@@ -19,9 +19,12 @@ xcuserdata
 DerivedData
 *.hmap
 *.ipa
+*.xcuserstate
+project.xcworkspace
 
 # Android/IJ
 #
+*.iml
 .idea
 .gradle
 local.properties
@@ -30,7 +33,6 @@ local.properties
 #
 node_modules/
 npm-debug.log
-example/ReactNativeCalendarStripExample/node_modules/
 
 # BUCK
 buck-out/
