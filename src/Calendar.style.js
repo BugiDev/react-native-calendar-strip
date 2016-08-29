@@ -24,7 +24,6 @@ export default StyleSheet.create({
     calendarHeader: {
         fontSize: 16,
         textAlign: 'center',
-        color: 'white',
         fontWeight: 'bold'
     },
     iconContainer: {

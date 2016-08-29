@@ -194,6 +194,7 @@ export default class CalendarStrip extends Component {
                         weekendDateNumberStyle={this.props.weekendDateNumberStyle}
                         selection={this.props.selection}
                         selectionAnimation={this.props.selectionAnimation}
+                        borderHighlightColor={this.props.borderHighlightColor}
                     />
                 </Animated.View>
             );
