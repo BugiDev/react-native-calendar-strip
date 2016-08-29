@@ -21,7 +21,6 @@ class ReactNativeCalendarStrip extends Component {
                     selection={'background'}
                     selectionAnimation={{duration: 300, borderWidth: 1}}
                     style={{paddingTop: 20, paddingBottom: 10}}
-                    iconContainer={{flex: 0.4}}
                     calendarColor={'#7743CE'}
                     highlightColor={'#9265DC'}
                 />
@@ -30,4 +29,4 @@ class ReactNativeCalendarStrip extends Component {
     }
 }
 
-AppRegistry.registerComponent('ReactNativeCalendarStrip', () => ReactNativeCalendarStrip);
+AppRegistry.registerComponent('ReactNativeCalendarStripExample', () => ReactNativeCalendarStrip);
