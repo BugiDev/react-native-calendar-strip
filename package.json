@@ -1,0 +1,38 @@
+{
+  "name": "react-native-calendar-strip",
+  "version": "1.0.0",
+  "description": "Easy to use and visually stunning calendar component for React Native",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "dependencies": {
+    "moment": "^2.14.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.1.2",
+    "eslint": "^3.4.0",
+    "eslint-plugin-react": "^6.2.0",
+    "react": "15.2.1",
+    "react-native": "^0.31.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BugiDev/react-native-calendar-strip.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "calendar",
+    "strip"
+  ],
+  "author": "Bogdan Begovic <bogdanbegovic@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BugiDev/react-native-calendar-strip/issues"
+  },
+  "homepage": "https://github.com/BugiDev/react-native-calendar-strip#readme"
+}

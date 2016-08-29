@@ -1,0 +1,17 @@
+{
+  "name": "ReactNativeCalendarStrip",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "dependencies": {
+    "react-native-calendar-strip": "github:BugiDev/react-native-calendar-strip",
+    "react": "15.2.1",
+    "react-native": "^0.31.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.4.0",
+    "eslint-plugin-react": "^6.2.0"
+  }
+}
