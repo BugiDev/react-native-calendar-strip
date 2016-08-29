@@ -49,7 +49,6 @@ export default StyleSheet.create({
     },
     dateName: {
         fontSize: 10,
-        color: 'white',
         textAlign: 'center'
     },
     weekendDateName: {
@@ -59,7 +58,6 @@ export default StyleSheet.create({
     },
     dateNumber: {
         fontSize: 18,
-        color: 'white',
         fontWeight: 'bold',
         textAlign: 'center'
     },

@@ -38,7 +38,7 @@ export default class CalendarDay extends Component {
             duration: 300,
             borderWidth: StyleSheet.hairline
         },
-        borderHighlightColor: 'white'
+        borderHighlightColor: '#000'
     };
 
     constructor(props) {
