@@ -54,8 +54,8 @@ export default class CalendarStrip extends Component {
 
     static defaultProps = {
         startingDate: moment(),
-        iconLeft: require('./img/left-arrow.png'),
-        iconRight: require('./img/right-arrow.png'),
+        iconLeft: require('./img/left-arrow-black.png'),
+        iconRight: require('./img/right-arrow-black.png'),
         calendarHeaderFormat: 'MMMM YYYY'
     };
 
