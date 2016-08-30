@@ -46,18 +46,23 @@ export default class CalendarDay extends Component {
         this.animValue = new Animated.Value(0);
     }
 
+    //When component mounts, if it is seleced run animation for animation show
     componentDidMount() {
         if (this.props.selected) {
             this.animate(1);
         }
     }
 
+    //When component receives the props, if it is selected use showing animation
+    //If it is deselected, use hiding animation
     componentWillReceiveProps(nextProps) {
         if (this.props.selected !== nextProps.selected) {
             nextProps.selected ? this.animate(1) : this.animate(0);
         }
     }
 
+    //Animation function for showin/hiding the element.
+    //Based on the value passed (either 1 or 0) the animate function is animatin towards that value, hence showin or hiding animation
     animate(toValue) {
         Animated.timing(
             this.animValue,
@@ -72,6 +77,9 @@ export default class CalendarDay extends Component {
     render() {
         let animValue;
         let animObject;
+        //The user can disable animation, so that is why I use selection type
+        //If it is background, the user have to input colors for animation
+        //If it is border, the user has to input color for border animation
         if (this.props.selection === 'background') {
             animValue = this.animValue.interpolate({
                 inputRange: [0, 1],

@@ -15,11 +15,15 @@ import CalendarDay from './CalendarDay';
 import moment from 'moment';
 import styles from './Calendar.style.js';
 
+//Just a shallow array of 7 elements
 const arr = [];
 for (let i = 0; i < 7; i++) {
     arr.push(i);
 }
-
+/*
+ * Class CalendarStrip that is representing the whole calendar strip and contains CalendarDay elements
+ *
+ */
 export default class CalendarStrip extends Component {
 
     static propTypes = {
@@ -80,10 +84,13 @@ export default class CalendarStrip extends Component {
         this.resetAnimation = this.resetAnimation.bind(this);
     }
 
+    //Animate showing of CalendarDay elements
     componentDidMount() {
         this.animate();
     }
 
+    //Only animate CalendarDays if the selectedDate is the same
+    //Prevents animation on pressing on a date
     componentWillUpdate(nextProps, nextState) {
         if (nextState.selectedDate === this.state.selectedDate) {
             this.resetAnimation();
@@ -91,14 +98,18 @@ export default class CalendarStrip extends Component {
         }
     }
 
+    //Set startingDate to the previous week
     getPreviousWeek() {
         this.setState({startingDate: this.state.startingDate.subtract(1, 'w')});
     }
 
+    //Set startingDate to the next week
     getNextWeek() {
         this.setState({startingDate: this.state.startingDate.add(1, 'w')});
     }
 
+    //Get dates for the week based on the startingDate
+    //Using isoWeekday so that it will start from Monday
     getDatesForWeek() {
         let dates = [];
         arr.forEach((item, index) => {
@@ -107,6 +118,7 @@ export default class CalendarStrip extends Component {
         return dates;
     }
 
+    //Handling press on date/selecting date
     onDateSelected(date) {
         this.setState({selectedDate: date});
         if (this.props.onDateSelected) {
@@ -114,10 +126,13 @@ export default class CalendarStrip extends Component {
         }
     }
 
+    //Function to check if provided date is the same as selected one, hence date is selected
+    //using isSame moment query with 'day' param so that it check years, months and day
     isDateSelected(date) {
         return date.isSame(this.state.selectedDate, 'day');
     }
 
+    //Function for reseting animations
     resetAnimation() {
         this.animatedValue = [];
         arr.forEach((value) => {
@@ -125,6 +140,8 @@ export default class CalendarStrip extends Component {
         });
     }
 
+    //Function to animate showing the CalendarDay elements.
+    //Possible cases for animations are sequence and parallel
     animate() {
         if (this.props.calendarAnimation) {
             let animations = arr.map((item) => {
@@ -138,10 +155,10 @@ export default class CalendarStrip extends Component {
                 );
             });
 
-            if (this.props.calendarAnimation.type === 'sequence') {
+            if (this.props.calendarAnimation.type.toLowerCase() === 'sequence') {
                 Animated.sequence(animations).start();
             } else {
-                if (this.props.calendarAnimation.type === 'parallel') {
+                if (this.props.calendarAnimation.type.toLowerCase() === 'parallel') {
                     Animated.parallel(animations).start();
                 } else {
                     throw new Error('CalendarStrip Error! Type of animation is incorrect!');
@@ -150,10 +167,13 @@ export default class CalendarStrip extends Component {
         }
     }
 
+    //Function that formats the calendar header
+    //It also formats the month section if the week is in between months
     formatCalendarHeader() {
         let firstDay = this.getDatesForWeek()[0];
         let lastDay = this.getDatesForWeek()[this.getDatesForWeek().length - 1];
         let monthFormatting = '';
+        //Parsing the month part of the user defined formating
         if ((this.props.calendarHeaderFormat.match(/Mo/g) || []).length > 0) {
             monthFormatting = 'Mo';
         } else {
