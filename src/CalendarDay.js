@@ -35,8 +35,8 @@ export default class CalendarDay extends Component {
     static defaultProps = {
         selection: 'border',
         selectionAnimation: {
-            duration: 300,
-            borderWidth: StyleSheet.hairline
+            duration: 0,
+            borderWidth: 1
         },
         borderHighlightColor: '#000'
     };
