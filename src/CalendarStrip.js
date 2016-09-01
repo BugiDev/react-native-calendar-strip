@@ -194,7 +194,7 @@ export default class CalendarStrip extends Component {
     }
 
     render() {
-        let opacityAnim = 0;
+        let opacityAnim = 1;
         let datesRender = this.getDatesForWeek().map((date, index) => {
             if (this.props.calendarAnimation) {
                 opacityAnim = this.animatedValue[index];
