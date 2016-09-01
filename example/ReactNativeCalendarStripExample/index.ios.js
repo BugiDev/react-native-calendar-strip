@@ -18,7 +18,7 @@ class ReactNativeCalendarStrip extends Component {
             <View>
                 <CalendarStrip
                     calendarAnimation={{type: 'sequence', duration: 30}}
-                    selection={'border'}
+                    selection={'background'}
                     selectionAnimation={{duration: 300, borderWidth: 2}}
                     style={{paddingTop: 20, paddingBottom: 10}}
                     calendarHeaderStyle={{color: 'white'}}
