@@ -4,7 +4,7 @@ Easy to use and visually stunning calendar component for React Native.
 
 `<CalendarStrip>` is a React Native component designed to replace the standard date picker component. It works for both `iOS` and `Android` and in both `portrait` and `landscape` orientations!
 
-![alt text](https://github.com/BugiDev/react-native-calendar-strip/blob/master/example/gifs/Initial.gif "react-native-calendar-strip demo")
+![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/Initial.gif "react-native-calendar-strip demo")
 
 #### Instalation
 Just use the standard npm installation
@@ -40,7 +40,7 @@ class Example extends Component {
 
 AppRegistry.registerComponent('Example', () => Example);
 ```
-![alt text](https://github.com/BugiDev/react-native-calendar-strip/blob/master/example/gifs/blank.gif "react-native-calendar-strip simple demo")
+![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/blank.gif "react-native-calendar-strip simple demo")
 
 ##### Styling and animations
 Even though this component works withouth any customization, it is possible to customize almost everything, so you can make it as beautiful as you want:
@@ -79,7 +79,7 @@ class Example extends Component {
 
 AppRegistry.registerComponent('Example', () => Example);
 ```
-![alt text](https://github.com/BugiDev/react-native-calendar-strip/blob/master/example/gifs/border.gif "react-native-calendar-strip border demo")
+![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/border.gif "react-native-calendar-strip border demo")
 
 #### Props / API
 This is the list of all the props you can pass to the component so that you can customize it:
@@ -117,24 +117,24 @@ This is the list of all the props you can pass to the component so that you can 
   
   ####### Sequence
   The animation is used to show dates in sequence, so it shows them one by one.
-  ![alt text](https://github.com/BugiDev/react-native-calendar-strip/blob/master/example/gifs/squential.gif "react-native-calendar-strip sequence animation demo")
+  ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/squential.gif "react-native-calendar-strip sequence animation demo")
   
   ####### Parallel
   The animation is used to show dates in parallel, so it shows all of them with opacity animation.
-  ![alt text](https://github.com/BugiDev/react-native-calendar-strip/blob/master/example/gifs/parallel.gif "react-native-calendar-strip parallel animation demo")
+  ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/parallel.gif "react-native-calendar-strip parallel animation demo")
   
   ---
   The second animation is used to animate selection of the date. Again, there are 2 types of animation, and they are either animating circular border around a date or changing a circualar background of the date.
   * selection: React.PropTypes.string - String prop for type of selection highligh. Possible types are `border` or `background.` `!important` This property will only determen the type of selection and type of animation, but to be animated, properties bellow have to be added as well.
   * selectionAnimation: React.PropTypes.object - An object used for the animation of selection. If this object is added, only then the selection will be animated. This object defines `{duration: 30}` of the animation, and *if you add a type `border` of selection, you should also add a `{duration: 30, borderWidth: 1}` to this object.*
   * borderHighlightColor: React.PropTypes.string - Highlighting border color.
-  ![alt text](https://github.com/BugiDev/react-native-calendar-strip/blob/master/example/gifs/border-small.gif "react-native-calendar-strip border animation demo")
+  ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/border-small.gif "react-native-calendar-strip border animation demo")
   
   If you chose the `background` type of animation, the selected date will animate the circular background color from `calendarColor` to `highlightColor`. That is why, when this type is chosen, you have to define both of these colors.
   * calendarColor: React.PropTypes.string - Color of the circular backgroundo of the date. `!important` This color will also be aplied as the whole calendar strip background color, so that highlighting the date will appear 'from background' but be aware that top level style of this component can override this property.
   * highlightColor: React.PropTypes.string - Highlighting color of dates.
   
-  ![alt text](https://github.com/BugiDev/react-native-calendar-strip/blob/master/example/gifs/background-small.gif "react-native-calendar-strip simple demo")
+  ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/background-small.gif "react-native-calendar-strip simple demo")
   
 #### ToDo
 
