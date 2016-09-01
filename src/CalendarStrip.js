@@ -66,8 +66,8 @@ export default class CalendarStrip extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            startingDate: this.props.startingDate,
-            selectedDate: this.props.selectedDate
+            startingDate: moment(this.props.startingDate),
+            selectedDate: moment(this.props.selectedDate)
         };
 
         this.resetAnimation();
@@ -220,7 +220,7 @@ export default class CalendarStrip extends Component {
             );
         });
         return (
-            <View style={[styles.calendarContainer, this.props.style, {backgroundColor: this.props.calendarColor}]}>
+            <View style={[styles.calendarContainer, {backgroundColor: this.props.calendarColor}, this.props.style]}>
                 <Text style={[styles.calendarHeader, this.props.calendarHeaderStyle]}>{this.formatCalendarHeader()}</Text>
                 <View style={styles.datesStrip}>
                     <TouchableOpacity style={[styles.iconContainer, this.props.iconContainer]} onPress={this.getPreviousWeek}>
