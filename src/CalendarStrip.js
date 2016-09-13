@@ -89,6 +89,15 @@ export default class CalendarStrip extends Component {
         this.animate();
     }
 
+    //Receiving props and set selected date
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.selectedDate !== this.props.selectedDate) {
+            this.setState({
+                selectedDate: moment(nextProps.selectedDate)
+            });
+        }
+    }
+
     //Only animate CalendarDays if the selectedDate is the same
     //Prevents animation on pressing on a date
     componentWillUpdate(nextProps, nextState) {
