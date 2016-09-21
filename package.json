@@ -1,6 +1,6 @@
 {
   "name": "react-native-calendar-strip",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Easy to use and visually stunning calendar component for React Native",
   "main": "index.js",
   "directories": {
@@ -27,13 +27,18 @@
   "keywords": [
     "react",
     "native",
+    "rn",
+    "RN",
+    "react native",
+    "react-native",
     "calendar",
     "strip",
-    "react native",
+    "calendar strip",
+    "calendar-strip",
     "react native calendar",
-    "react-native",
     "react-native-calendar",
-    "RN"
+    "react native calendar strip",
+    "react-native-calendar-strip"
   ],
   "author": "Bogdan Begovic <bogdanbegovic@gmail.com>",
   "license": "MIT",

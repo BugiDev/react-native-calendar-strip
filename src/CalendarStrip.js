@@ -53,7 +53,9 @@ export default class CalendarStrip extends Component {
         dateNameStyle: React.PropTypes.any,
         dateNumberStyle: React.PropTypes.any,
         weekendDateNameStyle: React.PropTypes.any,
-        weekendDateNumberStyle: React.PropTypes.any
+        weekendDateNumberStyle: React.PropTypes.any,
+
+        locale: React.PropTypes.object
     };
 
     static defaultProps = {
@@ -65,9 +67,21 @@ export default class CalendarStrip extends Component {
 
     constructor(props) {
         super(props);
+
+        if(props.locale) {
+            if(props.locale.name && props.locale.config) {
+                moment.locale(props.locale.name, props.locale.config);
+            } else {
+                throw new Error('Locale prop is not in the correct format. \b Locale has to be in form of object, with params NAME and CONFIG!');
+            }
+        }
+
+        const startingDate = this.setLocale(moment(this.props.startingDate));
+        const selectedDate = this.setLocale(moment(this.props.selectedDate));
+
         this.state = {
-            startingDate: moment(this.props.startingDate),
-            selectedDate: moment(this.props.selectedDate)
+            startingDate,
+            selectedDate
         };
 
         this.resetAnimation();
@@ -92,8 +106,9 @@ export default class CalendarStrip extends Component {
     //Receiving props and set selected date
     componentWillReceiveProps(nextProps) {
         if (nextProps.selectedDate !== this.props.selectedDate) {
+            const selectedDate = this.setLocale(moment(nextProps.selectedDate));
             this.setState({
-                selectedDate: moment(nextProps.selectedDate)
+                selectedDate
             });
         }
     }
@@ -105,6 +120,12 @@ export default class CalendarStrip extends Component {
             this.resetAnimation();
             this.animate();
         }
+    }
+
+    //Function that checks if the locale is passed to the component and sets it to the passed moment instance
+    setLocale(momentInstance) {
+        momentInstance.locale(this.props.locale.name);
+        return momentInstance;
     }
 
     //Set startingDate to the previous week
@@ -120,9 +141,11 @@ export default class CalendarStrip extends Component {
     //Get dates for the week based on the startingDate
     //Using isoWeekday so that it will start from Monday
     getDatesForWeek() {
+        const me = this;
         let dates = [];
         arr.forEach((item, index) => {
-            dates.push(moment(this.state.startingDate.isoWeekday(index + 1)));
+            const date = me.setLocale(moment(me.state.startingDate.isoWeekday(index + 1)));
+            dates.push(date);
         });
         return dates;
     }
