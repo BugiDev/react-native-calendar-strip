@@ -124,7 +124,9 @@ export default class CalendarStrip extends Component {
 
     //Function that checks if the locale is passed to the component and sets it to the passed moment instance
     setLocale(momentInstance) {
-        momentInstance.locale(this.props.locale.name);
+        if (this.props.locale) {
+            momentInstance.locale(this.props.locale.name);
+        }
         return momentInstance;
     }
 
