@@ -155,7 +155,7 @@ export default class CalendarStrip extends Component {
               date = me.setLocale(moment(startDate.isoWeekday(index + 1)));
             }
             else {
-              date = me.setLocale(moment(startDate.add(1, 'days')));
+              date = me.setLocale(moment(startDate).add(index, 'days'));
             }
             dates.push(date);
         });
