@@ -35,6 +35,7 @@ export default class CalendarStrip extends Component {
         startingDate: React.PropTypes.any,
         selectedDate: React.PropTypes.any,
         onDateSelected: React.PropTypes.func,
+        useIsoWeekday: React.PropTypes.bool,
 
         iconLeft: React.PropTypes.any,
         iconRight: React.PropTypes.any,
@@ -60,6 +61,7 @@ export default class CalendarStrip extends Component {
 
     static defaultProps = {
         startingDate: moment(),
+        useIsoWeekday: true,
         iconLeft: require('./img/left-arrow-black.png'),
         iconRight: require('./img/right-arrow-black.png'),
         calendarHeaderFormat: 'MMMM YYYY'
@@ -145,8 +147,16 @@ export default class CalendarStrip extends Component {
     getDatesForWeek() {
         const me = this;
         let dates = [];
+        let startDate = moment(this.state.startingDate);
+
         arr.forEach((item, index) => {
-            const date = me.setLocale(moment(me.state.startingDate.isoWeekday(index + 1)));
+            let date;
+            if (me.props.useIsoWeekday) {
+              date = me.setLocale(moment(startDate.isoWeekday(index + 1)));
+            }
+            else {
+              date = me.setLocale(moment(startDate).add(index, 'days'));
+            }
             dates.push(date);
         });
         return dates;
