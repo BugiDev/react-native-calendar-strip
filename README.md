@@ -67,6 +67,8 @@ class Example extends Component {
                     highlightColor={'#9265DC'}
                     dateNumberStyle={{color: 'white'}}
                     dateNameStyle={{color: 'white'}}
+                    highlightDateNumberStyle={{color: 'yellow'}}
+                    highlightDateNameStyle={{color: 'yellow'}}
                     borderHighlightColor={'white'}
                     iconLeft={require('./img/left-arrow.png')}
                     iconRight={require('./img/right-arrow.png')}
@@ -109,6 +111,9 @@ This is the list of all the props you can pass to the component so that you can 
   * dateNumberStyle: React.PropTypes.any - Style for the number of the day on work days in dates strip.
   * weekendDateNameStyle: React.PropTypes.any - Style for the name of the day on weekend days in dates strip.
   * weekendDateNumberStyle: React.PropTypes.any - Style for the number of the day on weekend days in dates strip.
+  * styleWeekend: React.PropTypes.bool - (default true) Whether to style weekend dates separately.
+  * highlightDateNameStyle: React.PropTypes.any - Style for the selected name of the day in dates strip.
+  * highlightDateNumberStyle: React.PropTypes.any - Style for the selected number of the day in dates strip.
 
   ###### Animations
   There are two animated properties that also can be customized. The first one is actually animated showing of dates when you change a week.
