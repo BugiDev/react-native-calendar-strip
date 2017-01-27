@@ -50,10 +50,17 @@ import {
     AppRegistry,
     View
 } from 'react-native';
+import moment from 'moment';
 
 import CalendarStrip from 'react-native-calendar-strip';
 
 class Example extends Component {
+    let datesWhitelist = [{
+      start: moment(),
+      end: moment.add(3, 'days')  // total 4 days enabled
+    }];
+    let datesBlacklist = [ moment.add(1, 'days') ]; // 1 day disabled
+
     render() {
         return (
             <View>
@@ -69,6 +76,10 @@ class Example extends Component {
                     dateNameStyle={{color: 'white'}}
                     highlightDateNumberStyle={{color: 'yellow'}}
                     highlightDateNameStyle={{color: 'yellow'}}
+                    disabledDateNameStyle={{color: 'grey'}}
+                    disabledDateNumberStyle={{color: 'grey'}}
+                    datesWhitelist={datesWhitelist}
+                    datesBlacklist={datesBlacklist}
                     borderHighlightColor={'white'}
                     iconLeft={require('./img/left-arrow.png')}
                     iconRight={require('./img/right-arrow.png')}
@@ -89,7 +100,17 @@ This is the list of all the props you can pass to the component so that you can 
   * startingDate: React.PropTypes.any - Date to be used for centering the calendar/showing the week based on that date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`.
   * selectedDate: React.PropTypes.any - Date to be used as pre selected Date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`.
   * onDateSelected: React.PropTypes.func - Function to be used as a callback when a date is selected. It returns `moment Date`
-  * useIsoWeekday: React.PropTypes.bool - start week on ISO day of week (default true).  If false, starts week on _startingDate_ parameter.
+  * useIsoWeekday: React.PropTypes.bool - start week on ISO day of week (default true).  If false, starts week on _startingDate_ parameter.  
+  * datesWhitelist: React.PropTypes.array - Dates that are enabled (accepts both `Date` and `moment Date`). Ranges may be specified with an object entry in the array:
+  ```
+  // Date range format
+  {
+      start: (Date or moment Date)
+      end: (Date or moment Date)
+  }
+  ```
+  This may be overridden by _datesBlacklist_.
+  * datesBlacklist: React.PropTypes.array - Dates that are disabled. Same format as _datesWhitelist_.  This overrides dates in _datesWhitelist_.
 
 ###### Top level style
   * style: React.PropTypes.any - Style for the top level CalendarStrip component
@@ -114,6 +135,9 @@ This is the list of all the props you can pass to the component so that you can 
   * styleWeekend: React.PropTypes.bool - (default true) Whether to style weekend dates separately.
   * highlightDateNameStyle: React.PropTypes.any - Style for the selected name of the day in dates strip.
   * highlightDateNumberStyle: React.PropTypes.any - Style for the selected number of the day in dates strip.
+
+  * disabledDateNameStyle: React.PropTypes.any - Style for disabled name of the day in dates strip (controlled by datesWhitelist & datesBlacklist).
+  * disabledDateNumberStyle: React.PropTypes.any - Style for disabled number of the day in dates strip (controlled by datesWhitelist & datesBlacklist).
 
   ###### Animations
   There are two animated properties that also can be customized. The first one is actually animated showing of dates when you change a week.

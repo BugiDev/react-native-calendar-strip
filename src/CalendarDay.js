@@ -18,6 +18,7 @@ export default class CalendarDay extends Component {
         date: React.PropTypes.object.isRequired,
         onDateSelected: React.PropTypes.func.isRequired,
         selected: React.PropTypes.bool.isRequired,
+        enabled: React.PropTypes.bool.isRequired,
 
         calendarColor: React.PropTypes.string,
         highlightColor: React.PropTypes.string,
@@ -29,6 +30,8 @@ export default class CalendarDay extends Component {
         weekendDateNumberStyle: React.PropTypes.any,
         highlightDateNameStyle: React.PropTypes.any,
         highlightDateNumberStyle: React.PropTypes.any,
+        disabledDateNameStyle: React.PropTypes.any,
+        disabledDateNumberStyle: React.PropTypes.any,
         styleWeekend: React.PropTypes.bool,
 
         selection: React.PropTypes.string,
@@ -81,36 +84,41 @@ export default class CalendarDay extends Component {
     render() {
         let animValue;
         let animObject;
-        //The user can disable animation, so that is why I use selection type
-        //If it is background, the user have to input colors for animation
-        //If it is border, the user has to input color for border animation
-        if (this.props.selection === 'background') {
-            animValue = this.animValue.interpolate({
-                inputRange: [0, 1],
-                outputRange: [this.props.calendarColor, this.props.highlightColor]
-            });
-            animObject = {backgroundColor: animValue};
-        } else {
-            if (this.props.selection === 'border') {
-                animValue = this.animValue.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0, this.props.selectionAnimation.borderWidth]
-                });
-                animObject = {borderColor: this.props.borderHighlightColor, borderWidth: animValue};
-            } else {
-                throw new Error('CalendarDay Error! Type of animation is incorrect!');
-            }
-        }
+        let dateNameStyle = [styles.dateName, this.props.disabledDateNameStyle];
+        let dateNumberStyle = [styles.dateNumber, this.props.disabledDateNumberStyle];
 
-        let dateNameStyle = [styles.dateName, this.props.dateNameStyle];
-        let dateNumberStyle = [styles.dateNumber, this.props.dateNumberStyle];
-        if (this.props.styleWeekend && (this.props.date.isoWeekday() === 6 || this.props.date.isoWeekday() === 7)) {
-            dateNameStyle = [styles.weekendDateName, this.props.weekendDateNameStyle];
-            dateNumberStyle = [styles.weekendDateNumber, this.props.weekendDateNumberStyle];
-        }
-        if (this.props.selected) {
-          dateNameStyle = [styles.dateName, this.props.highlightDateNameStyle];
-          dateNumberStyle = [styles.dateNumber, this.props.highlightDateNumberStyle];
+        if (this.props.enabled) {
+          //The user can disable animation, so that is why I use selection type
+          //If it is background, the user have to input colors for animation
+          //If it is border, the user has to input color for border animation
+          if (this.props.selection === 'background') {
+              animValue = this.animValue.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [this.props.calendarColor, this.props.highlightColor]
+              });
+              animObject = {backgroundColor: animValue};
+          } else {
+              if (this.props.selection === 'border') {
+                  animValue = this.animValue.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [0, this.props.selectionAnimation.borderWidth]
+                  });
+                  animObject = {borderColor: this.props.borderHighlightColor, borderWidth: animValue};
+              } else {
+                  throw new Error('CalendarDay Error! Type of animation is incorrect!');
+              }
+          }
+
+          dateNameStyle = [styles.dateName, this.props.dateNameStyle];
+          dateNumberStyle = [styles.dateNumber, this.props.dateNumberStyle];
+          if (this.props.styleWeekend && (this.props.date.isoWeekday() === 6 || this.props.date.isoWeekday() === 7)) {
+              dateNameStyle = [styles.weekendDateName, this.props.weekendDateNameStyle];
+              dateNumberStyle = [styles.weekendDateNumber, this.props.weekendDateNumberStyle];
+          }
+          if (this.props.selected) {
+            dateNameStyle = [styles.dateName, this.props.highlightDateNameStyle];
+            dateNumberStyle = [styles.dateNumber, this.props.highlightDateNumberStyle];
+          }
         }
 
         return (
