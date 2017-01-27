@@ -141,7 +141,7 @@ export default class CalendarStrip extends Component {
         const previousWeekStartDate = this.state.startingDate.subtract(1, 'w');
         this.setState({startingDate: previousWeekStartDate});
         if (this.props.onWeekChanged) {
-            this.props.onWeekChanged(previousWeekStartDate.startOf(this.props.useIsoWeekday ? 'isoweek' : 'week'));
+            this.props.onWeekChanged(previousWeekStartDate.clone().startOf(this.props.useIsoWeekday ? 'isoweek' : 'week'));
         }
     }
 
@@ -150,7 +150,7 @@ export default class CalendarStrip extends Component {
         const nextWeekStartDate = this.state.startingDate.add(1, 'w');
         this.setState({startingDate: nextWeekStartDate});
         if (this.props.onWeekChanged) {
-            this.props.onWeekChanged(nextWeekStartDate.startOf(this.props.useIsoWeekday ? 'isoweek' : 'week'));
+            this.props.onWeekChanged(nextWeekStartDate.clone().startOf(this.props.useIsoWeekday ? 'isoweek' : 'week'));
         }
     }
 
