@@ -35,6 +35,7 @@ export default class CalendarStrip extends Component {
         startingDate: React.PropTypes.any,
         selectedDate: React.PropTypes.any,
         onDateSelected: React.PropTypes.func,
+        onWeekChanged: React.PropTypes.func,
         useIsoWeekday: React.PropTypes.bool,
 
         iconLeft: React.PropTypes.any,
@@ -137,12 +138,20 @@ export default class CalendarStrip extends Component {
 
     //Set startingDate to the previous week
     getPreviousWeek() {
-        this.setState({startingDate: this.state.startingDate.subtract(1, 'w')});
+        const previousWeekStartDate = this.state.startingDate.subtract(1, 'w');
+        this.setState({startingDate: previousWeekStartDate});
+        if (this.props.onWeekChanged) {
+            this.props.onWeekChanged(previousWeekStartDate);
+        }
     }
 
     //Set startingDate to the next week
     getNextWeek() {
-        this.setState({startingDate: this.state.startingDate.add(1, 'w')});
+        const nextWeekStartDate = this.state.startingDate.add(1, 'w');
+        this.setState({startingDate: nextWeekStartDate});
+        if (this.props.onWeekChanged) {
+            this.props.onWeekChanged(nextWeekStartDate);
+        }
     }
 
     //Get dates for the week based on the startingDate
