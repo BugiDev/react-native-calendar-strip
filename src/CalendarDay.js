@@ -114,12 +114,12 @@ export default class CalendarDay extends Component {
         }
 
         return (
+          <TouchableOpacity onPress={this.props.onDateSelected.bind(this, this.props.date)}>
             <Animated.View style={[styles.dateContainer, animObject]}>
-                <TouchableOpacity onPress={this.props.onDateSelected.bind(this, this.props.date)}>
-                    <Text style={dateNameStyle}>{this.props.date.format('ddd').toUpperCase()}</Text>
-                    <Text style={dateNumberStyle}>{this.props.date.date()}</Text>
-                </TouchableOpacity>
+              <Text style={dateNameStyle}>{this.props.date.format('ddd').toUpperCase()}</Text>
+              <Text style={dateNumberStyle}>{this.props.date.date()}</Text>
             </Animated.View>
+          </TouchableOpacity>
         );
     }
 }
