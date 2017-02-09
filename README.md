@@ -89,6 +89,7 @@ This is the list of all the props you can pass to the component so that you can 
   * startingDate: React.PropTypes.any - Date to be used for centering the calendar/showing the week based on that date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`.
   * selectedDate: React.PropTypes.any - Date to be used as pre selected Date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`.
   * onDateSelected: React.PropTypes.func - Function to be used as a callback when a date is selected. It returns `moment Date`
+  * onWeekChanged: React.PropTypes.func - Function to be used as a callback when a week is changed. It returns `moment Date`
   * useIsoWeekday: React.PropTypes.bool - start week on ISO day of week (default true).  If false, starts week on _startingDate_ parameter.
 
 ###### Top level style
