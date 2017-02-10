@@ -60,6 +60,11 @@ export default class CalendarStrip extends Component {
         highlightDateNumberStyle: React.PropTypes.any,
         styleWeekend: React.PropTypes.bool,
 
+        highlightedDates: React.PropTypes.array,
+        highlightedDateFormat: React.PropTypes.string,
+        highlightedDateNumberStyle: React.PropTypes.any,
+        highlightedDateNameStyle: React.PropTypes.any,
+
         locale: React.PropTypes.object
     };
 
@@ -68,7 +73,8 @@ export default class CalendarStrip extends Component {
         useIsoWeekday: true,
         iconLeft: require('./img/left-arrow-black.png'),
         iconRight: require('./img/right-arrow-black.png'),
-        calendarHeaderFormat: 'MMMM YYYY'
+        calendarHeaderFormat: 'MMMM YYYY',
+        highlightedDateFormat: 'DD.MM.YYYY'
     };
 
     constructor(props) {
@@ -250,8 +256,19 @@ export default class CalendarStrip extends Component {
     }
 
     render() {
+
         let opacityAnim = 1;
         let datesRender = this.getDatesForWeek().map((date, index) => {
+
+            let dateNameStyle = this.props.dateNameStyle;
+            let dateNumberStyle = this.props.dateNumberStyle;
+            let weekendDateNameStyle = this.props.weekendDateNameStyle;
+            let weekendDateNumberStyle = this.props.weekendDateNumberStyle;
+
+            if(this.props.highlightedDates.indexOf(date.format(this.props.highlightedDateFormat)) != -1) {
+                weekendDateNameStyle = dateNameStyle = this.props.highlightedDateNameStyle;
+                weekendDateNumberStyle = dateNumberStyle = this.props.highlightedDateNumberStyle;
+            }
             if (this.props.calendarAnimation) {
                 opacityAnim = this.animatedValue[index];
             }
@@ -264,10 +281,10 @@ export default class CalendarStrip extends Component {
                         onDateSelected={this.onDateSelected}
                         calendarColor={this.props.calendarColor}
                         highlightColor={this.props.highlightColor}
-                        dateNameStyle={this.props.dateNameStyle}
-                        dateNumberStyle={this.props.dateNumberStyle}
-                        weekendDateNameStyle={this.props.weekendDateNameStyle}
-                        weekendDateNumberStyle={this.props.weekendDateNumberStyle}
+                        dateNameStyle={dateNameStyle}
+                        dateNumberStyle={dateNumberStyle}
+                        weekendDateNameStyle={weekendDateNameStyle}
+                        weekendDateNumberStyle={weekendDateNumberStyle}
                         highlightDateNameStyle={this.props.highlightDateNameStyle}
                         highlightDateNumberStyle={this.props.highlightDateNumberStyle}
                         styleWeekend={this.props.styleWeekend}
