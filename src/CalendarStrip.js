@@ -73,8 +73,8 @@ export default class CalendarStrip extends Component {
         iconLeft: require('./img/left-arrow-black.png'),
         iconRight: require('./img/right-arrow-black.png'),
         calendarHeaderFormat: 'MMMM YYYY',
-        datesWhitelist: [],
-        datesBlacklist: []
+        datesWhitelist: undefined,
+        datesBlacklist: undefined
     };
 
     constructor(props) {
@@ -191,21 +191,23 @@ export default class CalendarStrip extends Component {
     // Check whether date is allowed
     isDateAllowed(date) {
       // datesBlacklist entries override datesWhitelist
-      for (let disallowed of this.props.datesBlacklist) {
-        // Blacklist start/end object
-        if (disallowed.start && disallowed.end) {
-          if (date.isBetween(disallowed.start, disallowed.end, 'day', '[]')) {
-            return false;
+      if (this.props.datesBlacklist !== undefined ) {
+        for (let disallowed of this.props.datesBlacklist) {
+          // Blacklist start/end object
+          if (disallowed.start && disallowed.end) {
+            if (date.isBetween(disallowed.start, disallowed.end, 'day', '[]')) {
+              return false;
+            }
           }
-        }
-        else {
-          if (date.isSame(disallowed, 'day')) {
-            return false;
+          else {
+            if (date.isSame(disallowed, 'day')) {
+              return false;
+            }
           }
         }
       }
 
-      if (this.props.datesWhitelist.length === 0) {
+      if (this.props.datesWhitelist === undefined ) {
         return true;
       }
 
