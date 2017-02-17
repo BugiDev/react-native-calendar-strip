@@ -27,9 +27,6 @@ export default class CalendarDay extends Component {
         dateNumberStyle: React.PropTypes.any,
         weekendDateNameStyle: React.PropTypes.any,
         weekendDateNumberStyle: React.PropTypes.any,
-        highlightDateNameStyle: React.PropTypes.any,
-        highlightDateNumberStyle: React.PropTypes.any,
-        styleWeekend: React.PropTypes.bool,
 
         selection: React.PropTypes.string,
         selectionAnimation: React.PropTypes.object
@@ -41,8 +38,7 @@ export default class CalendarDay extends Component {
             duration: 0,
             borderWidth: 1
         },
-        borderHighlightColor: '#000',
-        styleWeekend: true
+        borderHighlightColor: '#000'
     };
 
     constructor(props) {
@@ -104,22 +100,18 @@ export default class CalendarDay extends Component {
 
         let dateNameStyle = [styles.dateName, this.props.dateNameStyle];
         let dateNumberStyle = [styles.dateNumber, this.props.dateNumberStyle];
-        if (this.props.styleWeekend && (this.props.date.isoWeekday() === 6 || this.props.date.isoWeekday() === 7)) {
+        if (this.props.date.isoWeekday() === 6 || this.props.date.isoWeekday() === 7) {
             dateNameStyle = [styles.weekendDateName, this.props.weekendDateNameStyle];
             dateNumberStyle = [styles.weekendDateNumber, this.props.weekendDateNumberStyle];
         }
-        if (this.props.selected) {
-          dateNameStyle = [styles.dateName, this.props.highlightDateNameStyle];
-          dateNumberStyle = [styles.dateNumber, this.props.highlightDateNumberStyle];
-        }
 
         return (
-          <TouchableOpacity onPress={this.props.onDateSelected.bind(this, this.props.date)}>
             <Animated.View style={[styles.dateContainer, animObject]}>
-              <Text style={dateNameStyle}>{this.props.date.format('ddd').toUpperCase()}</Text>
-              <Text style={dateNumberStyle}>{this.props.date.date()}</Text>
+                <TouchableOpacity onPress={this.props.onDateSelected.bind(this, this.props.date)}>
+                    <Text style={dateNameStyle}>{this.props.date.format('ddd').toUpperCase()}</Text>
+                    <Text style={dateNumberStyle}>{this.props.date.date()}</Text>
+                </TouchableOpacity>
             </Animated.View>
-          </TouchableOpacity>
         );
     }
 }

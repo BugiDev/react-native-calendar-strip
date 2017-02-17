@@ -24,7 +24,9 @@ export default StyleSheet.create({
     calendarHeader: {
         fontSize: 16,
         textAlign: 'center',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginBottom:10,
+        marginTop:10,
     },
     iconContainer: {
         justifyContent: 'center',
@@ -40,10 +42,10 @@ export default StyleSheet.create({
     dateContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 10,
-        width: 50,
-        height: 50,
-        borderRadius: 50 / 2
+        padding: 0,
+        width: 43,
+        height: 43,
+        borderRadius: 43 / 2
     },
     dateName: {
         fontSize: 10,

@@ -35,7 +35,6 @@ export default class CalendarStrip extends Component {
         startingDate: React.PropTypes.any,
         selectedDate: React.PropTypes.any,
         onDateSelected: React.PropTypes.func,
-        onWeekChanged: React.PropTypes.func,
         useIsoWeekday: React.PropTypes.bool,
 
         iconLeft: React.PropTypes.any,
@@ -56,9 +55,6 @@ export default class CalendarStrip extends Component {
         dateNumberStyle: React.PropTypes.any,
         weekendDateNameStyle: React.PropTypes.any,
         weekendDateNumberStyle: React.PropTypes.any,
-        highlightDateNameStyle: React.PropTypes.any,
-        highlightDateNumberStyle: React.PropTypes.any,
-        styleWeekend: React.PropTypes.bool,
 
         locale: React.PropTypes.object
     };
@@ -138,20 +134,12 @@ export default class CalendarStrip extends Component {
 
     //Set startingDate to the previous week
     getPreviousWeek() {
-        const previousWeekStartDate = this.state.startingDate.subtract(1, 'w');
-        this.setState({startingDate: previousWeekStartDate});
-        if (this.props.onWeekChanged) {
-            this.props.onWeekChanged(previousWeekStartDate.clone().startOf(this.props.useIsoWeekday ? 'isoweek' : 'week'));
-        }
+        this.setState({startingDate: this.state.startingDate.subtract(1, 'w')});
     }
 
     //Set startingDate to the next week
     getNextWeek() {
-        const nextWeekStartDate = this.state.startingDate.add(1, 'w');
-        this.setState({startingDate: nextWeekStartDate});
-        if (this.props.onWeekChanged) {
-            this.props.onWeekChanged(nextWeekStartDate.clone().startOf(this.props.useIsoWeekday ? 'isoweek' : 'week'));
-        }
+        this.setState({startingDate: this.state.startingDate.add(1, 'w')});
     }
 
     //Get dates for the week based on the startingDate
@@ -268,9 +256,6 @@ export default class CalendarStrip extends Component {
                         dateNumberStyle={this.props.dateNumberStyle}
                         weekendDateNameStyle={this.props.weekendDateNameStyle}
                         weekendDateNumberStyle={this.props.weekendDateNumberStyle}
-                        highlightDateNameStyle={this.props.highlightDateNameStyle}
-                        highlightDateNumberStyle={this.props.highlightDateNumberStyle}
-                        styleWeekend={this.props.styleWeekend}
                         selection={this.props.selection}
                         selectionAnimation={this.props.selectionAnimation}
                         borderHighlightColor={this.props.borderHighlightColor}

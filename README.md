@@ -9,12 +9,12 @@ Easy to use and visually stunning calendar component for React Native.
 #### Instalation
 Just use the standard npm installation
 ```sh
-npm install react-native-calendar-strip --save
+npm install react-native-calendar-strip-slide-navigation --save
 ```
 
 #### Example
 
-You can see the examples in [\example](https://github.com/BugiDev/react-native-calendar-strip/tree/master/example/ReactNativeCalendarStripExample) folder of this repo.
+You can see the examples in [\example](https://github.com/invinci/react-native-calendar-strip/tree/master/example/ReactNativeCalendarStripExample) folder of this repo.
 
 ##### Simple "out of the box" usage
 You can use this component without any styling or customization.
@@ -26,7 +26,7 @@ import {
     View
 } from 'react-native';
 
-import CalendarStrip from 'react-native-calendar-strip';
+import CalendarStrip from 'react-native-calendar-strip-slide-navigation';
 
 class Example extends Component {
     render() {
@@ -51,7 +51,7 @@ import {
     View
 } from 'react-native';
 
-import CalendarStrip from 'react-native-calendar-strip';
+import CalendarStrip from 'react-native-calendar-strip-slide-navigation';
 
 class Example extends Component {
     render() {

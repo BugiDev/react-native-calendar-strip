@@ -1,7 +1,7 @@
 {
-  "name": "react-native-calendar-strip",
-  "version": "0.1.3",
-  "description": "Easy to use and visually stunning calendar component for React Native",
+  "name": "react-native-calendar-strip-slide-navigation",
+  "version": "0.0.1",
+  "description": "This is a fork of react-native-calendar-strip updated Slide navigation for selected dates",
   "main": "index.js",
   "directories": {
     "example": "example"
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BugiDev/react-native-calendar-strip.git"
+    "url": "git+https://github.com/invinci/react-native-calendar-strip.git"
   },
   "keywords": [
     "react",
@@ -40,10 +40,10 @@
     "react native calendar strip",
     "react-native-calendar-strip"
   ],
-  "author": "Bogdan Begovic <bogdanbegovic@gmail.com>",
+  "author": "Ravi Kumar <ravi.14378@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/BugiDev/react-native-calendar-strip/issues"
+    "url": "https://github.com/invinci/react-native-calendar-strip/issues"
   },
   "contributors": [
     {
@@ -60,5 +60,5 @@
       "url": "https://github.com/Vitall"
     }
   ],
-  "homepage": "https://github.com/BugiDev/react-native-calendar-strip#readme"
+  "homepage": "https://github.com/invinci/react-native-calendar-strip#readme"
 }
