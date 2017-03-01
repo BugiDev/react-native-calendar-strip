@@ -58,7 +58,11 @@ export default class CalendarStrip extends Component {
         weekendDateNumberStyle: React.PropTypes.any,
         highlightDateNameStyle: React.PropTypes.any,
         highlightDateNumberStyle: React.PropTypes.any,
+        disabledDateNameStyle: React.PropTypes.any,
+        disabledDateNumberStyle: React.PropTypes.any,
         styleWeekend: React.PropTypes.bool,
+        datesWhitelist: React.PropTypes.array,
+        datesBlacklist: React.PropTypes.array,
 
         locale: React.PropTypes.object
     };
@@ -68,7 +72,9 @@ export default class CalendarStrip extends Component {
         useIsoWeekday: true,
         iconLeft: require('./img/left-arrow-black.png'),
         iconRight: require('./img/right-arrow-black.png'),
-        calendarHeaderFormat: 'MMMM YYYY'
+        calendarHeaderFormat: 'MMMM YYYY',
+        datesWhitelist: undefined,
+        datesBlacklist: undefined
     };
 
     constructor(props) {
@@ -182,6 +188,46 @@ export default class CalendarStrip extends Component {
         }
     }
 
+    // Check whether date is allowed
+    isDateAllowed(date) {
+      // datesBlacklist entries override datesWhitelist
+      if (this.props.datesBlacklist !== undefined ) {
+        for (let disallowed of this.props.datesBlacklist) {
+          // Blacklist start/end object
+          if (disallowed.start && disallowed.end) {
+            if (date.isBetween(disallowed.start, disallowed.end, 'day', '[]')) {
+              return false;
+            }
+          }
+          else {
+            if (date.isSame(disallowed, 'day')) {
+              return false;
+            }
+          }
+        }
+      }
+
+      if (this.props.datesWhitelist === undefined ) {
+        return true;
+      }
+
+      // Whitelist
+      for (let allowed of this.props.datesWhitelist) {
+        // start/end object
+        if (allowed.start && allowed.end) {
+          if (date.isBetween(allowed.start, allowed.end, 'day', '[]')) {
+            return true;
+          }
+        }
+        else {
+          if (date.isSame(allowed, 'day')) {
+            return true;
+          }
+        }
+      }
+      return false;
+    }
+
     //Function to check if provided date is the same as selected one, hence date is selected
     //using isSame moment query with 'day' param so that it check years, months and day
     isDateSelected(date) {
@@ -255,13 +301,15 @@ export default class CalendarStrip extends Component {
             if (this.props.calendarAnimation) {
                 opacityAnim = this.animatedValue[index];
             }
+            let enabled = this.isDateAllowed(date);
             return (
                 <Animated.View key={date} style={{opacity: opacityAnim, flex: 1}}>
                     <CalendarDay
                         date={date}
                         key={date}
                         selected={this.isDateSelected(date)}
-                        onDateSelected={this.onDateSelected}
+                        enabled={enabled}
+                        onDateSelected={() => { if (enabled) this.onDateSelected(date); } }
                         calendarColor={this.props.calendarColor}
                         highlightColor={this.props.highlightColor}
                         dateNameStyle={this.props.dateNameStyle}
@@ -270,6 +318,8 @@ export default class CalendarStrip extends Component {
                         weekendDateNumberStyle={this.props.weekendDateNumberStyle}
                         highlightDateNameStyle={this.props.highlightDateNameStyle}
                         highlightDateNumberStyle={this.props.highlightDateNumberStyle}
+                        disabledDateNameStyle={this.props.disabledDateNameStyle}
+                        disabledDateNumberStyle={this.props.disabledDateNumberStyle}
                         styleWeekend={this.props.styleWeekend}
                         selection={this.props.selection}
                         selectionAnimation={this.props.selectionAnimation}
