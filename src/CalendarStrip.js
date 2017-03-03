@@ -29,8 +29,6 @@ export default class CalendarStrip extends Component {
     static propTypes = {
         style: React.PropTypes.any,
         calendarColor: React.PropTypes.string,
-        highlightColor: React.PropTypes.string,
-        borderHighlightColor: React.PropTypes.string,
 
         startingDate: React.PropTypes.any,
         selectedDate: React.PropTypes.any,
@@ -49,8 +47,7 @@ export default class CalendarStrip extends Component {
         calendarHeaderFormat: React.PropTypes.string,
 
         calendarAnimation: React.PropTypes.object,
-        selection: React.PropTypes.string,
-        selectionAnimation: React.PropTypes.object,
+        daySelectionAnimation: React.PropTypes.object,
 
         dateNameStyle: React.PropTypes.any,
         dateNumberStyle: React.PropTypes.any,
@@ -303,15 +300,13 @@ export default class CalendarStrip extends Component {
             }
             let enabled = this.isDateAllowed(date);
             return (
-                <Animated.View key={date} style={{opacity: opacityAnim, flex: 1}}>
+                <Animated.View key={index} style={{opacity: opacityAnim, flex: 1}}>
                     <CalendarDay
                         date={date}
-                        key={date}
                         selected={this.isDateSelected(date)}
                         enabled={enabled}
                         onDateSelected={() => { if (enabled) this.onDateSelected(date); } }
                         calendarColor={this.props.calendarColor}
-                        highlightColor={this.props.highlightColor}
                         dateNameStyle={this.props.dateNameStyle}
                         dateNumberStyle={this.props.dateNumberStyle}
                         weekendDateNameStyle={this.props.weekendDateNameStyle}
@@ -321,9 +316,7 @@ export default class CalendarStrip extends Component {
                         disabledDateNameStyle={this.props.disabledDateNameStyle}
                         disabledDateNumberStyle={this.props.disabledDateNumberStyle}
                         styleWeekend={this.props.styleWeekend}
-                        selection={this.props.selection}
-                        selectionAnimation={this.props.selectionAnimation}
-                        borderHighlightColor={this.props.borderHighlightColor}
+                        daySelectionAnimation={this.props.daySelectionAnimation}
                     />
                 </Animated.View>
             );

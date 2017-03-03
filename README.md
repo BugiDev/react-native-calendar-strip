@@ -66,12 +66,10 @@ class Example extends Component {
             <View>
                 <CalendarStrip
                     calendarAnimation={{type: 'sequence', duration: 30}}
-                    selection={'border'}
-                    selectionAnimation={{duration: 300, borderWidth: 1}}
+                    daySelectionAnimation={{type: 'border', duration: 200, borderWidth: 1, borderHighlightColor: 'white'}}
                     style={{paddingTop: 20, paddingBottom: 10}}
                     calendarHeaderStyle={{color: 'white'}}
                     calendarColor={'#7743CE'}
-                    highlightColor={'#9265DC'}
                     dateNumberStyle={{color: 'white'}}
                     dateNameStyle={{color: 'white'}}
                     highlightDateNumberStyle={{color: 'yellow'}}
@@ -80,7 +78,6 @@ class Example extends Component {
                     disabledDateNumberStyle={{color: 'grey'}}
                     datesWhitelist={datesWhitelist}
                     datesBlacklist={datesBlacklist}
-                    borderHighlightColor={'white'}
                     iconLeft={require('./img/left-arrow.png')}
                     iconRight={require('./img/right-arrow.png')}
                     iconContainer={{flex: 0.1}}
@@ -140,30 +137,39 @@ This is the list of all the props you can pass to the component so that you can 
   * disabledDateNameStyle: React.PropTypes.any - Style for disabled name of the day in dates strip (controlled by datesWhitelist & datesBlacklist).
   * disabledDateNumberStyle: React.PropTypes.any - Style for disabled number of the day in dates strip (controlled by datesWhitelist & datesBlacklist).
 
-  ###### Animations
-  There are two animated properties that also can be customized. The first one is actually animated showing of dates when you change a week.
-  *If you do not add this prop, it will not have an animation*
-  There are 2 possible options.
-  * calendarAnimation: React.PropTypes.object - Animation object for showin the dates. It can have 2 types: `{type: 'sequence', duration: 30}` or `{type: 'parallel', duration: 300}` and the duration part being the duration of animation in millisecond.
+###### Animations
+  The week strip and day selection have configurable opacity animations.  If they are not specified in the props, by default the animations are disabled.
 
-  ####### Sequence
-  The animation is used to show dates in sequence, so it shows them one by one.
+**Week strip animation**
+  * calendarAnimation: React.PropTypes.object - options for animating the week.
+   * type: `sequence` or `parallel`
+   * duration: duration of animation in milliseconds.
+
+  Sequence example (dates shown one by one):
+
   ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/squential.gif "react-native-calendar-strip sequence animation demo")
 
-  ####### Parallel
-  The animation is used to show dates in parallel, so it shows all of them with opacity animation.
+  Parallel example (dates shown all at once):
+
   ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/parallel.gif "react-native-calendar-strip parallel animation demo")
 
-  ---
-  The second animation is used to animate selection of the date. Again, there are 2 types of animation, and they are either animating circular border around a date or changing a circualar background of the date.
-  * selection: React.PropTypes.string - String prop for type of selection highligh. Possible types are `border` or `background.` `!important` This property will only determen the type of selection and type of animation, but to be animated, properties bellow have to be added as well.
-  * selectionAnimation: React.PropTypes.object - An object used for the animation of selection. If this object is added, only then the selection will be animated. This object defines `{duration: 30}` of the animation, and *if you add a type `border` of selection, you should also add a `{duration: 30, borderWidth: 1}` to this object.*
-  * borderHighlightColor: React.PropTypes.string - Highlighting border color.
+**Day selection animation**
+  * daySelectionAnimation: React.PropTypes.object -
+   * type: `border` or `background`.  'border' animates a circular border around a date. 'background' animates the background of the date.
+   * duration: duration of animation in milliseconds.
+   * borderWidth: React.PropTypes.number - Selected day's border width. Required if the type is set to _border_.
+   * borderHighlightColor: React.PropTypes.string - Selected day's border color. Required if the type is set to _border_.
+   * highlightColor: React.PropTypes.string - Highlighted color of selected date. Required if the type is set to _background_.
+   * animType, animUpdateType, animProperty, and animSpringDamping are optional config options passed to [LayoutAnimation](https://facebook.github.io/react-native/docs/layoutanimation.html)
+
+   Border example:
+
   ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/border-small.gif "react-native-calendar-strip border animation demo")
 
-  If you chose the `background` type of animation, the selected date will animate the circular background color from `calendarColor` to `highlightColor`. That is why, when this type is chosen, you have to define both of these colors.
-  * calendarColor: React.PropTypes.string - Color of the circular backgroundo of the date. `!important` This color will also be aplied as the whole calendar strip background color, so that highlighting the date will appear 'from background' but be aware that top level style of this component can override this property.
-  * highlightColor: React.PropTypes.string - Highlighting color of dates.
+  If you chose the `background` type of animation, the selected date will animate the circular background color from `calendarColor` to `daySelectionAnimation.highlightColor`. That is why, when this type is chosen, you have to define both of these colors.
+  * calendarColor: React.PropTypes.string - Background color of the whole calendar strip. `!important` This is also the color of the circular background of the date so that highlighting the date will appear 'from background'. The top level style of this component can override this property.
+
+  Background example:
 
   ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/background-small.gif "react-native-calendar-strip simple demo")
 
