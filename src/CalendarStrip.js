@@ -231,6 +231,19 @@ export default class CalendarStrip extends Component {
         return date.isSame(this.state.selectedDate, 'day');
     }
 
+    // Get the currently selected date (Moment JS object)
+    getSelectedDate(date) {
+        if (this.state.selectedDate.valueOf() === 0) {
+          return; // undefined (no date has been selected yet)
+        }
+        return this.state.selectedDate;
+    }
+
+    // Set the selected date.  To clear the currently selected date, pass in 0.
+    setSelectedDate(date) {
+        this.onDateSelected(moment(date));
+    }
+
     //Function for reseting animations
     resetAnimation() {
         this.animatedValue = [];
