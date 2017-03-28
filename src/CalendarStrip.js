@@ -128,6 +128,7 @@ export default class CalendarStrip extends Component {
             this.setState({
                 selectedDate
             });
+            this.updateWeekView(selectedDate);
         }
     }
 
@@ -174,6 +175,17 @@ export default class CalendarStrip extends Component {
                 this.props.onWeekChanged(nextWeekStartDate.clone());
             }
         }
+    }
+
+    // Set the current visible week to the selectedDate
+    updateWeekView(date) {
+      let daysDiff = date.diff(this.state.startingDate, 'days');
+      let addOrSubtract = daysDiff > 0 ? 'add' : 'subtract';
+      let adjustWeeks = daysDiff / 7;
+      adjustWeeks = adjustWeeks > 0 ? Math.floor(adjustWeeks) : Math.ceil(Math.abs(adjustWeeks));
+
+      let startingDate = this.state.startingDate[addOrSubtract](adjustWeeks, 'w');
+      this.setState({startingDate});
     }
 
     //Get dates for the week based on the startingDate
@@ -260,7 +272,9 @@ export default class CalendarStrip extends Component {
 
     // Set the selected date.  To clear the currently selected date, pass in 0.
     setSelectedDate(date) {
-        this.onDateSelected(moment(date));
+        let mDate = moment(date);
+        this.onDateSelected(mDate);
+        this.updateWeekView(mDate);
     }
 
     //Function for reseting animations
