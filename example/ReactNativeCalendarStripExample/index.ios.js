@@ -18,15 +18,12 @@ class ReactNativeCalendarStrip extends Component {
             <View>
                 <CalendarStrip
                     calendarAnimation={{type: 'sequence', duration: 30}}
-                    selection={'background'}
-                    selectionAnimation={{duration: 300, borderWidth: 2}}
+                    daySelectionAnimation={{type: 'background', duration: 300, highlightColor: '#9265DC'}}
                     style={{paddingTop: 20, paddingBottom: 10}}
                     calendarHeaderStyle={{color: 'white'}}
                     calendarColor={'#7743CE'}
-                    highlightColor={'#9265DC'}
                     dateNumberStyle={{color: 'white'}}
                     dateNameStyle={{color: 'white'}}
-                    borderHighlightColor={'white'}
                     iconLeft={require('./img/left-arrow.png')}
                     iconRight={require('./img/right-arrow.png')}
                     iconContainer={{flex: 0.1}}
