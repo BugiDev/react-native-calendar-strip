@@ -6,7 +6,7 @@ Easy to use and visually stunning calendar component for React Native.
 
 ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/Initial.gif "react-native-calendar-strip demo")
 
-#### Instalation
+#### Installation
 Just use the standard npm installation
 ```sh
 npm install react-native-calendar-strip --save
@@ -110,6 +110,12 @@ This is the list of all the props you can pass to the component so that you can 
   This may be overridden by _datesBlacklist_.
   * datesBlacklist: React.PropTypes.array - Dates that are disabled. Same format as _datesWhitelist_.  This overrides dates in _datesWhitelist_.
 
+###### Show or hide components
+  * showMonth: React.PropTypes.bool - Show (default true) or hide (false) the month label.
+  * showDate: React.PropTypes.bool - Show (default true) or hide (false) all the dates.
+  * showDayName: React.PropTypes.bool - Show (default true) or hide (false) the day name label.
+  * showDayNumber: React.PropTypes.bool - Show (default true) or hide (false) the day number label.
+
 ###### Top level style
   * style: React.PropTypes.any - Style for the top level CalendarStrip component
 
@@ -120,6 +126,8 @@ This is the list of all the props you can pass to the component so that you can 
   * iconLeftStyle: React.PropTypes.any - Style for left icon. It will override all of the other styles applied to icons.
   * iconRightStyle: React.PropTypes.any - Style for right icon. It will override all of the other styles applied to icons.
   * iconContainer: React.PropTypes.any - Style for the container of icons. (Example usage is to add `flex` property to it so in the portrait mode, it will shrink the dates strip)
+  * leftSelector: React.PropTypes.any - Component for the left selector control. May be an instance of any React component. This overrides the icon* props above. Passing in an empty array `[]` hides this control.
+  * rightSelector: React.PropTypes.any - same as above but for the right selector control.
 
 ###### Header style and formating
   * calendarHeaderStyle: React.PropTypes.any - Style for the header text of the calendar.

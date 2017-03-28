@@ -36,6 +36,13 @@ export default class CalendarStrip extends Component {
         onWeekChanged: React.PropTypes.func,
         useIsoWeekday: React.PropTypes.bool,
 
+        showMonth: React.PropTypes.bool,
+        showDayName: React.PropTypes.bool,
+        showDayNumber: React.PropTypes.bool,
+        showDate: React.PropTypes.bool,
+
+        leftSelector: React.PropTypes.any,
+        rightSelector: React.PropTypes.any,
         iconLeft: React.PropTypes.any,
         iconRight: React.PropTypes.any,
         iconStyle: React.PropTypes.any,
@@ -67,6 +74,8 @@ export default class CalendarStrip extends Component {
     static defaultProps = {
         startingDate: moment(),
         useIsoWeekday: true,
+        showMonth: true,
+        showDate: true,
         iconLeft: require('./img/left-arrow-black.png'),
         iconRight: require('./img/right-arrow-black.png'),
         calendarHeaderFormat: 'MMMM YYYY',
@@ -318,6 +327,8 @@ export default class CalendarStrip extends Component {
                         date={date}
                         selected={this.isDateSelected(date)}
                         enabled={enabled}
+                        showDayName={this.props.showDayName}
+                        showDayNumber={this.props.showDayNumber}
                         onDateSelected={() => { if (enabled) this.onDateSelected(date); } }
                         calendarColor={this.props.calendarColor}
                         dateNameStyle={this.props.dateNameStyle}
@@ -334,20 +345,30 @@ export default class CalendarStrip extends Component {
                 </Animated.View>
             );
         });
+        let leftSelector = this.props.leftSelector   || <Image style={[styles.icon, this.props.iconStyle, this.props.iconLeftStyle]} source={this.props.iconLeft}/>;
+        let rightSelector = this.props.rightSelector || <Image style={[styles.icon, this.props.iconStyle, this.props.iconRightStyle]} source={this.props.iconRight}/>;
+        let calendarHeader = this.props.showMonth && <Text style={[styles.calendarHeader, this.props.calendarHeaderStyle]}>{this.formatCalendarHeader()}</Text>;
+
+        // calendarHeader renders above the dates & left/right selectors if dates are shown.
+        // However if dates are hidden, the header shows between the left/right selectors.
         return (
             <View style={[styles.calendarContainer, {backgroundColor: this.props.calendarColor}, this.props.style]}>
-                <Text style={[styles.calendarHeader, this.props.calendarHeaderStyle]}>{this.formatCalendarHeader()}</Text>
+                { this.props.showDate && calendarHeader }
                 <View style={styles.datesStrip}>
                     <TouchableOpacity style={[styles.iconContainer, this.props.iconContainer]} onPress={this.getPreviousWeek}>
-                        <Image style={[styles.icon, this.props.iconStyle, this.props.iconLeftStyle]} source={this.props.iconLeft}/>
+                        { leftSelector }
                     </TouchableOpacity>
-                    <View style={styles.calendarDates}>
-                        {datesRender}
-                    </View>
+                    { this.props.showDate ?
+                      <View style={styles.calendarDates}>
+                          {datesRender}
+                      </View>
+                      :
+                      calendarHeader
+                    }
                     <TouchableOpacity style={[styles.iconContainer, this.props.iconContainer]} onPress={this.getNextWeek}>
-                        <Image style={[styles.icon, this.props.iconStyle, this.props.iconRightStyle]} source={this.props.iconRight}/>
+                        { rightSelector }
                     </TouchableOpacity>
-                </View>
+              </View>
             </View>
         );
     }

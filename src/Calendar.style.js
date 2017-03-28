@@ -13,7 +13,9 @@ export default StyleSheet.create({
         overflow: 'hidden'
     },
     datesStrip: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        flex: 1,
+        justifyContent: 'space-between',
     },
     calendarDates: {
         flex: 1,
@@ -24,7 +26,8 @@ export default StyleSheet.create({
     calendarHeader: {
         fontSize: 16,
         textAlign: 'center',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        alignSelf: 'center',
     },
     iconContainer: {
         justifyContent: 'center',

@@ -21,6 +21,9 @@ export default class CalendarDay extends Component {
         selected: React.PropTypes.bool.isRequired,
         enabled: React.PropTypes.bool.isRequired,
 
+        showDayName: React.PropTypes.bool,
+        showDayNumber: React.PropTypes.bool,
+
         calendarColor: React.PropTypes.string,
 
         dateNameStyle: React.PropTypes.any,
@@ -49,8 +52,10 @@ export default class CalendarDay extends Component {
           animProperty: LayoutAnimation.Properties.opacity,
           animSpringDamping: undefined,  // Only applicable for LayoutAnimation.Types.spring,
         },
-        styleWeekend: true
-    };
+        styleWeekend: true,
+        showDayName: true,
+        showDayNumber: true,
+  };
 
     constructor(props) {
         super(props);
@@ -123,8 +128,12 @@ export default class CalendarDay extends Component {
         return (
           <TouchableOpacity onPress={this.props.onDateSelected.bind(this, this.props.date)}>
             <View key={this.props.date} style={[styles.dateContainer, dateViewStyle]}>
-              <Text style={dateNameStyle}>{this.props.date.format('ddd').toUpperCase()}</Text>
-              <Text style={dateNumberStyle}>{this.props.date.date()}</Text>
+              { this.props.showDayName &&
+                <Text style={dateNameStyle}>{this.props.date.format('ddd').toUpperCase()}</Text>
+              }
+              { this.props.showDayNumber &&
+                <Text style={dateNumberStyle}>{this.props.date.date()}</Text>
+              }
             </View>
           </TouchableOpacity>
         );
