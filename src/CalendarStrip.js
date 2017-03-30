@@ -124,11 +124,19 @@ export default class CalendarStrip extends Component {
     //Receiving props and set selected date
     componentWillReceiveProps(nextProps) {
         if (nextProps.selectedDate !== this.props.selectedDate) {
-            const selectedDate = this.setLocale(moment(nextProps.selectedDate));
+            let selectedDate = this.setLocale(moment(nextProps.selectedDate));
+            this.updateWeekView(selectedDate);
             this.setState({
                 selectedDate
             });
-            this.updateWeekView(selectedDate);
+        }
+
+        if (nextProps.startingDate !== this.props.startingDate) {
+            let startingDate = this.setLocale(moment(nextProps.startingDate));
+            this.updateWeekView(startingDate, startingDate);
+            this.setState({
+                startingDate
+            });
         }
     }
 
@@ -178,13 +186,14 @@ export default class CalendarStrip extends Component {
     }
 
     // Set the current visible week to the selectedDate
-    updateWeekView(date) {
-      let daysDiff = date.diff(this.state.startingDate, 'days');
+    updateWeekView(date, startDate = this.state.startingDate) {
+      let mDate = moment(date);
+      let daysDiff = mDate.diff(startDate, 'days');
       let addOrSubtract = daysDiff > 0 ? 'add' : 'subtract';
       let adjustWeeks = daysDiff / 7;
       adjustWeeks = adjustWeeks > 0 ? Math.floor(adjustWeeks) : Math.ceil(Math.abs(adjustWeeks));
 
-      let startingDate = this.state.startingDate[addOrSubtract](adjustWeeks, 'w');
+      let startingDate = startDate[addOrSubtract](adjustWeeks, 'w');
       this.setState({startingDate});
     }
 

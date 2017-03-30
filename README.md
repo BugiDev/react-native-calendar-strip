@@ -258,7 +258,10 @@ This is the list of all the props you can pass to the component so that you can 
 ###### Methods
 Methods may be accessed through the instantiated component's [ref](http://reactjs.cn/react/docs/more-about-refs.html).
   * `getSelectedDate()` : Returns the currently selected date. If no date is selected, returns undefined.
-  * `setSelectedDate(date)` : Sets the selected date. `date` may be a Moment object, ISO8601 date string, or any format that Moment is able to parse.  It is the responsibility of the caller to select a date that makes sense (e.g. within the current week view).  Passing in a value of `0` effectively clears the selected date. 
+  * `setSelectedDate(date)` : Sets the selected date. `date` may be a Moment object, ISO8601 date string, or any format that Moment is able to parse.  It is the responsibility of the caller to select a date that makes sense (e.g. within the current week view).  Passing in a value of `0` effectively clears the selected date.
+  * `getNextWeek()` : Advance to the next week.
+  * `getPreviousWeek()` : Rewind to the previous week.
+  * `updateWeekView(date, startDate)` : Show the week that includes the `date` param.  If `startDate` is provided, the first day of the week resets to it as long as `useIsoWeekday` is false.
 
 #### ToDo
 
