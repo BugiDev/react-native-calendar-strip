@@ -274,7 +274,10 @@ export default class CalendarStrip extends Component {
     setSelectedDate(date) {
         let mDate = moment(date);
         this.onDateSelected(mDate);
-        this.updateWeekView(mDate);
+        // Update week view only if date is not cleared (0).
+        if (date !== 0) {
+          this.updateWeekView(mDate);
+        }
     }
 
     //Function for reseting animations
