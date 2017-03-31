@@ -134,9 +134,6 @@ export default class CalendarStrip extends Component {
         if (nextProps.startingDate !== this.props.startingDate) {
             let startingDate = this.setLocale(moment(nextProps.startingDate));
             this.updateWeekView(startingDate, startingDate);
-            this.setState({
-                startingDate
-            });
         }
     }
 
