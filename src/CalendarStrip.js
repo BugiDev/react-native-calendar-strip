@@ -72,7 +72,6 @@ export default class CalendarStrip extends Component {
     };
 
     static defaultProps = {
-        startingDate: moment(),
         useIsoWeekday: true,
         showMonth: true,
         showDate: true,
@@ -94,7 +93,7 @@ export default class CalendarStrip extends Component {
             }
         }
 
-        const startingDate = this.setLocale(moment(this.props.startingDate));
+        const startingDate = this.getInitialStartingDate();
         const selectedDate = this.setLocale(moment(this.props.selectedDate));
 
         this.state = {
@@ -152,6 +151,14 @@ export default class CalendarStrip extends Component {
             momentInstance.locale(this.props.locale.name);
         }
         return momentInstance;
+    }
+
+    getInitialStartingDate() {
+        if (this.props.startingDate) {
+            return this.setLocale(moment(this.props.startingDate));
+        } else {
+            return this.setLocale(moment(this.props.selectedDate)).isoWeekday(1);
+        }
     }
 
     //Set startingDate to the previous week
