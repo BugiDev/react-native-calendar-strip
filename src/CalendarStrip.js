@@ -191,8 +191,8 @@ export default class CalendarStrip extends Component {
 
     // Set the current visible week to the selectedDate
     updateWeekView(date, startDate = this.state.startingDate) {
-      let mDate = moment(date);
-      let daysDiff = mDate.diff(startDate, 'days');
+      let mDate = moment(date).startOf("day");
+      let daysDiff = mDate.diff(moment(startDate).startOf("day"), "days");
       let addOrSubtract = daysDiff > 0 ? 'add' : 'subtract';
       let adjustWeeks = daysDiff / 7;
       adjustWeeks = adjustWeeks > 0 ? Math.floor(adjustWeeks) : Math.ceil(Math.abs(adjustWeeks));
