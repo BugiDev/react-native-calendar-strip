@@ -34,7 +34,9 @@ export default class CalendarDay extends Component {
         highlightDateNumberStyle: React.PropTypes.any,
         disabledDateNameStyle: React.PropTypes.any,
         disabledDateNumberStyle: React.PropTypes.any,
+        disabledDateOpacity: React.PropTypes.number,
         styleWeekend: React.PropTypes.bool,
+        customStyle: React.PropTypes.object,
 
         daySelectionAnimation: React.PropTypes.object
     };
@@ -91,11 +93,19 @@ export default class CalendarDay extends Component {
     }
 
     render() {
-        let dateViewStyle;
+        // Defaults for disabled state
         let dateNameStyle = [styles.dateName, this.props.disabledDateNameStyle];
         let dateNumberStyle = [styles.dateNumber, this.props.disabledDateNumberStyle];
+        let dateViewStyle = this.props.enabled ? [] : [{opacity: this.props.disabledDateOpacity}];
+        let customStyle = this.props.customStyle;
 
-        if (this.props.enabled) {
+        if (customStyle) {
+          dateNameStyle = [styles.dateName, customStyle.dateNameStyle];
+          dateNumberStyle = [styles.dateNumber, customStyle.dateNumberStyle];
+          dateViewStyle.push(customStyle.dateContainerStyle);
+        }
+        // Enabled state
+        else if (this.props.enabled) {
           //The user can disable animation, so that is why I use selection type
           //If it is background, the user have to input colors for animation
           //If it is border, the user has to input color for border animation

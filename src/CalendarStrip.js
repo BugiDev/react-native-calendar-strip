@@ -56,6 +56,8 @@ export default class CalendarStrip extends Component {
         calendarAnimation: React.PropTypes.object,
         daySelectionAnimation: React.PropTypes.object,
 
+        customDatesStyles: React.PropTypes.array,
+
         dateNameStyle: React.PropTypes.any,
         dateNumberStyle: React.PropTypes.any,
         weekendDateNameStyle: React.PropTypes.any,
@@ -64,6 +66,7 @@ export default class CalendarStrip extends Component {
         highlightDateNumberStyle: React.PropTypes.any,
         disabledDateNameStyle: React.PropTypes.any,
         disabledDateNumberStyle: React.PropTypes.any,
+        disabledDateOpacity: React.PropTypes.number,
         styleWeekend: React.PropTypes.bool,
         datesWhitelist: React.PropTypes.array,
         datesBlacklist: React.PropTypes.array,
@@ -79,7 +82,9 @@ export default class CalendarStrip extends Component {
         iconRight: require('./img/right-arrow-black.png'),
         calendarHeaderFormat: 'MMMM YYYY',
         datesWhitelist: undefined,
-        datesBlacklist: undefined
+        datesBlacklist: undefined,
+        disabledDateOpacity: 0.3,
+        customDatesStyles: [],
     };
 
     constructor(props) {
@@ -293,6 +298,23 @@ export default class CalendarStrip extends Component {
         }
     }
 
+    getCustomDateStyle(date) {
+      for (let customDateStyle of this.props.customDatesStyles) {
+        if (customDateStyle.endDate) {
+          // Range
+          if (date.isBetween(customDateStyle.startDate, customDateStyle.endDate, 'day', '[]')) {
+            return customDateStyle;
+          }
+        }
+        else {
+          // Single date
+          if (date.isSame(customDateStyle.startDate, 'day')) {
+            return customDateStyle;
+          }
+        }
+      }
+    }
+
     //Function for reseting animations
     resetAnimation() {
         this.animatedValue = [];
@@ -379,8 +401,10 @@ export default class CalendarStrip extends Component {
                         highlightDateNumberStyle={this.props.highlightDateNumberStyle}
                         disabledDateNameStyle={this.props.disabledDateNameStyle}
                         disabledDateNumberStyle={this.props.disabledDateNumberStyle}
+                        disabledDateOpacity={this.props.disabledDateOpacity}
                         styleWeekend={this.props.styleWeekend}
                         daySelectionAnimation={this.props.daySelectionAnimation}
+                        customStyle={this.getCustomDateStyle(date)}
                     />
                 </Animated.View>
             );
