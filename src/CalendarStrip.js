@@ -35,6 +35,10 @@ export default class CalendarStrip extends Component {
         onDateSelected: React.PropTypes.func,
         onWeekChanged: React.PropTypes.func,
         useIsoWeekday: React.PropTypes.bool,
+        minDate: React.PropTypes.any,
+        maxDate: React.PropTypes.any,
+        datesWhitelist: React.PropTypes.array,
+        datesBlacklist: React.PropTypes.array,
 
         showMonth: React.PropTypes.bool,
         showDayName: React.PropTypes.bool,
@@ -68,8 +72,6 @@ export default class CalendarStrip extends Component {
         disabledDateNumberStyle: React.PropTypes.any,
         disabledDateOpacity: React.PropTypes.number,
         styleWeekend: React.PropTypes.bool,
-        datesWhitelist: React.PropTypes.array,
-        datesBlacklist: React.PropTypes.array,
 
         locale: React.PropTypes.object
     };
@@ -103,7 +105,9 @@ export default class CalendarStrip extends Component {
 
         this.state = {
             startingDate,
-            selectedDate
+            selectedDate,
+            showLeftSelector: true,
+            showRightSelector: true,
         };
 
         this.resetAnimation();
@@ -122,6 +126,7 @@ export default class CalendarStrip extends Component {
 
     //Animate showing of CalendarDay elements
     componentDidMount() {
+        this.updateWeekView(this.state.startingDate);
         this.animate();
     }
 
@@ -203,7 +208,18 @@ export default class CalendarStrip extends Component {
       adjustWeeks = adjustWeeks > 0 ? Math.floor(adjustWeeks) : Math.ceil(Math.abs(adjustWeeks));
 
       let startingDate = startDate[addOrSubtract](adjustWeeks, 'w');
-      this.setState({startingDate});
+      let newState = {startingDate};
+      let endOfWeekDate;
+      if (this.props.minDate || this.props.maxDate) {
+        endOfWeekDate = startingDate.clone().add(6, 'days');
+      }
+      if (this.props.minDate) {
+        newState.showLeftSelector = !moment(this.props.minDate).isBetween(startingDate, endOfWeekDate, 'day', '[]');
+      }
+      if (this.props.maxDate) {
+        newState.showRightSelector = !moment(this.props.maxDate).isBetween(startingDate, endOfWeekDate, 'day', '[]');
+      }
+      this.setState(newState);
     }
 
     //Get dates for the week based on the startingDate
@@ -409,8 +425,8 @@ export default class CalendarStrip extends Component {
                 </Animated.View>
             );
         });
-        let leftSelector = this.props.leftSelector   || <Image style={[styles.icon, this.props.iconStyle, this.props.iconLeftStyle]} source={this.props.iconLeft}/>;
-        let rightSelector = this.props.rightSelector || <Image style={[styles.icon, this.props.iconStyle, this.props.iconRightStyle]} source={this.props.iconRight}/>;
+        let leftSelector = this.state.showLeftSelector  &&  (this.props.leftSelector  || <Image style={[styles.icon, this.props.iconStyle, this.props.iconLeftStyle]} source={this.props.iconLeft}/>);
+        let rightSelector = this.state.showRightSelector && (this.props.rightSelector || <Image style={[styles.icon, this.props.iconStyle, this.props.iconRightStyle]} source={this.props.iconRight}/>);
         let calendarHeader = this.props.showMonth && <Text style={[styles.calendarHeader, this.props.calendarHeaderStyle]}>{this.formatCalendarHeader()}</Text>;
 
         // calendarHeader renders above the dates & left/right selectors if dates are shown.

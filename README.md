@@ -99,6 +99,8 @@ This is the list of all the props you can pass to the component so that you can 
   * onDateSelected: React.PropTypes.func - Function to be used as a callback when a date is selected. It returns `moment Date`
   * onWeekChanged: React.PropTypes.func - Function to be used as a callback when a week is changed. It returns `moment Date`
   * useIsoWeekday: React.PropTypes.bool - start week on ISO day of week (default true).  If false, starts week on _startingDate_ parameter.  
+  * minDate: React.PropTypes.any - minimum date that the calendar may navigate to. A week is allowed if minDate falls within the current week.
+  * maxDate: React.PropTypes.any - maximum date that the calendar may navigate to. A week is allowed if maxDate falls within the current week. 
   * datesWhitelist: React.PropTypes.array - Dates that are enabled (accepts both `Date` and `moment Date`). Ranges may be specified with an object entry in the array:
   ```
   // Date range format
