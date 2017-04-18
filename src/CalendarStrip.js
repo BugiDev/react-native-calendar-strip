@@ -106,8 +106,8 @@ export default class CalendarStrip extends Component {
         this.state = {
             startingDate,
             selectedDate,
-            showLeftSelector: true,
-            showRightSelector: true,
+            enableLeftSelector: true,
+            enableRightSelector: true,
         };
 
         this.resetAnimation();
@@ -142,7 +142,7 @@ export default class CalendarStrip extends Component {
 
         if (nextProps.startingDate !== this.props.startingDate) {
             let startingDate = this.setLocale(moment(nextProps.startingDate));
-            this.updateWeekView(startingDate, startingDate);
+            this.updateWeekView(startingDate);
         }
     }
 
@@ -183,6 +183,7 @@ export default class CalendarStrip extends Component {
                 this.props.onWeekChanged(previousWeekStartDate.clone());
             }
         }
+        this.updateWeekView(previousWeekStartDate);
     }
 
     //Set startingDate to the next week
@@ -197,6 +198,7 @@ export default class CalendarStrip extends Component {
                 this.props.onWeekChanged(nextWeekStartDate.clone());
             }
         }
+        this.updateWeekView(nextWeekStartDate);
     }
 
     // Set the current visible week to the selectedDate
@@ -214,10 +216,10 @@ export default class CalendarStrip extends Component {
         endOfWeekDate = startingDate.clone().add(6, 'days');
       }
       if (this.props.minDate) {
-        newState.showLeftSelector = !moment(this.props.minDate).isBetween(startingDate, endOfWeekDate, 'day', '[]');
+        newState.enableLeftSelector = !moment(this.props.minDate).isBetween(startingDate, endOfWeekDate, 'day', '[]');
       }
       if (this.props.maxDate) {
-        newState.showRightSelector = !moment(this.props.maxDate).isBetween(startingDate, endOfWeekDate, 'day', '[]');
+        newState.enableRightSelector = !moment(this.props.maxDate).isBetween(startingDate, endOfWeekDate, 'day', '[]');
       }
       this.setState(newState);
     }
@@ -425,8 +427,10 @@ export default class CalendarStrip extends Component {
                 </Animated.View>
             );
         });
-        let leftSelector = this.state.showLeftSelector  &&  (this.props.leftSelector  || <Image style={[styles.icon, this.props.iconStyle, this.props.iconLeftStyle]} source={this.props.iconLeft}/>);
-        let rightSelector = this.state.showRightSelector && (this.props.rightSelector || <Image style={[styles.icon, this.props.iconStyle, this.props.iconRightStyle]} source={this.props.iconRight}/>);
+        let leftOpacity = {opacity: this.state.enableLeftSelector ? 1 : 0};
+        let rightOpacity = {opacity: this.state.enableRightSelector ? 1 : 0};
+        let leftSelector = this.props.leftSelector  || <Image style={[styles.icon, this.props.iconStyle, this.props.iconLeftStyle, leftOpacity]} source={this.props.iconLeft}/>;
+        let rightSelector = this.props.rightSelector || <Image style={[styles.icon, this.props.iconStyle, this.props.iconRightStyle, rightOpacity]} source={this.props.iconRight}/>;
         let calendarHeader = this.props.showMonth && <Text style={[styles.calendarHeader, this.props.calendarHeaderStyle]}>{this.formatCalendarHeader()}</Text>;
 
         // calendarHeader renders above the dates & left/right selectors if dates are shown.
@@ -435,8 +439,12 @@ export default class CalendarStrip extends Component {
             <View style={[styles.calendarContainer, {backgroundColor: this.props.calendarColor}, this.props.style]}>
                 { this.props.showDate && calendarHeader }
                 <View style={styles.datesStrip}>
-                    <TouchableOpacity style={[styles.iconContainer, this.props.iconContainer]} onPress={this.getPreviousWeek}>
-                        { leftSelector }
+                    <TouchableOpacity
+                      style={[styles.iconContainer, this.props.iconContainer]}
+                      onPress={this.getPreviousWeek}
+                      disabled={!this.state.enableLeftSelector}
+                    >
+                      { leftSelector }
                     </TouchableOpacity>
                     { this.props.showDate ?
                       <View style={styles.calendarDates}>
@@ -445,8 +453,12 @@ export default class CalendarStrip extends Component {
                       :
                       calendarHeader
                     }
-                    <TouchableOpacity style={[styles.iconContainer, this.props.iconContainer]} onPress={this.getNextWeek}>
-                        { rightSelector }
+                    <TouchableOpacity
+                      style={[styles.iconContainer, this.props.iconContainer]}
+                      onPress={this.getNextWeek}
+                      disabled={!this.state.enableRightSelector}
+                    >
+                      { rightSelector }
                     </TouchableOpacity>
               </View>
             </View>
