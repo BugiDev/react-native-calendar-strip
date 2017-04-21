@@ -59,6 +59,8 @@ export default class CalendarStrip extends Component {
 
         dateNameStyle: React.PropTypes.any,
         dateNumberStyle: React.PropTypes.any,
+        todayDateNameStyle: React.PropTypes.any,
+        todayDateNumberStyle: React.PropTypes.any,
         weekendDateNameStyle: React.PropTypes.any,
         weekendDateNumberStyle: React.PropTypes.any,
         highlightDateNameStyle: React.PropTypes.any,
@@ -445,6 +447,8 @@ export default class CalendarStrip extends Component {
                 calendarColor={this.props.calendarColor}
                 dateNameStyle={this.props.dateNameStyle}
                 dateNumberStyle={this.props.dateNumberStyle}
+                todayDateNameStyle={this.props.todayDateNameStyle}
+                todayDateNumberStyle={this.props.todayDateNumberStyle}
                 weekendDateNameStyle={this.props.weekendDateNameStyle}
                 weekendDateNumberStyle={this.props.weekendDateNumberStyle}
                 highlightDateNameStyle={this.props.highlightDateNameStyle}
