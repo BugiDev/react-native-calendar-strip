@@ -444,12 +444,13 @@ export default class CalendarStrip extends Component {
         let leftSelector = this.props.leftSelector  || <Image style={[styles.icon, this.props.iconStyle, this.props.iconLeftStyle, leftOpacity]} source={this.props.iconLeft}/>;
         let rightSelector = this.props.rightSelector || <Image style={[styles.icon, this.props.iconStyle, this.props.iconRightStyle, rightOpacity]} source={this.props.iconRight}/>;
 
-        let calendarHeader = <CalendarHeader
-            calendarHeaderFormat={this.props.calendarHeaderFormat}
-            calendarHeaderStyle={this.props.calendarHeaderStyle}
-            datesForWeek={this.state.datesForWeek}
-            startingDate={this.state.startingDate}
-        />;
+        let calendarHeader = (
+            <CalendarHeader
+                calendarHeaderFormat={this.props.calendarHeaderFormat}
+                calendarHeaderStyle={this.props.calendarHeaderStyle}
+                datesForWeek={this.state.datesForWeek}
+            />
+        );
 
         // calendarHeader renders above the dates & left/right selectors if dates are shown.
         // However if dates are hidden, the header shows between the left/right selectors.
