@@ -444,7 +444,7 @@ export default class CalendarStrip extends Component {
         let leftSelector = this.props.leftSelector  || <Image style={[styles.icon, this.props.iconStyle, this.props.iconLeftStyle, leftOpacity]} source={this.props.iconLeft}/>;
         let rightSelector = this.props.rightSelector || <Image style={[styles.icon, this.props.iconStyle, this.props.iconRightStyle, rightOpacity]} source={this.props.iconRight}/>;
 
-        let calendarHeader = (
+        let calendarHeader = this.props.showMonth && (
             <CalendarHeader
                 calendarHeaderFormat={this.props.calendarHeaderFormat}
                 calendarHeaderStyle={this.props.calendarHeaderStyle}
