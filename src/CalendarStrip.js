@@ -11,6 +11,8 @@ import {
     Easing,
     TouchableOpacity
 } from 'react-native';
+
+import CalendarHeader from './CalendarHeader';
 import CalendarDay from './CalendarDay';
 import moment from 'moment';
 import styles from './Calendar.style.js';
@@ -119,7 +121,6 @@ export default class CalendarStrip extends Component {
         this.getNextWeek = this.getNextWeek.bind(this);
         this.onDateSelected = this.onDateSelected.bind(this);
         this.isDateSelected = this.isDateSelected.bind(this);
-        this.formatCalendarHeader = this.formatCalendarHeader.bind(this);
         this.animate = this.animate.bind(this);
         this.resetAnimation = this.resetAnimation.bind(this);
     }
@@ -400,35 +401,6 @@ export default class CalendarStrip extends Component {
         }
     }
 
-    //Function that formats the calendar header
-    //It also formats the month section if the week is in between months
-    formatCalendarHeader(datesForWeek) {
-        if (!datesForWeek || datesForWeek.length === 0) {
-            return;
-        }
-        let firstDay = datesForWeek[0];
-        let lastDay = datesForWeek[datesForWeek.length - 1];
-        let monthFormatting = '';
-        //Parsing the month part of the user defined formating
-        if ((this.props.calendarHeaderFormat.match(/Mo/g) || []).length > 0) {
-            monthFormatting = 'Mo';
-        } else {
-            if ((this.props.calendarHeaderFormat.match(/M/g) || []).length > 0) {
-                for (let i = (this.props.calendarHeaderFormat.match(/M/g) || []).length; i > 0; i--) {
-                    monthFormatting += 'M';
-                }
-            }
-        }
-
-        if (firstDay.month() === lastDay.month()) {
-            return firstDay.format(this.props.calendarHeaderFormat);
-        }
-        if (firstDay.year() !== lastDay.year()) {
-            return `${firstDay.format(this.props.calendarHeaderFormat)} / ${lastDay.format(this.props.calendarHeaderFormat)}`;
-        }
-        return `${monthFormatting.length > 1 ? firstDay.format(monthFormatting) : ''} ${monthFormatting.length > 1 ? '/' : ''} ${lastDay.format(this.props.calendarHeaderFormat)}`;
-    }
-
     render() {
         let datesForWeek = this.state.datesForWeek;
         let datesRender = [];
@@ -471,7 +443,14 @@ export default class CalendarStrip extends Component {
         let rightOpacity = {opacity: this.state.enableRightSelector ? 1 : 0};
         let leftSelector = this.props.leftSelector  || <Image style={[styles.icon, this.props.iconStyle, this.props.iconLeftStyle, leftOpacity]} source={this.props.iconLeft}/>;
         let rightSelector = this.props.rightSelector || <Image style={[styles.icon, this.props.iconStyle, this.props.iconRightStyle, rightOpacity]} source={this.props.iconRight}/>;
-        let calendarHeader = this.props.showMonth && <Text style={[styles.calendarHeader, this.props.calendarHeaderStyle]}>{this.formatCalendarHeader(datesForWeek)}</Text>;
+
+        let calendarHeader = this.props.showMonth && (
+            <CalendarHeader
+                calendarHeaderFormat={this.props.calendarHeaderFormat}
+                calendarHeaderStyle={this.props.calendarHeaderStyle}
+                datesForWeek={this.state.datesForWeek}
+            />
+        );
 
         // calendarHeader renders above the dates & left/right selectors if dates are shown.
         // However if dates are hidden, the header shows between the left/right selectors.
