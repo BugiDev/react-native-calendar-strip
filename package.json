@@ -11,13 +11,37 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
+    "babel-jest": "^19.0.0",
+    "babel-preset-react-native": "^1.9.1",
+    "enzyme": "^2.8.2",
+    "enzyme-to-json": "^1.5.1",
     "eslint": "^3.4.0",
     "eslint-plugin-react": "^6.2.0",
-    "react": "15.2.1",
-    "react-native": "^0.31.0"
+    "jest": "^19.0.2",
+    "react": "15.4.2",
+    "react-addons-test-utils": "15.4.2",
+    "react-dom": "15.4.2",
+    "react-native": "0.42.3",
+    "react-test-renderer": "15.4.2"
+  },
+  "jest": {
+    "preset": "react-native",
+    "verbose":true,
+    "coverageDirectory": "./coverage/",
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/img.js",
+      "!example/*.js"
+    ],
+    "collectCoverage": false,
+    "globals": {
+      "__DEV__": true
+    }
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "eslint": "eslint ."
   },
   "repository": {
