@@ -5,7 +5,7 @@ import styles from './Calendar.style.js';
 
 class CalendarHeader extends Component {
     static propTypes = {
-        calendarHeaderFormat: React.PropTypes.string,
+        calendarHeaderFormat: React.PropTypes.string.isRequired,
         calendarHeaderStyle: React.PropTypes.oneOfType([
             React.PropTypes.object,
             React.PropTypes.number

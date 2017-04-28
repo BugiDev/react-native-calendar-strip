@@ -1,0 +1,194 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CalendarHeader Component should render 01 / 02 2018 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+  style={
+    Array [
+      Object {
+        "alignSelf": "center",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "textAlign": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  01 / 02 2018
+</Text>
+`;
+
+exports[`CalendarHeader Component should render 1st / 2nd 18 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+  style={
+    Array [
+      Object {
+        "alignSelf": "center",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "textAlign": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  1st / 2nd 18
+</Text>
+`;
+
+exports[`CalendarHeader Component should render December 2017 / January 2018 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+  style={
+    Array [
+      Object {
+        "alignSelf": "center",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "textAlign": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  December 2017 / January 2018
+</Text>
+`;
+
+exports[`CalendarHeader Component should render December 2017 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+  style={
+    Array [
+      Object {
+        "alignSelf": "center",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "textAlign": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  December 2017
+</Text>
+`;
+
+exports[`CalendarHeader Component should render Jan / Feb 2018 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+  style={
+    Array [
+      Object {
+        "alignSelf": "center",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "textAlign": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  Jan / Feb 2018
+</Text>
+`;
+
+exports[`CalendarHeader Component should render January / February 2018 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+  style={
+    Array [
+      Object {
+        "alignSelf": "center",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "textAlign": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  January / February 2018
+</Text>
+`;
+
+exports[`CalendarHeader Component should render in Comic Sans 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+  style={
+    Array [
+      Object {
+        "alignSelf": "center",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "textAlign": "center",
+      },
+      Object {
+        "fontFamily": "ComicSans",
+      },
+    ]
+  }
+>
+  December 2017 / January 2018
+</Text>
+`;
+
+exports[`CalendarHeader Component should render in a red color 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+  style={
+    Array [
+      Object {
+        "alignSelf": "center",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "textAlign": "center",
+      },
+      Object {
+        "color": "red",
+      },
+    ]
+  }
+>
+  December 2017 / January 2018
+</Text>
+`;
+
+exports[`CalendarHeader Component should render without issues 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+  style={
+    Array [
+      Object {
+        "alignSelf": "center",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "textAlign": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  December 2017
+</Text>
+`;
