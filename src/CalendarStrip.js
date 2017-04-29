@@ -4,16 +4,14 @@
 
 import React, {Component} from 'react';
 import {
-    Text,
     View,
-    Image,
     Animated,
-    Easing,
-    TouchableOpacity
+    Easing
 } from 'react-native';
 
 import CalendarHeader from './CalendarHeader';
 import CalendarDay from './CalendarDay';
+import WeekSelector from './WeekSelector';
 import moment from 'moment';
 import styles from './Calendar.style.js';
 
@@ -107,9 +105,7 @@ export default class CalendarStrip extends Component {
             datesAllowedForWeek: [],
             datesSelectedForWeek: [],
             datesCustomStylesForWeek: [],
-            selectedDate,
-            enableLeftSelector: true,
-            enableRightSelector: true,
+            selectedDate
         };
 
         this.resetAnimation();
@@ -235,16 +231,7 @@ export default class CalendarStrip extends Component {
       startingDate[addOrSubtract](adjustWeeks, 'w');
 
       let newState = {startingDate};
-      let endOfWeekDate;
-      if (props.minDate || props.maxDate) {
-        endOfWeekDate = startingDate.clone().add(6, 'days');
-      }
-      if (props.minDate) {
-        newState.enableLeftSelector = !moment(props.minDate).isBetween(startingDate, endOfWeekDate, 'day', '[]');
-      }
-      if (props.maxDate) {
-        newState.enableRightSelector = !moment(props.maxDate).isBetween(startingDate, endOfWeekDate, 'day', '[]');
-      }
+
       this.setState(newState);
       return startingDate;
     }
@@ -439,10 +426,6 @@ export default class CalendarStrip extends Component {
             </View>
           );
         }
-        let leftOpacity = {opacity: this.state.enableLeftSelector ? 1 : 0};
-        let rightOpacity = {opacity: this.state.enableRightSelector ? 1 : 0};
-        let leftSelector = this.props.leftSelector  || <Image style={[styles.icon, this.props.iconStyle, this.props.iconLeftStyle, leftOpacity]} source={this.props.iconLeft}/>;
-        let rightSelector = this.props.rightSelector || <Image style={[styles.icon, this.props.iconStyle, this.props.iconRightStyle, rightOpacity]} source={this.props.iconRight}/>;
 
         let calendarHeader = this.props.showMonth && (
             <CalendarHeader
@@ -458,13 +441,19 @@ export default class CalendarStrip extends Component {
             <View style={[styles.calendarContainer, {backgroundColor: this.props.calendarColor}, this.props.style]}>
                 { this.props.showDate && calendarHeader }
                 <View style={styles.datesStrip}>
-                    <TouchableOpacity
-                      style={[styles.iconContainer, this.props.iconContainer]}
-                      onPress={this.getPreviousWeek}
-                      disabled={!this.state.enableLeftSelector}
-                    >
-                      { leftSelector }
-                    </TouchableOpacity>
+
+                    <WeekSelector
+                        controlDate={this.props.minDate}
+                        iconComponent={this.props.leftSelector}
+                        iconContainerStyle={this.props.iconContainer}
+                        iconInstanceStyle={this.props.iconLeftStyle}
+                        iconStyle={this.props.iconStyle}
+                        imageSource={this.props.iconLeft}
+                        onPress={this.getPreviousWeek}
+                        weekEndDate={this.state.datesForWeek[this.state.datesForWeek.length - 1]}
+                        weekStartDate={this.state.datesForWeek[0]}
+                    />
+
                     { this.props.showDate ?
                       <View style={styles.calendarDates}>
                           {datesRender}
@@ -472,13 +461,19 @@ export default class CalendarStrip extends Component {
                       :
                       calendarHeader
                     }
-                    <TouchableOpacity
-                      style={[styles.iconContainer, this.props.iconContainer]}
-                      onPress={this.getNextWeek}
-                      disabled={!this.state.enableRightSelector}
-                    >
-                      { rightSelector }
-                    </TouchableOpacity>
+
+                    <WeekSelector
+                        controlDate={this.props.maxDate}
+                        iconComponent={this.props.rightSelector}
+                        iconContainerStyle={this.props.iconContainer}
+                        iconInstanceStyle={this.props.iconRightStyle}
+                        iconStyle={this.props.iconStyle}
+                        imageSource={this.props.iconRight}
+                        onPress={this.getNextWeek}
+                        weekEndDate={this.state.datesForWeek[this.state.datesForWeek.length - 1]}
+                        weekStartDate={this.state.datesForWeek[0]}
+                    />
+
               </View>
             </View>
         );
