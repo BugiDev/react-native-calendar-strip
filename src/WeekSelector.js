@@ -21,7 +21,10 @@ class WeekSelector extends Component {
             React.PropTypes.object,
             React.PropTypes.number
         ]),
-        imageSource: React.PropTypes.number,
+        imageSource: React.PropTypes.oneOfType([
+            React.PropTypes.object,
+            React.PropTypes.number
+        ]),
         onPress: React.PropTypes.func,
         weekStartDate: React.PropTypes.object,
         weekEndDate: React.PropTypes.object
