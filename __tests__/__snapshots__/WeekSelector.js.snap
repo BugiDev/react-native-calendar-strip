@@ -1,0 +1,323 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WeekSelector Component should be disabled 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  disabled={true}
+  focusedOpacity={0.7}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <Image
+    source={1}
+    style={
+      Array [
+        Object {
+          "height": 20,
+          "resizeMode": "contain",
+          "width": 20,
+        },
+        undefined,
+        undefined,
+        Object {
+          "opacity": 0,
+        },
+      ]
+    }
+  />
+</TouchableOpacity>
+`;
+
+exports[`WeekSelector Component should have a custom container style of color red 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  disabled={false}
+  focusedOpacity={0.7}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      Object {
+        "color": "red",
+      },
+    ]
+  }
+>
+  <Image
+    source={1}
+    style={
+      Array [
+        Object {
+          "height": 20,
+          "resizeMode": "contain",
+          "width": 20,
+        },
+        undefined,
+        undefined,
+        Object {
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+</TouchableOpacity>
+`;
+
+exports[`WeekSelector Component should have onPress event 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  disabled={false}
+  focusedOpacity={0.7}
+  onPress={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <Image
+    source={1}
+    style={
+      Array [
+        Object {
+          "height": 20,
+          "resizeMode": "contain",
+          "width": 20,
+        },
+        undefined,
+        undefined,
+        Object {
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+</TouchableOpacity>
+`;
+
+exports[`WeekSelector Component should render without issues 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  disabled={false}
+  focusedOpacity={0.7}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <Image
+    source={1}
+    style={
+      Array [
+        Object {
+          "height": 20,
+          "resizeMode": "contain",
+          "width": 20,
+        },
+        undefined,
+        undefined,
+        Object {
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+</TouchableOpacity>
+`;
+
+exports[`WeekSelector Image Component  should be disabled with opacity 0 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  disabled={true}
+  focusedOpacity={0.7}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <Image
+    source={1}
+    style={
+      Array [
+        Object {
+          "height": 20,
+          "resizeMode": "contain",
+          "width": 20,
+        },
+        undefined,
+        undefined,
+        Object {
+          "opacity": 0,
+        },
+      ]
+    }
+  />
+</TouchableOpacity>
+`;
+
+exports[`WeekSelector Image Component  should have custom icon instance style of backgroundColor blue 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  disabled={false}
+  focusedOpacity={0.7}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <Image
+    source={1}
+    style={
+      Array [
+        Object {
+          "height": 20,
+          "resizeMode": "contain",
+          "width": 20,
+        },
+        Object {
+          "backgroundColor": "red",
+        },
+        Object {
+          "backgroundColor": "blue",
+        },
+        Object {
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+</TouchableOpacity>
+`;
+
+exports[`WeekSelector Image Component  should have custom icon style of backgroundColor red 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  disabled={false}
+  focusedOpacity={0.7}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <Image
+    source={1}
+    style={
+      Array [
+        Object {
+          "height": 20,
+          "resizeMode": "contain",
+          "width": 20,
+        },
+        Object {
+          "backgroundColor": "red",
+        },
+        undefined,
+        Object {
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+</TouchableOpacity>
+`;
+
+exports[`WeekSelector Image Component  should render a custom component 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  disabled={false}
+  focusedOpacity={0.7}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        undefined,
+        Object {
+          "opacity": 1,
+        },
+      ]
+    }
+  >
+    GO BACK
+  </Text>
+</TouchableOpacity>
+`;
+
+exports[`WeekSelector Image Component  should render a custom component that is disabled 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  disabled={true}
+  focusedOpacity={0.7}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "color": "red",
+        },
+        Object {
+          "opacity": 0,
+        },
+      ]
+    }
+  >
+    GO BACK
+  </Text>
+</TouchableOpacity>
+`;
