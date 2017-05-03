@@ -19,7 +19,8 @@ class WeekSelector extends Component {
         ]),
         iconStyle: React.PropTypes.oneOfType([
             React.PropTypes.object,
-            React.PropTypes.number
+            React.PropTypes.number,
+            React.PropTypes.array
         ]),
         imageSource: React.PropTypes.oneOfType([
             React.PropTypes.object,
@@ -63,10 +64,12 @@ class WeekSelector extends Component {
         const opacity = { opacity: enabled ? 1 : 0 };
 
         let component;
-        if (iconComponent) {
+        if (React.Component.isPrototypeOf(iconComponent)) {
             component = React.cloneElement(iconComponent, {
                 style: [ iconComponent.props.style, { opacity: opacity.opacity } ]
             });
+        } else if (Array.isArray(iconComponent)) {
+            component = iconComponent;
         } else {
             component = (
                 <Image
