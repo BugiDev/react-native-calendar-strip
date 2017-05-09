@@ -98,14 +98,12 @@ export default class CalendarStrip extends Component {
 
         const startingDate = this.getInitialStartingDate();
         const selectedDate = this.setLocale(moment(this.props.selectedDate));
+        const weekData = this.updateWeekData(startingDate, selectedDate);
 
         this.state = {
             startingDate,
-            datesForWeek: [],
-            datesAllowedForWeek: [],
-            datesSelectedForWeek: [],
-            datesCustomStylesForWeek: [],
-            selectedDate
+            selectedDate,
+            ...weekData
         };
 
         this.resetAnimation();
@@ -122,39 +120,42 @@ export default class CalendarStrip extends Component {
     }
 
     componentDidMount() {
-        // Initialize week view
-        let startingDate = this.updateWeekView(); // Force update
-        this.updateWeekData(startingDate);
         // Animate showing of CalendarDay elements
         this.animate();
     }
 
-    //Receiving props and set selected date
+    //Receiving props and set date states, minimizing state updates.
     componentWillReceiveProps(nextProps) {
-        if (nextProps.selectedDate !== this.props.selectedDate) {
-            let selectedDate = this.setLocale(moment(nextProps.selectedDate));
-            this.setState({ selectedDate }, () => {
-              // update week view and week data states
-              let startingDate = this.updateWeekView(selectedDate);
-              this.updateWeekData(startingDate, nextProps);
-            });
+        let selectedDate = {}, startingDate = {}, weekData = {};
+        let updateState = false;
+
+        if (JSON.stringify(nextProps.selectedDate) !== JSON.stringify(this.props.selectedDate)) {
+            updateState = true;
+            selectedDate = {selectedDate: this.setLocale(moment(nextProps.selectedDate))};
+            startingDate = {startingDate: this.updateWeekStart(selectedDate)};
+            weekData = this.updateWeekData(startingDate.startingDate, selectedDate.selectedDate, nextProps);
         }
 
-        let _startingDate;
-        if (nextProps.startingDate !== this.props.startingDate) {
-            _startingDate = this.setLocale(moment(nextProps.startingDate));
-            this.updateWeekView(_startingDate, nextProps);
-            this.updateWeekData(_startingDate, nextProps);
+        if (!updateState && JSON.stringify(nextProps.startingDate) !== JSON.stringify(this.props.startingDate)) {
+            updateState = true;
+            startingDate = this.setLocale(moment(nextProps.startingDate));
+            startingDate = {startingDate: this.updateWeekStart(startingDate)};
+            weekData = this.updateWeekData(startingDate.startingDate, this.state.selectedDate, nextProps);
         }
 
-        if (!_startingDate && (
-            nextProps.datesBlacklist !== this.props.datesBlacklist ||
-            nextProps.datesWhitelist !== this.props.datesWhitelist ||
-            nextProps.customDatesStyles !== this.props.customDatesStyles ))
+        if (!updateState && (
+            JSON.stringify(nextProps.datesBlacklist) !== JSON.stringify(this.props.datesBlacklist) ||
+            JSON.stringify(nextProps.datesWhitelist) !== JSON.stringify(this.props.datesWhitelist) ||
+            JSON.stringify(nextProps.customDatesStyles) !== JSON.stringify(this.props.customDatesStyles) ))
         {
-            // No need to update week view here
-            _startingDate = this.setLocale(moment(nextProps.startingDate));
-            this.updateWeekData(_startingDate, nextProps);
+            updateState = true;
+            // No need to update week start here
+            startingDate = {startingDate: this.setLocale(moment(nextProps.startingDate))};
+            weekData = this.updateWeekData(startingDate.startingDate, this.state.selectedDate, nextProps);
+        }
+
+        if (updateState) {
+            this.setState({ ...selectedDate, ...startingDate, ...weekData });
         }
     }
 
@@ -186,7 +187,6 @@ export default class CalendarStrip extends Component {
     //Set startingDate to the previous week
     getPreviousWeek() {
         const previousWeekStartDate = this.state.startingDate.clone().subtract(1, 'w');
-        this.setState({startingDate: previousWeekStartDate});
         if (this.props.onWeekChanged) {
             if(this.props.useIsoWeekday) {
                 this.props.onWeekChanged(previousWeekStartDate.clone().startOf('isoweek'));
@@ -195,14 +195,13 @@ export default class CalendarStrip extends Component {
                 this.props.onWeekChanged(previousWeekStartDate.clone());
             }
         }
-        this.updateWeekView(previousWeekStartDate);
-        this.updateWeekData(previousWeekStartDate);
+        let weekData = this.updateWeekData(previousWeekStartDate);
+        this.setState({startingDate: previousWeekStartDate, ...weekData});
     }
 
     //Set startingDate to the next week
     getNextWeek() {
         const nextWeekStartDate = this.state.startingDate.clone().add(1, 'w');
-        this.setState({startingDate: nextWeekStartDate});
         if (this.props.onWeekChanged) {
             if(this.props.useIsoWeekday) {
                 this.props.onWeekChanged(nextWeekStartDate.clone().startOf('isoweek'));
@@ -211,33 +210,28 @@ export default class CalendarStrip extends Component {
                 this.props.onWeekChanged(nextWeekStartDate.clone());
             }
         }
-        this.updateWeekView(nextWeekStartDate);
-        this.updateWeekData(nextWeekStartDate);
+        let weekData = this.updateWeekData(nextWeekStartDate);
+        this.setState({startingDate: nextWeekStartDate, ...weekData});
     }
 
     // Set the current visible week to the selectedDate
     // When date param is undefined, an update always occurs (e.g. initialize)
-    updateWeekView(date, props = this.props) {
-      let startingDate = this.state.startingDate.clone().startOf('day');
-      let initialize = date === undefined;
-      let mDate = initialize ? startingDate : moment(date).startOf('day');
-      let daysDiff = mDate.diff(startingDate, 'days');
-      if (daysDiff === 0 && !initialize) {
-        return this.state.startingDate;
+    updateWeekStart(newStartDate, originalStartDate = this.state.startingDate) {
+      let startingDate = moment(newStartDate).startOf('day');
+      let daysDiff = startingDate.diff(originalStartDate, 'days');
+      if (daysDiff === 0) {
+        return originalStartDate;
       }
       let addOrSubtract = daysDiff > 0 ? 'add' : 'subtract';
       let adjustWeeks = daysDiff / 7;
       adjustWeeks = adjustWeeks > 0 ? Math.floor(adjustWeeks) : Math.ceil(Math.abs(adjustWeeks));
-      startingDate[addOrSubtract](adjustWeeks, 'w');
+      startingDate = originalStartDate[addOrSubtract](adjustWeeks, 'w');
 
-      let newState = {startingDate};
-
-      this.setState(newState);
       return startingDate;
     }
 
     // Get & update week states for the week based on the startingDate
-    updateWeekData(startingDate, props = this.props) {
+    updateWeekData(startingDate, selectedDate = this.state.selectedDate, props = this.props) {
         const me = this;
         let datesForWeek = [];
         let datesAllowedForWeek = [];
@@ -255,10 +249,9 @@ export default class CalendarStrip extends Component {
           }
           datesForWeek.push(date);
           datesAllowedForWeek.push(this.isDateAllowed(date, props));
-          datesSelectedForWeek.push(this.isDateSelected(date));
+          datesSelectedForWeek.push(this.isDateSelected(date, selectedDate));
           datesCustomStylesForWeek.push(this.getCustomDateStyle(date, props));
         }
-        this.setState({datesForWeek, datesAllowedForWeek, datesSelectedForWeek, datesCustomStylesForWeek});
         return {datesForWeek, datesAllowedForWeek, datesSelectedForWeek, datesCustomStylesForWeek};
     }
 
@@ -312,8 +305,8 @@ export default class CalendarStrip extends Component {
 
     //Function to check if provided date is the same as selected one, hence date is selected
     //using isSame moment query with 'day' param so that it check years, months and day
-    isDateSelected(date) {
-        return date.isSame(this.state.selectedDate, 'day');
+    isDateSelected(date, selectedDate = this.state.selectedDate) {
+        return date.isSame(selectedDate, 'day');
     }
 
     // Get the currently selected date (Moment JS object)
@@ -330,7 +323,7 @@ export default class CalendarStrip extends Component {
         this.onDateSelected(mDate);
         // Update week view only if date is not cleared (0).
         if (date !== 0) {
-          this.updateWeekView(mDate);
+          this.updateWeekStart(mDate);
         }
     }
 
