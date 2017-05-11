@@ -129,14 +129,14 @@ export default class CalendarStrip extends Component {
         let selectedDate = {}, startingDate = {}, weekData = {};
         let updateState = false;
 
-        if (JSON.stringify(nextProps.selectedDate) !== JSON.stringify(this.props.selectedDate)) {
+        if (!this.compareDates(nextProps.selectedDate, this.props.selectedDate)) {
             updateState = true;
             selectedDate = {selectedDate: this.setLocale(moment(nextProps.selectedDate))};
             startingDate = {startingDate: this.updateWeekStart(selectedDate)};
             weekData = this.updateWeekData(startingDate.startingDate, selectedDate.selectedDate, nextProps);
         }
 
-        if (!updateState && JSON.stringify(nextProps.startingDate) !== JSON.stringify(this.props.startingDate)) {
+        if (!updateState && !this.compareDates(nextProps.startingDate, this.props.startingDate)) {
             updateState = true;
             startingDate = this.setLocale(moment(nextProps.startingDate));
             startingDate = {startingDate: this.updateWeekStart(startingDate)};
@@ -166,6 +166,20 @@ export default class CalendarStrip extends Component {
             this.resetAnimation();
             this.animate();
         }
+    }
+
+    // Check whether two datetimes are of the same value.  Supports Moment date,
+    // JS date, or ISO 8601 strings.
+    // Returns true if the datetimes values are the same; false otherwise.
+    compareDates(date1, date2) {
+      if (date1 && date1.valueOf && date2 && date2.valueOf &&
+        (date1.valueOf() === date2.valueOf()))
+      {
+        return true;
+      }
+      else {
+        return JSON.stringify(date1) === JSON.stringify(date2);
+      }
     }
 
     //Function that checks if the locale is passed to the component and sets it to the passed moment instance
