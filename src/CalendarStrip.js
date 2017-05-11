@@ -132,7 +132,7 @@ export default class CalendarStrip extends Component {
         if (!this.compareDates(nextProps.selectedDate, this.props.selectedDate)) {
             updateState = true;
             selectedDate = {selectedDate: this.setLocale(moment(nextProps.selectedDate))};
-            startingDate = {startingDate: this.updateWeekStart(selectedDate)};
+            startingDate = {startingDate: this.updateWeekStart(selectedDate.selectedDate)};
             weekData = this.updateWeekData(startingDate.startingDate, selectedDate.selectedDate, nextProps);
         }
 
@@ -232,7 +232,7 @@ export default class CalendarStrip extends Component {
     // When date param is undefined, an update always occurs (e.g. initialize)
     updateWeekStart(newStartDate, originalStartDate = this.state.startingDate) {
       let startingDate = moment(newStartDate).startOf('day');
-      let daysDiff = startingDate.diff(originalStartDate, 'days');
+      let daysDiff = startingDate.diff(originalStartDate.startOf('day'), 'days');
       if (daysDiff === 0) {
         return originalStartDate;
       }
@@ -271,9 +271,7 @@ export default class CalendarStrip extends Component {
 
     //Handling press on date/selecting date
     onDateSelected(selectedDate) {
-        this.setState({ selectedDate },
-          () => this.updateWeekData(this.state.startingDate) );
-
+        this.setState({ selectedDate, ...this.updateWeekData(this.state.startingDate, selectedDate)});
         this.props.onDateSelected && this.props.onDateSelected(selectedDate);
     }
 
