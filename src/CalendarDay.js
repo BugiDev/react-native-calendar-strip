@@ -111,7 +111,7 @@ export default class CalendarDay extends Component {
           //If it is border, the user has to input color for border animation
           switch (this.props.daySelectionAnimation.type) {
             case 'background':
-              let dateViewBGColor = this.state.selected ? this.props.daySelectionAnimation.highlightColor : this.props.calendarColor;
+              let dateViewBGColor = this.state.selected ? this.props.daySelectionAnimation.highlightColor : 'transparent';
               dateViewStyle = {backgroundColor: dateViewBGColor};
               break;
             case 'border':
