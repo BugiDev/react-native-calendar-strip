@@ -1,6 +1,6 @@
 {
   "name": "react-native-calendar-strip",
-  "version": "0.1.4",
+  "version": "1.0.0",
   "description": "Easy to use and visually stunning calendar component for React Native",
   "main": "index.js",
   "directories": {
@@ -75,9 +75,12 @@
       "url": "https://github.com/1ne8ight7even"
     },
     {
-      "name": "Peace",
-      "url": "https://github.com/peacechen",
-      "email": "pc_5@yahoo.com"
+      "name": "Peace Chen",
+      "url": "https://github.com/peacechen"
+    },
+    {
+      "name": "Sam Colby",
+      "url": "https://github.com/samcolby"
     },
     {
       "name": "Vitaliy Zhukov",
