@@ -28,6 +28,8 @@ export default class CalendarDay extends Component {
 
         dateNameStyle: React.PropTypes.any,
         dateNumberStyle: React.PropTypes.any,
+        todayDateNameStyle: React.PropTypes.any,
+        todayDateNumberStyle: React.PropTypes.any,
         weekendDateNameStyle: React.PropTypes.any,
         weekendDateNumberStyle: React.PropTypes.any,
         highlightDateNameStyle: React.PropTypes.any,
@@ -92,6 +94,10 @@ export default class CalendarDay extends Component {
       }
     }
 
+    isToday( thisMoment ) {
+      return thisMoment.isSame( new Date(), 'd');
+    }
+
     render() {
         // Defaults for disabled state
         let dateNameStyle = [styles.dateName, this.props.disabledDateNameStyle];
@@ -128,6 +134,14 @@ export default class CalendarDay extends Component {
           if (this.props.styleWeekend && (this.props.date.isoWeekday() === 6 || this.props.date.isoWeekday() === 7)) {
               dateNameStyle = [styles.weekendDateName, this.props.weekendDateNameStyle];
               dateNumberStyle = [styles.weekendDateNumber, this.props.weekendDateNumberStyle];
+          }
+          if ( ( this.props.todayDateNameStyle || this.props.todayDateNumberStyle ) && this.isToday(this.props.date) ) {
+              if ( this.props.todayDateNameStyle ) {
+                  dateNameStyle = [...dateNameStyle, this.props.todayDateNameStyle];
+              }
+              if ( this.props.todayDateNumberStyle ) {
+                  dateNumberStyle = [...dateNumberStyle, this.props.todayDateNumberStyle];
+              }
           }
           if (this.state.selected) {
             dateNameStyle = [styles.dateName, this.props.highlightDateNameStyle];
