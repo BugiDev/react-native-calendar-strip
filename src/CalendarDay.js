@@ -74,31 +74,26 @@ export default class CalendarDay extends Component {
         let configurableAnimation = {
           duration: this.props.daySelectionAnimation.duration || 300,
           create: {
-            type: (
+            type:
               this.props.daySelectionAnimation.animType ||
-                LayoutAnimation.Types.easeInEaseOut
-            ),
-            property: (
+              LayoutAnimation.Types.easeInEaseOut,
+            property:
               this.props.daySelectionAnimation.animProperty ||
-                LayoutAnimation.Properties.opacity
-            )
+              LayoutAnimation.Properties.opacity
           },
           update: {
-            type: (
+            type:
               this.props.daySelectionAnimation.animUpdateType ||
-                LayoutAnimation.Types.easeInEaseOut
-            ),
+              LayoutAnimation.Types.easeInEaseOut,
             springDamping: this.props.daySelectionAnimation.animSpringDamping
           },
           delete: {
-            type: (
+            type:
               this.props.daySelectionAnimation.animType ||
-                LayoutAnimation.Types.easeInEaseOut
-            ),
-            property: (
+              LayoutAnimation.Types.easeInEaseOut,
+            property:
               this.props.daySelectionAnimation.animProperty ||
-                LayoutAnimation.Properties.opacity
-            )
+              LayoutAnimation.Properties.opacity
           }
         };
         LayoutAnimation.configureNext(configurableAnimation);
@@ -188,7 +183,9 @@ export default class CalendarDay extends Component {
               {this.props.date.format("ddd").toUpperCase()}
             </Text>}
           {this.props.showDayNumber &&
-            <Text style={dateNumberStyle}>{this.props.date.date()}</Text>}
+            <Text style={dateNumberStyle}>
+              {this.props.date.date()}
+            </Text>}
         </View>
       </TouchableOpacity>
     );

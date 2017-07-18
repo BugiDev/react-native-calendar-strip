@@ -124,7 +124,9 @@ export default class CalendarStrip extends Component {
 
   //Receiving props and set date states, minimizing state updates.
   componentWillReceiveProps(nextProps) {
-    let selectedDate = {}, startingDate = {}, weekData = {};
+    let selectedDate = {},
+      startingDate = {},
+      weekData = {};
     let updateState = false;
 
     if (!this.compareDates(nextProps.selectedDate, this.props.selectedDate)) {
@@ -266,9 +268,10 @@ export default class CalendarStrip extends Component {
     }
     let addOrSubtract = daysDiff > 0 ? "add" : "subtract";
     let adjustWeeks = daysDiff / 7;
-    adjustWeeks = adjustWeeks > 0
-      ? Math.floor(adjustWeeks)
-      : Math.ceil(Math.abs(adjustWeeks));
+    adjustWeeks =
+      adjustWeeks > 0
+        ? Math.floor(adjustWeeks)
+        : Math.ceil(Math.abs(adjustWeeks));
     startingDate = originalStartDate[addOrSubtract](adjustWeeks, "w");
 
     return startingDate;
@@ -480,7 +483,8 @@ export default class CalendarStrip extends Component {
       );
     }
 
-    let calendarHeader = this.props.showMonth &&
+    let calendarHeader =
+      this.props.showMonth &&
       <CalendarHeader
         calendarHeaderFormat={this.props.calendarHeaderFormat}
         calendarHeaderStyle={this.props.calendarHeaderStyle}
@@ -499,7 +503,6 @@ export default class CalendarStrip extends Component {
       >
         {this.props.showDate && calendarHeader}
         <View style={styles.datesStrip}>
-
           <WeekSelector
             controlDate={this.props.minDate}
             iconComponent={this.props.leftSelector}
@@ -533,7 +536,6 @@ export default class CalendarStrip extends Component {
             }
             weekStartDate={this.state.datesForWeek[0]}
           />
-
         </View>
       </View>
     );
