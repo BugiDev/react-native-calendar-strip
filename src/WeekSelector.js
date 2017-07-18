@@ -1,34 +1,33 @@
 import React, { Component } from 'react';
 import { Image, TouchableOpacity } from 'react-native';
-
 import moment from 'moment';
-
 import styles from './Calendar.style.js';
+import PropTypes from 'prop-types';
 
 class WeekSelector extends Component {
     static propTypes = {
-        controlDate: React.PropTypes.object,
-        iconComponent: React.PropTypes.any,
-        iconContainerStyle: React.PropTypes.oneOfType([
-            React.PropTypes.object,
-            React.PropTypes.number
+        controlDate: PropTypes.object,
+        iconComponent: PropTypes.any,
+        iconContainerStyle: PropTypes.oneOfType([
+            PropTypes.object,
+            PropTypes.number
         ]),
-        iconInstanceStyle: React.PropTypes.oneOfType([
-            React.PropTypes.object,
-            React.PropTypes.number
+        iconInstanceStyle: PropTypes.oneOfType([
+            PropTypes.object,
+            PropTypes.number
         ]),
-        iconStyle: React.PropTypes.oneOfType([
-            React.PropTypes.object,
-            React.PropTypes.number,
-            React.PropTypes.array
+        iconStyle: PropTypes.oneOfType([
+            PropTypes.object,
+            PropTypes.number,
+            PropTypes.array
         ]),
-        imageSource: React.PropTypes.oneOfType([
-            React.PropTypes.object,
-            React.PropTypes.number
+        imageSource: PropTypes.oneOfType([
+            PropTypes.object,
+            PropTypes.number
         ]),
-        onPress: React.PropTypes.func,
-        weekStartDate: React.PropTypes.object,
-        weekEndDate: React.PropTypes.object
+        onPress: PropTypes.func,
+        weekStartDate: PropTypes.object,
+        weekEndDate: PropTypes.object
     };
 
     shouldComponentUpdate(nextProps) {

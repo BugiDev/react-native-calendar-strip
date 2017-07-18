@@ -3,6 +3,8 @@
  */
 
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
 import {
     StyleSheet,
     Text,
@@ -16,29 +18,29 @@ import styles from './Calendar.style.js';
 export default class CalendarDay extends Component {
 
     static propTypes = {
-        date: React.PropTypes.object.isRequired,
-        onDateSelected: React.PropTypes.func.isRequired,
-        selected: React.PropTypes.bool.isRequired,
-        enabled: React.PropTypes.bool.isRequired,
+        date: PropTypes.object.isRequired,
+        onDateSelected: PropTypes.func.isRequired,
+        selected: PropTypes.bool.isRequired,
+        enabled: PropTypes.bool.isRequired,
 
-        showDayName: React.PropTypes.bool,
-        showDayNumber: React.PropTypes.bool,
+        showDayName: PropTypes.bool,
+        showDayNumber: PropTypes.bool,
 
-        calendarColor: React.PropTypes.string,
+        calendarColor: PropTypes.string,
 
-        dateNameStyle: React.PropTypes.any,
-        dateNumberStyle: React.PropTypes.any,
-        weekendDateNameStyle: React.PropTypes.any,
-        weekendDateNumberStyle: React.PropTypes.any,
-        highlightDateNameStyle: React.PropTypes.any,
-        highlightDateNumberStyle: React.PropTypes.any,
-        disabledDateNameStyle: React.PropTypes.any,
-        disabledDateNumberStyle: React.PropTypes.any,
-        disabledDateOpacity: React.PropTypes.number,
-        styleWeekend: React.PropTypes.bool,
-        customStyle: React.PropTypes.object,
+        dateNameStyle: PropTypes.any,
+        dateNumberStyle: PropTypes.any,
+        weekendDateNameStyle: PropTypes.any,
+        weekendDateNumberStyle: PropTypes.any,
+        highlightDateNameStyle: PropTypes.any,
+        highlightDateNumberStyle: PropTypes.any,
+        disabledDateNameStyle: PropTypes.any,
+        disabledDateNumberStyle: PropTypes.any,
+        disabledDateOpacity: PropTypes.number,
+        styleWeekend: PropTypes.bool,
+        customStyle: PropTypes.object,
 
-        daySelectionAnimation: React.PropTypes.object
+        daySelectionAnimation: PropTypes.object
     };
 
     // Reference: https://medium.com/@Jpoliachik/react-native-s-layoutanimation-is-awesome-4a4d317afd3e

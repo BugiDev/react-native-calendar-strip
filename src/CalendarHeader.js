@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import {Text} from 'react-native';
-
 import styles from './Calendar.style.js';
+import PropTypes from 'prop-types';
 
 class CalendarHeader extends Component {
     static propTypes = {
-        calendarHeaderFormat: React.PropTypes.string.isRequired,
-        calendarHeaderStyle: React.PropTypes.oneOfType([
-            React.PropTypes.object,
-            React.PropTypes.number
+        calendarHeaderFormat: PropTypes.string.isRequired,
+        calendarHeaderStyle: PropTypes.oneOfType([
+            PropTypes.object,
+            PropTypes.number
         ]),
-        datesForWeek: React.PropTypes.array.isRequired
+        datesForWeek: PropTypes.array.isRequired
     };
 
     shouldComponentUpdate(nextProps) {

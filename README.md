@@ -94,14 +94,14 @@ AppRegistry.registerComponent('Example', () => Example);
 #### Props / API
 This is the list of all the props you can pass to the component so that you can customize it:
 ###### Initial data and onDateSelected handler
-  * startingDate: React.PropTypes.any - Date to be used for centering the calendar/showing the week based on that date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`.
-  * selectedDate: React.PropTypes.any - Date to be used as pre selected Date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`.
-  * onDateSelected: React.PropTypes.func - Function to be used as a callback when a date is selected. It returns `moment Date`
-  * onWeekChanged: React.PropTypes.func - Function to be used as a callback when a week is changed. It returns `moment Date`
-  * useIsoWeekday: React.PropTypes.bool - start week on ISO day of week (default true).  If false, starts week on _startingDate_ parameter.  
-  * minDate: React.PropTypes.any - minimum date that the calendar may navigate to. A week is allowed if minDate falls within the current week.
-  * maxDate: React.PropTypes.any - maximum date that the calendar may navigate to. A week is allowed if maxDate falls within the current week. 
-  * datesWhitelist: React.PropTypes.array - Dates that are enabled (accepts both `Date` and `moment Date`). Ranges may be specified with an object entry in the array:
+  * startingDate: PropTypes.any - Date to be used for centering the calendar/showing the week based on that date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`.
+  * selectedDate: PropTypes.any - Date to be used as pre selected Date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`.
+  * onDateSelected: PropTypes.func - Function to be used as a callback when a date is selected. It returns `moment Date`
+  * onWeekChanged: PropTypes.func - Function to be used as a callback when a week is changed. It returns `moment Date`
+  * useIsoWeekday: PropTypes.bool - start week on ISO day of week (default true).  If false, starts week on _startingDate_ parameter.  
+  * minDate: PropTypes.any - minimum date that the calendar may navigate to. A week is allowed if minDate falls within the current week.
+  * maxDate: PropTypes.any - maximum date that the calendar may navigate to. A week is allowed if maxDate falls within the current week.
+  * datesWhitelist: PropTypes.array - Dates that are enabled (accepts both `Date` and `moment Date`). Ranges may be specified with an object entry in the array:
   ```
   // Date range format
   {
@@ -110,44 +110,44 @@ This is the list of all the props you can pass to the component so that you can 
   }
   ```
   This may be overridden by _datesBlacklist_.
-  * datesBlacklist: React.PropTypes.array - Dates that are disabled. Same format as _datesWhitelist_.  This overrides dates in _datesWhitelist_.
+  * datesBlacklist: PropTypes.array - Dates that are disabled. Same format as _datesWhitelist_.  This overrides dates in _datesWhitelist_.
 
 ###### Show or hide components
-  * showMonth: React.PropTypes.bool - Show (default true) or hide (false) the month label.
-  * showDate: React.PropTypes.bool - Show (default true) or hide (false) all the dates.
-  * showDayName: React.PropTypes.bool - Show (default true) or hide (false) the day name label.
-  * showDayNumber: React.PropTypes.bool - Show (default true) or hide (false) the day number label.
+  * showMonth: PropTypes.bool - Show (default true) or hide (false) the month label.
+  * showDate: PropTypes.bool - Show (default true) or hide (false) all the dates.
+  * showDayName: PropTypes.bool - Show (default true) or hide (false) the day name label.
+  * showDayNumber: PropTypes.bool - Show (default true) or hide (false) the day number label.
 
 ###### Top level style
-  * style: React.PropTypes.any - Style for the top level CalendarStrip component
+  * style: PropTypes.any - Style for the top level CalendarStrip component
 
 ###### Icon
-  * iconLeft: React.PropTypes.any - Icon to be used for the left icon. It accepts require statement with url to the image (`require('./img/icon.png')`), or object with remote uri `{uri: 'http://example.com/image.png'}`
-  * iconRight: React.PropTypes.any  - Icon to be used for the right icon. It accepts require statement with url to the image (`require('./img/icon.png')`), or object with remote uri `{uri: 'http://example.com/image.png'}`
-  * iconStyle: React.PropTypes.any - Style that is applied to both left and right icons. It is applied before *iconLeftStyle* or *iconLeftStyle*.
-  * iconLeftStyle: React.PropTypes.any - Style for left icon. It will override all of the other styles applied to icons.
-  * iconRightStyle: React.PropTypes.any - Style for right icon. It will override all of the other styles applied to icons.
-  * iconContainer: React.PropTypes.any - Style for the container of icons. (Example usage is to add `flex` property to it so in the portrait mode, it will shrink the dates strip)
-  * leftSelector: React.PropTypes.any - Component for the left selector control. May be an instance of any React component. This overrides the icon* props above. Passing in an empty array `[]` hides this control.
-  * rightSelector: React.PropTypes.any - same as above but for the right selector control.
+  * iconLeft: PropTypes.any - Icon to be used for the left icon. It accepts require statement with url to the image (`require('./img/icon.png')`), or object with remote uri `{uri: 'http://example.com/image.png'}`
+  * iconRight: PropTypes.any  - Icon to be used for the right icon. It accepts require statement with url to the image (`require('./img/icon.png')`), or object with remote uri `{uri: 'http://example.com/image.png'}`
+  * iconStyle: PropTypes.any - Style that is applied to both left and right icons. It is applied before *iconLeftStyle* or *iconLeftStyle*.
+  * iconLeftStyle: PropTypes.any - Style for left icon. It will override all of the other styles applied to icons.
+  * iconRightStyle: PropTypes.any - Style for right icon. It will override all of the other styles applied to icons.
+  * iconContainer: PropTypes.any - Style for the container of icons. (Example usage is to add `flex` property to it so in the portrait mode, it will shrink the dates strip)
+  * leftSelector: PropTypes.any - Component for the left selector control. May be an instance of any React component. This overrides the icon* props above. Passing in an empty array `[]` hides this control.
+  * rightSelector: PropTypes.any - same as above but for the right selector control.
 
 ###### Header style and formatting
-  * calendarHeaderStyle: React.PropTypes.any - Style for the header text of the calendar.
-  * calendarHeaderFormat: React.PropTypes.string - Format for the header text of the calendar. For options, refere to [moments documentation](http://momentjs.com/docs/#/displaying/format/)
+  * calendarHeaderStyle: PropTypes.any - Style for the header text of the calendar.
+  * calendarHeaderFormat: PropTypes.string - Format for the header text of the calendar. For options, refere to [moments documentation](http://momentjs.com/docs/#/displaying/format/)
 
 ###### Date name and number styling
-  * dateNameStyle: React.PropTypes.any - Style for the name of the day on work days in dates strip.
-  * dateNumberStyle: React.PropTypes.any - Style for the number of the day on work days in dates strip.
-  * weekendDateNameStyle: React.PropTypes.any - Style for the name of the day on weekend days in dates strip.
-  * weekendDateNumberStyle: React.PropTypes.any - Style for the number of the day on weekend days in dates strip.
-  * styleWeekend: React.PropTypes.bool - (default true) Whether to style weekend dates separately.
-  * highlightDateNameStyle: React.PropTypes.any - Style for the selected name of the day in dates strip.
-  * highlightDateNumberStyle: React.PropTypes.any - Style for the selected number of the day in dates strip.
+  * dateNameStyle: PropTypes.any - Style for the name of the day on work days in dates strip.
+  * dateNumberStyle: PropTypes.any - Style for the number of the day on work days in dates strip.
+  * weekendDateNameStyle: PropTypes.any - Style for the name of the day on weekend days in dates strip.
+  * weekendDateNumberStyle: PropTypes.any - Style for the number of the day on weekend days in dates strip.
+  * styleWeekend: PropTypes.bool - (default true) Whether to style weekend dates separately.
+  * highlightDateNameStyle: PropTypes.any - Style for the selected name of the day in dates strip.
+  * highlightDateNumberStyle: PropTypes.any - Style for the selected number of the day in dates strip.
 
-  * disabledDateNameStyle: React.PropTypes.any - Style for disabled name of the day in dates strip (controlled by datesWhitelist & datesBlacklist).
-  * disabledDateNumberStyle: React.PropTypes.any - Style for disabled number of the day in dates strip (controlled by datesWhitelist & datesBlacklist).
-  * disabledDateOpacity: React.PropTypes.number - (default 0.3) Opacity of disabled dates strip.
-  * customDatesStyles: React.PropTypes.array - Custom per-date styling, overriding the styles above. Object format:
+  * disabledDateNameStyle: PropTypes.any - Style for disabled name of the day in dates strip (controlled by datesWhitelist & datesBlacklist).
+  * disabledDateNumberStyle: PropTypes.any - Style for disabled number of the day in dates strip (controlled by datesWhitelist & datesBlacklist).
+  * disabledDateOpacity: PropTypes.number - (default 0.3) Opacity of disabled dates strip.
+  * customDatesStyles: PropTypes.array - Custom per-date styling, overriding the styles above. Object format:
     * startDate: anything parseable by Moment.
     * endDate: (optional) specify a range. If no endDate is supplied, startDate is treated as a single date.
     * dateNameStyle: (optional, see above)
@@ -184,7 +184,7 @@ This is the list of all the props you can pass to the component so that you can 
   The week strip and day selection have configurable opacity animations.  If they are not specified in the props, by default the animations are disabled.
 
 **Week strip animation**
-  * calendarAnimation: React.PropTypes.object - options for animating the week.
+  * calendarAnimation: PropTypes.object - options for animating the week.
    * type: `sequence` or `parallel`
    * duration: duration of animation in milliseconds.
 
@@ -197,12 +197,12 @@ This is the list of all the props you can pass to the component so that you can 
   ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/parallel.gif "react-native-calendar-strip parallel animation demo")
 
 **Day selection animation**
-  * daySelectionAnimation: React.PropTypes.object -
+  * daySelectionAnimation: PropTypes.object -
    * type: `border` or `background`.  'border' animates a circular border around a date. 'background' animates the background of the date.
    * duration: duration of animation in milliseconds.
-   * borderWidth: React.PropTypes.number - Selected day's border width. Required if the type is set to _border_.
-   * borderHighlightColor: React.PropTypes.string - Selected day's border color. Required if the type is set to _border_.
-   * highlightColor: React.PropTypes.string - Highlighted color of selected date. Required if the type is set to _background_.
+   * borderWidth: PropTypes.number - Selected day's border width. Required if the type is set to _border_.
+   * borderHighlightColor: PropTypes.string - Selected day's border color. Required if the type is set to _border_.
+   * highlightColor: PropTypes.string - Highlighted color of selected date. Required if the type is set to _background_.
    * animType, animUpdateType, animProperty, and animSpringDamping are optional config options passed to [LayoutAnimation](https://facebook.github.io/react-native/docs/layoutanimation.html)
 
    Border example:
@@ -210,14 +210,14 @@ This is the list of all the props you can pass to the component so that you can 
   ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/border-small.gif "react-native-calendar-strip border animation demo")
 
   If you chose the `background` type of animation, the selected date will animate the circular background color from `calendarColor` to `daySelectionAnimation.highlightColor`. That is why, when this type is chosen, you have to define both of these colors.
-  * calendarColor: React.PropTypes.string - Background color of the whole calendar strip. `!important` This is also the color of the circular background of the date so that highlighting the date will appear 'from background'. The top level style of this component can override this property.
+  * calendarColor: PropTypes.string - Background color of the whole calendar strip. `!important` This is also the color of the circular background of the date so that highlighting the date will appear 'from background'. The top level style of this component can override this property.
 
   Background example:
 
   ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/background-small.gif "react-native-calendar-strip simple demo")
 
 ###### Localization
-  * locale: React.PropTypes.object - Locale for dates
+  * locale: PropTypes.object - Locale for dates
 
   This prop is used for adding localization to react-native-calendar-strip component. The localization rules are the same as moments and can be found in [moments documentation](http://momentjs.com/docs/#/i18n/)
 
