@@ -64,11 +64,17 @@ export default class CalendarDay extends Component {
     super(props);
 
     this.state = {
-      selected: props.selected
+      selected: props.selected,
+      containerSize: Math.round(props.size),
+      containerPadding: Math.round(props.size / 5),
+      containerBorderRadius: Math.round(props.size / 2),
+      dateNameFontSize: Math.round(props.size / 2.8),
+      dateNumberFontSize: Math.round(props.size / 5)
     };
   }
 
   componentWillReceiveProps(nextProps) {
+    newState = {};
     if (this.state.selected !== nextProps.selected) {
       if (this.props.daySelectionAnimation.type !== "") {
         let configurableAnimation = {
@@ -98,9 +104,18 @@ export default class CalendarDay extends Component {
         };
         LayoutAnimation.configureNext(configurableAnimation);
       }
-
-      this.setState({ selected: nextProps.selected });
+      newState.selected = nextProps.selected;
     }
+
+    if (nextProps.size !== this.props.size) {
+      newState.containerSize = Math.round(nextProps.size);
+      newState.containerPadding = Math.round(nextProps.size / 5);
+      newState.containerBorderRadius = Math.round(nextProps.size / 2);
+      newState.dateNameFontSize = Math.round(nextProps.size / 5);
+      newState.dateNumberFontSize = Math.round(nextProps.size / 2.9);
+    }
+
+    this.setState(newState);
   }
 
   render() {
@@ -170,20 +185,38 @@ export default class CalendarDay extends Component {
       }
     }
 
+    let responsiveDateContainerStyle = {
+      width: this.state.containerSize,
+      height: this.state.containerSize,
+      borderRadius: this.state.containerBorderRadius,
+      padding: this.state.containerPadding
+    };
+
     return (
       <TouchableOpacity
         onPress={this.props.onDateSelected.bind(this, this.props.date)}
       >
         <View
           key={this.props.date}
-          style={[styles.dateContainer, dateViewStyle]}
+          style={[
+            styles.dateContainer,
+            responsiveDateContainerStyle,
+            dateViewStyle
+          ]}
         >
           {this.props.showDayName &&
-            <Text style={dateNameStyle}>
+            <Text
+              style={[dateNameStyle, { fontSize: this.state.dateNameFontSize }]}
+            >
               {this.props.date.format("ddd").toUpperCase()}
             </Text>}
           {this.props.showDayNumber &&
-            <Text style={dateNumberStyle}>
+            <Text
+              style={[
+                dateNumberStyle,
+                { fontSize: this.state.dateNumberFontSize }
+              ]}
+            >
               {this.props.date.date()}
             </Text>}
         </View>

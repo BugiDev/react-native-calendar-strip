@@ -2,7 +2,7 @@
 
 Easy to use and visually stunning calendar component for React Native.
 
-`<CalendarStrip>` is a React Native component designed to replace the standard date picker component. It works for both `iOS` and `Android` and in both `portrait` and `landscape` orientations!
+`<CalendarStrip>` is a React Native component designed to replace the standard date picker component. It supports `iOS` & `Android` and responsively sizes its height based on its container width. It gracefully resizes for `portrait` and `landscape` orientations and virtually all display resolutions.
 
 ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/Initial.gif "react-native-calendar-strip demo")
 
@@ -120,6 +120,11 @@ This is the list of all the props you can pass to the component so that you can 
 
 ###### Top level style
   * style: PropTypes.any - Style for the top level CalendarStrip component
+  * innerStyle: PropTypes.any - Style for the responsively sized inner view. This is necessary to account for padding/margin from the top level view. The inner view has style `flex:1` by default. If this component is nested within another dynamically sized container, remove the flex style by passing in `[]`.
+
+###### Responsive sizing
+  * maxDayComponentSize: PropTypes.number - (default 80) Maximum size that CalendarDay will responsively size up to.
+  * minDayComponentSize: PropTypes.number - (default 10) Minimum size that CalendarDay will responsively size down to.
 
 ###### Icon
   * iconLeft: PropTypes.any - Icon to be used for the left icon. It accepts require statement with url to the image (`require('./img/icon.png')`), or object with remote uri `{uri: 'http://example.com/image.png'}`

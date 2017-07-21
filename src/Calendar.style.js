@@ -21,18 +21,16 @@ export default StyleSheet.create({
     alignItems: "center"
   },
   calendarHeader: {
-    fontSize: 16,
     textAlign: "center",
     fontWeight: "bold",
     alignSelf: "center"
   },
   iconContainer: {
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    alignSelf: "center"
   },
   icon: {
-    width: 20,
-    height: 20,
     resizeMode: "contain"
   },
 
@@ -40,27 +38,20 @@ export default StyleSheet.create({
   dateContainer: {
     justifyContent: "center",
     alignItems: "center",
-    padding: 10,
-    width: 50,
-    height: 50,
-    borderRadius: 50 / 2
+    alignSelf: "center"
   },
   dateName: {
-    fontSize: 10,
     textAlign: "center"
   },
   weekendDateName: {
-    fontSize: 10,
     color: "#A7A7A7",
     textAlign: "center"
   },
   dateNumber: {
-    fontSize: 18,
     fontWeight: "bold",
     textAlign: "center"
   },
   weekendDateNumber: {
-    fontSize: 18,
     color: "#A7A7A7",
     fontWeight: "bold",
     textAlign: "center"

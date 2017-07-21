@@ -63,7 +63,13 @@ class CalendarHeader extends Component {
       this.props.calendarHeaderFormat
     );
     return (
-      <Text style={[styles.calendarHeader, this.props.calendarHeaderStyle]}>
+      <Text
+        style={[
+          styles.calendarHeader,
+          { fontSize: this.props.fontSize },
+          this.props.calendarHeaderStyle
+        ]}
+      >
         {headerText}
       </Text>
     );
