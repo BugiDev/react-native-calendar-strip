@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Text } from "react-native";
-import styles from "./Calendar.style.js";
 import PropTypes from "prop-types";
+import { Text } from "react-native";
+
+import styles from "./Calendar.style.js";
 
 class CalendarHeader extends Component {
   static propTypes = {

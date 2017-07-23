@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { Image, TouchableOpacity } from "react-native";
-import moment from "moment";
-import styles from "./Calendar.style.js";
 import PropTypes from "prop-types";
+import { Image, TouchableOpacity } from "react-native";
+
+import moment from "moment";
+
+import styles from "./Calendar.style.js";
 
 class WeekSelector extends Component {
   static propTypes = {

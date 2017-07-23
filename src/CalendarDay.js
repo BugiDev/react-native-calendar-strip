@@ -5,14 +5,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import {
-  StyleSheet,
-  Text,
-  View,
-  LayoutAnimation,
-  Easing,
-  TouchableOpacity
-} from "react-native";
+import { Text, View, LayoutAnimation, TouchableOpacity } from "react-native";
 import styles from "./Calendar.style.js";
 
 export default class CalendarDay extends Component {
@@ -80,26 +73,31 @@ export default class CalendarDay extends Component {
         let configurableAnimation = {
           duration: this.props.daySelectionAnimation.duration || 300,
           create: {
-            type:
+            type: (
               this.props.daySelectionAnimation.animType ||
-              LayoutAnimation.Types.easeInEaseOut,
-            property:
+                LayoutAnimation.Types.easeInEaseOut
+            ),
+            property: (
               this.props.daySelectionAnimation.animProperty ||
-              LayoutAnimation.Properties.opacity
+                LayoutAnimation.Properties.opacity
+            )
           },
           update: {
-            type:
+            type: (
               this.props.daySelectionAnimation.animUpdateType ||
-              LayoutAnimation.Types.easeInEaseOut,
+                LayoutAnimation.Types.easeInEaseOut
+            ),
             springDamping: this.props.daySelectionAnimation.animSpringDamping
           },
           delete: {
-            type:
+            type: (
               this.props.daySelectionAnimation.animType ||
-              LayoutAnimation.Types.easeInEaseOut,
-            property:
+                LayoutAnimation.Types.easeInEaseOut
+            ),
+            property: (
               this.props.daySelectionAnimation.animProperty ||
-              LayoutAnimation.Properties.opacity
+                LayoutAnimation.Properties.opacity
+            )
           }
         };
         LayoutAnimation.configureNext(configurableAnimation);
