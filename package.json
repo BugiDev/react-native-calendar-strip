@@ -16,8 +16,9 @@
     "babel-preset-react-native": "^1.9.1",
     "enzyme": "^2.8.2",
     "enzyme-to-json": "^1.5.1",
-    "eslint": "^3.4.0",
-    "eslint-plugin-react": "^6.2.0",
+    "eslint": "^3.19.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-react": "^6.10.3",
     "jest": "^19.0.2",
     "prettier": "^1.5.3",
     "react": "15.4.2",
@@ -44,7 +45,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "eslint": "eslint .",
+    "eslint": "eslint src/** __tests__/**",
     "prettier": "prettier --write \"{src,__tests__}/**/*.js\""
   },
   "repository": {
