@@ -53,7 +53,8 @@ class WeekSelector extends Component {
       imageSource,
       onPress,
       weekEndDate,
-      weekStartDate
+      weekStartDate,
+      size
     } = this.props;
 
     const enabled = this.isEnabled(controlDate, weekStartDate, weekEndDate);
@@ -67,9 +68,10 @@ class WeekSelector extends Component {
     } else if (Array.isArray(iconComponent)) {
       component = iconComponent;
     } else {
+      let imageSize = {width: size, height: size};
       component = (
         <Image
-          style={[styles.icon, iconStyle, iconInstanceStyle, opacity]}
+          style={[styles.icon, imageSize, iconStyle, iconInstanceStyle, opacity]}
           source={imageSource}
         />
       );
