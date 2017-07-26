@@ -3,11 +3,12 @@ import { Image, Text } from "react-native";
 
 import { shallow } from "enzyme";
 import toJson from "enzyme-to-json";
-import WeekSelector from "../src/WeekSelector";
-import defaultStyles from "../src/Calendar.style.js";
 
 import moment from "moment";
 import _ from "lodash";
+
+import WeekSelector from "../src/WeekSelector";
+import defaultStyles from "../src/Calendar.style.js";
 
 const genDatesForWeek = startDate => {
   const day = moment(startDate);

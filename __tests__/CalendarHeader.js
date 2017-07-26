@@ -1,10 +1,11 @@
 import React from "react";
 import { shallow } from "enzyme";
 import toJson from "enzyme-to-json";
-import CalendarHeader from "../src/CalendarHeader";
 
 import moment from "moment";
 import _ from "lodash";
+
+import CalendarHeader from "../src/CalendarHeader";
 
 const genDatesForWeek = startDate => {
   const day = moment(startDate);

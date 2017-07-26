@@ -3,14 +3,15 @@
  */
 
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { View, Animated, Easing } from "react-native";
+
+import moment from "moment";
 
 import CalendarHeader from "./CalendarHeader";
 import CalendarDay from "./CalendarDay";
 import WeekSelector from "./WeekSelector";
-import moment from "moment";
 import styles from "./Calendar.style.js";
-import PropTypes from "prop-types";
 
 /*
  * Class CalendarStrip that is representing the whole calendar strip and contains CalendarDay elements
@@ -135,9 +136,7 @@ export default class CalendarStrip extends Component {
 
   //Receiving props and set date states, minimizing state updates.
   componentWillReceiveProps(nextProps) {
-    let selectedDate = {},
-      startingDate = {},
-      weekData = {};
+    let selectedDate = {}, startingDate = {}, weekData = {};
     let updateState = false;
 
     if (!this.compareDates(nextProps.selectedDate, this.props.selectedDate)) {
@@ -279,10 +278,9 @@ export default class CalendarStrip extends Component {
     }
     let addOrSubtract = daysDiff > 0 ? "add" : "subtract";
     let adjustWeeks = daysDiff / 7;
-    adjustWeeks =
-      adjustWeeks > 0
-        ? Math.floor(adjustWeeks)
-        : Math.ceil(Math.abs(adjustWeeks));
+    adjustWeeks = adjustWeeks > 0
+      ? Math.floor(adjustWeeks)
+      : Math.ceil(Math.abs(adjustWeeks));
     startingDate = originalStartDate[addOrSubtract](adjustWeeks, "w");
 
     return startingDate;
@@ -534,8 +532,7 @@ export default class CalendarStrip extends Component {
       );
     }
 
-    let calendarHeader =
-      this.props.showMonth &&
+    let calendarHeader = this.props.showMonth &&
       <CalendarHeader
         calendarHeaderFormat={this.props.calendarHeaderFormat}
         calendarHeaderStyle={this.props.calendarHeaderStyle}
