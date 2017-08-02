@@ -125,6 +125,7 @@ This is the list of all the props you can pass to the component so that you can 
 ###### Responsive sizing
   * maxDayComponentSize: PropTypes.number - (default 80) Maximum size that CalendarDay will responsively size up to.
   * minDayComponentSize: PropTypes.number - (default 10) Minimum size that CalendarDay will responsively size down to.
+  * responsiveSizingOffset: PropTypes.number - (default 0) Adjust the responsive sizing. May be positive (increase size) or negative (decrease size). This value is added to the calculated day component width.
 
 ###### Icon
   * iconLeft: PropTypes.any - Icon to be used for the left icon. It accepts require statement with url to the image (`require('./img/icon.png')`), or object with remote uri `{uri: 'http://example.com/image.png'}`

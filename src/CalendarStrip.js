@@ -49,6 +49,7 @@ export default class CalendarStrip extends Component {
 
     maxDayComponentSize: PropTypes.number,
     minDayComponentSize: PropTypes.number,
+    responsiveSizingOffset: PropTypes.number,
 
     calendarHeaderStyle: PropTypes.any,
     calendarHeaderFormat: PropTypes.string,
@@ -83,6 +84,7 @@ export default class CalendarStrip extends Component {
     datesBlacklist: undefined,
     disabledDateOpacity: 0.3,
     customDatesStyles: [],
+    responsiveSizingOffset: 0,
     innerStyle: { flex: 1 },
     maxDayComponentSize: 80,
     minDayComponentSize: 10
@@ -467,7 +469,7 @@ export default class CalendarStrip extends Component {
       numElements++;
     }
 
-    let dayComponentWidth = csWidth / numElements;
+    let dayComponentWidth = (csWidth / numElements) + this.props.responsiveSizingOffset;
     dayComponentWidth = Math.min(
       dayComponentWidth,
       this.props.maxDayComponentSize
