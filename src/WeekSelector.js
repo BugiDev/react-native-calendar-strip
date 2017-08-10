@@ -30,7 +30,15 @@ class WeekSelector extends Component {
   };
 
   shouldComponentUpdate(nextProps) {
-    return JSON.stringify(this.props) !== JSON.stringify(nextProps);
+    // Extract iconComponent since JSON.stringify fails on React component circular refs
+    let _nextProps = Object.assign({}, nextProps);
+    let _props = Object.assign({}, this.props);
+
+    delete _nextProps.iconComponent;
+    delete _props.iconComponent;
+
+    return JSON.stringify(_props) !== JSON.stringify(_nextProps) &&
+          this.props.iconComponent !== nextProps.iconComponent;
   }
 
   isEnabled(controlDate, weekStartDate, weekEndDate) {
@@ -63,7 +71,7 @@ class WeekSelector extends Component {
     const opacity = { opacity: enabled ? 1 : 0 };
 
     let component;
-    if (React.Component.isPrototypeOf(iconComponent)) {
+    if (React.isValidElement(iconComponent)) {
       component = React.cloneElement(iconComponent, {
         style: [iconComponent.props.style, { opacity: opacity.opacity }]
       });
