@@ -482,6 +482,7 @@ export default class CalendarStrip extends Component {
     let selectorSize = Math.round(dayComponentWidth / 2.5);
     let height = this.props.showMonth ? monthFontSize : 0;
     height += this.props.showDate ? dayComponentWidth : 0; // assume square element sizes
+    selectorSize = Math.min(selectorSize, height);
 
     this.setState({
       dayComponentWidth,

@@ -37,7 +37,7 @@ class WeekSelector extends Component {
     delete _nextProps.iconComponent;
     delete _props.iconComponent;
 
-    return JSON.stringify(_props) !== JSON.stringify(_nextProps) &&
+    return JSON.stringify(_props) !== JSON.stringify(_nextProps) ||
           this.props.iconComponent !== nextProps.iconComponent;
   }
 
