@@ -27,6 +27,7 @@ export default class CalendarStrip extends Component {
     selectedDate: PropTypes.any,
     onDateSelected: PropTypes.func,
     onWeekChanged: PropTypes.func,
+    updateWeek: PropTypes.bool,
     useIsoWeekday: PropTypes.bool,
     minDate: PropTypes.any,
     maxDate: PropTypes.any,
@@ -77,6 +78,7 @@ export default class CalendarStrip extends Component {
     useIsoWeekday: true,
     showMonth: true,
     showDate: true,
+    updateWeek: true,
     iconLeft: require("./img/left-arrow-black.png"),
     iconRight: require("./img/right-arrow-black.png"),
     calendarHeaderFormat: "MMMM YYYY",
@@ -182,7 +184,7 @@ export default class CalendarStrip extends Component {
       updateState = true;
       // No need to update week start here
       startingDate = {
-        startingDate: this.setLocale(moment(nextProps.startingDate))
+        startingDate: this.updateWeekStart(nextProps.startingDate)
       };
       weekData = this.updateWeekData(
         startingDate.startingDate,
@@ -273,6 +275,9 @@ export default class CalendarStrip extends Component {
   // Set the current visible week to the selectedDate
   // When date param is undefined, an update always occurs (e.g. initialize)
   updateWeekStart(newStartDate, originalStartDate = this.state.startingDate) {
+    if (!this.props.updateWeek) {
+      return originalStartDate;
+    }
     let startingDate = moment(newStartDate).startOf("day");
     let daysDiff = startingDate.diff(originalStartDate.startOf("day"), "days");
     if (daysDiff === 0) {
@@ -285,7 +290,7 @@ export default class CalendarStrip extends Component {
       : Math.ceil(Math.abs(adjustWeeks));
     startingDate = originalStartDate[addOrSubtract](adjustWeeks, "w");
 
-    return startingDate;
+    return this.setLocale(startingDate);
   }
 
   // Get & update week states for the week based on the startingDate

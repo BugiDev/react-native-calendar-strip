@@ -1,6 +1,6 @@
 {
   "name": "react-native-calendar-strip",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Easy to use and visually stunning calendar component for React Native",
   "main": "index.js",
   "directories": {

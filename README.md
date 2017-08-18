@@ -98,6 +98,7 @@ This is the list of all the props you can pass to the component so that you can 
   * selectedDate: PropTypes.any - Date to be used as pre selected Date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`.
   * onDateSelected: PropTypes.func - Function to be used as a callback when a date is selected. It returns `moment Date`
   * onWeekChanged: PropTypes.func - Function to be used as a callback when a week is changed. It returns `moment Date`
+  * updateWeek: PropTypes.bool - (default true) Update the week view if other props change. If `false`, the week view won't change when other props change, but will still respond to left/right selectors.
   * useIsoWeekday: PropTypes.bool - start week on ISO day of week (default true).  If false, starts week on _startingDate_ parameter.  
   * minDate: PropTypes.any - minimum date that the calendar may navigate to. A week is allowed if minDate falls within the current week.
   * maxDate: PropTypes.any - maximum date that the calendar may navigate to. A week is allowed if maxDate falls within the current week.
