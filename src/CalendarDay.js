@@ -58,16 +58,14 @@ export default class CalendarDay extends Component {
 
     this.state = {
       selected: props.selected,
-      containerSize: Math.round(props.size),
-      containerPadding: Math.round(props.size / 5),
-      containerBorderRadius: Math.round(props.size / 2),
-      dateNameFontSize: Math.round(props.size / 2.8),
-      dateNumberFontSize: Math.round(props.size / 5)
+      ...this.calcSizes(props)
     };
   }
 
   componentWillReceiveProps(nextProps) {
     newState = {};
+    let doStateUpdate = false;
+
     if (this.state.selected !== nextProps.selected) {
       if (this.props.daySelectionAnimation.type !== "") {
         let configurableAnimation = {
@@ -103,17 +101,27 @@ export default class CalendarDay extends Component {
         LayoutAnimation.configureNext(configurableAnimation);
       }
       newState.selected = nextProps.selected;
+      doStateUpdate = true;
     }
 
     if (nextProps.size !== this.props.size) {
-      newState.containerSize = Math.round(nextProps.size);
-      newState.containerPadding = Math.round(nextProps.size / 5);
-      newState.containerBorderRadius = Math.round(nextProps.size / 2);
-      newState.dateNameFontSize = Math.round(nextProps.size / 5);
-      newState.dateNumberFontSize = Math.round(nextProps.size / 2.9);
+      newState = {...newState, ...this.calcSizes(nextProps)};
+      doStateUpdate = true;
     }
 
-    this.setState(newState);
+    if (doStateUpdate) {
+      this.setState(newState);
+    }
+  }
+
+  calcSizes(props) {
+    return {
+      containerSize: Math.round(props.size),
+      containerPadding: Math.round(props.size / 5),
+      containerBorderRadius: Math.round(props.size / 2),
+      dateNameFontSize: Math.round(props.size / 5),
+      dateNumberFontSize: Math.round(props.size / 2.9)
+    }
   }
 
   render() {
