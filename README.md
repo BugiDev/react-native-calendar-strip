@@ -57,9 +57,9 @@ import CalendarStrip from 'react-native-calendar-strip';
 class Example extends Component {
     let datesWhitelist = [{
       start: moment(),
-      end: moment.add(3, 'days')  // total 4 days enabled
+      end: moment().add(3, 'days')  // total 4 days enabled
     }];
-    let datesBlacklist = [ moment.add(1, 'days') ]; // 1 day disabled
+    let datesBlacklist = [ moment().add(1, 'days') ]; // 1 day disabled
 
     render() {
         return (
