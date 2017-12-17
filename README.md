@@ -226,7 +226,7 @@ Methods may be accessed through the instantiated component's [ref](http://reactj
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/squential.gif "react-native-calendar-strip parallel animation demo") | ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/parallel.gif "react-native-calendar-strip parallel animation demo") |
 
-### Week Strip Animation
+### Day Selection Animation
 
 #### Options
 
