@@ -1,4 +1,3 @@
-
 <h1 align="center"> react-native-calendar-strip </h1>
 <div align="center">
   <strong> Easy to use and visually stunning calendar component for React Native.</strong>
@@ -62,18 +61,18 @@ $ yarn add react-native-calendar-strip
 ## Usage
 
 ```jsx
-import {View, StyleSheet} from 'react-native'
+import { View, StyleSheet } from 'react-native';
 import CalendarStrip from 'react-native-calendar-strip';
 
 const Example = () => (
   <View style={styles.container}>
-       <CalendarStrip/>
+    <CalendarStrip />
   </View>
-)
+);
 
 const styles = StyleSheet.create({
   container: { flex: 1 }
-})
+});
 ```
 
 This will result in:
@@ -88,67 +87,68 @@ You can see the examples in [example](https://github.com/BugiDev/react-native-ca
 
 ### Initial data and onDateSelected handler
 
-Prop | Description | Type | Defualt
------- | ------ | ------ | ------
-**`startingDate `** | Date to be used for centering the calendar/showing the week based on that date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`. | Any |  
-**`selectedDate `** | Date to be used as pre selected Date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`. | Any | 
-**`onDateSelected `** | Function to be used as a callback when a date is selected. It returns `moment Date`| Function | 
-**`onWeekChanged `** | Function to be used as a callback when a week is changed. It returns `moment Date`| Number |
-**`updateWeek `** | Update the week view if other props change. If `false`, the week view won't change when other props change, but will still respond to left/right selectors.| Bool | **`True`**
-**`useIsoWeekday `** | start week on ISO day of week (default true).  If false, starts week on _startingDate_ parameter.| Bool | **`True`**
-**`minDate`** | minimum date that the calendar may navigate to. A week is allowed if minDate falls within the current week.| Any | 
-**`maxDate `** | maximum date that the calendar may navigate to. A week is allowed if maxDate falls within the current week.| Any | 
-**`datesWhitelist `** | TODO: Come up with better way to show code | Array |
-**`datesBlacklist `** | Dates that are disabled. Same format as _datesWhitelist_.  This overrides dates in _datesWhitelist_. | Array | 
+| Prop                 | Description                                                                                                                                                      | Type     | Defualt    |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------- |
+| **`startingDate`**   | Date to be used for centering the calendar/showing the week based on that date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`. | Any      |
+| **`selectedDate`**   | Date to be used as pre selected Date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`.                                           | Any      |
+| **`onDateSelected`** | Function to be used as a callback when a date is selected. It returns `moment Date`                                                                              | Function |
+| **`onWeekChanged`**  | Function to be used as a callback when a week is changed. It returns `moment Date`                                                                               | Number   |
+| **`updateWeek`**     | Update the week view if other props change. If `false`, the week view won't change when other props change, but will still respond to left/right selectors.      | Bool     | **`True`** |
+| **`useIsoWeekday`**  | start week on ISO day of week (default true). If false, starts week on _startingDate_ parameter.                                                                 | Bool     | **`True`** |
+| **`minDate`**        | minimum date that the calendar may navigate to. A week is allowed if minDate falls within the current week.                                                      | Any      |
+| **`maxDate`**        | maximum date that the calendar may navigate to. A week is allowed if maxDate falls within the current week.                                                      | Any      |
+| **`datesWhitelist`** | TODO: Come up with better way to show code                                                                                                                       | Array    |
+| **`datesBlacklist`** | Dates that are disabled. Same format as _datesWhitelist_. This overrides dates in _datesWhitelist_.                                                              | Array    |
 
 ### Hiding Components
-Prop | Description | Type | Defualt
------- | ------ | ------ | ------
-**`showMonth `** | Show or hide the month label. | Bool | **`True`**
-**`showDate `** | Show or hide all the dates. | Bool | **`True`**
-**`showDayName `** | Show or hide the day name label | Bool | **`True`**
-**`showDayNumber `** | Show or hide the day number label | Bool | **`True`**
+
+| Prop                | Description                       | Type | Defualt    |
+| ------------------- | --------------------------------- | ---- | ---------- |
+| **`showMonth`**     | Show or hide the month label.     | Bool | **`True`** |
+| **`showDate`**      | Show or hide all the dates.       | Bool | **`True`** |
+| **`showDayName`**   | Show or hide the day name label   | Bool | **`True`** |
+| **`showDayNumber`** | Show or hide the day number label | Bool | **`True`** |
 
 ### Styling
 
-Prop | Description | Type | Defualt
------- | ------ | ------ | ------
-**`style `** | Style for the top level CalendarStrip component. | Any |
-**`innerStyle `** | Sh Style for the responsively sized inner view. This is necessary to account for padding/margin from the top level view. The inner view has style `flex:1` by default. If this component is nested within another dynamically sized container, remove the flex style by passing in `[]`.| Any | 
-**`calendarHeaderStyle `** | Style for the header text of the calendar | Any |
-**`calendarHeaderFormat `** | Format for the header text of the calendar. For options, refere to [moments documentation](http://momentjs.com/docs/#/displaying/format/) | String |
-**`dateNameStyle `** | Style for the name of the day on work days in dates strip | Any | 
-**`dateNumberStyle `** | Style for the number of the day on work days in dates strip. | Any | 
-**`weekendDateNameStyle `** | Style for the name of the day on weekend days in dates strip.| Any | 
-**`weekendDateNumberStyle `** | Style for the number of the day on weekend days in dates strip.| Any | 
-**`styleWeekend `** | Whether to style weekend dates separately. | Bool | **`True`**
-**`highlightDateNameStyle `** | Style for the selected name of the day in dates strip. | Any | 
-**`highlightDateNumberStyle `** | Style for the selected number of the day in dates strip. | Any | 
-**`disabledDateNameStyle `** | Style for disabled name of the day in dates strip (controlled by datesWhitelist & datesBlacklist). | Any | 
-**`disabledDateNumberStyle `** | Style for disabled number of the day in dates strip (controlled by datesWhitelist & datesBlacklist). | Any | 
-**`disabledDateOpacity `** | Opacity of disabled dates strip. | Number | **`0.3`**
-**`customDatesStyles `** | Custom per-date styling, overriding the styles above. Check Table Below <a href="#customDatesStyles"> Below </a>| Array |
+| Prop                           | Description                                                                                                                                                                                                                                                                              | Type   | Defualt    |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ---------- |
+| **`style`**                    | Style for the top level CalendarStrip component.                                                                                                                                                                                                                                         | Any    |
+| **`innerStyle`**               | Sh Style for the responsively sized inner view. This is necessary to account for padding/margin from the top level view. The inner view has style `flex:1` by default. If this component is nested within another dynamically sized container, remove the flex style by passing in `[]`. | Any    |
+| **`calendarHeaderStyle`**      | Style for the header text of the calendar                                                                                                                                                                                                                                                | Any    |
+| **`calendarHeaderFormat`**     | Format for the header text of the calendar. For options, refere to [moments documentation](http://momentjs.com/docs/#/displaying/format/)                                                                                                                                                | String |
+| **`dateNameStyle`**            | Style for the name of the day on work days in dates strip                                                                                                                                                                                                                                | Any    |
+| **`dateNumberStyle`**          | Style for the number of the day on work days in dates strip.                                                                                                                                                                                                                             | Any    |
+| **`weekendDateNameStyle`**     | Style for the name of the day on weekend days in dates strip.                                                                                                                                                                                                                            | Any    |
+| **`weekendDateNumberStyle`**   | Style for the number of the day on weekend days in dates strip.                                                                                                                                                                                                                          | Any    |
+| **`styleWeekend`**             | Whether to style weekend dates separately.                                                                                                                                                                                                                                               | Bool   | **`True`** |
+| **`highlightDateNameStyle`**   | Style for the selected name of the day in dates strip.                                                                                                                                                                                                                                   | Any    |
+| **`highlightDateNumberStyle`** | Style for the selected number of the day in dates strip.                                                                                                                                                                                                                                 | Any    |
+| **`disabledDateNameStyle`**    | Style for disabled name of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                                                                                                                                                                       | Any    |
+| **`disabledDateNumberStyle`**  | Style for disabled number of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                                                                                                                                                                     | Any    |
+| **`disabledDateOpacity`**      | Opacity of disabled dates strip.                                                                                                                                                                                                                                                         | Number | **`0.3`**  |
+| **`customDatesStyles`**        | Custom per-date styling, overriding the styles above. Check Table Below <a href="#customDatesStyles"> Below </a>                                                                                                                                                                         | Array  |
 
 #### Responsive Sizing
 
-Prop | Description | Type | Defualt
------- | ------ | ------ | ------
-**`maxDayComponentSize `** | Maximum size that CalendarDay will responsively size up to. | Number | **`80`**
-**`minDayComponentSize `** | Minimum size that CalendarDay will responsively size down to. | Number | **`10`**
-**`responsiveSizingOffset `** | Adjust the responsive sizing. May be positive (increase size) or negative (decrease size). This value is added to the calculated day component width | Number | **`0`**
+| Prop                         | Description                                                                                                                                          | Type   | Defualt  |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
+| **`maxDayComponentSize`**    | Maximum size that CalendarDay will responsively size up to.                                                                                          | Number | **`80`** |
+| **`minDayComponentSize`**    | Minimum size that CalendarDay will responsively size down to.                                                                                        | Number | **`10`** |
+| **`responsiveSizingOffset`** | Adjust the responsive sizing. May be positive (increase size) or negative (decrease size). This value is added to the calculated day component width | Number | **`0`**  |
 
 #### Icon Sizing
 
-Prop | Description | Type | Defualt
------- | ------ | ------ | ------
-**`iconLeft `** | Icon to be used for the left icon. It accepts require statement with url to the image (`require('./img/icon.png')`), or object with remote uri `{uri: 'http://example.com/image.png'}` | 
-**`iconRight `** | Icon to be used for the right icon. It accepts require statement with url to the image (`require('./img/icon.png')`), or object with remote uri `{uri: 'http://example.com/image.png'}` | Any | 
-**`iconStyle `** | Style that is applied to both left and right icons. It is applied before *iconLeftStyle* or *iconRightStyle*. | Any | 
-**`iconLeftStyle `** | Style for left icon. It will override all of the other styles applied to icons. | Any |
-**`iconRightStyle `** | Style for right icon. It will override all of the other styles applied to icons. | Any | 
-**`iconStyle `** | Style for the container of icons. (Example usage is to add `flex` property to it so in the portrait mode, it will shrink the dates strip) | Any |
-**`leftSelector `** | Component for the left selector control. May be an instance of any React component. This overrides the icon* props above. Passing in an empty array `[]` hides this control. | Any | 
-**`rightSelector `** | Component for the right selector control. May be an instance of any React component. This overrides the icon* props above. Passing in an empty array `[]` hides this control. | Any | 
+| Prop                 | Description                                                                                                                                                                             | Type | Defualt |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------- |
+| **`iconLeft`**       | Icon to be used for the left icon. It accepts require statement with url to the image (`require('./img/icon.png')`), or object with remote uri `{uri: 'http://example.com/image.png'}`  |
+| **`iconRight`**      | Icon to be used for the right icon. It accepts require statement with url to the image (`require('./img/icon.png')`), or object with remote uri `{uri: 'http://example.com/image.png'}` | Any  |
+| **`iconStyle`**      | Style that is applied to both left and right icons. It is applied before _iconLeftStyle_ or _iconRightStyle_.                                                                           | Any  |
+| **`iconLeftStyle`**  | Style for left icon. It will override all of the other styles applied to icons.                                                                                                         | Any  |
+| **`iconRightStyle`** | Style for right icon. It will override all of the other styles applied to icons.                                                                                                        | Any  |
+| **`iconStyle`**      | Style for the container of icons. (Example usage is to add `flex` property to it so in the portrait mode, it will shrink the dates strip)                                               | Any  |
+| **`leftSelector`**   | Component for the left selector control. May be an instance of any React component. This overrides the icon\* props above. Passing in an empty array `[]` hides this control.           | Any  |
+| **`rightSelector`**  | Component for the right selector control. May be an instance of any React component. This overrides the icon\* props above. Passing in an empty array `[]` hides this control.          | Any  |
 
 #### customDatesStyles
 
@@ -156,16 +156,16 @@ Prop | Description | Type | Defualt
   <img src="https://cloud.githubusercontent.com/assets/6295083/25105759/a3335fc8-238b-11e7-9a92-3174498a0d89.png" alt="Custom date styling example">
 </div>
 
-Prop | Description | Type | optional
------- | ------ | ------ | ------
-**`startDate `** | anything parseable by Moment. | Any | **`False `**
-**`endDate `** | specify a range. If no endDate is supplied, startDate is treated as a single date. | Any | **`True`**
-**`dateNameStyle `** | Style for the name of the day on work days in dates strip | Any | **`True`**
-**`dateNumberStyle `** | Style for the number of the day on work days in dates strip. | Any | **`True`**
-**`dateContainerStyle `** | Style for the date Container. | Any | **`True`**
+| Prop                     | Description                                                                        | Type | optional    |
+| ------------------------ | ---------------------------------------------------------------------------------- | ---- | ----------- |
+| **`startDate`**          | anything parseable by Moment.                                                      | Any  | **`False`** |
+| **`endDate`**            | specify a range. If no endDate is supplied, startDate is treated as a single date. | Any  | **`True`**  |
+| **`dateNameStyle`**      | Style for the name of the day on work days in dates strip                          | Any  | **`True`**  |
+| **`dateNumberStyle`**    | Style for the number of the day on work days in dates strip.                       | Any  | **`True`**  |
+| **`dateContainerStyle`** | Style for the date Container.                                                      | Any  | **`True`**  |
 
 ##### Usage Example:
-  
+
 ```jsx
   let customDatesStyles = [];
   let startDate = moment();
@@ -188,7 +188,7 @@ Prop | Description | Type | optional
     );
   }
 ```
-  
+
 ## Contributing
 
 Contributions are welcome!
