@@ -213,16 +213,25 @@ Methods may be accessed through the instantiated component's [ref](http://reactj
 
 ## Animations
 
-| Animation Type              | Description                     | Type                             | duration |
-| --------------------------- | ------------------------------- | -------------------------------- | -------- |
-| **`WeekStripAnimation`**    | Options for animating the week. | **`sequence`** or **`parallel`** | **`ms`** |
-| **`DaySelectionAnimation`** | Options for animating the Day.  | **`border`** or **`background`** | **`ms`** |
+| Animation Type              | Description                     | Types                            |
+| --------------------------- | ------------------------------- | -------------------------------- |
+| **`WeekStripAnimation`**    | Options for animating the week. | **`sequence`** or **`parallel`** |
+| **`DaySelectionAnimation`** | Options for animating the Day.  | **`border`** or **`background`** |
 
-### Example
+### Week Strip Animation
 
-| Sequence example (dates shown one by one)                                                                                                                                 | Parallel example (dates shown all at once)                                                                                                                                |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/parallel.gif "react-native-calendar-strip parallel animation demo") | ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/parallel.gif "react-native-calendar-strip parallel animation demo") |
+### Options
+
+| Props          | Description                                         | Types                            |
+| -------------- | --------------------------------------------------- | -------------------------------- |
+| **`Type`**     | Pick witch type of animation you would like to show | **`sequence`** or **`parallel`** |
+| **`duration`** | duration of animation in milliseconds               | **`ms`**                         |
+
+### Example Animation for Week Strip Animation
+
+| Sequence example (dates shown one by one)                                                                                                                                  | Parallel example (dates shown all at once)                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/squential.gif "react-native-calendar-strip parallel animation demo") | ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/parallel.gif "react-native-calendar-strip parallel animation demo") |
 
 ## ToDo
 
