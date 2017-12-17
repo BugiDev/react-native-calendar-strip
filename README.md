@@ -111,7 +111,63 @@ Prop | Description | Type | Defualt
 
 ### Styling
 
+Prop | Description | Type | Defualt
+------ | ------ | ------ | ------
+**`style `** | Style for the top level CalendarStrip component. | Any |
+**`innerStyle `** | Sh Style for the responsively sized inner view. This is necessary to account for padding/margin from the top level view. The inner view has style `flex:1` by default. If this component is nested within another dynamically sized container, remove the flex style by passing in `[]`.| Any | 
+**`calendarHeaderStyle `** | Style for the header text of the calendar | Any |
+**`calendarHeaderFormat `** | Format for the header text of the calendar. For options, refere to [moments documentation](http://momentjs.com/docs/#/displaying/format/) | String |
+**`dateNameStyle `** | Style for the name of the day on work days in dates strip | Any | 
+**`dateNumberStyle `** | Style for the number of the day on work days in dates strip. | Any | 
+**`weekendDateNameStyle `** | Style for the name of the day on weekend days in dates strip.| Any | 
+**`weekendDateNumberStyle `** | Style for the number of the day on weekend days in dates strip.| Any | 
+**`styleWeekend `** | Whether to style weekend dates separately. | Bool | **`True`**
+**`highlightDateNameStyle `** | Style for the selected name of the day in dates strip. | Any | 
+**`highlightDateNumberStyle `** | Style for the selected number of the day in dates strip. | Any | 
+**`disabledDateNameStyle `** | Style for disabled name of the day in dates strip (controlled by datesWhitelist & datesBlacklist). | Any | 
+**`disabledDateNumberStyle `** | Style for disabled number of the day in dates strip (controlled by datesWhitelist & datesBlacklist). | Any | 
+**`disabledDateOpacity `** | Opacity of disabled dates strip. | Number | **`0.3`**
+**`customDatesStyles `** | Custom per-date styling, overriding the styles above. Check Table Below <a href="#customDatesStyles"> Below </a>| Array |
 
+#### customDatesStyles
+
+  <div align="center">
+  <img src="https://cloud.githubusercontent.com/assets/6295083/25105759/a3335fc8-238b-11e7-9a92-3174498a0d89.png" alt="Custom date styling example">
+</div>
+
+Prop | Description | Type | optional
+------ | ------ | ------ | ------
+**`startDate `** | anything parseable by Moment. | Any | **`False `**
+**`endDate `** | specify a range. If no endDate is supplied, startDate is treated as a single date. | Any | **`Truie`**
+**`dateNameStyle `** | Style for the name of the day on work days in dates strip | Any | **`True`**
+**`dateNumberStyle `** | Style for the number of the day on work days in dates strip. | Any | **`True`**
+**`dateContainerStyle `** | Style for the date Container. | Any | **`True`**
+
+##### Usage Example:
+  
+```jsx
+  let customDatesStyles = [];
+  let startDate = moment();
+  for (let i=0; i<6; i++) {
+    customDatesStyles.push({
+        startDate: startDate.clone().add(i, 'days'), // Single date since no endDate provided
+        dateNameStyle: {styles.someDateNameStyle},
+        dateNumberStyle: {styles.someDateNumberStyle},
+        // Random color...
+        dateContainerStyle: {{backgroundColor: '#'+('#00000'+(Math.random()*(1<<24)|0).toString(16)).slice(-6)}},
+    });
+  }
+
+  render() {
+    return (
+      <CalendarStrip
+        customDatesStyles={customDatesStyles}
+        ...
+      />
+    );
+  }
+```
+  
 ## Contributing
 
 Contributions are welcome!
