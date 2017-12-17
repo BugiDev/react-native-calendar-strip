@@ -129,6 +129,15 @@ Prop | Description | Type | Defualt
 **`disabledDateOpacity `** | Opacity of disabled dates strip. | Number | **`0.3`**
 **`customDatesStyles `** | Custom per-date styling, overriding the styles above. Check Table Below <a href="#customDatesStyles"> Below </a>| Array |
 
+#### Responsive Sizing
+
+Prop | Description | Type | Defualt
+------ | ------ | ------ | ------
+**`maxDayComponentSize `** | Maximum size that CalendarDay will responsively size up to. | Number | **`80`**
+**`minDayComponentSize `** | Minimum size that CalendarDay will responsively size down to. | Number | **`10`**
+**`responsiveSizingOffset `** | Adjust the responsive sizing. May be positive (increase size) or negative (decrease size). This value is added to the calculated day component width | Number | **`0`**
+
+
 #### customDatesStyles
 
   <div align="center">
