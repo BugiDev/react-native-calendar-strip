@@ -211,6 +211,22 @@ Methods may be accessed through the instantiated component's [ref](http://reactj
   }
 ```
 
+## Animations
+
+The week strip and day selection have configurable opacity animations. If they are not specified in the props, by default the animations are disabled.
+
+| Prop                       | Description                     | Type   | Option                           | duration             |
+| -------------------------- | ------------------------------- | ------ | -------------------------------- | -------------------- |
+| **`Week strip animation`** | options for animating the week. | Object | **`sequence`** or **`parallel`** | **`duration in ms`** |
+
+Sequence example (dates shown one by one):
+
+![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/squential.gif "react-native-calendar-strip sequence animation demo")
+
+Parallel example (dates shown all at once):
+
+![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/parallel.gif "react-native-calendar-strip parallel animation demo")
+
 ## ToDo
 
 * [ ] Add unit tests
