@@ -127,7 +127,7 @@ You can see the examples in [example](https://github.com/BugiDev/react-native-ca
 | **`disabledDateNameStyle`**    | Style for disabled name of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                                                                                                                                                                       | Any    |
 | **`disabledDateNumberStyle`**  | Style for disabled number of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                                                                                                                                                                     | Any    |
 | **`disabledDateOpacity`**      | Opacity of disabled dates strip.                                                                                                                                                                                                                                                         | Number | **`0.3`**  |
-| **`customDatesStyles`**        | Custom per-date styling, overriding the styles above. Check Table Below <a href="#customDatesStyles"> Below </a>                                                                                                                                                                         | Array  |
+| **`customDatesStyles`**        | Custom per-date styling, overriding the styles above. Check Table Below <a href="#customdatesstyles"> Below </a>                                                                                                                                                                         | Array  |
 
 #### Responsive Sizing
 
