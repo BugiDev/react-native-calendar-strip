@@ -147,7 +147,7 @@ AppRegistry.registerComponent('Example', () => Example);
 This will result in:
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/blank.gif" alt="">
+  <img src="https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/Initial.gif" alt="">
 </div>
 
 </details>
