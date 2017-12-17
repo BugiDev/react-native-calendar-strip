@@ -99,18 +99,18 @@ Methods may be accessed through the instantiated component's [ref](http://reactj
 
 ### Initial data and onDateSelected handler
 
-| Prop                 | Description                                                                                                                                                      | Type     | Defualt    |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------- |
-| **`startingDate`**   | Date to be used for centering the calendar/showing the week based on that date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`. | Any      |
-| **`selectedDate`**   | Date to be used as pre selected Date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`.                                           | Any      |
-| **`onDateSelected`** | Function to be used as a callback when a date is selected. It returns `moment Date`                                                                              | Function |
-| **`onWeekChanged`**  | Function to be used as a callback when a week is changed. It returns `moment Date`                                                                               | Number   |
-| **`updateWeek`**     | Update the week view if other props change. If `false`, the week view won't change when other props change, but will still respond to left/right selectors.      | Bool     | **`True`** |
-| **`useIsoWeekday`**  | start week on ISO day of week (default true). If false, starts week on _startingDate_ parameter.                                                                 | Bool     | **`True`** |
-| **`minDate`**        | minimum date that the calendar may navigate to. A week is allowed if minDate falls within the current week.                                                      | Any      |
-| **`maxDate`**        | maximum date that the calendar may navigate to. A week is allowed if maxDate falls within the current week.                                                      | Any      |
-| **`datesWhitelist`** | Dates that are enabled (accepts both `Date` and `moment Date`). Ranges may be specified with an object entry in the array. Check example <a href="#datesWhitelistArrayExample"> Below </a>                                         | Array    |
-| **`datesBlacklist`** | Dates that are disabled. Same format as _datesWhitelist_. This overrides dates in _datesWhitelist_.                                                              | Array    |
+| Prop                 | Description                                                                                                                                                                                | Type     | Defualt    |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ---------- |
+| **`startingDate`**   | Date to be used for centering the calendar/showing the week based on that date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`.                           | Any      |
+| **`selectedDate`**   | Date to be used as pre selected Date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`.                                                                     | Any      |
+| **`onDateSelected`** | Function to be used as a callback when a date is selected. It returns `moment Date`                                                                                                        | Function |
+| **`onWeekChanged`**  | Function to be used as a callback when a week is changed. It returns `moment Date`                                                                                                         | Number   |
+| **`updateWeek`**     | Update the week view if other props change. If `false`, the week view won't change when other props change, but will still respond to left/right selectors.                                | Bool     | **`True`** |
+| **`useIsoWeekday`**  | start week on ISO day of week (default true). If false, starts week on _startingDate_ parameter.                                                                                           | Bool     | **`True`** |
+| **`minDate`**        | minimum date that the calendar may navigate to. A week is allowed if minDate falls within the current week.                                                                                | Any      |
+| **`maxDate`**        | maximum date that the calendar may navigate to. A week is allowed if maxDate falls within the current week.                                                                                | Any      |
+| **`datesWhitelist`** | Dates that are enabled (accepts both `Date` and `moment Date`). Ranges may be specified with an object entry in the array. Check example <a href="#datesWhitelistArrayExample"> Below </a> | Array    |
+| **`datesBlacklist`** | Dates that are disabled. Same format as _datesWhitelist_. This overrides dates in _datesWhitelist_.                                                                                        | Array    |
 
 ##### datesWhitelist Array Example
 
