@@ -215,9 +215,10 @@ Methods may be accessed through the instantiated component's [ref](http://reactj
 
 The week strip and day selection have configurable opacity animations. If they are not specified in the props, by default the animations are disabled.
 
-| Prop                       | Description                     | Type   | Option                           | duration             |
-| -------------------------- | ------------------------------- | ------ | -------------------------------- | -------------------- |
-| **`Week strip animation`** | options for animating the week. | Object | **`sequence`** or **`parallel`** | **`duration in ms`** |
+| Animation                       | Description                     | Option                           | duration             |
+| -------------------------- | ------------------------------- | -------------------------------- | -------------------- |
+| **`WeekStripAnimation`** | options for animating the week. |  **`sequence`** or **`parallel`** | **`ms`** |
+| **`DaySelectionAnimation`** | options for animating the Day. |  **`border`** or **`background`** | **`ms`** |
 
 Sequence example (dates shown one by one):
 
