@@ -85,6 +85,8 @@ You can see the examples in [example](https://github.com/BugiDev/react-native-ca
 
 ## Props
 
+### Initial data and onDateSelected handler
+
 Prop | Description | Type | Defualt
 ------ | ------ | ------ | ------
 **`startingDate `** | Date to be used for centering the calendar/showing the week based on that date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`. | Any |  
@@ -97,6 +99,16 @@ Prop | Description | Type | Defualt
 **`maxDate `** | maximum date that the calendar may navigate to. A week is allowed if maxDate falls within the current week.| Any | 
 **`datesWhitelist `** | TODO: Come up with better way to show code | Array |
 **`datesBlacklist `** | Dates that are disabled. Same format as _datesWhitelist_.  This overrides dates in _datesWhitelist_. | Array | 
+
+### Hiding Components
+Prop | Description | Type | Defualt
+------ | ------ | ------ | ------
+**`showMonth `** | Show or hide the month label. | Bool | **`True`**
+**`showDate `** | Show or hide all the dates. | Bool | **`True`**
+**`showDayName `** | Show or hide the day name label | Bool | **`True`**
+**`showDayNumber `** | Show or hide the day number label | Bool | **`True`**
+
+
 
 ## Contributing
 
