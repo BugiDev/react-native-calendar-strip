@@ -230,17 +230,17 @@ Methods may be accessed through the instantiated component's [ref](http://reactj
 
 #### Options
 
-| Props                      | Description                                                                                                            | Type                             | Required for Background | Required for Border |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------- | ----------------------- | ------------------- |
-| **`Type`**                 | Pick witch type of animation you would like to show                                                                    | **`border`** or **`background`** |                         |                     |
-| **`duration`**             | duration of animation in milliseconds                                                                                  | **`Number (ms)`**                |                         |                     |
-| **`borderWidth`**          | Selected day's border width.                                                                                           | **`Number`**                     |                         | ✅                  |
-| **`borderHighlightColor`** | Selected day's border color.                                                                                           | **`String`**                     |                         | ✅                  |
-| **`highlightColor`**       | Highlighted color of selected date.                                                                                    | **`String`**                     | ✅                      |                     |
-| **`animType`**             | optional config options passed to [LayoutAnimation](https://facebook.github.io/react-native/docs/layoutanimation.html) | **`any`**                        |                         |                     |
-| **`animUpdateType`**       | optional config options passed to [LayoutAnimation](https://facebook.github.io/react-native/docs/layoutanimation.html) | **`any`**                        |                         |                     |
-| **`animProperty`**         | optional config options passed to [LayoutAnimation](https://facebook.github.io/react-native/docs/layoutanimation.html) | **`any`**                        |                         |                     |
-| **`animSpringDamping`**    | optional config options passed to [LayoutAnimation](https://facebook.github.io/react-native/docs/layoutanimation.html) | **`any`**                        |                         |                     |
+| Props                      | Description                                                                                                            | Type                             |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| **`Type`**                 | Pick witch type of animation you would like to show                                                                    | **`border`** or **`background`** |
+| **`duration`**             | duration of animation in milliseconds                                                                                  | **`Number (ms)`**                |
+| **`borderWidth`**          | Selected day's border width. _Required if the type is set to border_.                                                  | **`Number`**                     |
+| **`borderHighlightColor`** | Selected day's border color. _Required if the type is set to border_.                                                  | **`String`**                     |
+| **`highlightColor`**       | Highlighted color of selected date. _Required if the type is set to background_.                                       | **`String`**                     |
+| **`animType`**             | optional config options passed to [LayoutAnimation](https://facebook.github.io/react-native/docs/layoutanimation.html) | **`any`**                        |
+| **`animUpdateType`**       | optional config options passed to [LayoutAnimation](https://facebook.github.io/react-native/docs/layoutanimation.html) | **`any`**                        |
+| **`animProperty`**         | optional config options passed to [LayoutAnimation](https://facebook.github.io/react-native/docs/layoutanimation.html) | **`any`**                        |
+| **`animSpringDamping`**    | optional config options passed to [LayoutAnimation](https://facebook.github.io/react-native/docs/layoutanimation.html) | **`any`**                        |
 
 | Border example                                                                                                                                                              | Background example                                                                                                                                                    |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
