@@ -46,6 +46,7 @@
   <summary>Table of Contents</summary>
   <li><a href="#install">Install</a></li>
   <li><a href="#usage">Usage</a></li>
+  <li><a href="#props">Props</a></li>
   <li><a href="#contribute">Contribute</a></li>
   <li><a href="#license">License</a></li>
 </details>
@@ -108,6 +109,7 @@ Prop | Description | Type | Defualt
 **`showDayName `** | Show or hide the day name label | Bool | **`True`**
 **`showDayNumber `** | Show or hide the day number label | Bool | **`True`**
 
+### Styling
 
 
 ## Contributing
