@@ -188,7 +188,12 @@ You can see the examples in [example](https://github.com/BugiDev/react-native-ca
     );
   }
 ```
-
+## ToDo
+ * [ ] Add unit tests
+ * [ ] Add Travis CI integration
+ * [ ] Implement week view, which should show weeks in a month rather than days, so that you select the whole week
+ * [ ] Add a month and a year selection in a form of a popup
+ 
 ## Contributing
 
 Contributions are welcome!
