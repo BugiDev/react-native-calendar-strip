@@ -137,6 +137,18 @@ Prop | Description | Type | Defualt
 **`minDayComponentSize `** | Minimum size that CalendarDay will responsively size down to. | Number | **`10`**
 **`responsiveSizingOffset `** | Adjust the responsive sizing. May be positive (increase size) or negative (decrease size). This value is added to the calculated day component width | Number | **`0`**
 
+#### Icon Sizing
+
+Prop | Description | Type | Defualt
+------ | ------ | ------ | ------
+**`iconLeft `** | Icon to be used for the left icon. It accepts require statement with url to the image (`require('./img/icon.png')`), or object with remote uri `{uri: 'http://example.com/image.png'}` | 
+**`iconRight `** | Icon to be used for the right icon. It accepts require statement with url to the image (`require('./img/icon.png')`), or object with remote uri `{uri: 'http://example.com/image.png'}` | Any | 
+**`iconStyle `** | Style that is applied to both left and right icons. It is applied before *iconLeftStyle* or *iconRightStyle*. | Any | 
+**`iconLeftStyle `** | Style for left icon. It will override all of the other styles applied to icons. | Any |
+**`iconRightStyle `** | Style for right icon. It will override all of the other styles applied to icons. | Any | 
+**`iconStyle `** | Style for the container of icons. (Example usage is to add `flex` property to it so in the portrait mode, it will shrink the dates strip) | Any |
+**`leftSelector `** | Component for the left selector control. May be an instance of any React component. This overrides the icon* props above. Passing in an empty array `[]` hides this control. | Any | 
+**`rightSelector `** | Component for the right selector control. May be an instance of any React component. This overrides the icon* props above. Passing in an empty array `[]` hides this control. | Any | 
 
 #### customDatesStyles
 
@@ -147,7 +159,7 @@ Prop | Description | Type | Defualt
 Prop | Description | Type | optional
 ------ | ------ | ------ | ------
 **`startDate `** | anything parseable by Moment. | Any | **`False `**
-**`endDate `** | specify a range. If no endDate is supplied, startDate is treated as a single date. | Any | **`Truie`**
+**`endDate `** | specify a range. If no endDate is supplied, startDate is treated as a single date. | Any | **`True`**
 **`dateNameStyle `** | Style for the name of the day on work days in dates strip | Any | **`True`**
 **`dateNumberStyle `** | Style for the number of the day on work days in dates strip. | Any | **`True`**
 **`dateContainerStyle `** | Style for the date Container. | Any | **`True`**
