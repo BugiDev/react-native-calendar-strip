@@ -87,6 +87,8 @@ You can see the examples in [example](https://github.com/BugiDev/react-native-ca
 
 ### Methods
 
+Methods may be accessed through the instantiated component's [ref](http://reactjs.cn/react/docs/more-about-refs.html).
+
 | Prop                                  | Description                                                                                                                                                                                                                                                                                           |
 | ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`getSelectedDate()`**               | Returns the currently selected date. If no date is selected, returns undefined.                                                                                                                                                                                                                       |
@@ -107,8 +109,18 @@ You can see the examples in [example](https://github.com/BugiDev/react-native-ca
 | **`useIsoWeekday`**  | start week on ISO day of week (default true). If false, starts week on _startingDate_ parameter.                                                                 | Bool     | **`True`** |
 | **`minDate`**        | minimum date that the calendar may navigate to. A week is allowed if minDate falls within the current week.                                                      | Any      |
 | **`maxDate`**        | maximum date that the calendar may navigate to. A week is allowed if maxDate falls within the current week.                                                      | Any      |
-| **`datesWhitelist`** | TODO: Come up with better way to show code                                                                                                                       | Array    |
+| **`datesWhitelist`** | Dates that are enabled (accepts both `Date` and `moment Date`). Ranges may be specified with an object entry in the array. Check example <a href="#datesWhitelistArrayExample"> Below </a>                                         | Array    |
 | **`datesBlacklist`** | Dates that are disabled. Same format as _datesWhitelist_. This overrides dates in _datesWhitelist_.                                                              | Array    |
+
+##### datesWhitelist Array Example
+
+```jsx
+   // Date range format
+  {
+      start: (Date or moment Date)
+      end: (Date or moment Date)
+  }
+```
 
 ### Hiding Components
 
@@ -137,7 +149,7 @@ You can see the examples in [example](https://github.com/BugiDev/react-native-ca
 | **`disabledDateNameStyle`**    | Style for disabled name of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                                                                                                                                                                       | Any    |
 | **`disabledDateNumberStyle`**  | Style for disabled number of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                                                                                                                                                                     | Any    |
 | **`disabledDateOpacity`**      | Opacity of disabled dates strip.                                                                                                                                                                                                                                                         | Number | **`0.3`**  |
-| **`customDatesStyles`**        | Custom per-date styling, overriding the styles above. Check Table Below <a href="#customdatesstyles"> Below </a>                                                                                                                                                                         | Array  |
+| **`customDatesStyles`**        | Custom per-date styling, overriding the styles above. Check Table <a href="#customdatesstyles"> Below </a>                                                                                                                                                                         | Array  |
 
 #### Responsive Sizing
 
