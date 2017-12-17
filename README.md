@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
 This will result in:
 
 <div align="center">
-  <img src="example.png" alt="">
+  <img src="https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/Initial.gif" alt="">
 </div>
 
 You can see the examples in [example](https://github.com/BugiDev/react-native-calendar-strip/tree/master/example/ReactNativeCalendarStripExample) folder of this repo.
