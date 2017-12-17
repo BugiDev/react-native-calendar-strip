@@ -46,6 +46,9 @@
   <li><a href="#install">Install</a></li>
   <li><a href="#usage">Usage</a></li>
   <li><a href="#props">Props</a></li>
+  <li><a href="#animations">Animations</a></li>
+  <li><a href="#localization">Localization</a></li>
+  <li><a href="#todo">ToDo</a></li>
   <li><a href="#contribute">Contribute</a></li>
   <li><a href="#license">License</a></li>
 </details>
@@ -59,6 +62,12 @@ $ yarn add react-native-calendar-strip
 ```
 
 ## Usage
+
+### Simple "out of the box" Example
+
+You can use this component without any styling or customization. Just import it in your project and render it:
+
+<details>
 
 ```jsx
 import { View, StyleSheet } from 'react-native';
@@ -78,10 +87,70 @@ const styles = StyleSheet.create({
 This will result in:
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/Initial.gif" alt="">
+  <img src="https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/blank.gif" alt="">
 </div>
 
-You can see the examples in [example](https://github.com/BugiDev/react-native-calendar-strip/tree/master/example/ReactNativeCalendarStripExample) folder of this repo.
+</details>
+
+### Styling and animations Example
+
+<details>
+
+Even though this component works withouth any customization, it is possible to customize almost everything, so you can make it as beautiful as you want:
+
+```jsx
+import React, {Component} from 'react';
+import {
+    AppRegistry,
+    View
+} from 'react-native';
+import moment from 'moment';
+
+import CalendarStrip from 'react-native-calendar-strip';
+
+class Example extends Component {
+    let datesWhitelist = [{
+      start: moment(),
+      end: moment().add(3, 'days')  // total 4 days enabled
+    }];
+    let datesBlacklist = [ moment().add(1, 'days') ]; // 1 day disabled
+
+    render() {
+        return (
+            <View>
+                <CalendarStrip
+                    calendarAnimation={{type: 'sequence', duration: 30}}
+                    daySelectionAnimation={{type: 'border', duration: 200, borderWidth: 1, borderHighlightColor: 'white'}}
+                    style={{height: 100, paddingTop: 20, paddingBottom: 10}}
+                    calendarHeaderStyle={{color: 'white'}}
+                    calendarColor={'#7743CE'}
+                    dateNumberStyle={{color: 'white'}}
+                    dateNameStyle={{color: 'white'}}
+                    highlightDateNumberStyle={{color: 'yellow'}}
+                    highlightDateNameStyle={{color: 'yellow'}}
+                    disabledDateNameStyle={{color: 'grey'}}
+                    disabledDateNumberStyle={{color: 'grey'}}
+                    datesWhitelist={datesWhitelist}
+                    datesBlacklist={datesBlacklist}
+                    iconLeft={require('./img/left-arrow.png')}
+                    iconRight={require('./img/right-arrow.png')}
+                    iconContainer={{flex: 0.1}}
+                />
+            </View>
+        );
+    }
+}
+
+AppRegistry.registerComponent('Example', () => Example);
+```
+
+This will result in:
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/blank.gif" alt="">
+</div>
+
+</details>
 
 ## Props
 
@@ -219,36 +288,36 @@ Methods may be accessed through the instantiated component's [ref](http://reactj
 
 ### Week Strip Animation
 
-#### Options
-
-| Props          | Description                                         | Types                            |
-| -------------- | --------------------------------------------------- | -------------------------------- |
-| **`Type`**     | Pick witch type of animation you would like to show | **`sequence`** or **`parallel`** |
-| **`duration`** | duration of animation in milliseconds               | **`ms`**                         |
-
 | Sequence example (dates shown one by one)                                                                                                                                  | Parallel example (dates shown all at once)                                                                                                                                |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/squential.gif "react-native-calendar-strip parallel animation demo") | ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/parallel.gif "react-native-calendar-strip parallel animation demo") |
 
+#### Week Strip Animation Options
+
+| Props          | Description                                         | Types                    |
+| -------------- | --------------------------------------------------- | ------------------------ |
+| **`Type`**     | Pick witch type of animation you would like to show | `sequence` or `parallel` |
+| **`duration`** | duration of animation in milliseconds               | Number (ms)              |
+
 ### Day Selection Animation
-
-#### Options
-
-| Props                      | Description                                                                                                            | Type                             |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| **`Type`**                 | Pick witch type of animation you would like to show                                                                    | **`border`** or **`background`** |
-| **`duration`**             | duration of animation in milliseconds                                                                                  | **`Number (ms)`**                |
-| **`borderWidth`**          | Selected day's border width. _Required if the type is set to border_.                                                  | **`Number`**                     |
-| **`borderHighlightColor`** | Selected day's border color. _Required if the type is set to border_.                                                  | **`String`**                     |
-| **`highlightColor`**       | Highlighted color of selected date. _Required if the type is set to background_.                                       | **`String`**                     |
-| **`animType`**             | optional config options passed to [LayoutAnimation](https://facebook.github.io/react-native/docs/layoutanimation.html) | **`any`**                        |
-| **`animUpdateType`**       | optional config options passed to [LayoutAnimation](https://facebook.github.io/react-native/docs/layoutanimation.html) | **`any`**                        |
-| **`animProperty`**         | optional config options passed to [LayoutAnimation](https://facebook.github.io/react-native/docs/layoutanimation.html) | **`any`**                        |
-| **`animSpringDamping`**    | optional config options passed to [LayoutAnimation](https://facebook.github.io/react-native/docs/layoutanimation.html) | **`any`**                        |
 
 | Border example                                                                                                                                                              | Background example                                                                                                                                                    |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/border-small.gif "react-native-calendar-strip border animation demo") | ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/background-small.gif "react-native-calendar-strip simple demo") |
+
+#### Day Selection Animation Options
+
+| Props                      | Description                                                                                                            | Type                     |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| **`Type`**                 | Pick witch type of animation you would like to show                                                                    | `border` or `background` |
+| **`duration`**             | duration of animation in milliseconds                                                                                  | Number (ms)              |
+| **`borderWidth`**          | Selected day's border width. _Required if the type is set to border_.                                                  | Number                   |
+| **`borderHighlightColor`** | Selected day's border color. _Required if the type is set to border_.                                                  | String                   |
+| **`highlightColor`**       | Highlighted color of selected date. _Required if the type is set to background_.                                       | String                   |
+| **`animType`**             | optional config options passed to [LayoutAnimation](https://facebook.github.io/react-native/docs/layoutanimation.html) | any                      |
+| **`animUpdateType`**       | optional config options passed to [LayoutAnimation](https://facebook.github.io/react-native/docs/layoutanimation.html) | any                      |
+| **`animProperty`**         | optional config options passed to [LayoutAnimation](https://facebook.github.io/react-native/docs/layoutanimation.html) | any                      |
+| **`animSpringDamping`**    | optional config options passed to [LayoutAnimation](https://facebook.github.io/react-native/docs/layoutanimation.html) | any                      |
 
 ## Localization
 
