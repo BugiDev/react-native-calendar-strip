@@ -13,9 +13,9 @@
   <a href="https://github.com/feross/standard">
     <img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square" alt="standard JS linter" />
   </a>
-  <!-- <a href="https://github.com/prettier/prettier">
+  <a href="https://github.com/prettier/prettier">
     <img src="https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square" alt="prettier code formatting" />
-  </a> -->
+  </a>
   <a href="https://github.com/BugiDev/react-native-calendar-strip/blob/master/LICENSE.md">
     <img src="https://img.shields.io/npm/l/react-native-calendar-strip.svg?style=flat-square" alt="project license" />
   </a>
