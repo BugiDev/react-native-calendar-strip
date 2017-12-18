@@ -296,7 +296,7 @@ Methods may be accessed through the instantiated component's [ref](https://react
 
 | Props          | Description                                         | Types                    |
 | -------------- | --------------------------------------------------- | ------------------------ |
-| **`Type`**     | Pick witch type of animation you would like to show | `sequence` or `parallel` |
+| **`Type`**     | Pick which type of animation you would like to show | `sequence` or `parallel` |
 | **`duration`** | duration of animation in milliseconds               | Number (ms)              |
 
 ### Day Selection Animation
@@ -424,7 +424,7 @@ Contributions are welcome!
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :D
 
-Or open up [a issue](https://github.com/BugiDev/react-native-calendar-strip/issues).
+Or open up [an issue](https://github.com/BugiDev/react-native-calendar-strip/issues).
 
 ## License
 
