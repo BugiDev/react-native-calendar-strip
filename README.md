@@ -156,7 +156,7 @@ This will result in:
 
 ### Methods
 
-Methods may be accessed through the instantiated component's [ref](http://reactjs.cn/react/docs/more-about-refs.html).
+Methods may be accessed through the instantiated component's [ref](https://reactjs.org/docs/react-component.html).
 
 | Prop                                  | Description                                                                                                                                                                                                                                                                                           |
 | ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
