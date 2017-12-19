@@ -309,7 +309,7 @@ Methods may be accessed through the instantiated component's [ref](https://react
 
 | Props                      | Description                                                                                                            | Type                     |
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| **`Type`**                 | Pick witch type of animation you would like to show                                                                    | `border` or `background` |
+| **`Type`**                 | Pick which type of animation you would like to show                                                                    | `border` or `background` |
 | **`duration`**             | duration of animation in milliseconds                                                                                  | Number (ms)              |
 | **`borderWidth`**          | Selected day's border width. _Required if the type is set to border_.                                                  | Number                   |
 | **`borderHighlightColor`** | Selected day's border color. _Required if the type is set to border_.                                                  | String                   |
