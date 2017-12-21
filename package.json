@@ -36,7 +36,6 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-dom": "*",
     "react-native": "*"
   },
   "devDependencies": {
@@ -51,7 +50,8 @@
     "jest": "^22.0.3",
     "prettier-standard": "^8.0.0",
     "react-addons-test-utils": "^15.6.2",
-    "react-test-renderer": "^16.2.0"
+    "react-test-renderer": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "keywords": [
     "RN",
