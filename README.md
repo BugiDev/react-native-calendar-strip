@@ -168,7 +168,7 @@ Methods may be accessed through the instantiated component's [ref](https://react
 
 ### Initial data and onDateSelected handler
 
-| Prop                 | Description                                                                                                                                                                                  | Type     | Defualt    |
+| Prop                 | Description                                                                                                                                                                                  | Type     | Default    |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------- |
 | **`startingDate`**   | Date to be used for centering the calendar/showing the week based on that date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`.                             | Any      |
 | **`selectedDate`**   | Date to be used as pre selected Date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`.                                                                       | Any      |
@@ -193,7 +193,7 @@ Methods may be accessed through the instantiated component's [ref](https://react
 
 ### Hiding Components
 
-| Prop                | Description                       | Type | Defualt    |
+| Prop                | Description                       | Type | Default    |
 | ------------------- | --------------------------------- | ---- | ---------- |
 | **`showMonth`**     | Show or hide the month label.     | Bool | **`True`** |
 | **`showDate`**      | Show or hide all the dates.       | Bool | **`True`** |
@@ -202,7 +202,7 @@ Methods may be accessed through the instantiated component's [ref](https://react
 
 ### Styling
 
-| Prop                           | Description                                                                                                                                                                                                                                                                              | Type   | Defualt    |
+| Prop                           | Description                                                                                                                                                                                                                                                                              | Type   | Default    |
 | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ---------- |
 | **`style`**                    | Style for the top level CalendarStrip component.                                                                                                                                                                                                                                         | Any    |
 | **`innerStyle`**               | Sh Style for the responsively sized inner view. This is necessary to account for padding/margin from the top level view. The inner view has style `flex:1` by default. If this component is nested within another dynamically sized container, remove the flex style by passing in `[]`. | Any    |
@@ -222,7 +222,7 @@ Methods may be accessed through the instantiated component's [ref](https://react
 
 #### Responsive Sizing
 
-| Prop                         | Description                                                                                                                                          | Type   | Defualt  |
+| Prop                         | Description                                                                                                                                          | Type   | Default  |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
 | **`maxDayComponentSize`**    | Maximum size that CalendarDay will responsively size up to.                                                                                          | Number | **`80`** |
 | **`minDayComponentSize`**    | Minimum size that CalendarDay will responsively size down to.                                                                                        | Number | **`10`** |
@@ -230,7 +230,7 @@ Methods may be accessed through the instantiated component's [ref](https://react
 
 #### Icon Sizing
 
-| Prop                 | Description                                                                                                                                                                             | Type | Defualt |
+| Prop                 | Description                                                                                                                                                                             | Type | Default |
 | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------- |
 | **`iconLeft`**       | Icon to be used for the left icon. It accepts require statement with url to the image (`require('./img/icon.png')`), or object with remote uri `{uri: 'http://example.com/image.png'}`  | Any  |
 | **`iconRight`**      | Icon to be used for the right icon. It accepts require statement with url to the image (`require('./img/icon.png')`), or object with remote uri `{uri: 'http://example.com/image.png'}` | Any  |
