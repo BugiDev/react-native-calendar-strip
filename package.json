@@ -1,10 +1,34 @@
 {
   "name": "react-native-calendar-strip",
-  "version": "1.2.4",
   "description": "Easy to use and visually stunning calendar component for React Native",
+  "author": "Bogdan Begovic <bogdanbegovic@gmail.com>",
+  "contributors": [
+    "Christopher Burns (https://github.com/Burnsy)",
+    "Florian Biebel (https://github.com/1ne8ight7even)",
+    "Peace Chen (https://github.com/peacechen)",
+    "Sam Colby (https://github.com/samcolby)",
+    "Vitaliy Zhukov (https://github.com/Vitall)"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/BugiDev/react-native-calendar-strip#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BugiDev/react-native-calendar-strip.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BugiDev/react-native-calendar-strip/issues"
+  },
+  "version": "1.2.4",
   "main": "index.js",
   "directories": {
     "example": "example"
+  },
+  "scripts": {
+    "eslint": "eslint src/** __tests__/**; exit 0",
+    "format": "prettier-standard \"{src,__tests__}/**/*.js\"",
+    "test": "npm run format && jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "moment": "^2.17.1",
@@ -20,13 +44,29 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-react": "^6.10.3",
     "jest": "^19.0.2",
-    "prettier": "^1.5.3",
+    "prettier-standard": "^8.0.0",
     "react": "15.4.2",
     "react-addons-test-utils": "15.4.2",
     "react-dom": "15.4.2",
     "react-native": "0.42.3",
     "react-test-renderer": "15.4.2"
   },
+  "keywords": [
+    "RN",
+    "calendar",
+    "calendar strip",
+    "calendar-strip",
+    "native",
+    "react",
+    "react native",
+    "react native calendar",
+    "react native calendar strip",
+    "react-native",
+    "react-native-calendar",
+    "react-native-calendar-strip",
+    "rn",
+    "strip"
+  ],
   "jest": {
     "preset": "react-native",
     "verbose": true,
@@ -40,60 +80,5 @@
     "globals": {
       "__DEV__": true
     }
-  },
-  "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "eslint": "eslint src/** __tests__/**; exit 0",
-    "prettier": "prettier --write \"{src,__tests__}/**/*.js\""
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/BugiDev/react-native-calendar-strip.git"
-  },
-  "keywords": [
-    "react",
-    "native",
-    "rn",
-    "RN",
-    "react native",
-    "react-native",
-    "calendar",
-    "strip",
-    "calendar strip",
-    "calendar-strip",
-    "react native calendar",
-    "react-native-calendar",
-    "react native calendar strip",
-    "react-native-calendar-strip"
-  ],
-  "author": "Bogdan Begovic <bogdanbegovic@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/BugiDev/react-native-calendar-strip/issues"
-  },
-  "contributors": [
-    {
-      "name": "Florian Biebel",
-      "url": "https://github.com/1ne8ight7even"
-    },
-    {
-      "name": "Peace Chen",
-      "url": "https://github.com/peacechen"
-    },
-    {
-      "name": "Sam Colby",
-      "url": "https://github.com/samcolby"
-    },
-    {
-      "name": "Vitaliy Zhukov",
-      "url": "https://github.com/Vitall"
-    },
-    {
-      "name": "Christopher Burns",
-      "url": "https://github.com/Burnsy"
-    }
-  ],
-  "homepage": "https://github.com/BugiDev/react-native-calendar-strip#readme"
+  }
 }
