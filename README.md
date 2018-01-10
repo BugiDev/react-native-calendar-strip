@@ -22,7 +22,7 @@
   <a href="http://makeapullrequest.com">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="make a pull request" />
   </a>
-  <img src="https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square" alt="All Contributors" />
+  <img src="https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square" alt="All Contributors" />
 </div>
 <br>
 <div align="center">
