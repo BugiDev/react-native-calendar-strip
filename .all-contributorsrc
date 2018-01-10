@@ -1,0 +1,90 @@
+{
+  "projectName": "react-native-calendar-strip",
+  "projectOwner": "bugidev",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "BugiDev",
+      "name": "Bogdan Begovic",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/4005545?v=4",
+      "profile": "https://github.com/BugiDev",
+      "contributions": [
+        "question",
+        "code",
+        "design",
+        "doc",
+        "example",
+        "tool"
+      ]
+    },
+    {
+      "login": "peacechen",
+      "name": "Peace",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/6295083?v=4",
+      "profile": "https://github.com/peacechen",
+      "contributions": [
+        "question",
+        "bug",
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+     {
+      "login": "Burnsy",
+      "name": "Chris Burns",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/15834048?v=4",
+      "profile": "http://www.usebillo.com",
+      "contributions": [
+        "question",
+        "bug",
+        "code",
+        "doc",
+        "tool",
+        "example",
+        "review"
+      ]
+    },
+    {
+      "login": "samcolby",
+      "name": "samcolby",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/26348965?v=4",
+      "profile": "https://github.com/samcolby",
+      "contributions": [
+        "code",
+        "test"
+      ]
+    },
+    {
+      "login": "1ne8ight7even",
+      "name": "Florian Biebel",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/239360?v=4",
+      "profile": "https://chromosom23.de",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Vitall",
+      "name": "Vitaliy Zhukov",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/986135?v=4",
+      "profile": "http://intspirit.com/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "lbrdar",
+      "name": "lbrdar",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/15323137?v=4",
+      "profile": "https://github.com/lbrdar",
+      "contributions": [
+        "code"
+      ]
+    }
+  ]
+}

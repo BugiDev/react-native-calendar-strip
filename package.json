@@ -28,9 +28,12 @@
     "format": "prettier-standard \"{src,__tests__}/**/*.js\"",
     "test": "npm run format && jest",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "contributors:add": "./node_modules/.bin/all-contributors add",
+    "contributors:generate": "./node_modules/.bin/all-contributors generate"
   },
   "dependencies": {
+    "all-contributors-cli": "^4.10.1",
     "moment": "^2.17.1",
     "prop-types": "^15.6.0"
   },
