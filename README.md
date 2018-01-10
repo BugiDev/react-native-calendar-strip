@@ -49,8 +49,7 @@
   <li><a href="#props">Props</a></li>
   <li><a href="#animations">Animations</a></li>
   <li><a href="#localization">Localization</a></li>
-  <li><a href="#todo">ToDo</a></li>
-  <li><a href="#contribute">Contribute</a></li>
+  <li><a href="#contributors">Contribute</a></li>
   <li><a href="#license">License</a></li>
 </details>
 
