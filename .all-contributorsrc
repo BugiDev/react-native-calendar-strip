@@ -34,7 +34,7 @@
         "review"
       ]
     },
-     {
+    {
       "login": "Burnsy",
       "name": "Chris Burns",
       "avatar_url": "https://avatars1.githubusercontent.com/u/15834048?v=4",
@@ -82,6 +82,15 @@
       "name": "lbrdar",
       "avatar_url": "https://avatars1.githubusercontent.com/u/15323137?v=4",
       "profile": "https://github.com/lbrdar",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "gHashTag",
+      "name": "Dimka Vasilyev",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/6774813?v=4",
+      "profile": "https://github.com/gHashTag",
       "contributions": [
         "code"
       ]
