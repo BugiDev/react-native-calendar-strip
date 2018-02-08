@@ -165,8 +165,7 @@ export default class CalendarStrip extends Component {
       !this.compareDates(nextProps.startingDate, this.props.startingDate)
     ) {
       updateState = true;
-      startingDate = this.setLocale(moment(nextProps.startingDate));
-      startingDate = { startingDate: this.updateWeekStart(startingDate) };
+      startingDate = { startingDate: this.setLocale(moment(nextProps.startingDate))};
       weekData = this.updateWeekData(
         startingDate.startingDate,
         this.state.selectedDate,
