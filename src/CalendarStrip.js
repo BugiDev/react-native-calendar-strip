@@ -4,7 +4,7 @@
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { View, Animated, Easing } from "react-native";
+import { View, Animated, Easing, I18nManager } from "react-native";
 
 import moment from "moment";
 
@@ -79,8 +79,8 @@ export default class CalendarStrip extends Component {
     showMonth: true,
     showDate: true,
     updateWeek: true,
-    iconLeft: require("./img/left-arrow-black.png"),
-    iconRight: require("./img/right-arrow-black.png"),
+    iconLeft: I18nManager.isRTL? require("./img/right-arrow-black.png") : require("./img/left-arrow-black.png"),
+    iconRight: I18nManager.isRTL? require("./img/left-arrow-black.png") : require("./img/right-arrow-black.png"),
     calendarHeaderFormat: "MMMM YYYY",
     datesWhitelist: undefined,
     datesBlacklist: undefined,
