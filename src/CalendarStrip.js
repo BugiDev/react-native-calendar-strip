@@ -4,7 +4,7 @@
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { View, Animated, Easing, I18nManager } from "react-native";
+import { View, Animated, Easing, I18nManager, ScrollView } from "react-native";
 
 import moment from "moment";
 
@@ -131,6 +131,8 @@ export default class CalendarStrip extends Component {
     this.isDateSelected = this.isDateSelected.bind(this);
     this.animate = this.animate.bind(this);
     this.resetAnimation = this.resetAnimation.bind(this);
+    this.onScroll = this.onScroll.bind(this);
+    
   }
 
   componentDidMount() {
@@ -224,6 +226,20 @@ export default class CalendarStrip extends Component {
       this.props.leftSelector !== nextProps.leftSelector ||
       this.props.rightSelector !== nextProps.rightSelector
     );
+  }
+
+  onScroll(event) {
+    var currentOffset = event.nativeEvent.contentOffset.x;
+    const dif = currentOffset - (this.offset || 0);
+    const enabledMin = this.isEnabled(this.props.minDate, this.state.datesForWeek[0], this.state.datesForWeek[this.state.datesForWeek.length - 1]);
+    const enabledMax = this.isEnabled(this.props.maxDate, this.state.datesForWeek[0], this.state.datesForWeek[this.state.datesForWeek.length - 1]);
+    
+    if (Math.abs(dif) > 3.5 && dif < 0 && currentOffset === dif && enabledMin) {
+      this.getPreviousWeek();
+    } else if (Math.abs(dif) > 3.5 && dif > 0 && currentOffset === dif && enabledMax){
+      this.getNextWeek();
+    }
+    this.offset = currentOffset;
   }
 
   // Check whether two datetimes are of the same value.  Supports Moment date,
@@ -518,6 +534,18 @@ export default class CalendarStrip extends Component {
     });
   }
 
+  isEnabled(controlDate, weekStartDate, weekEndDate) {
+    if (controlDate) {
+      return !moment(controlDate).isBetween(
+        weekStartDate,
+        weekEndDate,
+        "day",
+        "[]"
+      );
+    }
+    return true;
+  }
+
   render() {
     let datesForWeek = this.state.datesForWeek;
     let datesRender = [];
@@ -603,8 +631,14 @@ export default class CalendarStrip extends Component {
               size={this.state.selectorSize}
             />
 
-            {this.props.showDate ? (
-              <View style={styles.calendarDates}>{datesRender}</View>
+           {this.props.showDate ? (
+              <ScrollView
+                horizontal= {true} 
+                style={styles.calendarDates} 
+                onScroll={this.onScroll} 
+                contentContainerStyle={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
+                  {datesRender}
+              </ScrollView>
             ) : (
               calendarHeader
             )}
