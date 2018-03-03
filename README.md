@@ -429,6 +429,10 @@ Contributions are welcome!
 
 Or open up [an issue](https://github.com/BugiDev/react-native-calendar-strip/issues).
 
+## Discussion and Collaboration
+
+In addition to the [Github Issues](https://github.com/BugiDev/react-native-calendar-strip/issues) page, there is a [Discord group](https://discord.gg/RvFM97v) for React Native with a channel specifically for [react-native-calendar-strip](https://discordapp.com/channels/413352084981678082/413360340579909633).  Thanks @MichelDiz for setting that up.
+
 ## License
 
 Licensed under the MIT License.
