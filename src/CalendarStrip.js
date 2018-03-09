@@ -71,7 +71,8 @@ export default class CalendarStrip extends Component {
     disabledDateOpacity: PropTypes.number,
     styleWeekend: PropTypes.bool,
 
-    locale: PropTypes.object
+    locale: PropTypes.object,
+    shouldAllowFontScaling: PropTypes.bool
   };
 
   static defaultProps = {
@@ -545,6 +546,7 @@ export default class CalendarStrip extends Component {
           daySelectionAnimation={this.props.daySelectionAnimation}
           customStyle={this.state.datesCustomStylesForWeek[i]}
           size={this.state.dayComponentWidth}
+          allowDayTextScaling={this.props.shouldAllowFontScaling}
         />
       );
       datesRender.push(
@@ -569,6 +571,7 @@ export default class CalendarStrip extends Component {
         calendarHeaderStyle={this.props.calendarHeaderStyle}
         datesForWeek={this.state.datesForWeek}
         fontSize={this.state.monthFontSize}
+        allowHeaderTextScaling={this.props.shouldAllowFontScaling}
       />
     );
 
