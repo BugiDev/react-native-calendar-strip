@@ -90,7 +90,8 @@ export default class CalendarStrip extends Component {
     responsiveSizingOffset: 0,
     innerStyle: { flex: 1 },
     maxDayComponentSize: 80,
-    minDayComponentSize: 10
+    minDayComponentSize: 10,
+    shouldAllowFontScaling: false
   };
 
   constructor(props) {

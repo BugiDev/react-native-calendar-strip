@@ -72,7 +72,7 @@ class CalendarHeader extends Component {
           { fontSize: this.props.fontSize },
           this.props.calendarHeaderStyle
         ]}
-        allowFontScaling={(this.props.allowHeaderTextScaling !== undefined ? this.props.allowHeaderTextScaling : false)}
+        allowFontScaling={this.props.allowHeaderTextScaling}
       >
         {headerText}
       </Text>
