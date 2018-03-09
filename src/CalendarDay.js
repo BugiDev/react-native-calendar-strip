@@ -32,7 +32,8 @@ export default class CalendarDay extends Component {
     styleWeekend: PropTypes.bool,
     customStyle: PropTypes.object,
 
-    daySelectionAnimation: PropTypes.object
+    daySelectionAnimation: PropTypes.object,
+    allowDayTextScaling: PropTypes.bool
   };
 
   // Reference: https://medium.com/@Jpoliachik/react-native-s-layoutanimation-is-awesome-4a4d317afd3e
@@ -208,6 +209,7 @@ export default class CalendarDay extends Component {
           {this.props.showDayName && (
             <Text
               style={[dateNameStyle, { fontSize: this.state.dateNameFontSize }]}
+              allowFontScaling={this.props.allowDayTextScaling}
             >
               {this.props.date.format("ddd").toUpperCase()}
             </Text>
@@ -218,6 +220,7 @@ export default class CalendarDay extends Component {
                 dateNumberStyle,
                 { fontSize: this.state.dateNumberFontSize }
               ]}
+              allowFontScaling={this.props.allowDayTextScaling}
             >
               {this.props.date.date()}
             </Text>

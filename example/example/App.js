@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import CalendarStrip from 'react-native-calendar-strip';
+import CalendarStrip from "react-native-calendar-strip";
 
 export default class App extends Component<{}> {
   render() {
