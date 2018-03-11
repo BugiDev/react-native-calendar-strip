@@ -219,7 +219,7 @@ Methods may be accessed through the instantiated component's [ref](https://react
 | **`disabledDateNumberStyle`**  | Style for disabled number of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                                                                                                                                                                     | Any    |
 | **`disabledDateOpacity`**      | Opacity of disabled dates strip.                                                                                                                                                                                                                                                         | Number | **`0.3`**  |
 | **`customDatesStyles`**        | Custom per-date styling, overriding the styles above. Check Table <a href="#customdatesstyles"> Below </a>                                                                                                                                                                               | Array  |
-| **`shouldAllowFontScaling`**   | Override the underlying Text element scaling to respect font settings                                                                                                                                                                            | Bool   | **`False`**|
+| **`shouldAllowFontScaling`**   | Override the underlying Text element scaling to respect font settings                                                                                                                                                                            | Bool   | **`True`**|
 
 #### Responsive Sizing
 
