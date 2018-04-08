@@ -4,11 +4,12 @@
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import {polyfill} from 'react-lifecycles-compat';
 
 import { Text, View, LayoutAnimation, TouchableOpacity } from "react-native";
 import styles from "./Calendar.style.js";
 
-export default class CalendarDay extends Component {
+class CalendarDay extends Component {
   static propTypes = {
     date: PropTypes.object.isRequired,
     onDateSelected: PropTypes.func.isRequired,
@@ -63,11 +64,11 @@ export default class CalendarDay extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps, prevState) {
     newState = {};
     let doStateUpdate = false;
 
-    if (this.state.selected !== nextProps.selected) {
+    if (this.props.selected !== prevProps.selected) {
       if (this.props.daySelectionAnimation.type !== "") {
         let configurableAnimation = {
           duration: this.props.daySelectionAnimation.duration || 300,
@@ -96,12 +97,12 @@ export default class CalendarDay extends Component {
         };
         LayoutAnimation.configureNext(configurableAnimation);
       }
-      newState.selected = nextProps.selected;
+      newState.selected = this.props.selected;
       doStateUpdate = true;
     }
 
-    if (nextProps.size !== this.props.size) {
-      newState = { ...newState, ...this.calcSizes(nextProps) };
+    if (prevProps.size !== this.props.size) {
+      newState = { ...newState, ...this.calcSizes(this.props) };
       doStateUpdate = true;
     }
 
@@ -230,3 +231,7 @@ export default class CalendarDay extends Component {
     );
   }
 }
+
+polyfill(CalendarDay);
+
+export default CalendarDay;
