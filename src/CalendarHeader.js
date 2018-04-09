@@ -64,7 +64,6 @@ class CalendarHeader extends Component {
       this.props.datesForWeek,
       this.props.calendarHeaderFormat
     );
-    console.log('this.props', this.props);
     return (
       <Text
         style={[
