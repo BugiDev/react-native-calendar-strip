@@ -4,7 +4,7 @@
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {polyfill} from 'react-lifecycles-compat';
+import { polyfill } from "react-lifecycles-compat";
 import { View, Animated, Easing } from "react-native";
 
 import moment from "moment";
@@ -173,7 +173,9 @@ class CalendarStrip extends Component {
       !this.compareDates(prevProps.startingDate, this.props.startingDate)
     ) {
       updateState = true;
-      startingDate = { startingDate: this.setLocale(moment(this.props.startingDate))};
+      startingDate = {
+        startingDate: this.setLocale(moment(this.props.startingDate))
+      };
       weekData = this.updateWeekData(
         startingDate.startingDate,
         this.state.selectedDate,

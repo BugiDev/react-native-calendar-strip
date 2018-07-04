@@ -4,7 +4,7 @@
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {polyfill} from 'react-lifecycles-compat';
+import { polyfill } from "react-lifecycles-compat";
 
 import { Text, View, LayoutAnimation, TouchableOpacity } from "react-native";
 import styles from "./Calendar.style.js";
@@ -23,15 +23,19 @@ class CalendarDay extends Component {
 
     dateNameStyle: PropTypes.any,
     dateNumberStyle: PropTypes.any,
+    dateContainerStyle: PropTypes.any,
     weekendDateNameStyle: PropTypes.any,
     weekendDateNumberStyle: PropTypes.any,
     highlightDateNameStyle: PropTypes.any,
     highlightDateNumberStyle: PropTypes.any,
+    highlightDateContainerStyle: PropTypes.any,
     disabledDateNameStyle: PropTypes.any,
     disabledDateNumberStyle: PropTypes.any,
+    disabledDateContainerStyle: PropTypes.any,
     disabledDateOpacity: PropTypes.number,
     styleWeekend: PropTypes.bool,
     customStyle: PropTypes.object,
+    size: PropTypes.any,
 
     daySelectionAnimation: PropTypes.object,
     allowDayTextScaling: PropTypes.bool
@@ -65,7 +69,7 @@ class CalendarDay extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    newState = {};
+    let newState = {};
     let doStateUpdate = false;
 
     if (this.props.selected !== prevProps.selected) {
@@ -123,11 +127,21 @@ class CalendarDay extends Component {
 
   render() {
     // Defaults for disabled state
-    let dateNameStyle = [styles.dateName, !this.props.enabled && this.props.disabledDateNameStyle];
-    let dateNumberStyle = [styles.dateNumber, !this.props.enabled && this.props.disabledDateNumberStyle];
+    let dateNameStyle = [
+      styles.dateName,
+      !this.props.enabled && this.props.disabledDateNameStyle
+    ];
+    let dateNumberStyle = [
+      styles.dateNumber,
+      !this.props.enabled && this.props.disabledDateNumberStyle
+    ];
     let dateViewStyle = this.props.enabled
       ? [{ backgroundColor: "transparent" }]
-      : [{ opacity: this.props.disabledDateOpacity }];
+      : [
+          this.props.disabledDateContainerStyle.push({
+            opacity: this.props.disabledDateOpacity
+          })
+        ];
 
     let customStyle = this.props.customStyle;
     if (customStyle) {
@@ -142,7 +156,9 @@ class CalendarDay extends Component {
       //If it is border, the user has to input color for border animation
       switch (this.props.daySelectionAnimation.type) {
         case "background":
-          dateViewStyle.push({ backgroundColor: this.props.daySelectionAnimation.highlightColor });
+          dateViewStyle.push({
+            backgroundColor: this.props.daySelectionAnimation.highlightColor
+          });
           break;
         case "border":
           dateViewStyle.push({
@@ -157,6 +173,7 @@ class CalendarDay extends Component {
 
       dateNameStyle = [styles.dateName, this.props.dateNameStyle];
       dateNumberStyle = [styles.dateNumber, this.props.dateNumberStyle];
+      dateViewStyle = [styles.dateNumber, this.props.dateContainerStyle];
       if (
         this.props.styleWeekend &&
         (this.props.date.isoWeekday() === 6 ||
@@ -176,6 +193,10 @@ class CalendarDay extends Component {
         dateNumberStyle = [
           styles.dateNumber,
           this.props.highlightDateNumberStyle
+        ];
+        dateViewStyle = [
+          styles.dateViewStyle,
+          this.props.highlightDateContainerStyle
         ];
       }
     }
