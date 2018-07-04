@@ -55,6 +55,7 @@ class CalendarDay extends Component {
       animProperty: LayoutAnimation.Properties.opacity,
       animSpringDamping: undefined // Only applicable for LayoutAnimation.Types.spring,
     },
+    disabledDateContainerStyle: [],
     styleWeekend: true,
     showDayName: true,
     showDayNumber: true
@@ -137,7 +138,7 @@ class CalendarDay extends Component {
       !this.props.enabled && this.props.disabledDateNumberStyle
     ];
     let dateViewStyle = this.props.enabled
-      ? [{ backgroundColor: "transparent" }]
+      ? [{ backgroundColor: "transparent" }, this.props.dateContainerStyle]
       : [
           this.props.disabledDateContainerStyle.push({
             opacity: this.props.disabledDateOpacity
@@ -174,7 +175,6 @@ class CalendarDay extends Component {
 
       dateNameStyle = [styles.dateName, this.props.dateNameStyle];
       dateNumberStyle = [styles.dateNumber, this.props.dateNumberStyle];
-      dateViewStyle = [styles.dateNumber, this.props.dateContainerStyle];
       if (
         this.props.styleWeekend &&
         (this.props.date.isoWeekday() === 6 ||
@@ -188,10 +188,7 @@ class CalendarDay extends Component {
           styles.weekendDateNumber,
           this.props.weekendDateNumberStyle
         ];
-        dateViewStyle = [
-          styles.weekendDateNumber,
-          this.props.weekendDateContainerStyle
-        ];
+        dateViewStyle.push(this.props.weekendDateContainerStyle);
       }
       if (this.state.selected) {
         dateNameStyle = [styles.dateName, this.props.highlightDateNameStyle];
@@ -199,10 +196,7 @@ class CalendarDay extends Component {
           styles.dateNumber,
           this.props.highlightDateNumberStyle
         ];
-        dateViewStyle = [
-          styles.dateViewStyle,
-          this.props.highlightDateContainerStyle
-        ];
+        dateViewStyle.push(this.props.highlightDateContainerStyle);
       }
     }
 
