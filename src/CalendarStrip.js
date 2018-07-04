@@ -63,12 +63,15 @@ class CalendarStrip extends Component {
 
     dateNameStyle: PropTypes.any,
     dateNumberStyle: PropTypes.any,
+    dateContainerStyle: PropTypes.any,
     weekendDateNameStyle: PropTypes.any,
     weekendDateNumberStyle: PropTypes.any,
     highlightDateNameStyle: PropTypes.any,
     highlightDateNumberStyle: PropTypes.any,
+    highlightDateContainerStyle: PropTypes.any,
     disabledDateNameStyle: PropTypes.any,
     disabledDateNumberStyle: PropTypes.any,
+    disabledDateContainerStyle: PropTypes.any,
     disabledDateOpacity: PropTypes.number,
     styleWeekend: PropTypes.bool,
 
@@ -535,12 +538,15 @@ class CalendarStrip extends Component {
           calendarColor={this.props.calendarColor}
           dateNameStyle={this.props.dateNameStyle}
           dateNumberStyle={this.props.dateNumberStyle}
+          dateContainerStyle={this.props.dateContainerStyle}
           weekendDateNameStyle={this.props.weekendDateNameStyle}
           weekendDateNumberStyle={this.props.weekendDateNumberStyle}
           highlightDateNameStyle={this.props.highlightDateNameStyle}
           highlightDateNumberStyle={this.props.highlightDateNumberStyle}
+          highlightDateContainerStyle={this.props.highlightDateContainerStyle}
           disabledDateNameStyle={this.props.disabledDateNameStyle}
           disabledDateNumberStyle={this.props.disabledDateNumberStyle}
+          disabledDateContainerStyle={this.props.disabledDateContainerStyle}
           disabledDateOpacity={this.props.disabledDateOpacity}
           styleWeekend={this.props.styleWeekend}
           daySelectionAnimation={this.props.daySelectionAnimation}
