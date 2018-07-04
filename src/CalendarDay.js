@@ -26,6 +26,7 @@ class CalendarDay extends Component {
     dateContainerStyle: PropTypes.any,
     weekendDateNameStyle: PropTypes.any,
     weekendDateNumberStyle: PropTypes.any,
+    weekendDateContainerStyle: PropTypes.any,
     highlightDateNameStyle: PropTypes.any,
     highlightDateNumberStyle: PropTypes.any,
     highlightDateContainerStyle: PropTypes.any,
@@ -186,6 +187,10 @@ class CalendarDay extends Component {
         dateNumberStyle = [
           styles.weekendDateNumber,
           this.props.weekendDateNumberStyle
+        ];
+        dateViewStyle = [
+          styles.weekendDateNumber,
+          this.props.weekendDateContainerStyle
         ];
       }
       if (this.state.selected) {

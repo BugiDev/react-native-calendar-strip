@@ -66,6 +66,7 @@ class CalendarStrip extends Component {
     dateContainerStyle: PropTypes.any,
     weekendDateNameStyle: PropTypes.any,
     weekendDateNumberStyle: PropTypes.any,
+    weekendDateContainerStyle: PropTypes.any,
     highlightDateNameStyle: PropTypes.any,
     highlightDateNumberStyle: PropTypes.any,
     highlightDateContainerStyle: PropTypes.any,
@@ -541,6 +542,7 @@ class CalendarStrip extends Component {
           dateContainerStyle={this.props.dateContainerStyle}
           weekendDateNameStyle={this.props.weekendDateNameStyle}
           weekendDateNumberStyle={this.props.weekendDateNumberStyle}
+          weekendDateContainerStyle={this.props.weekendDateContainerStyle}
           highlightDateNameStyle={this.props.highlightDateNameStyle}
           highlightDateNumberStyle={this.props.highlightDateNumberStyle}
           highlightDateContainerStyle={this.props.highlightDateContainerStyle}
