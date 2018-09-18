@@ -43,13 +43,14 @@ class CalendarHeader extends Component {
         }
       }
     }
-
+    
     if (firstDay.month() === lastDay.month()) {
-      return firstDay.format(calendarHeaderFormat);
+      return lastDay.format(calendarHeaderFormat);
     } else if (firstDay.year() !== lastDay.year()) {
-      return `${firstDay.format(calendarHeaderFormat)} / ${lastDay.format(
-        calendarHeaderFormat
-      )}`;
+//       return `${firstDay.format(calendarHeaderFormat)} / ${lastDay.format(
+//         calendarHeaderFormat
+//       )}`;
+      return lastDay.format(calendarHeaderFormat);
     }
 
     return `${
