@@ -212,8 +212,8 @@ class CalendarDay extends Component {
           {this.props.showDayNumber && (
             <Text
               style={[
-                !this.props.keepDayNumberFontSize && { fontSize: this.state.dateNumberFontSize },
-                dateNumberStyle
+                dateNumberStyle,
+                !this.props.keepDayNumberFontSize && { fontSize: this.state.dateNumberFontSize }
               ]}
               allowFontScaling={this.props.allowDayTextScaling}
             >
