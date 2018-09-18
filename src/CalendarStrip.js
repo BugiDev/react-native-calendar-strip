@@ -74,7 +74,9 @@ class CalendarStrip extends Component {
     styleWeekend: PropTypes.bool,
 
     locale: PropTypes.object,
-    shouldAllowFontScaling: PropTypes.bool
+    shouldAllowFontScaling: PropTypes.bool,
+    keepDayNameFontSize: PropTypes.bool,
+    keepDayNumberFontSize: PropTypes.bool
   };
 
   static defaultProps = {
@@ -93,7 +95,9 @@ class CalendarStrip extends Component {
     innerStyle: { flex: 1 },
     maxDayComponentSize: 80,
     minDayComponentSize: 10,
-    shouldAllowFontScaling: true
+    shouldAllowFontScaling: true,
+    keepDayNameFontSize: false,
+    keepDayNumberFontSize: false
   };
 
   constructor(props) {
@@ -546,7 +550,7 @@ class CalendarStrip extends Component {
           customStyle={this.state.datesCustomStylesForWeek[i]}
           size={this.state.dayComponentWidth}
           allowDayTextScaling={this.props.shouldAllowFontScaling}
-          keepDayNameFontSize={this.props.keepDayTextFontSize}
+          keepDayNameFontSize={this.props.keepDayNameFontSize}
           keepDayNumberFontSize={this.props.keepDayNumberFontSize} 
         />
       );
