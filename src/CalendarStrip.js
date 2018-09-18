@@ -545,6 +545,8 @@ class CalendarStrip extends Component {
           customStyle={this.state.datesCustomStylesForWeek[i]}
           size={this.state.dayComponentWidth}
           allowDayTextScaling={this.props.shouldAllowFontScaling}
+          keepDayNameFontSize={this.props.keepDayTextFontSize}
+          keepDayNumberFontSize={this.props.keepDayNumberFontSize} 
         />
       );
       datesRender.push(
