@@ -117,7 +117,7 @@ class CalendarDay extends Component {
       containerPadding: Math.round(props.size / 5),
       containerBorderRadius: Math.round(props.size / 2),
       dateNameFontSize: Math.round(props.size / 5),
-      dateNumberFontSize: Math.round(props.size / 2.9)
+      dateNumberFontSize: Math.round(props.size / 2.3)
     };
   }
 
