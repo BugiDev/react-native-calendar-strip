@@ -55,6 +55,7 @@ class CalendarStrip extends Component {
 
     calendarHeaderStyle: PropTypes.any,
     calendarHeaderFormat: PropTypes.string,
+    calendarHeaderSpanWeekFormat: PropTypes.string,
 
     calendarAnimation: PropTypes.object,
     daySelectionAnimation: PropTypes.object,
@@ -572,6 +573,7 @@ class CalendarStrip extends Component {
     let calendarHeader = this.props.showMonth && (
       <CalendarHeader
         calendarHeaderFormat={this.props.calendarHeaderFormat}
+        calendarHeaderSpanWeekFormat={this.props.calendarHeaderSpanWeekFormat}
         calendarHeaderStyle={this.props.calendarHeaderStyle}
         datesForWeek={this.state.datesForWeek}
         fontSize={this.state.monthFontSize}

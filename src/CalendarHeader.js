@@ -7,6 +7,7 @@ import styles from "./Calendar.style.js";
 class CalendarHeader extends Component {
   static propTypes = {
     calendarHeaderFormat: PropTypes.string.isRequired,
+    calendarHeaderSpanWeekFormat: PropTypes.string,
     calendarHeaderStyle: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.number
@@ -21,7 +22,7 @@ class CalendarHeader extends Component {
 
   //Function that formats the calendar header
   //It also formats the month section if the week is in between months
-  formatCalendarHeader(datesForWeek, calendarHeaderFormat) {
+  formatCalendarHeader(datesForWeek, calendarHeaderFormat, calendarHeaderSpanWeekFormat) {
     if (!datesForWeek || datesForWeek.length === 0) {
       return "";
     }
@@ -44,27 +45,32 @@ class CalendarHeader extends Component {
       }
     }
 
-    return lastDay.format(calendarHeaderFormat);
-    
-    // if (firstDay.month() === lastDay.month()) {
-    //   return firstDay.format(calendarHeaderFormat);
-    // } else if (firstDay.year() !== lastDay.year()) {
-    //   return `${firstDay.format(calendarHeaderFormat)} / ${lastDay.format(
-    //     calendarHeaderFormat
-    //   )}`;
-    // }
+    if (calendarHeaderSpanWeekFormat === "last") {
+      return lastDay.format(calendarHeaderFormat);
+    } else if (calendarHeaderFormat === "first") {
+      return firstDay.format(calendarHeaderFormat);
+    }
+   
+    if (firstDay.month() === lastDay.month()) {
+      return firstDay.format(calendarHeaderFormat);
+    } else if (firstDay.year() !== lastDay.year()) {
+      return `${firstDay.format(calendarHeaderFormat)} / ${lastDay.format(
+        calendarHeaderFormat
+      )}`;
+    }
 
-    // return `${
-    //   monthFormatting.length > 1 ? firstDay.format(monthFormatting) : ""
-    // } ${monthFormatting.length > 1 ? "/" : ""} ${lastDay.format(
-    //   calendarHeaderFormat
-    // )}`;
+    return `${
+      monthFormatting.length > 1 ? firstDay.format(monthFormatting) : ""
+    } ${monthFormatting.length > 1 ? "/" : ""} ${lastDay.format(
+      calendarHeaderFormat
+    )}`;
   }
 
   render() {
     const headerText = this.formatCalendarHeader(
       this.props.datesForWeek,
-      this.props.calendarHeaderFormat
+      this.props.calendarHeaderFormat,
+      this.props.calendarHeaderSpanWeekFormat
     );
     return (
       <Text
