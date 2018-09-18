@@ -43,21 +43,22 @@ class CalendarHeader extends Component {
         }
       }
     }
-    
-    if (firstDay.month() === lastDay.month()) {
-      return lastDay.format(calendarHeaderFormat);
-    } else if (firstDay.year() !== lastDay.year()) {
-//       return `${firstDay.format(calendarHeaderFormat)} / ${lastDay.format(
-//         calendarHeaderFormat
-//       )}`;
-      return lastDay.format(calendarHeaderFormat);
-    }
 
-    return `${
-      monthFormatting.length > 1 ? firstDay.format(monthFormatting) : ""
-    } ${monthFormatting.length > 1 ? "/" : ""} ${lastDay.format(
-      calendarHeaderFormat
-    )}`;
+    return lastDay.format(calendarHeaderFormat);
+    
+    // if (firstDay.month() === lastDay.month()) {
+    //   return firstDay.format(calendarHeaderFormat);
+    // } else if (firstDay.year() !== lastDay.year()) {
+    //   return `${firstDay.format(calendarHeaderFormat)} / ${lastDay.format(
+    //     calendarHeaderFormat
+    //   )}`;
+    // }
+
+    // return `${
+    //   monthFormatting.length > 1 ? firstDay.format(monthFormatting) : ""
+    // } ${monthFormatting.length > 1 ? "/" : ""} ${lastDay.format(
+    //   calendarHeaderFormat
+    // )}`;
   }
 
   render() {
