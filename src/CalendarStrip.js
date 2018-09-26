@@ -351,12 +351,12 @@ class CalendarStrip extends Component {
   }
 
   //Handling press on date/selecting date
-  onDateSelected(selectedDate) {
+  onDateSelected(selectedDate, args=null) {
     this.setState({
       selectedDate,
       ...this.updateWeekData(this.state.startingDate, selectedDate)
     });
-    this.props.onDateSelected && this.props.onDateSelected(selectedDate);
+    this.props.onDateSelected && this.props.onDateSelected(selectedDate, args);
   }
 
   // Check whether date is allowed
@@ -412,9 +412,9 @@ class CalendarStrip extends Component {
   }
 
   // Set the selected date.  To clear the currently selected date, pass in 0.
-  setSelectedDate(date) {
+  setSelectedDate(date, args=null) {
     let mDate = moment(date);
-    this.onDateSelected(mDate);
+    this.onDateSelected(mDate, args);
     // Update week view only if date is not cleared (0).
     if (date !== 0) {
       this.updateWeekStart(mDate);
