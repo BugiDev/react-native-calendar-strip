@@ -58,6 +58,7 @@ class CalendarStrip extends Component {
     calendarHeaderSpanWeekFormat: PropTypes.string,
 
     calendarAnimation: PropTypes.object,
+    calendarAnimationWeekChangeOnly: PropTypes.bool,
     daySelectionAnimation: PropTypes.object,
 
     customDatesStyles: PropTypes.array,
@@ -97,7 +98,8 @@ class CalendarStrip extends Component {
     minDayComponentSize: 10,
     shouldAllowFontScaling: true,
     keepDayNameFontSize: false,
-    keepDayNumberFontSize: false
+    keepDayNumberFontSize: false,
+    calendarAnimationWeekChangeOnly: false
   };
 
   constructor(props) {
@@ -146,11 +148,22 @@ class CalendarStrip extends Component {
 
   //Receiving props and set date states, minimizing state updates.
   componentDidUpdate(prevProps, prevState) {
+
     //Only animate CalendarDays if the selectedDate is the same
     //Prevents animation on pressing on a date
-    if (prevState.selectedDate === this.state.selectedDate) {
-      this.resetAnimation();
-      this.animate();
+    const { calendarAnimationWeekChangeOnly } = this.props;
+
+    if (calendarAnimationWeekChangeOnly) {
+      if (prevState.datesForWeek[0].startOf("isoweek").format("YYYY-MM-DD") !== this.state.datesForWeek[0].startOf("isoweek").format("YYYY-MM-DD")) {
+        this.resetAnimation();
+        this.animate();
+      }
+    }
+    else {
+      if (prevState.selectedDate === this.state.selectedDate) {
+        this.resetAnimation();
+        this.animate();
+      }
     }
 
     let selectedDate = {},
