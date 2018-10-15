@@ -131,11 +131,11 @@ class CalendarDay extends Component {
     // Defaults for disabled state
     let dateNameStyle = [
       styles.dateName,
-      !this.props.enabled && this.props.disabledDateNameStyle
+      this.props.enabled ? this.props.dateNameStyle : this.props.disabledDateNameStyle
     ];
     let dateNumberStyle = [
       styles.dateNumber,
-      !this.props.enabled && this.props.disabledDateNumberStyle
+      this.props.enabled ? this.props.dateNumberStyle : this.props.disabledDateNumberStyle
     ];
     let dateViewStyle = this.props.enabled
       ? [{ backgroundColor: "transparent" }, this.props.dateContainerStyle]
@@ -230,8 +230,8 @@ class CalendarDay extends Component {
           {this.props.showDayNumber && (
             <Text
               style={[
-                dateNumberStyle,
-                { fontSize: this.state.dateNumberFontSize }
+                  { fontSize: this.state.dateNumberFontSize },
+                  dateNumberStyle
               ]}
               allowFontScaling={this.props.allowDayTextScaling}
             >
