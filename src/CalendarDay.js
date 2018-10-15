@@ -123,8 +123,8 @@ class CalendarDay extends Component {
 
   render() {
     // Defaults for disabled state
-    let dateNameStyle = [styles.dateName, !this.props.enabled && this.props.disabledDateNameStyle];
-    let dateNumberStyle = [styles.dateNumber, !this.props.enabled && this.props.disabledDateNumberStyle];
+    let dateNameStyle = [styles.dateName, this.props.enabled ? this.props.dateNameStyle : this.props.disabledDateNameStyle];
+    let dateNumberStyle = [styles.dateNumber, this.props.enabled ? this.props.dateNumberStyle : this.props.disabledDateNumberStyle];
     let dateViewStyle = this.props.enabled
       ? [{ backgroundColor: "transparent" }]
       : [{ opacity: this.props.disabledDateOpacity }];
