@@ -4,7 +4,7 @@
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {polyfill} from 'react-lifecycles-compat';
+import { polyfill } from 'react-lifecycles-compat';
 
 import { Text, View, LayoutAnimation, TouchableOpacity } from "react-native";
 import styles from "./Calendar.style.js";
@@ -34,7 +34,9 @@ class CalendarDay extends Component {
     customStyle: PropTypes.object,
 
     daySelectionAnimation: PropTypes.object,
-    allowDayTextScaling: PropTypes.bool
+    allowDayTextScaling: PropTypes.bool,
+    keepDayNumberFontSize: PropTypes.bool,
+    keepDayNameFontSize: PropTypes.bool
   };
 
   // Reference: https://medium.com/@Jpoliachik/react-native-s-layoutanimation-is-awesome-4a4d317afd3e
@@ -201,7 +203,7 @@ class CalendarDay extends Component {
         >
           {this.props.showDayName && (
             <Text
-              style={[dateNameStyle, { fontSize: this.state.dateNameFontSize }]}
+              style={[dateNameStyle, !this.props.keepDayNameFontSize && { fontSize: this.state.dateNameFontSize }]}
               allowFontScaling={this.props.allowDayTextScaling}
             >
               {this.props.date.format("ddd").toUpperCase()}
@@ -210,8 +212,8 @@ class CalendarDay extends Component {
           {this.props.showDayNumber && (
             <Text
               style={[
-                  { fontSize: this.state.dateNumberFontSize },
-                  dateNumberStyle
+                dateNumberStyle,
+                !this.props.keepDayNumberFontSize && { fontSize: this.state.dateNumberFontSize }
               ]}
               allowFontScaling={this.props.allowDayTextScaling}
             >

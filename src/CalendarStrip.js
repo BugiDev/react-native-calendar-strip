@@ -4,7 +4,7 @@
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {polyfill} from 'react-lifecycles-compat';
+import { polyfill } from 'react-lifecycles-compat';
 import { View, Animated, Easing } from "react-native";
 
 import moment from "moment";
@@ -55,8 +55,10 @@ class CalendarStrip extends Component {
 
     calendarHeaderStyle: PropTypes.any,
     calendarHeaderFormat: PropTypes.string,
+    calendarHeaderSpanWeekFormat: PropTypes.string,
 
     calendarAnimation: PropTypes.object,
+    calendarAnimationWeekChangeOnly: PropTypes.bool,
     daySelectionAnimation: PropTypes.object,
 
     customDatesStyles: PropTypes.array,
@@ -73,7 +75,9 @@ class CalendarStrip extends Component {
     styleWeekend: PropTypes.bool,
 
     locale: PropTypes.object,
-    shouldAllowFontScaling: PropTypes.bool
+    shouldAllowFontScaling: PropTypes.bool,
+    keepDayNameFontSize: PropTypes.bool,
+    keepDayNumberFontSize: PropTypes.bool
   };
 
   static defaultProps = {
@@ -92,7 +96,10 @@ class CalendarStrip extends Component {
     innerStyle: { flex: 1 },
     maxDayComponentSize: 80,
     minDayComponentSize: 10,
-    shouldAllowFontScaling: true
+    shouldAllowFontScaling: true,
+    keepDayNameFontSize: false,
+    keepDayNumberFontSize: false,
+    calendarAnimationWeekChangeOnly: false
   };
 
   constructor(props) {
@@ -141,11 +148,22 @@ class CalendarStrip extends Component {
 
   //Receiving props and set date states, minimizing state updates.
   componentDidUpdate(prevProps, prevState) {
+
     //Only animate CalendarDays if the selectedDate is the same
     //Prevents animation on pressing on a date
-    if (prevState.selectedDate === this.state.selectedDate) {
-      this.resetAnimation();
-      this.animate();
+    const { calendarAnimationWeekChangeOnly } = this.props;
+
+    if (calendarAnimationWeekChangeOnly) {
+      if (prevState.datesForWeek[0].startOf("isoweek").format("YYYY-MM-DD") !== this.state.datesForWeek[0].startOf("isoweek").format("YYYY-MM-DD")) {
+        this.resetAnimation();
+        this.animate();
+      }
+    }
+    else {
+      if (prevState.selectedDate === this.state.selectedDate) {
+        this.resetAnimation();
+        this.animate();
+      }
     }
 
     let selectedDate = {},
@@ -173,7 +191,7 @@ class CalendarStrip extends Component {
       !this.compareDates(prevProps.startingDate, this.props.startingDate)
     ) {
       updateState = true;
-      startingDate = { startingDate: this.setLocale(moment(this.props.startingDate))};
+      startingDate = { startingDate: this.setLocale(moment(this.props.startingDate)) };
       weekData = this.updateWeekData(
         startingDate.startingDate,
         this.state.selectedDate,
@@ -186,9 +204,9 @@ class CalendarStrip extends Component {
       (JSON.stringify(prevProps.datesBlacklist) !==
         JSON.stringify(this.props.datesBlacklist) ||
         JSON.stringify(prevProps.datesWhitelist) !==
-          JSON.stringify(this.props.datesWhitelist) ||
+        JSON.stringify(this.props.datesWhitelist) ||
         JSON.stringify(prevProps.customDatesStyles) !==
-          JSON.stringify(this.props.customDatesStyles))
+        JSON.stringify(this.props.customDatesStyles))
     ) {
       updateState = true;
       // No need to update week start here
@@ -346,12 +364,12 @@ class CalendarStrip extends Component {
   }
 
   //Handling press on date/selecting date
-  onDateSelected(selectedDate) {
+  onDateSelected(selectedDate, args = null) {
     this.setState({
       selectedDate,
       ...this.updateWeekData(this.state.startingDate, selectedDate)
     });
-    this.props.onDateSelected && this.props.onDateSelected(selectedDate);
+    this.props.onDateSelected && this.props.onDateSelected(selectedDate, args);
   }
 
   // Check whether date is allowed
@@ -407,9 +425,9 @@ class CalendarStrip extends Component {
   }
 
   // Set the selected date.  To clear the currently selected date, pass in 0.
-  setSelectedDate(date) {
+  setSelectedDate(date, args = null) {
     let mDate = moment(date);
-    this.onDateSelected(mDate);
+    this.onDateSelected(mDate, args);
     // Update week view only if date is not cleared (0).
     if (date !== 0) {
       this.updateWeekStart(mDate);
@@ -545,6 +563,8 @@ class CalendarStrip extends Component {
           customStyle={this.state.datesCustomStylesForWeek[i]}
           size={this.state.dayComponentWidth}
           allowDayTextScaling={this.props.shouldAllowFontScaling}
+          keepDayNameFontSize={this.props.keepDayNameFontSize}
+          keepDayNumberFontSize={this.props.keepDayNumberFontSize}
         />
       );
       datesRender.push(
@@ -556,16 +576,17 @@ class CalendarStrip extends Component {
             {calendarDay}
           </Animated.View>
         ) : (
-          <View key={i} style={{ flex: 1 }}>
-            {calendarDay}
-          </View>
-        )
+            <View key={i} style={{ flex: 1 }}>
+              {calendarDay}
+            </View>
+          )
       );
     }
 
     let calendarHeader = this.props.showMonth && (
       <CalendarHeader
         calendarHeaderFormat={this.props.calendarHeaderFormat}
+        calendarHeaderSpanWeekFormat={this.props.calendarHeaderSpanWeekFormat}
         calendarHeaderStyle={this.props.calendarHeaderStyle}
         datesForWeek={this.state.datesForWeek}
         fontSize={this.state.monthFontSize}
@@ -607,8 +628,8 @@ class CalendarStrip extends Component {
             {this.props.showDate ? (
               <View style={styles.calendarDates}>{datesRender}</View>
             ) : (
-              calendarHeader
-            )}
+                calendarHeader
+              )}
 
             <WeekSelector
               controlDate={this.props.maxDate}
