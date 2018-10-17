@@ -75,7 +75,9 @@ import CalendarStrip from 'react-native-calendar-strip';
 
 const Example = () => (
   <View style={styles.container}>
-    <CalendarStrip />
+    <CalendarStrip 
+      style={{height:150, paddingTop: 20, paddingBottom: 10}}
+    />
   </View>
 );
 
