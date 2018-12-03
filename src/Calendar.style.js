@@ -55,5 +55,24 @@ export default StyleSheet.create({
     color: "#A7A7A7",
     fontWeight: "bold",
     textAlign: "center"
-  }
+  },
+  dot: {
+    width: 6,
+    height: 6,
+    marginTop: 1,
+    borderRadius: 5,
+    opacity: 0
+  },
+  
+  // CALENDAR DOTS
+  dotsContainer: {
+    flexDirection: 'row'
+  },
+  visibleDot: {
+    opacity: 1,
+    backgroundColor: 'blue'
+  },
+  selectedDot: {
+    backgroundColor: 'blue'
+  },
 });

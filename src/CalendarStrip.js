@@ -35,6 +35,8 @@ class CalendarStrip extends Component {
     datesWhitelist: PropTypes.array,
     datesBlacklist: PropTypes.array,
 
+    markedDates: PropTypes.object,
+
     showMonth: PropTypes.bool,
     showDayName: PropTypes.bool,
     showDayNumber: PropTypes.bool,
@@ -416,6 +418,19 @@ class CalendarStrip extends Component {
     }
   }
 
+  getDateMarking(day) {
+    const { markedDates } = this.props
+    if (!markedDates) {
+      return false;
+    }
+    const dates = markedDates[day.format('YYYY-MM-DD')] || [];
+    if (dates.length || dates) {
+      return dates;
+    } else {
+      return false;
+    }
+  }
+
   getCustomDateStyle(date, props = this.props) {
     for (let customDateStyle of props.customDatesStyles) {
       if (customDateStyle.endDate) {
@@ -525,6 +540,7 @@ class CalendarStrip extends Component {
       let calendarDay = (
         <CalendarDay
           date={datesForWeek[i]}
+          marking={this.getDateMarking(datesForWeek[i])}
           selected={this.state.datesSelectedForWeek[i]}
           enabled={enabled}
           showDayName={this.props.showDayName}

@@ -16,6 +16,8 @@ class CalendarDay extends Component {
     selected: PropTypes.bool.isRequired,
     enabled: PropTypes.bool.isRequired,
 
+    marking: PropTypes.any,
+
     showDayName: PropTypes.bool,
     showDayNumber: PropTypes.bool,
 
@@ -121,6 +123,23 @@ class CalendarDay extends Component {
     };
   }
 
+  renderDots() {
+    const marking = this.props.marking || {};
+    const baseDotStyle = [styles.dot, styles.visibleDot];
+
+    if (marking.dots && Array.isArray(marking.dots) && marking.dots.length > 0) {
+      // Filter out dots so that we we process only those items which have key and color property
+      const validDots = marking.dots.filter(d => (d && d.color));
+      return validDots.map((dot, index) => {
+        return (
+          <View key={dot.key ? dot.key : index} style={[baseDotStyle,
+            { backgroundColor: marking.selected && dot.selectedDotColor ? dot.selectedDotColor : dot.color }]}/>
+        );
+      });
+    }
+    return null;
+  }
+
   render() {
     // Defaults for disabled state
     let dateNameStyle = [styles.dateName, this.props.enabled ? this.props.dateNameStyle : this.props.disabledDateNameStyle];
@@ -187,6 +206,8 @@ class CalendarDay extends Component {
       padding: this.state.containerPadding
     };
 
+    // let Dot = <View style={[styles.dot, styles.visibleDot]}/>    
+
     return (
       <TouchableOpacity
         onPress={this.props.onDateSelected.bind(this, this.props.date)}
@@ -208,15 +229,20 @@ class CalendarDay extends Component {
             </Text>
           )}
           {this.props.showDayNumber && (
-            <Text
-              style={[
-                  { fontSize: this.state.dateNumberFontSize },
-                  dateNumberStyle
-              ]}
-              allowFontScaling={this.props.allowDayTextScaling}
-            >
-              {this.props.date.date()}
-            </Text>
+            <React.Fragment>
+              <Text
+                style={[
+                    { fontSize: this.state.dateNumberFontSize },
+                    dateNumberStyle
+                ]}
+                allowFontScaling={this.props.allowDayTextScaling}
+              >
+                {this.props.date.date()}
+              </Text>
+              <View style={styles.dotsContainer}>
+                {this.renderDots()}
+              </View>
+            </React.Fragment>
           )}
         </View>
       </TouchableOpacity>
