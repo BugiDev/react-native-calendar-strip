@@ -94,7 +94,8 @@ class CalendarStrip extends Component {
     innerStyle: { flex: 1 },
     maxDayComponentSize: 80,
     minDayComponentSize: 10,
-    shouldAllowFontScaling: true
+    shouldAllowFontScaling: true,
+    markedDates: null,
   };
 
   constructor(props) {
