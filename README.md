@@ -200,9 +200,13 @@ Methods may be accessed through the instantiated component's [ref](https://react
    // Market dates format
   {
       YYYY-MM-DD: {
-        key: (unique number or string),
-        color: string,
-        selectedDotColor: string,
+        dots: [
+          {
+            key: (unique number or string),
+            color: string,
+            selectedDotColor: string,
+          }
+        ]
       }
   }
 ```
