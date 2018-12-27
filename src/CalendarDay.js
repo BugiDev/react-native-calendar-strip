@@ -206,7 +206,6 @@ class CalendarDay extends Component {
       padding: this.state.containerPadding
     };
 
-    // let Dot = <View style={[styles.dot, styles.visibleDot]}/>    
 
     return (
       <TouchableOpacity
