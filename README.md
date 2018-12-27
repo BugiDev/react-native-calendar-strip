@@ -75,7 +75,7 @@ import CalendarStrip from 'react-native-calendar-strip';
 
 const Example = () => (
   <View style={styles.container}>
-    <CalendarStrip 
+    <CalendarStrip
       style={{height:150, paddingTop: 20, paddingBottom: 10}}
     />
   </View>
@@ -182,7 +182,7 @@ Methods may be accessed through the instantiated component's [ref](https://react
 | **`maxDate`**        | maximum date that the calendar may navigate to. A week is allowed if maxDate falls within the current week.                                                                                  | Any      |
 | **`datesWhitelist`** | Dates that are enabled (accepts both `Date` and `moment Date`). Ranges may be specified with an object entry in the array. Check example <a href="#dateswhitelist-array-example"> Below </a> | Array    |
 | **`datesBlacklist`** | Dates that are disabled. Same format as _datesWhitelist_. This overrides dates in _datesWhitelist_.                                                                                          | Array    |
-| **`markedDates`** | Dates that are marked. Format as _markedDatesFormat_.  | Object   | **null**
+| **`markedDates`** | Dates that are marked. Format as _markedDatesFormat_.  | Array   | **null**
 
 ##### datesWhitelist Array Example
 
@@ -194,21 +194,22 @@ Methods may be accessed through the instantiated component's [ref](https://react
   }
 ```
 
-##### markedDatesFormat Object Example
+##### markedDatesFormat Array Example
 
 ```jsx
    // Market dates format
-  {
-      YYYY-MM-DD: {
+  [
+    {
+        date: '(string, Date or Moment object)',
         dots: [
-          {
-            key: (unique number or string),
-            color: string,
-            selectedDotColor: string,
-          }
-        ]
-      }
-  }
+            {
+              key: (unique number or string),
+              color: string,
+              selectedDotColor: string,
+            },
+        ],
+    },
+  ]
 ```
 
 ### Hiding Components
