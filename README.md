@@ -214,7 +214,11 @@ Methods may be accessed through the instantiated component's [ref](https://react
 
 ### markedDates screenshot example
 
+<<<<<<< HEAD
 ![alt text](https://user-images.githubusercontent.com/6241354/50537547-f1f3af80-0b71-11e9-806d-2ca3294f8b2e.png "react-native-calendar-strip marked dates example")
+=======
+![alt text](https://user-images.githubusercontent.com/6241354/50478731-dd81ac80-09e3-11e9-9592-e9d43b44a9db.png "react-native-calendar-strip marked dates example")
+>>>>>>> upstream/master
 
 ### Hiding Components
 
