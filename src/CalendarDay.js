@@ -245,9 +245,6 @@ class CalendarDay extends Component {
                   {this.renderDots()}
                 </View>
               }
-              <View style={styles.dotsContainer}>
-                {this.renderDots()}
-              </View>
             </React.Fragment>
           )}
         </View>
