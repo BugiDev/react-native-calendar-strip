@@ -17,10 +17,7 @@ class CalendarDay extends Component {
     enabled: PropTypes.bool.isRequired,
 
     marking: PropTypes.any,
-<<<<<<< HEAD
     markedDates: PropTypes.array,
-=======
->>>>>>> upstream/master
 
     showDayName: PropTypes.bool,
     showDayNumber: PropTypes.bool,
@@ -141,12 +138,8 @@ class CalendarDay extends Component {
         );
       });
     }
-<<<<<<< HEAD
 
     return <View style={[styles.dot]} />
-=======
-    return null;
->>>>>>> upstream/master
   }
 
   render() {
@@ -247,17 +240,14 @@ class CalendarDay extends Component {
               >
                 {this.props.date.date()}
               </Text>
-<<<<<<< HEAD
               {this.props.markedDates.length > 0 &&
                 <View style={styles.dotsContainer}>
                   {this.renderDots()}
                 </View>
               }
-=======
               <View style={styles.dotsContainer}>
                 {this.renderDots()}
               </View>
->>>>>>> upstream/master
             </React.Fragment>
           )}
         </View>
