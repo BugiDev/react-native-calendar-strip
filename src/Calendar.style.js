@@ -63,10 +63,11 @@ export default StyleSheet.create({
     borderRadius: 5,
     opacity: 0
   },
-  
+
   // CALENDAR DOTS
   dotsContainer: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
   visibleDot: {
     opacity: 1,
