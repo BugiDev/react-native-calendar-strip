@@ -125,13 +125,17 @@ class CalendarDay extends Component {
   }
 
   renderDots() {
+    if (!this.props.markedDates || this.props.markedDates.length === 0) {
+      return;
+    }
     const marking = this.props.marking || {};
     const baseDotStyle = [styles.dot, styles.visibleDot];
+    let validDots = <View style={[styles.dot]} />; // default empty view for no dots case
 
     if (marking.dots && Array.isArray(marking.dots) && marking.dots.length > 0) {
       // Filter out dots so that we we process only those items which have key and color property
-      const validDots = marking.dots.filter(d => (d && d.color));
-      return validDots.map((dot, index) => {
+      validDots = marking.dots.filter(d => (d && d.color));
+      validDots.map((dot, index) => {
         return (
           <View key={dot.key ? dot.key : index} style={[baseDotStyle,
             { backgroundColor: marking.selected && dot.selectedDotColor ? dot.selectedDotColor : dot.color }]}/>
@@ -139,7 +143,11 @@ class CalendarDay extends Component {
       });
     }
 
-    return <View style={[styles.dot]} />
+    return (
+      <View style={styles.dotsContainer}>
+        { validDots }
+      </View>
+    );
   }
 
   render() {
@@ -230,7 +238,7 @@ class CalendarDay extends Component {
             </Text>
           )}
           {this.props.showDayNumber && (
-            <React.Fragment>
+            <View>
               <Text
                 style={[
                     { fontSize: this.state.dateNumberFontSize },
@@ -240,12 +248,8 @@ class CalendarDay extends Component {
               >
                 {this.props.date.date()}
               </Text>
-              {this.props.markedDates.length > 0 &&
-                <View style={styles.dotsContainer}>
-                  {this.renderDots()}
-                </View>
-              }
-            </React.Fragment>
+              { this.renderDots() }
+            </View>
           )}
         </View>
       </TouchableOpacity>
