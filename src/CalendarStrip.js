@@ -71,6 +71,7 @@ class CalendarStrip extends Component {
     highlightDateNumberStyle: PropTypes.any,
     disabledDateNameStyle: PropTypes.any,
     disabledDateNumberStyle: PropTypes.any,
+    markedDatesStyle: PropTypes.object,
     disabledDateOpacity: PropTypes.number,
     styleWeekend: PropTypes.bool,
 
@@ -556,6 +557,7 @@ class CalendarStrip extends Component {
           highlightDateNumberStyle={this.props.highlightDateNumberStyle}
           disabledDateNameStyle={this.props.disabledDateNameStyle}
           disabledDateNumberStyle={this.props.disabledDateNumberStyle}
+          markedDatesStyle={this.props.markedDatesStyle}
           disabledDateOpacity={this.props.disabledDateOpacity}
           styleWeekend={this.props.styleWeekend}
           daySelectionAnimation={this.props.daySelectionAnimation}
