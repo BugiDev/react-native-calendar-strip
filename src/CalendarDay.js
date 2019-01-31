@@ -32,6 +32,7 @@ class CalendarDay extends Component {
     highlightDateNumberStyle: PropTypes.any,
     disabledDateNameStyle: PropTypes.any,
     disabledDateNumberStyle: PropTypes.any,
+    markedDatesStyle: PropTypes.object,
     disabledDateOpacity: PropTypes.number,
     styleWeekend: PropTypes.bool,
     customStyle: PropTypes.object,
@@ -130,14 +131,21 @@ class CalendarDay extends Component {
     }
     const marking = this.props.marking || {};
     const baseDotStyle = [styles.dot, styles.visibleDot];
+    const markedDatesStyle = this.props.markedDatesStyle || {};
     let validDots = <View style={[styles.dot]} />; // default empty view for no dots case
 
     if (marking.dots && Array.isArray(marking.dots) && marking.dots.length > 0) {
       // Filter out dots so that we we process only those items which have key and color property
       validDots = marking.dots.filter(d => (d && d.color)).map((dot, index) => {
         return (
-          <View key={dot.key ? dot.key : index} style={[baseDotStyle,
-            { backgroundColor: marking.selected && dot.selectedDotColor ? dot.selectedDotColor : dot.color }]}/>
+          <View
+            key={dot.key ? dot.key : index}
+            style={[
+              baseDotStyle,
+              { backgroundColor: marking.selected && dot.selectedDotColor ? dot.selectedDotColor : dot.color },
+              markedDatesStyle
+            ]}
+          />
         );
       });
     }
