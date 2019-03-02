@@ -268,6 +268,13 @@ Methods may be accessed through the instantiated component's [ref](https://react
 | **`leftSelector`**   | Component for the left selector control. May be an instance of any React component. This overrides the icon\* props above. Passing in an empty array `[]` hides this control.           | Any  |
 | **`rightSelector`**  | Component for the right selector control. May be an instance of any React component. This overrides the icon\* props above. Passing in an empty array `[]` hides this control.          | Any  |
 
+#### Custom Day component
+
+| Prop                 | Description                                                                                                                                                                             | Type | Default |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------- |
+| **`dayComponent`**       | User-defined component for the Days. All day-related props are passed to the custom component: https://github.com/BugiDev/react-native-calendar-strip/blob/master/src/CalendarStrip.js#L542 | Any  |
+
+
 #### customDatesStyles
 
   <div align="center">

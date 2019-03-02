@@ -42,6 +42,7 @@ class CalendarStrip extends Component {
     showDayNumber: PropTypes.bool,
     showDate: PropTypes.bool,
 
+    dayComponent: PropTypes.any,
     leftSelector: PropTypes.any,
     rightSelector: PropTypes.any,
     iconLeft: PropTypes.any,
@@ -537,10 +538,11 @@ class CalendarStrip extends Component {
   render() {
     let datesForWeek = this.state.datesForWeek;
     let datesRender = [];
+    let _CalendarDay = this.props.dayComponent ? this.props.dayComponent : CalendarDay;
     for (let i = 0; i < datesForWeek.length; i++) {
       let enabled = this.state.datesAllowedForWeek[i];
       let calendarDay = (
-        <CalendarDay
+        <_CalendarDay
           date={datesForWeek[i]}
           marking={this.getDateMarking(datesForWeek[i])}
           selected={this.state.datesSelectedForWeek[i]}
