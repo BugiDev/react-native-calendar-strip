@@ -136,7 +136,9 @@ class CalendarDay extends Component {
 
     if (marking.dots && Array.isArray(marking.dots) && marking.dots.length > 0) {
       // Filter out dots so that we we process only those items which have key and color property
-      validDots = marking.dots.filter(d => (d && d.color)).map((dot, index) => {
+      validDots = marking.dots
+        .filter(d => (d && d.color))
+        .map((dot, index) => {
         return (
           <View
             key={dot.key ? dot.key : index}
@@ -148,13 +150,14 @@ class CalendarDay extends Component {
           />
         );
       });
-    }
+      return (
+        <View style={styles.dotsContainer}>
+          {validDots}
+        </View>
+      );
+    };
 
-    return (
-      <View style={styles.dotsContainer}>
-        { validDots }
-      </View>
-    );
+    return null
   }
 
   render() {
