@@ -1,11 +1,12 @@
-import { Component } from "react";
-import { StyleProp, ViewStyle, TextStyle } from "react-native";
+import { Component } from 'react';
+import { StyleProp, ViewStyle, TextStyle } from 'react-native';
 
-declare module "react-native-calendar-strip" {
+declare module 'react-native-calendar-strip' {
   type dateRange = {
     start: Date;
     end: Date;
   };
+  
   class ReactNativeCalendarStrip extends Component<
     {
       style: StyleProp<ViewStyle>;
@@ -41,16 +42,18 @@ declare module "react-native-calendar-strip" {
       minDayComponentSize?: number;
       responsiveSizingOffset?: number;
 
-      calendarHeaderStyle: StyleProp<ViewStyle>;
+      calendarHeaderContainerStyle: StyleProp<ViewStyle>;
+      calendarHeaderStyle: StyleProp<TextStyle>;
       calendarHeaderFormat?: string;
+      calendarHeaderPosition?: 'below' | 'above';
 
       calendarAnimation: {
         duration: number;
-        type: "sequence" | "parallel";
+        type: 'sequence' | 'parallel';
       };
       daySelectionAnimation:
         | {
-            type: "background";
+            type: 'background';
             duration: number;
             highlightColor: string;
             animType: any;
@@ -59,7 +62,7 @@ declare module "react-native-calendar-strip" {
             animSpringDamping: any;
           }
         | {
-            type: "border";
+            type: 'border';
             duration: number;
             borderWidth: number;
             borderHighlightColor: string;
@@ -87,5 +90,6 @@ declare module "react-native-calendar-strip" {
     },
     {}
   > {}
+
   export = ReactNativeCalendarStrip;
 }

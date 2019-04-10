@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 
 import styles from "./Calendar.style.js";
 
 class CalendarHeader extends Component {
   static propTypes = {
     calendarHeaderFormat: PropTypes.string.isRequired,
+    calendarHeaderContainerStyle: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.number
+    ]),
     calendarHeaderStyle: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.number
@@ -65,16 +69,18 @@ class CalendarHeader extends Component {
       this.props.calendarHeaderFormat
     );
     return (
-      <Text
-        style={[
-          styles.calendarHeader,
-          { fontSize: this.props.fontSize },
-          this.props.calendarHeaderStyle
-        ]}
-        allowFontScaling={this.props.allowHeaderTextScaling}
-      >
-        {headerText}
-      </Text>
+      <View style={this.props.calendarHeaderContainerStyle}>
+        <Text
+          style={[
+            styles.calendarHeader,
+            { fontSize: this.props.fontSize },
+            this.props.calendarHeaderStyle
+          ]}
+          allowFontScaling={this.props.allowHeaderTextScaling}
+        >
+          {headerText}
+        </Text>
+      </View>
     );
   }
 }
