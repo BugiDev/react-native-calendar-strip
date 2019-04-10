@@ -70,14 +70,12 @@ You can use this component without any styling or customization. Just import it 
 <details>
 
 ```jsx
-import { View, StyleSheet } from 'react-native';
-import CalendarStrip from 'react-native-calendar-strip';
+import { View, StyleSheet } from "react-native";
+import CalendarStrip from "react-native-calendar-strip";
 
 const Example = () => (
   <View style={styles.container}>
-    <CalendarStrip
-      style={{height:150, paddingTop: 20, paddingBottom: 10}}
-    />
+    <CalendarStrip style={{ height: 150, paddingTop: 20, paddingBottom: 10 }} />
   </View>
 );
 
@@ -182,7 +180,7 @@ Methods may be accessed through the instantiated component's [ref](https://react
 | **`maxDate`**        | maximum date that the calendar may navigate to. A week is allowed if maxDate falls within the current week.                                                                                  | Any      |
 | **`datesWhitelist`** | Dates that are enabled (accepts both `Date` and `moment Date`). Ranges may be specified with an object entry in the array. Check example <a href="#dateswhitelist-array-example"> Below </a> | Array    |
 | **`datesBlacklist`** | Dates that are disabled. Same format as _datesWhitelist_. This overrides dates in _datesWhitelist_.                                                                                          | Array    |
-| **`markedDates`** | Dates that are marked. Format as _markedDatesFormat_.  | Array   | **null**
+| **`markedDates`**    | Dates that are marked. Format as _markedDatesFormat_.                                                                                                                                        | Array    | **null**   |
 
 ##### datesWhitelist Array Example
 
@@ -227,25 +225,27 @@ Methods may be accessed through the instantiated component's [ref](https://react
 
 ### Styling
 
-| Prop                           | Description                                                                                                                                                                                                                                                                              | Type   | Default    |
-| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ---------- |
-| **`style`**                    | Style for the top level CalendarStrip component.                                                                                                                                                                                                                                         | Any    |
-| **`innerStyle`**               | Sh Style for the responsively sized inner view. This is necessary to account for padding/margin from the top level view. The inner view has style `flex:1` by default. If this component is nested within another dynamically sized container, remove the flex style by passing in `[]`. | Any    |
-| **`calendarHeaderStyle`**      | Style for the header text of the calendar                                                                                                                                                                                                                                                | Any    |
-| **`calendarHeaderFormat`**     | Format for the header text of the calendar. For options, refere to [moments documentation](http://momentjs.com/docs/#/displaying/format/)                                                                                                                                                | String |
-| **`dateNameStyle`**            | Style for the name of the day on work days in dates strip                                                                                                                                                                                                                                | Any    |
-| **`dateNumberStyle`**          | Style for the number of the day on work days in dates strip.                                                                                                                                                                                                                             | Any    |
-| **`weekendDateNameStyle`**     | Style for the name of the day on weekend days in dates strip.                                                                                                                                                                                                                            | Any    |
-| **`weekendDateNumberStyle`**   | Style for the number of the day on weekend days in dates strip.                                                                                                                                                                                                                          | Any    |
-| **`styleWeekend`**             | Whether to style weekend dates separately.                                                                                                                                                                                                                                               | Bool   | **`True`** |
-| **`highlightDateNameStyle`**   | Style for the selected name of the day in dates strip.                                                                                                                                                                                                                                   | Any    |
-| **`highlightDateNumberStyle`** | Style for the selected number of the day in dates strip.                                                                                                                                                                                                                                 | Any    |
-| **`disabledDateNameStyle`**    | Style for disabled name of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                                                                                                                                                                       | Any    |
-| **`disabledDateNumberStyle`**  | Style for disabled number of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                                                                                                                                                                     | Any    |
-| **`markedDatesStyle`**         | Style for the marked dates marker.                                                                                                                                                                                                                                                       | Object |
-| **`disabledDateOpacity`**      | Opacity of disabled dates strip.                                                                                                                                                                                                                                                         | Number | **`0.3`**  |
-| **`customDatesStyles`**        | Custom per-date styling, overriding the styles above. Check Table <a href="#customdatesstyles"> Below </a>                                                                                                                                                                               | Array  |
-| **`shouldAllowFontScaling`**   | Override the underlying Text element scaling to respect font settings                                                                                                                                                                            | Bool   | **`True`**|
+| Prop                               | Description                                                                                                                                                                                                                                                                              | Type           | Default     |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | ----------- |
+| **`style`**                        | Style for the top level CalendarStrip component.                                                                                                                                                                                                                                         | Any            |
+| **`innerStyle`**                   | Sh Style for the responsively sized inner view. This is necessary to account for padding/margin from the top level view. The inner view has style `flex:1` by default. If this component is nested within another dynamically sized container, remove the flex style by passing in `[]`. | Any            |
+| **`calendarHeaderStyle`**          | Style for the header text of the calendar                                                                                                                                                                                                                                                | Any            |
+| **`calendarHeaderContainerStyle`** | Style for the header text wrapper of the calendar                                                                                                                                                                                                                                        | Any            |
+| **`calendarHeaderPosition`**       | Position of the header text (above or below)                                                                                                                                                                                                                                             | `above, below` | **`above`** |
+| **`calendarHeaderFormat`**         | Format for the header text of the calendar. For options, refere to [moments documentation](http://momentjs.com/docs/#/displaying/format/)                                                                                                                                                | String         |
+| **`dateNameStyle`**                | Style for the name of the day on work days in dates strip                                                                                                                                                                                                                                | Any            |
+| **`dateNumberStyle`**              | Style for the number of the day on work days in dates strip.                                                                                                                                                                                                                             | Any            |
+| **`weekendDateNameStyle`**         | Style for the name of the day on weekend days in dates strip.                                                                                                                                                                                                                            | Any            |
+| **`weekendDateNumberStyle`**       | Style for the number of the day on weekend days in dates strip.                                                                                                                                                                                                                          | Any            |
+| **`styleWeekend`**                 | Whether to style weekend dates separately.                                                                                                                                                                                                                                               | Bool           | **`True`**  |
+| **`highlightDateNameStyle`**       | Style for the selected name of the day in dates strip.                                                                                                                                                                                                                                   | Any            |
+| **`highlightDateNumberStyle`**     | Style for the selected number of the day in dates strip.                                                                                                                                                                                                                                 | Any            |
+| **`disabledDateNameStyle`**        | Style for disabled name of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                                                                                                                                                                       | Any            |
+| **`disabledDateNumberStyle`**      | Style for disabled number of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                                                                                                                                                                     | Any            |
+| **`markedDatesStyle`**             | Style for the marked dates marker.                                                                                                                                                                                                                                                       | Object         |
+| **`disabledDateOpacity`**          | Opacity of disabled dates strip.                                                                                                                                                                                                                                                         | Number         | **`0.3`**   |
+| **`customDatesStyles`**            | Custom per-date styling, overriding the styles above. Check Table <a href="#customdatesstyles"> Below </a>                                                                                                                                                                               | Array          |
+| **`shouldAllowFontScaling`**       | Override the underlying Text element scaling to respect font settings                                                                                                                                                                                                                    | Bool           | **`True`**  |
 
 #### Responsive Sizing
 
@@ -270,10 +270,9 @@ Methods may be accessed through the instantiated component's [ref](https://react
 
 #### Custom Day component
 
-| Prop                 | Description                                                                                                                                                                             | Type | Default |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------- |
-| **`dayComponent`**       | User-defined component for the Days. All day-related props are passed to the custom component: https://github.com/BugiDev/react-native-calendar-strip/blob/master/src/CalendarStrip.js#L542 | Any  |
-
+| Prop               | Description                                                                                                                                                                                 | Type | Default |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------- |
+| **`dayComponent`** | User-defined component for the Days. All day-related props are passed to the custom component: https://github.com/BugiDev/react-native-calendar-strip/blob/master/src/CalendarStrip.js#L542 | Any  |
 
 #### customDatesStyles
 
@@ -372,55 +371,55 @@ This prop is used for adding localization to react-native-calendar-strip compone
 
 ```jsx
 const locale = {
-  name: 'fr',
+  name: "fr",
   config: {
-    months: 'Janvier_Février_Mars_Avril_Mai_Juin_Juillet_Août_Septembre_Octobre_Novembre_Décembre'.split(
-      '_'
+    months: "Janvier_Février_Mars_Avril_Mai_Juin_Juillet_Août_Septembre_Octobre_Novembre_Décembre".split(
+      "_"
     ),
-    monthsShort: 'Janv_Févr_Mars_Avr_Mai_Juin_Juil_Août_Sept_Oct_Nov_Déc'.split(
-      '_'
+    monthsShort: "Janv_Févr_Mars_Avr_Mai_Juin_Juil_Août_Sept_Oct_Nov_Déc".split(
+      "_"
     ),
-    weekdays: 'Dimanche_Lundi_Mardi_Mercredi_Jeudi_Vendredi_Samedi'.split('_'),
-    weekdaysShort: 'Dim_Lun_Mar_Mer_Jeu_Ven_Sam'.split('_'),
-    weekdaysMin: 'Di_Lu_Ma_Me_Je_Ve_Sa'.split('_'),
+    weekdays: "Dimanche_Lundi_Mardi_Mercredi_Jeudi_Vendredi_Samedi".split("_"),
+    weekdaysShort: "Dim_Lun_Mar_Mer_Jeu_Ven_Sam".split("_"),
+    weekdaysMin: "Di_Lu_Ma_Me_Je_Ve_Sa".split("_"),
     longDateFormat: {
-      LT: 'HH:mm',
-      LTS: 'HH:mm:ss',
-      L: 'DD/MM/YYYY',
-      LL: 'D MMMM YYYY',
-      LLL: 'D MMMM YYYY LT',
-      LLLL: 'dddd D MMMM YYYY LT'
+      LT: "HH:mm",
+      LTS: "HH:mm:ss",
+      L: "DD/MM/YYYY",
+      LL: "D MMMM YYYY",
+      LLL: "D MMMM YYYY LT",
+      LLLL: "dddd D MMMM YYYY LT"
     },
     calendar: {
       sameDay: "[Aujourd'hui à] LT",
-      nextDay: '[Demain à] LT',
-      nextWeek: 'dddd [à] LT',
-      lastDay: '[Hier à] LT',
-      lastWeek: 'dddd [dernier à] LT',
-      sameElse: 'L'
+      nextDay: "[Demain à] LT",
+      nextWeek: "dddd [à] LT",
+      lastDay: "[Hier à] LT",
+      lastWeek: "dddd [dernier à] LT",
+      sameElse: "L"
     },
     relativeTime: {
-      future: 'dans %s',
-      past: 'il y a %s',
-      s: 'quelques secondes',
-      m: 'une minute',
-      mm: '%d minutes',
-      h: 'une heure',
-      hh: '%d heures',
-      d: 'un jour',
-      dd: '%d jours',
-      M: 'un mois',
-      MM: '%d mois',
-      y: 'une année',
-      yy: '%d années'
+      future: "dans %s",
+      past: "il y a %s",
+      s: "quelques secondes",
+      m: "une minute",
+      mm: "%d minutes",
+      h: "une heure",
+      hh: "%d heures",
+      d: "un jour",
+      dd: "%d jours",
+      M: "un mois",
+      MM: "%d mois",
+      y: "une année",
+      yy: "%d années"
     },
     ordinalParse: /\d{1,2}(er|ème)/,
     ordinal: function(number) {
-      return number + (number === 1 ? 'er' : 'ème');
+      return number + (number === 1 ? "er" : "ème");
     },
     meridiemParse: /PD|MD/,
     isPM: function(input) {
-      return input.charAt(0) === 'M';
+      return input.charAt(0) === "M";
     },
     // in case the meridiem units are not separated around 12, then implement
     // this function (look at locale/id.js for an example)
@@ -428,7 +427,7 @@ const locale = {
     //     return /* 0-23 hour, given meridiem token and hour 1-12 */
     // },
     meridiem: function(hours, minutes, isLower) {
-      return hours < 12 ? 'PD' : 'MD';
+      return hours < 12 ? "PD" : "MD";
     },
     week: {
       dow: 1, // Monday is the first day of the week.
@@ -448,7 +447,9 @@ const locale = {
 | [<img src="https://avatars0.githubusercontent.com/u/4005545?v=4" width="100px;"/><br /><sub><b>Bogdan Begovic</b></sub>](https://github.com/BugiDev)<br />[💬](#question-BugiDev "Answering Questions") [💻](https://github.com/bugidev/react-native-calendar-strip/commits?author=BugiDev "Code") [🎨](#design-BugiDev "Design") [📖](https://github.com/bugidev/react-native-calendar-strip/commits?author=BugiDev "Documentation") [💡](#example-BugiDev "Examples") [🔧](#tool-BugiDev "Tools") | [<img src="https://avatars3.githubusercontent.com/u/6295083?v=4" width="100px;"/><br /><sub><b>Peace</b></sub>](https://github.com/peacechen)<br />[💬](#question-peacechen "Answering Questions") [🐛](https://github.com/bugidev/react-native-calendar-strip/issues?q=author%3Apeacechen "Bug reports") [💻](https://github.com/bugidev/react-native-calendar-strip/commits?author=peacechen "Code") [📖](https://github.com/bugidev/react-native-calendar-strip/commits?author=peacechen "Documentation") [👀](#review-peacechen "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/15834048?v=4" width="100px;"/><br /><sub><b>Chris Burns</b></sub>](http://www.usebillo.com)<br />[💬](#question-Burnsy "Answering Questions") [🐛](https://github.com/bugidev/react-native-calendar-strip/issues?q=author%3ABurnsy "Bug reports") [💻](https://github.com/bugidev/react-native-calendar-strip/commits?author=Burnsy "Code") [📖](https://github.com/bugidev/react-native-calendar-strip/commits?author=Burnsy "Documentation") [🔧](#tool-Burnsy "Tools") [💡](#example-Burnsy "Examples") [👀](#review-Burnsy "Reviewed Pull Requests") | [<img src="https://avatars0.githubusercontent.com/u/26348965?v=4" width="100px;"/><br /><sub><b>samcolby</b></sub>](https://github.com/samcolby)<br />[💻](https://github.com/bugidev/react-native-calendar-strip/commits?author=samcolby "Code") [⚠️](https://github.com/bugidev/react-native-calendar-strip/commits?author=samcolby "Tests") | [<img src="https://avatars0.githubusercontent.com/u/239360?v=4" width="100px;"/><br /><sub><b>Florian Biebel</b></sub>](https://chromosom23.de)<br />[💻](https://github.com/bugidev/react-native-calendar-strip/commits?author=1ne8ight7even "Code") | [<img src="https://avatars0.githubusercontent.com/u/986135?v=4" width="100px;"/><br /><sub><b>Vitaliy Zhukov</b></sub>](http://intspirit.com/)<br />[💻](https://github.com/bugidev/react-native-calendar-strip/commits?author=Vitall "Code") | [<img src="https://avatars1.githubusercontent.com/u/15323137?v=4" width="100px;"/><br /><sub><b>lbrdar</b></sub>](https://github.com/lbrdar)<br />[💻](https://github.com/bugidev/react-native-calendar-strip/commits?author=lbrdar "Code") |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | [<img src="https://avatars0.githubusercontent.com/u/6774813?v=4" width="100px;"/><br /><sub><b>Dimka Vasilyev</b></sub>](https://github.com/gHashTag)<br />[💻](https://github.com/bugidev/react-native-calendar-strip/commits?author=gHashTag "Code") | [<img src="https://avatars2.githubusercontent.com/u/6241354?v=4" width="100px;"/><br /><sub><b>Eugene</b></sub>](https://github.com/hellpirat)<br />[💻](https://github.com/bugidev/react-native-calendar-strip/commits?author=hellpirat "Code") |
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
 Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
 ## Contributing
@@ -465,7 +466,7 @@ Or open up [an issue](https://github.com/BugiDev/react-native-calendar-strip/iss
 
 ## Discussion and Collaboration
 
-In addition to the [Github Issues](https://github.com/BugiDev/react-native-calendar-strip/issues) page, there is a [Discord group](https://discord.gg/RvFM97v) for React Native with a channel specifically for [react-native-calendar-strip](https://discordapp.com/channels/413352084981678082/413360340579909633).  Thanks @MichelDiz for setting that up.
+In addition to the [Github Issues](https://github.com/BugiDev/react-native-calendar-strip/issues) page, there is a [Discord group](https://discord.gg/RvFM97v) for React Native with a channel specifically for [react-native-calendar-strip](https://discordapp.com/channels/413352084981678082/413360340579909633). Thanks @MichelDiz for setting that up.
 
 ## License
 
