@@ -56,8 +56,10 @@ class CalendarStrip extends Component {
     minDayComponentSize: PropTypes.number,
     responsiveSizingOffset: PropTypes.number,
 
+    calendarHeaderContainerStyle: PropTypes.any,
     calendarHeaderStyle: PropTypes.any,
     calendarHeaderFormat: PropTypes.string,
+    calendarHeaderPosition: PropTypes.oneOf(['above', 'below']),
 
     calendarAnimation: PropTypes.object,
     daySelectionAnimation: PropTypes.object,
@@ -88,6 +90,7 @@ class CalendarStrip extends Component {
     iconLeft: require("./img/left-arrow-black.png"),
     iconRight: require("./img/right-arrow-black.png"),
     calendarHeaderFormat: "MMMM YYYY",
+    calendarHeaderPosition: 'above',
     datesWhitelist: undefined,
     datesBlacklist: undefined,
     disabledDateOpacity: 0.3,
@@ -588,6 +591,7 @@ class CalendarStrip extends Component {
     let calendarHeader = this.props.showMonth && (
       <CalendarHeader
         calendarHeaderFormat={this.props.calendarHeaderFormat}
+        calendarHeaderContainerStyle={this.props.calendarHeaderContainerStyle}
         calendarHeaderStyle={this.props.calendarHeaderStyle}
         datesForWeek={this.state.datesForWeek}
         fontSize={this.state.monthFontSize}
@@ -595,7 +599,7 @@ class CalendarStrip extends Component {
       />
     );
 
-    // calendarHeader renders above the dates & left/right selectors if dates are shown.
+    // calendarHeader renders above or below of the dates & left/right selectors if dates are shown.
     // However if dates are hidden, the header shows between the left/right selectors.
     return (
       <View
@@ -609,7 +613,8 @@ class CalendarStrip extends Component {
           style={[this.props.innerStyle, { height: this.state.height }]}
           onLayout={this.onLayout.bind(this)}
         >
-          {this.props.showDate && calendarHeader}
+          {this.props.showDate && this.props.calendarHeaderPosition === 'above' && calendarHeader}
+
           <View style={styles.datesStrip}>
             <WeekSelector
               controlDate={this.props.minDate}
@@ -647,6 +652,8 @@ class CalendarStrip extends Component {
               size={this.state.selectorSize}
             />
           </View>
+
+          {this.props.showDate && this.props.calendarHeaderPosition === 'below' && calendarHeader}
         </View>
       </View>
     );
