@@ -301,11 +301,11 @@ Methods may be accessed through the instantiated component's [ref](https://react
   for (let i=0; i<6; i++) {
     customDatesStyles.push({
         startDate: startDate.clone().add(i, 'days'), // Single date since no endDate provided
-        dateNameStyle: {styles.someDateNameStyle},
-        dateNumberStyle: {styles.someDateNumberStyle},
+        dateNameStyle: styles.dateNameStyle,
+        dateNumberStyle: styles.dateNumberStyle,
         // Random color...
-        dateContainerStyle: {{backgroundColor: '#'+('#00000'+(Math.random()*(1<<24)|0).toString(16)).slice(-6)}},
-    });
+        dateContainerStyle: { backgroundColor: `#${(`#00000${(Math.random() * (1 << 24) | 0).toString(16)}`).slice(-6)}` },
+      });
   }
 
   render() {
