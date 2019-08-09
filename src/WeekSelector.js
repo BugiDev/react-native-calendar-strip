@@ -8,7 +8,7 @@ import styles from "./Calendar.style.js";
 
 class WeekSelector extends Component {
   static propTypes = {
-    controlDate: PropTypes.object,
+    controlDate: PropTypes.any,
     iconComponent: PropTypes.any,
     iconContainerStyle: PropTypes.oneOfType([
       PropTypes.object,
