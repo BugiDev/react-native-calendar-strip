@@ -69,7 +69,7 @@ class CalendarDay extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    newState = {};
+    let newState = {};
     let doStateUpdate = false;
 
     if (this.props.selected !== prevProps.selected) {
