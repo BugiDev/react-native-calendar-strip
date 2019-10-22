@@ -36,9 +36,9 @@ export default StyleSheet.create({
 
   //CALENDAR DAY
   dateContainer: {
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
-    alignSelf: "center"
+    alignSelf: "flex-start"
   },
   dateName: {
     textAlign: "center"
