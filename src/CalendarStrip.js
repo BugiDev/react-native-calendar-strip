@@ -146,6 +146,10 @@ class CalendarStrip extends Component {
     // Animate showing of CalendarDay elements
     this.animate();
 
+    let selectedDate = {},
+      startingDate = {},
+      weekData = {};
+      
     selectedDate = {
       selectedDate: this.setLocale(moment(this.props.selectedDate))
     };
