@@ -368,6 +368,18 @@ This prop is used for adding localization to react-native-calendar-strip compone
 | **`name`**     | The name of the locale (ex. 'fr')                           | String |
 | **`config`**   | The config object holding all of the localization strings.. | Object |
 
+#### Build Release infos
+
+To run build and release you need to import the "Locale" module you want to use follow the steps below:
+
+1- import momentJs module:
+$ yarn add moment
+or
+$ npm install moment or
+
+2- Go to your index.js and import the specific "Locale"
+ex: import 'moment / locale / en';
+
 #### Example of one locale object is:
 
 <details>
