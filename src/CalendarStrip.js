@@ -146,23 +146,17 @@ class CalendarStrip extends Component {
     // Animate showing of CalendarDay elements
     this.animate();
 
-    let selectedDate = {},
-      startingDate = {},
-      weekData = {};
-      
-    selectedDate = {
-      selectedDate: this.setLocale(moment(this.props.selectedDate))
-    };
-    startingDate = {
-      startingDate: this.updateWeekStart(selectedDate.selectedDate)
-    };
-    weekData = this.updateWeekData(
-      startingDate.startingDate,
-      selectedDate.selectedDate,
-      this.props
-    );
-
-    this.setState({...weekData});
+    let selectedDate = this.setLocale(moment(this.props.selectedDate));
+    let startingDate = this.getInitialStartingDate();
+    let daysFromStart = selectedDate.startOf("day").diff(startingDate.startOf("day"), "days");
+    let startOfWeek;
+    if (daysFromStart > this.numDaysInWeek) {
+      startOfWeek = startingDate.clone().add((Math.floor(daysFromStart / this.numDaysInWeek)) * this.numDaysInWeek, "days")
+    } else {
+      startOfWeek = startingDate;
+    }
+    let weekData = this.updateWeekData(startOfWeek);
+    this.setState({ startingDate: startOfWeek, ...weekData });
   }
 
   //Receiving props and set date states, minimizing state updates.
