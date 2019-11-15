@@ -7,7 +7,7 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   //CALENDAR STYLES
   calendarContainer: {
-    overflow: "hidden"
+    overflow: "visible"
   },
   datesStrip: {
     flexDirection: "row",
