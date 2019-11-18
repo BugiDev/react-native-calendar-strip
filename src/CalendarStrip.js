@@ -26,6 +26,7 @@ class CalendarStrip extends Component {
 
     startingDate: PropTypes.any,
     selectedDate: PropTypes.any,
+    onCalendarDateSelected: PropTypes.func,
     onDateSelected: PropTypes.func,
     onWeekChanged: PropTypes.func,
     updateWeek: PropTypes.bool,
@@ -138,6 +139,7 @@ class CalendarStrip extends Component {
     this.updateWeekData = this.updateWeekData.bind(this);
     this.getPreviousWeek = this.getPreviousWeek.bind(this);
     this.getNextWeek = this.getNextWeek.bind(this);
+    this.onCalendarDateSelected = this.onCalendarDateSelected.bind(this);
     this.onDateSelected = this.onDateSelected.bind(this);
     this.isDateSelected = this.isDateSelected.bind(this);
     this.animate = this.animate.bind(this);
@@ -362,6 +364,11 @@ class CalendarStrip extends Component {
       ...this.updateWeekData(this.state.startingDate, selectedDate)
     });
     this.props.onDateSelected && this.props.onDateSelected(selectedDate);
+  }
+
+    // Open Calendar
+  onCalendarDateSelected() {
+    this.props.onCalendarDateSelected && this.props.onCalendarDateSelected();
   }
 
   // Check whether date is allowed
@@ -597,7 +604,7 @@ class CalendarStrip extends Component {
         displayCalendarIcon={this.props.displayCalendarIcon}
         calendarHeaderStyle={this.props.calendarHeaderStyle}
         datesForWeek={this.state.datesForWeek}
-        onCalendarDateSelected={this.props.onCalendarDateSelected}
+        onCalendarDateSelected={this.onCalendarDateSelected}
         fontSize={this.state.monthFontSize}
         allowHeaderTextScaling={this.props.shouldAllowFontScaling}
       />
