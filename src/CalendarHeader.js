@@ -18,7 +18,7 @@ class CalendarHeader extends Component {
     datesForWeek: PropTypes.array.isRequired,
     allowHeaderTextScaling: PropTypes.bool,
     displayCalendarIcon: PropTypes.bool,
-    onCalendarDateSelected: PropTypes.func,
+    onCalendarDateSelected: PropTypes.func
   };
 
   constructor(props) {

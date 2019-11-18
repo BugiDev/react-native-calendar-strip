@@ -597,6 +597,7 @@ class CalendarStrip extends Component {
         displayCalendarIcon={this.props.displayCalendarIcon}
         calendarHeaderStyle={this.props.calendarHeaderStyle}
         datesForWeek={this.state.datesForWeek}
+        onCalendarDateSelected={this.props.onCalendarDateSelected}
         fontSize={this.state.monthFontSize}
         allowHeaderTextScaling={this.props.shouldAllowFontScaling}
       />
