@@ -30,6 +30,12 @@ export default StyleSheet.create({
     alignItems: "center",
     alignSelf: "center"
   },
+  calendarIconContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    margin: "5px"
+  },
   icon: {
     resizeMode: "contain"
   },

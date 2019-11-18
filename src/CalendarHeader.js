@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Text, View } from "react-native";
+import { Text, View, Image, TouchableOpacity } from "react-native";
 
 import styles from "./Calendar.style.js";
 
@@ -59,9 +59,9 @@ class CalendarHeader extends Component {
 
     return `${
       monthFormatting.length > 1 ? firstDay.format(monthFormatting) : ""
-    } ${monthFormatting.length > 1 ? "/" : ""} ${lastDay.format(
-      calendarHeaderFormat
-    )}`;
+      } ${monthFormatting.length > 1 ? "/" : ""} ${lastDay.format(
+        calendarHeaderFormat
+      )}`;
   }
 
   render() {
@@ -70,7 +70,9 @@ class CalendarHeader extends Component {
       this.props.calendarHeaderFormat
     );
 
-    console.tron.log("PROPS", this.props)
+    const iconComponent = require("./img/calendar.png")
+    const imageSize = { width: 15, height: 15 };
+
     return (
       <View style={this.props.calendarHeaderContainerStyle}>
         <Text
@@ -82,6 +84,18 @@ class CalendarHeader extends Component {
           allowFontScaling={this.props.allowHeaderTextScaling}
         >
           {headerText}
+          <TouchableOpacity
+            style={[styles.calendarIconContainer]}
+          // onPress={onPress}
+          // disabled={!enabled}
+          >
+            <Image
+              style={[
+                imageSize
+              ]}
+              source={iconComponent}
+            />
+          </TouchableOpacity>
         </Text>
       </View>
     );
