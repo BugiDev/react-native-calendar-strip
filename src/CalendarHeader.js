@@ -85,12 +85,13 @@ class CalendarHeader extends Component {
         >
           {headerText}
           <TouchableOpacity
-            style={[styles.calendarIconContainer]}
-          // onPress={onPress}
+            style={[styles.iconContainer]}
+          onPress={onPress}
           // disabled={!enabled}
           >
             <Image
               style={[
+                styles.calendarIcon,
                 imageSize
               ]}
               source={iconComponent}

@@ -74,6 +74,7 @@ declare module "react-native-calendar-strip" {
       startingDate?: Date;
       selectedDate?: Date;
       onDateSelected?: (date: Date) => void;
+      onCalendarDateSelected?: () => void;
       onWeekChanged?: (date: Date) => void;
       updateWeek?: boolean;
       useIsoWeekday?: boolean;
