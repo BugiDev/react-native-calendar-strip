@@ -96,18 +96,20 @@ class CalendarHeader extends Component {
           allowFontScaling={this.props.allowHeaderTextScaling}
         >
           {headerText}
-          <TouchableOpacity
-            style={[styles.iconContainer]}
-            onPress={this.onCalendarDateSelected}
-          >
-            <Image
-              style={[
-                styles.calendarIcon,
-                imageSize
-              ]}
-              source={iconComponent}
-            />
-          </TouchableOpacity>
+          {this.props.displayCalendarIcon && this.props.onCalendarDateSelected ? (
+            <TouchableOpacity
+              style={[styles.iconContainer]}
+              onPress={this.onCalendarDateSelected}
+            >
+              <Image
+                style={[
+                  styles.calendarIcon,
+                  imageSize
+                ]}
+                source={iconComponent}
+              />
+            </TouchableOpacity>
+          ) : null}
         </Text>
       </View>
     );
