@@ -100,6 +100,7 @@ declare module "react-native-calendar-strip" {
       minDayComponentSize?: number;
       responsiveSizingOffset?: number;
 
+      displayCalendarIcon?: boolean;
       calendarHeaderContainerStyle?: StyleProp<ViewStyle>;
       calendarHeaderStyle?: StyleProp<TextStyle>;
       calendarHeaderFormat?: string;

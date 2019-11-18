@@ -56,6 +56,7 @@ class CalendarStrip extends Component {
     minDayComponentSize: PropTypes.number,
     responsiveSizingOffset: PropTypes.number,
 
+    displayCalendarIcon: PropTypes.bool,
     calendarHeaderContainerStyle: PropTypes.any,
     calendarHeaderStyle: PropTypes.any,
     calendarHeaderFormat: PropTypes.string,
@@ -91,6 +92,7 @@ class CalendarStrip extends Component {
     iconRight: require("./img/right-arrow-black.png"),
     calendarHeaderFormat: "MMMM YYYY",
     calendarHeaderPosition: 'above',
+    displayCalendarIcon: false,
     datesWhitelist: undefined,
     datesBlacklist: undefined,
     disabledDateOpacity: 0.3,
@@ -592,6 +594,7 @@ class CalendarStrip extends Component {
       <CalendarHeader
         calendarHeaderFormat={this.props.calendarHeaderFormat}
         calendarHeaderContainerStyle={this.props.calendarHeaderContainerStyle}
+        displayCalendarIcon={this.props.displayCalendarIcon}
         calendarHeaderStyle={this.props.calendarHeaderStyle}
         datesForWeek={this.state.datesForWeek}
         fontSize={this.state.monthFontSize}

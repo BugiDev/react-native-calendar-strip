@@ -16,7 +16,8 @@ class CalendarHeader extends Component {
       PropTypes.number
     ]),
     datesForWeek: PropTypes.array.isRequired,
-    allowHeaderTextScaling: PropTypes.bool
+    allowHeaderTextScaling: PropTypes.bool,
+    displayCalendarIcon: PropTypes.bool
   };
 
   shouldComponentUpdate(nextProps) {
@@ -68,6 +69,8 @@ class CalendarHeader extends Component {
       this.props.datesForWeek,
       this.props.calendarHeaderFormat
     );
+
+    console.tron.log("PROPS", this.props)
     return (
       <View style={this.props.calendarHeaderContainerStyle}>
         <Text
