@@ -27,7 +27,6 @@ class CalendarStrip extends Component {
     startingDate: PropTypes.any,
     selectedDate: PropTypes.any,
     onDateSelected: PropTypes.func,
-    onCalendarDateSelected: PropTypes.func,
     onWeekChanged: PropTypes.func,
     updateWeek: PropTypes.bool,
     useIsoWeekday: PropTypes.bool,
@@ -139,7 +138,6 @@ class CalendarStrip extends Component {
     this.updateWeekData = this.updateWeekData.bind(this);
     this.getPreviousWeek = this.getPreviousWeek.bind(this);
     this.getNextWeek = this.getNextWeek.bind(this);
-    this.onCalendarDateSelected = this.onCalendarDateSelected.bind(this);
     this.onDateSelected = this.onDateSelected.bind(this);
     this.isDateSelected = this.isDateSelected.bind(this);
     this.animate = this.animate.bind(this);
@@ -364,11 +362,6 @@ class CalendarStrip extends Component {
       ...this.updateWeekData(this.state.startingDate, selectedDate)
     });
     this.props.onDateSelected && this.props.onDateSelected(selectedDate);
-  }
-
-  // Open Calendar
-  onCalendarDateSelected() {
-    this.onDateSelected();
   }
 
   // Check whether date is allowed

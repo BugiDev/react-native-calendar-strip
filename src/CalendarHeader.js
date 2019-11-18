@@ -17,8 +17,20 @@ class CalendarHeader extends Component {
     ]),
     datesForWeek: PropTypes.array.isRequired,
     allowHeaderTextScaling: PropTypes.bool,
-    displayCalendarIcon: PropTypes.bool
+    displayCalendarIcon: PropTypes.bool,
+    onCalendarDateSelected: PropTypes.func,
   };
+
+  constructor(props) {
+    super(props);
+
+    this.onCalendarDateSelected = this.onCalendarDateSelected.bind(this);
+  }
+
+  // Open Calendar
+  onCalendarDateSelected() {
+    this.props.onCalendarDateSelected && this.props.onCalendarDateSelected();
+  }
 
   shouldComponentUpdate(nextProps) {
     return JSON.stringify(this.props) !== JSON.stringify(nextProps);
@@ -86,8 +98,7 @@ class CalendarHeader extends Component {
           {headerText}
           <TouchableOpacity
             style={[styles.iconContainer]}
-          onPress={onPress}
-          // disabled={!enabled}
+            onPress={this.onCalendarDateSelected}
           >
             <Image
               style={[
