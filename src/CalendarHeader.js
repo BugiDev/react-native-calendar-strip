@@ -1,7 +1,7 @@
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Text, View, Image, TouchableOpacity } from "react-native";
 
+import PropTypes from "prop-types";
 import styles from "./Calendar.style.js";
 
 class CalendarHeader extends Component {
@@ -87,18 +87,23 @@ class CalendarHeader extends Component {
 
     return (
       <View style={this.props.calendarHeaderContainerStyle}>
-        <Text
-          style={[
-            styles.calendarHeader,
-            { fontSize: this.props.fontSize },
-            this.props.calendarHeaderStyle
-          ]}
-          allowFontScaling={this.props.allowHeaderTextScaling}
-        >
-          {headerText}
+        <View style={[
+          styles.calendarHeader,
+          { fontSize: this.props.fontSize },
+          this.props.calendarHeaderStyle
+        ]}>
+          <Text
+            style={[
+              { fontSize: this.props.fontSize },
+              this.props.calendarHeaderStyle
+            ]}
+            allowFontScaling={this.props.allowHeaderTextScaling}
+          >
+            {headerText}
+
+          </Text>
           {this.props.displayCalendarIcon && this.props.onCalendarDateSelected ? (
             <TouchableOpacity
-              style={[styles.iconContainer]}
               onPress={this.onCalendarDateSelected}
             >
               <Image
@@ -110,7 +115,8 @@ class CalendarHeader extends Component {
               />
             </TouchableOpacity>
           ) : null}
-        </Text>
+        </View>
+
       </View>
     );
   }
