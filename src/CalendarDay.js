@@ -150,14 +150,13 @@ class CalendarDay extends Component {
           />
         );
       });
-      return (
-        <View style={styles.dotsContainer}>
-          {validDots}
-        </View>
-      );
-    };
+    }
 
-    return null
+    return (
+      <View style={styles.dotsContainer}>
+        {validDots}
+      </View>
+    );
   }
 
   render() {
