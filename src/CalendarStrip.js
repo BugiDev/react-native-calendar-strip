@@ -4,7 +4,7 @@
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {polyfill} from 'react-lifecycles-compat';
+import {polyfill} from "react-lifecycles-compat";
 import { View, Animated, Easing } from "react-native";
 
 import moment from "moment";
@@ -59,7 +59,7 @@ class CalendarStrip extends Component {
     calendarHeaderContainerStyle: PropTypes.any,
     calendarHeaderStyle: PropTypes.any,
     calendarHeaderFormat: PropTypes.string,
-    calendarHeaderPosition: PropTypes.oneOf(['above', 'below']),
+    calendarHeaderPosition: PropTypes.oneOf(["above", "below"]),
 
     calendarAnimation: PropTypes.object,
     daySelectionAnimation: PropTypes.object,
@@ -90,7 +90,7 @@ class CalendarStrip extends Component {
     iconLeft: require("./img/left-arrow-black.png"),
     iconRight: require("./img/right-arrow-black.png"),
     calendarHeaderFormat: "MMMM YYYY",
-    calendarHeaderPosition: 'above',
+    calendarHeaderPosition: "above",
     datesWhitelist: undefined,
     datesBlacklist: undefined,
     disabledDateOpacity: 0.3,
@@ -401,7 +401,7 @@ class CalendarStrip extends Component {
   }
 
   //Function to check if provided date is the same as selected one, hence date is selected
-  //using isSame moment query with 'day' param so that it check years, months and day
+  //using isSame moment query with "day" param so that it check years, months and day
   isDateSelected(date, selectedDate = this.state.selectedDate) {
     return date.isSame(selectedDate, "day");
   }
@@ -429,7 +429,7 @@ class CalendarStrip extends Component {
     if (markedDates.length === 0) {
       return false
     }
-    const date = markedDates.find(item => moment(day).isSame(item.date, 'day'))
+    const date = markedDates.find(item => moment(day).isSame(item.date, "day"))
     if (date && date.dots.length > 0) {
       return date
     } else {
@@ -613,7 +613,7 @@ class CalendarStrip extends Component {
           style={[this.props.innerStyle, { height: this.state.height }]}
           onLayout={this.onLayout.bind(this)}
         >
-          {this.props.showDate && this.props.calendarHeaderPosition === 'above' && calendarHeader}
+          {this.props.showDate && this.props.calendarHeaderPosition === "above" && calendarHeader}
 
           <View style={styles.datesStrip}>
             <WeekSelector
@@ -653,7 +653,7 @@ class CalendarStrip extends Component {
             />
           </View>
 
-          {this.props.showDate && this.props.calendarHeaderPosition === 'below' && calendarHeader}
+          {this.props.showDate && this.props.calendarHeaderPosition === "below" && calendarHeader}
         </View>
       </View>
     );
