@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/BugiDev/react-native-calendar-strip/issues"
   },
-  "version": "1.3.9",
+  "version": "1.4.0",
   "main": "index.js",
   "directories": {
     "example": "example"
