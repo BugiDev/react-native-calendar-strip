@@ -94,7 +94,8 @@ class CalendarHeader extends Component {
         ]}>
           <Text
             style={[
-              { fontSize: this.props.fontSize },
+              { fontFamily: "Montserrat",
+                fontSize: this.props.fontSize },
               this.props.calendarHeaderStyle
             ]}
             allowFontScaling={this.props.allowHeaderTextScaling}
