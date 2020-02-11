@@ -130,7 +130,13 @@ declare module "react-native-calendar-strip" {
       shouldAllowFontScaling?: boolean;
     },
     {}
-  > {}
+  > {
+    getSelectedDate: () => undefined | Date | string;
+    setSelectedDate: (date: Date | string) => void;
+    getNextWeek: () => void;
+    getPreviousWeek: () => void;
+    updateWeekView: (date: Date | string, startDate: Date | string) => void;
+  }
 
   export = ReactNativeCalendarStrip;
 }
