@@ -334,6 +334,7 @@ Methods may be accessed through the instantiated component's [ref](https://react
 | -------------- | --------------------------------------------------- | ------------------------ |
 | **`Type`**     | Pick which type of animation you would like to show | `sequence` or `parallel` |
 | **`duration`** | duration of animation in milliseconds               | Number (ms)              |
+| **`useNativeDriver`** | Use Animated's native driver (default true)  | Bool                     |
 
 ### Day Selection Animation
 
