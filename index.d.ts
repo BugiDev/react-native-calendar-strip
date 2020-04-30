@@ -128,6 +128,7 @@ declare module "react-native-calendar-strip" {
 
       locale?: object;
       shouldAllowFontScaling?: boolean;
+      useNativeDriver?: boolean;
     },
     {}
   > {

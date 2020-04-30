@@ -79,7 +79,8 @@ class CalendarStrip extends Component {
     styleWeekend: PropTypes.bool,
 
     locale: PropTypes.object,
-    shouldAllowFontScaling: PropTypes.bool
+    shouldAllowFontScaling: PropTypes.bool,
+    useNativeDriver: PropTypes.bool
   };
 
   static defaultProps = {
@@ -101,6 +102,7 @@ class CalendarStrip extends Component {
     minDayComponentSize: 10,
     shouldAllowFontScaling: true,
     markedDates: [],
+    useNativeDriver: true
   };
 
   constructor(props) {
@@ -478,7 +480,8 @@ class CalendarStrip extends Component {
           Animated.timing(this.animatedValue[i], {
             toValue: 1,
             duration: this.props.calendarAnimation.duration,
-            easing: Easing.linear
+            easing: Easing.linear,
+            useNativeDriver: this.props.useNativeDriver
           })
         );
       }
