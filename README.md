@@ -246,7 +246,7 @@ Methods may be accessed through the instantiated component's [ref](https://react
 | **`disabledDateNumberStyle`**  | Style for disabled number of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                                                                                                                                                                     | Any    |
 | **`markedDatesStyle`**         | Style for the marked dates marker.                                                                                                                                                                                                                                                       | Object |
 | **`disabledDateOpacity`**      | Opacity of disabled dates strip.                                                                                                                                                                                                                                                         | Number | **`0.3`**  |
-| **`customDatesStyles`**        | Custom per-date styling, overriding the styles above. Check Table <a href="#customdatesstyles"> Below </a>                                                                                                                                                                               | Array  |
+| **`customDatesStyles`**        | Custom per-date styling, overriding the styles above. Check Table <a href="#customdatesstyles"> Below </a>     .                                                                                                                                                                           | Array or Func  | [] |
 | **`shouldAllowFontScaling`**   | Override the underlying Text element scaling to respect font settings                                                                                                                                                                            | Bool   | **`True`**|
 
 #### Responsive Sizing
@@ -279,19 +279,21 @@ Methods may be accessed through the instantiated component's [ref](https://react
 
 #### customDatesStyles
 
-  <div align="center">
+<div align="center">
   <img src="https://cloud.githubusercontent.com/assets/6295083/25105759/a3335fc8-238b-11e7-9a92-3174498a0d89.png" alt="Custom date styling example">
 </div>
 
-| Prop                     | Description                                                                        | Type | optional    |
+This prop may be passed an array of objects in the format below. Alternatively, pass a callback which receives a date param and returns a style object for it (same format as below).
+
+| Key                      | Description                                                                        | Type | optional    |
 | ------------------------ | ---------------------------------------------------------------------------------- | ---- | ----------- |
-| **`startDate`**          | anything parseable by Moment.                                                      | Any  | **`False`** |
-| **`endDate`**            | specify a range. If no endDate is supplied, startDate is treated as a single date. | Any  | **`True`**  |
-| **`dateNameStyle`**      | Style for the name of the day on work days in dates strip                          | Any  | **`True`**  |
-| **`dateNumberStyle`**    | Style for the number of the day on work days in dates strip.                       | Any  | **`True`**  |
+| **`startDate`**          | anything parseable by Moment.                                                      | Any  | **`False`** (unused w/ callback)|
+| **`endDate`**            | specify a range. If no endDate is supplied, startDate is treated as a single date. | Any  | **`True`** (unused w/ callback) |
+| **`dateNameStyle`**      | Text style for the name of the day.                                                | Any  | **`True`**  |
+| **`dateNumberStyle`**    | Text style for the number of the day.                                              | Any  | **`True`**  |
 | **`dateContainerStyle`** | Style for the date Container.                                                      | Any  | **`True`**  |
 
-##### Usage Example:
+##### Array Usage Example:
 
 <details>
 
@@ -317,7 +319,32 @@ Methods may be accessed through the instantiated component's [ref](https://react
     );
   }
 ```
+</details>
 
+##### Callback Usage Example:
+
+<details>
+
+```jsx
+  const customDatesStylesFunc = date => {
+    if (date.isoWeekday() === 5) { // Fridays
+      return {
+        dateNameStyle: {color: 'blue'},
+        dateNumberStyle: {color: 'purple'},
+        dateContainerStyle:  {color: 'yellow'},
+      }
+    }
+  }
+
+  render() {
+    return (
+      <CalendarStrip
+        customDatesStyles={customDatesStylesFunc}
+        ...
+      />
+    );
+  }
+```
 </details>
 
 ## Animations

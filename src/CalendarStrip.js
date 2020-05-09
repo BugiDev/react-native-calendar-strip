@@ -64,7 +64,7 @@ class CalendarStrip extends Component {
     calendarAnimation: PropTypes.object,
     daySelectionAnimation: PropTypes.object,
 
-    customDatesStyles: PropTypes.array,
+    customDatesStyles: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
 
     dateNameStyle: PropTypes.any,
     dateNumberStyle: PropTypes.any,
@@ -440,25 +440,29 @@ class CalendarStrip extends Component {
   }
 
   getCustomDateStyle(date, props = this.props) {
-    for (let customDateStyle of props.customDatesStyles) {
-      if (customDateStyle.endDate) {
-        // Range
-        if (
-          date.isBetween(
-            customDateStyle.startDate,
-            customDateStyle.endDate,
-            "day",
-            "[]"
-          )
-        ) {
-          return customDateStyle;
-        }
-      } else {
-        // Single date
-        if (date.isSame(customDateStyle.startDate, "day")) {
-          return customDateStyle;
+    if (Array.isArray(props.customDatesStyles)) {
+      for (let customDateStyle of props.customDatesStyles) {
+        if (customDateStyle.endDate) {
+          // Range
+          if (
+            date.isBetween(
+              customDateStyle.startDate,
+              customDateStyle.endDate,
+              "day",
+              "[]"
+            )
+          ) {
+            return customDateStyle;
+          }
+        } else {
+          // Single date
+          if (date.isSame(customDateStyle.startDate, "day")) {
+            return customDateStyle;
+          }
         }
       }
+    } else if (props.customDatesStyles instanceof Function) {
+      return props.customDatesStyles(date);
     }
   }
 
@@ -544,7 +548,7 @@ class CalendarStrip extends Component {
   render() {
     let datesForWeek = this.state.datesForWeek;
     let datesRender = [];
-    let _CalendarDay = this.props.dayComponent ? this.props.dayComponent : CalendarDay;
+    let _CalendarDay = this.props.dayComponent || CalendarDay;
     for (let i = 0; i < datesForWeek.length; i++) {
       let enabled = this.state.datesAllowedForWeek[i];
       let calendarDay = (
