@@ -32,8 +32,8 @@ class CalendarStrip extends Component {
     useIsoWeekday: PropTypes.bool,
     minDate: PropTypes.any,
     maxDate: PropTypes.any,
-    datesWhitelist: PropTypes.array,
-    datesBlacklist: PropTypes.array,
+    datesWhitelist: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
+    datesBlacklist: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
 
     markedDates: PropTypes.array,
 
@@ -191,17 +191,12 @@ class CalendarStrip extends Component {
       );
     }
 
-    if (
-      !updateState &&
-      (JSON.stringify(prevProps.datesBlacklist) !==
-        JSON.stringify(this.props.datesBlacklist) ||
-        JSON.stringify(prevProps.datesWhitelist) !==
-          JSON.stringify(this.props.datesWhitelist) ||
-        JSON.stringify(prevProps.customDatesStyles) !==
-          JSON.stringify(this.props.customDatesStyles))
+    if (!updateState &&
+      prevProps.datesBlacklist !== this.props.datesBlacklist ||
+      prevProps.datesWhitelist !== this.props.datesWhitelist ||
+      prevProps.customDatesStyles !== this.props.customDatesStyles
     ) {
       updateState = true;
-      // No need to update week start here
       startingDate = {
         startingDate: this.updateWeekStart(this.props.startingDate)
       };
@@ -367,7 +362,7 @@ class CalendarStrip extends Component {
   // Check whether date is allowed
   isDateAllowed(date, props = this.props) {
     // datesBlacklist entries override datesWhitelist
-    if (props.datesBlacklist !== undefined) {
+    if (Array.isArray(props.datesBlacklist)) {
       for (let disallowed of props.datesBlacklist) {
         // Blacklist start/end object
         if (disallowed.start && disallowed.end) {
@@ -380,26 +375,30 @@ class CalendarStrip extends Component {
           }
         }
       }
-    }
-
-    if (props.datesWhitelist === undefined) {
-      return true;
+    } else if (props.datesBlacklist instanceof Function) {
+      return !props.datesBlacklist(date);
     }
 
     // Whitelist
-    for (let allowed of props.datesWhitelist) {
-      // start/end object
-      if (allowed.start && allowed.end) {
-        if (date.isBetween(allowed.start, allowed.end, "day", "[]")) {
-          return true;
-        }
-      } else {
-        if (date.isSame(allowed, "day")) {
-          return true;
+    if (Array.isArray(props.datesWhitelist)) {
+      for (let allowed of props.datesWhitelist) {
+        // start/end object
+        if (allowed.start && allowed.end) {
+          if (date.isBetween(allowed.start, allowed.end, "day", "[]")) {
+            return true;
+          }
+        } else {
+          if (date.isSame(allowed, "day")) {
+            return true;
+          }
         }
       }
+      return false;
+    } else if (props.datesWhitelist instanceof Function) {
+      return props.datesWhitelist(date);
     }
-    return false;
+
+    return true;
   }
 
   //Function to check if provided date is the same as selected one, hence date is selected
