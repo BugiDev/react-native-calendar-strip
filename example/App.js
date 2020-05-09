@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import CalendarStrip from "react-native-calendar-strip";
+import CalendarStrip from './CalendarStrip/CalendarStrip';
 import moment from 'moment';
 
 export default class App extends Component<{}> {
@@ -36,19 +36,17 @@ export default class App extends Component<{}> {
 
     return (
       <CalendarStrip
-                    calendarAnimation={{type: 'sequence', duration: 30}}
-                    daySelectionAnimation={{type: 'background', duration: 300, highlightColor: '#9265DC'}}
-                    style={{height:200, paddingTop: 20, paddingBottom: 10}}
-                    calendarHeaderStyle={{color: 'white'}}
-                    calendarColor={'#7743CE'}
-                    dateNumberStyle={{color: 'white'}}
-                    dateNameStyle={{color: 'white'}}
-                    iconLeft={require('./img/left-arrow.png')}
-                    iconRight={require('./img/right-arrow.png')}
-                    iconContainer={{flex: 0.1}}
-                    customDatesStyles={customDatesStyles}
-                    markedDates={markedDates}
-                />
+        calendarAnimation={{type: 'sequence', duration: 30}}
+        daySelectionAnimation={{type: 'background', duration: 300, highlightColor: '#9265DC'}}
+        style={{height:200, paddingTop: 20, paddingBottom: 10}}
+        calendarHeaderStyle={{color: 'white'}}
+        calendarColor={'#7743CE'}
+        dateNumberStyle={{color: 'white'}}
+        dateNameStyle={{color: 'white'}}
+        iconContainer={{flex: 0.1}}
+        customDatesStyles={customDatesStyles}
+        markedDates={markedDates}
+      />
     );
   }
 }

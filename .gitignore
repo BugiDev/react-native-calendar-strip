@@ -34,7 +34,7 @@ local.properties
 #
 node_modules/
 npm-debug.log
-example/ReactNativeCalendarStripExample/node_modules/
+example/CalendarStrip
 package-lock.json
 yarn.lock
 

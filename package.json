@@ -34,7 +34,7 @@
     "contributors:generate": "./node_modules/.bin/all-contributors generate"
   },
   "dependencies": {
-    "moment": "^2.17.1",
+    "moment": ">=2.0.0",
     "prop-types": "^15.6.0",
     "react-lifecycles-compat": "^2.0.0"
   },
