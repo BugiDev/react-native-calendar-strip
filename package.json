@@ -25,7 +25,7 @@
     "example": "example"
   },
   "scripts": {
-    "eslint": "eslint src/** __tests__/**; exit 0",
+    "eslint": "eslint src/**/*.js __tests__/**/*.js; exit 0",
     "format": "prettier-standard \"{src,__tests__}/**/*.js\"",
     "test": "npm run format && jest",
     "test:coverage": "jest --coverage",
