@@ -66,6 +66,9 @@ $ yarn add react-native-calendar-strip
 ### Simple "out of the box" Example
 
 You can use this component without any styling or customization. Just import it in your project and render it:
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/6295083/81627792-9459af00-93c4-11ea-870c-601390912615.gif" alt="">
+</div>
 
 <details>
 
@@ -86,19 +89,17 @@ const styles = StyleSheet.create({
 });
 ```
 
-This will result in:
-
-<div align="center">
-  <img src="https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/blank.gif" alt="">
-</div>
-
 </details>
 
 ### Styling and animations Example
 
-<details>
-
 Even though this component works withouth any customization, it is possible to customize almost everything, so you can make it as beautiful as you want:
+
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/6295083/81627795-958adc00-93c4-11ea-9307-878e9f023cfd.gif" alt="">
+</div>
+
+<details>
 
 ```jsx
 import React, {Component} from 'react';
@@ -145,12 +146,6 @@ class Example extends Component {
 
 AppRegistry.registerComponent('Example', () => Example);
 ```
-
-This will result in:
-
-<div align="center">
-  <img src="https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/Initial.gif" alt="">
-</div>
 
 </details>
 
@@ -275,41 +270,13 @@ Methods may be accessed through the instantiated component's [ref](https://react
 | **`customDatesStyles`**        | Custom per-date styling, overriding the styles above. Check Table <a href="#customdatesstyles"> Below </a>     .                                                                                                                                                                           | Array or Func  | [] |
 | **`shouldAllowFontScaling`**   | Override the underlying Text element scaling to respect font settings                                                                                                                                                                            | Bool   | **`True`**|
 
-#### Responsive Sizing
-
-| Prop                         | Description                                                                                                                                          | Type   | Default  |
-| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
-| **`maxDayComponentSize`**    | Maximum size that CalendarDay will responsively size up to.                                                                                          | Number | **`80`** |
-| **`minDayComponentSize`**    | Minimum size that CalendarDay will responsively size down to.                                                                                        | Number | **`10`** |
-| **`responsiveSizingOffset`** | Adjust the responsive sizing. May be positive (increase size) or negative (decrease size). This value is added to the calculated day component width | Number | **`0`**  |
-
-#### Icon Sizing
-
-| Prop                 | Description                                                                                                                                                                             | Type | Default |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------- |
-| **`iconLeft`**       | Icon to be used for the left icon. It accepts require statement with url to the image (`require('./img/icon.png')`), or object with remote uri `{uri: 'http://example.com/image.png'}`  | Any  |
-| **`iconRight`**      | Icon to be used for the right icon. It accepts require statement with url to the image (`require('./img/icon.png')`), or object with remote uri `{uri: 'http://example.com/image.png'}` | Any  |
-| **`iconStyle`**      | Style that is applied to both left and right icons. It is applied before _iconLeftStyle_ or _iconRightStyle_.                                                                           | Any  |
-| **`iconLeftStyle`**  | Style for left icon. It will override all of the other styles applied to icons.                                                                                                         | Any  |
-| **`iconRightStyle`** | Style for right icon. It will override all of the other styles applied to icons.                                                                                                        | Any  |
-| **`iconStyle`**      | Style for the container of icons. (Example usage is to add `flex` property to it so in the portrait mode, it will shrink the dates strip)                                               | Any  |
-| **`leftSelector`**   | Component for the left selector control. May be an instance of any React component. This overrides the icon\* props above. Passing in an empty array `[]` hides this control.           | Any  |
-| **`rightSelector`**  | Component for the right selector control. May be an instance of any React component. This overrides the icon\* props above. Passing in an empty array `[]` hides this control.          | Any  |
-
-#### Custom Day component
-
-| Prop                 | Description                                                                                                                                                                             | Type | Default |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------- |
-| **`dayComponent`**       | User-defined component for the Days. All day-related props are passed to the custom component: https://github.com/BugiDev/react-native-calendar-strip/blob/master/src/CalendarStrip.js#L542 | Any  |
-
-
 #### customDatesStyles
 
 <div align="center">
   <img src="https://cloud.githubusercontent.com/assets/6295083/25105759/a3335fc8-238b-11e7-9a92-3174498a0d89.png" alt="Custom date styling example">
 </div>
 
-This prop may be passed an array of objects in the format below. Alternatively, pass a callback which receives a date param and returns a style object for it (same format as below).
+This prop may be passed an array of style objects or a callback which receives a date param and returns a style object for it.  The format for the style object follows:
 
 | Key                      | Description                                                                        | Type | optional    |
 | ------------------------ | ---------------------------------------------------------------------------------- | ---- | ----------- |
@@ -373,13 +340,42 @@ This prop may be passed an array of objects in the format below. Alternatively, 
 ```
 </details>
 
+
+#### Responsive Sizing
+
+| Prop                         | Description                                                                                                                                          | Type   | Default  |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
+| **`maxDayComponentSize`**    | Maximum size that CalendarDay will responsively size up to.                                                                                          | Number | **`80`** |
+| **`minDayComponentSize`**    | Minimum size that CalendarDay will responsively size down to.                                                                                        | Number | **`10`** |
+| **`responsiveSizingOffset`** | Adjust the responsive sizing. May be positive (increase size) or negative (decrease size). This value is added to the calculated day component width | Number | **`0`**  |
+
+#### Icon Sizing
+
+| Prop                 | Description                                                                                                                                                                             | Type | Default |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------- |
+| **`iconLeft`**       | Icon to be used for the left icon. It accepts require statement with url to the image (`require('./img/icon.png')`), or object with remote uri `{uri: 'http://example.com/image.png'}`  | Any  |
+| **`iconRight`**      | Icon to be used for the right icon. It accepts require statement with url to the image (`require('./img/icon.png')`), or object with remote uri `{uri: 'http://example.com/image.png'}` | Any  |
+| **`iconStyle`**      | Style that is applied to both left and right icons. It is applied before _iconLeftStyle_ or _iconRightStyle_.                                                                           | Any  |
+| **`iconLeftStyle`**  | Style for left icon. It will override all of the other styles applied to icons.                                                                                                         | Any  |
+| **`iconRightStyle`** | Style for right icon. It will override all of the other styles applied to icons.                                                                                                        | Any  |
+| **`iconStyle`**      | Style for the container of icons. (Example usage is to add `flex` property to it so in the portrait mode, it will shrink the dates strip)                                               | Any  |
+| **`leftSelector`**   | Component for the left selector control. May be an instance of any React component. This overrides the icon\* props above. Passing in an empty array `[]` hides this control.           | Any  |
+| **`rightSelector`**  | Component for the right selector control. May be an instance of any React component. This overrides the icon\* props above. Passing in an empty array `[]` hides this control.          | Any  |
+
+#### Custom Day component
+
+| Prop                 | Description                                                                                                                                                                             | Type | Default |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------- |
+| **`dayComponent`**       | User-defined component for the Days. All day-related props are passed to the custom component: https://github.com/BugiDev/react-native-calendar-strip/blob/master/src/CalendarStrip.js#L542 | Any  |
+
+
 ## Animations
 
 ### Week Strip Animation
 
 | Sequence example (dates shown one by one)                                                                                                                                  | Parallel example (dates shown all at once)                                                                                                                                |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/squential.gif "react-native-calendar-strip parallel animation demo") | ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/parallel.gif "react-native-calendar-strip parallel animation demo") |
+| ![alt text](https://user-images.githubusercontent.com/6295083/81627798-96237280-93c4-11ea-998f-53f7ee07caba.gif "react-native-calendar-strip parallel animation demo") | ![alt text](https://user-images.githubusercontent.com/6295083/81627797-96237280-93c4-11ea-874d-1f23fe6ba487.gif "react-native-calendar-strip parallel animation demo") |
 
 #### Week Strip Animation Options
 
@@ -393,7 +389,7 @@ This prop may be passed an array of objects in the format below. Alternatively, 
 
 | Border example                                                                                                                                                              | Background example                                                                                                                                                    |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/border-small.gif "react-native-calendar-strip border animation demo") | ![alt text](https://raw.githubusercontent.com/BugiDev/react-native-calendar-strip/master/example/gifs/background-small.gif "react-native-calendar-strip simple demo") |
+| ![alt text](https://user-images.githubusercontent.com/6295083/81627793-94f24580-93c4-11ea-9726-89a56b2c4d49.gif "react-native-calendar-strip border animation demo") | ![alt text](https://user-images.githubusercontent.com/6295083/81627791-93c11880-93c4-11ea-8a1b-e5fb5848d2a7.gif "react-native-calendar-strip simple demo") |
 
 #### Day Selection Animation Options
 
