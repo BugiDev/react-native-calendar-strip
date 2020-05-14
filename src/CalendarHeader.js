@@ -15,7 +15,8 @@ class CalendarHeader extends Component {
       PropTypes.object,
       PropTypes.number
     ]),
-    datesForWeek: PropTypes.array.isRequired,
+    weekStartDate: PropTypes.object,
+    weekEndDate: PropTypes.object,
     allowHeaderTextScaling: PropTypes.bool,
     fontSize: PropTypes.number,
   };
@@ -26,13 +27,13 @@ class CalendarHeader extends Component {
 
   //Function that formats the calendar header
   //It also formats the month section if the week is in between months
-  formatCalendarHeader(datesForWeek, calendarHeaderFormat) {
-    if (!datesForWeek || datesForWeek.length === 0) {
+  formatCalendarHeader(calendarHeaderFormat) {
+    if (!this.props.weekStartDate || !this.props.weekEndDate) {
       return "";
     }
 
-    let firstDay = datesForWeek[0];
-    let lastDay = datesForWeek[datesForWeek.length - 1];
+    const firstDay = this.props.weekStartDate;
+    const lastDay = this.props.weekEndDate;
     let monthFormatting = "";
     //Parsing the month part of the user defined formating
     if ((calendarHeaderFormat.match(/Mo/g) || []).length > 0) {
@@ -65,10 +66,7 @@ class CalendarHeader extends Component {
   }
 
   render() {
-    const headerText = this.formatCalendarHeader(
-      this.props.datesForWeek,
-      this.props.calendarHeaderFormat
-    );
+    const headerText = this.formatCalendarHeader(this.props.calendarHeaderFormat);
     return (
       <View style={this.props.calendarHeaderContainerStyle}>
         <Text

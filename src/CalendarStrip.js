@@ -4,8 +4,7 @@
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {polyfill} from "react-lifecycles-compat";
-import { View, Animated, Easing } from "react-native";
+import { View, Animated } from "react-native";
 
 import moment from "moment";
 
@@ -121,94 +120,38 @@ class CalendarStrip extends Component {
 
     const startingDate = this.getInitialStartingDate();
     const selectedDate = this.setLocale(moment(this.props.selectedDate));
-    const weekData = this.updateWeekData(startingDate, selectedDate);
 
     this.state = {
       startingDate,
       selectedDate,
-      ...weekData,
       dayComponentWidth: 0,
       height: 0,
       monthFontSize: 0,
       selectorSize: 0
     };
 
-    this.resetAnimation();
-
-    this.updateWeekData = this.updateWeekData.bind(this);
+    this.animations = [];
     this.getPreviousWeek = this.getPreviousWeek.bind(this);
     this.getNextWeek = this.getNextWeek.bind(this);
     this.onDateSelected = this.onDateSelected.bind(this);
-    this.isDateSelected = this.isDateSelected.bind(this);
-    this.animate = this.animate.bind(this);
-    this.resetAnimation = this.resetAnimation.bind(this);
-  }
-
-  componentDidMount() {
-    // Animate showing of CalendarDay elements
-    this.animate();
+    this.createDays = this.createDays.bind(this);
+    this.registerAnimation = this.registerAnimation.bind(this);
   }
 
   //Receiving props and set date states, minimizing state updates.
   componentDidUpdate(prevProps, prevState) {
-    //Only animate CalendarDays if the selectedDate is the same
-    //Prevents animation on pressing on a date
-    if (prevState.selectedDate === this.state.selectedDate) {
-      this.resetAnimation();
-      this.animate();
-    }
-
-    let selectedDate = {},
-      startingDate = {},
-      weekData = {};
+    let startingDate = {};
+    let days = {};
     let updateState = false;
 
-    if (!this.compareDates(prevProps.selectedDate, this.props.selectedDate)) {
-      updateState = true;
-      selectedDate = {
-        selectedDate: this.setLocale(moment(this.props.selectedDate))
-      };
-      startingDate = {
-        startingDate: this.updateWeekStart(selectedDate.selectedDate)
-      };
-      weekData = this.updateWeekData(
-        startingDate.startingDate,
-        selectedDate.selectedDate,
-        this.props
-      );
-    }
-
-    if (
-      !updateState &&
-      !this.compareDates(prevProps.startingDate, this.props.startingDate)
-    ) {
+    if (!this.compareDates(prevProps.startingDate, this.props.startingDate)) {
       updateState = true;
       startingDate = { startingDate: this.setLocale(moment(this.props.startingDate))};
-      weekData = this.updateWeekData(
-        startingDate.startingDate,
-        this.state.selectedDate,
-        this.props
-      );
-    }
-
-    if (!updateState &&
-      prevProps.datesBlacklist !== this.props.datesBlacklist ||
-      prevProps.datesWhitelist !== this.props.datesWhitelist ||
-      prevProps.customDatesStyles !== this.props.customDatesStyles
-    ) {
-      updateState = true;
-      startingDate = {
-        startingDate: this.updateWeekStart(this.props.startingDate)
-      };
-      weekData = this.updateWeekData(
-        startingDate.startingDate,
-        this.state.selectedDate,
-        this.props
-      );
+      days = this.createDays(startingDate.startingDate);
     }
 
     if (updateState) {
-      this.setState({ ...selectedDate, ...startingDate, ...weekData });
+      this.setState({...startingDate, ...days });
     }
   }
 
@@ -234,13 +177,10 @@ class CalendarStrip extends Component {
   // JS date, or ISO 8601 strings.
   // Returns true if the datetimes values are the same; false otherwise.
   compareDates(date1, date2) {
-    if (
-      date1 &&
-      date1.valueOf &&
-      date2 &&
-      date2.valueOf &&
-      date1.valueOf() === date2.valueOf()
-    ) {
+    if (date1 && date1.valueOf &&
+        date2 && date2.valueOf &&
+        date1.valueOf() === date2.valueOf() )
+    {
       return true;
     } else {
       return JSON.stringify(date1) === JSON.stringify(date2);
@@ -265,34 +205,32 @@ class CalendarStrip extends Component {
 
   //Set startingDate to the previous week
   getPreviousWeek() {
-    const previousWeekStartDate = this.state.startingDate
-      .clone()
-      .subtract(1, "w");
+    this.animations = [];
+    const previousWeekStartDate = this.state.startingDate.clone().subtract(1, "w");
     if (this.props.onWeekChanged) {
-      if (this.props.useIsoWeekday) {
-        this.props.onWeekChanged(
-          previousWeekStartDate.clone().startOf("isoweek")
-        );
-      } else {
-        this.props.onWeekChanged(previousWeekStartDate.clone());
-      }
+      let _previousWeekStartDate = this.props.useIsoWeekday ?
+        previousWeekStartDate.clone().startOf("isoweek")
+        :
+        previousWeekStartDate;
+      this.props.onWeekChanged(_previousWeekStartDate);
     }
-    let weekData = this.updateWeekData(previousWeekStartDate);
-    this.setState({ startingDate: previousWeekStartDate, ...weekData });
+    const days = this.createDays(previousWeekStartDate);
+    this.setState({ startingDate: previousWeekStartDate, ...days });
   }
 
   //Set startingDate to the next week
   getNextWeek() {
+    this.animations = [];
     const nextWeekStartDate = this.state.startingDate.clone().add(1, "w");
     if (this.props.onWeekChanged) {
-      if (this.props.useIsoWeekday) {
-        this.props.onWeekChanged(nextWeekStartDate.clone().startOf("isoweek"));
-      } else {
-        this.props.onWeekChanged(nextWeekStartDate.clone());
-      }
+      let _nextWeekStartDate = this.props.useIsoWeekday ?
+        nextWeekStartDate.clone().startOf("isoweek")
+        :
+        nextWeekStartDate.clone();
+      this.props.onWeekChanged(_nextWeekStartDate);
     }
-    let weekData = this.updateWeekData(nextWeekStartDate);
-    this.setState({ startingDate: nextWeekStartDate, ...weekData });
+    const days = this.createDays(nextWeekStartDate);
+    this.setState({ startingDate: nextWeekStartDate, ...days });
   }
 
   // Set the current visible week to the selectedDate
@@ -317,94 +255,13 @@ class CalendarStrip extends Component {
     return this.setLocale(startingDate);
   }
 
-  // Get & update week states for the week based on the startingDate
-  updateWeekData(
-    startingDate,
-    selectedDate = this.state.selectedDate,
-    props = this.props
-  ) {
-    const me = this;
-    let datesForWeek = [];
-    let datesAllowedForWeek = [];
-    let datesSelectedForWeek = [];
-    let datesCustomStylesForWeek = [];
-
-    for (let i = 0; i < this.numDaysInWeek; i++) {
-      let date;
-      if (props.useIsoWeekday) {
-        // isoWeekday starts from Monday
-        date = me.setLocale(startingDate.clone().isoWeekday(i + 1));
-      } else {
-        date = me.setLocale(startingDate.clone().add(i, "days"));
-      }
-      datesForWeek.push(date);
-      datesAllowedForWeek.push(this.isDateAllowed(date, props));
-      datesSelectedForWeek.push(this.isDateSelected(date, selectedDate));
-      datesCustomStylesForWeek.push(this.getCustomDateStyle(date, props));
-    }
-    return {
-      datesForWeek,
-      datesAllowedForWeek,
-      datesSelectedForWeek,
-      datesCustomStylesForWeek
-    };
-  }
-
   //Handling press on date/selecting date
   onDateSelected(selectedDate) {
     this.setState({
       selectedDate,
-      ...this.updateWeekData(this.state.startingDate, selectedDate)
+      ...this.createDays(this.state.startingDate, selectedDate),
     });
     this.props.onDateSelected && this.props.onDateSelected(selectedDate);
-  }
-
-  // Check whether date is allowed
-  isDateAllowed(date, props = this.props) {
-    // datesBlacklist entries override datesWhitelist
-    if (Array.isArray(props.datesBlacklist)) {
-      for (let disallowed of props.datesBlacklist) {
-        // Blacklist start/end object
-        if (disallowed.start && disallowed.end) {
-          if (date.isBetween(disallowed.start, disallowed.end, "day", "[]")) {
-            return false;
-          }
-        } else {
-          if (date.isSame(disallowed, "day")) {
-            return false;
-          }
-        }
-      }
-    } else if (props.datesBlacklist instanceof Function) {
-      return !props.datesBlacklist(date);
-    }
-
-    // Whitelist
-    if (Array.isArray(props.datesWhitelist)) {
-      for (let allowed of props.datesWhitelist) {
-        // start/end object
-        if (allowed.start && allowed.end) {
-          if (date.isBetween(allowed.start, allowed.end, "day", "[]")) {
-            return true;
-          }
-        } else {
-          if (date.isSame(allowed, "day")) {
-            return true;
-          }
-        }
-      }
-      return false;
-    } else if (props.datesWhitelist instanceof Function) {
-      return props.datesWhitelist(date);
-    }
-
-    return true;
-  }
-
-  //Function to check if provided date is the same as selected one, hence date is selected
-  //using isSame moment query with "day" param so that it check years, months and day
-  isDateSelected(date, selectedDate = this.state.selectedDate) {
-    return date.isSame(selectedDate, "day");
   }
 
   // Get the currently selected date (Moment JS object)
@@ -415,90 +272,36 @@ class CalendarStrip extends Component {
     return this.state.selectedDate;
   }
 
+  updateSelectedDay(previousSelectedDate, selectedDate) {
+    let days = [...this.state.days];
+
+    for (let i = 0; i < days.length; i++) {
+      if (selectedDate.isSame(days[i].key, "day") ||
+          previousSelectedDate.isSame(days[i].key, "day"))
+      {
+        days[i] = this.renderDay(moment(days[i].key), selectedDate, i);
+      }
+    }
+
+    return days;
+  }
+
   // Set the selected date.  To clear the currently selected date, pass in 0.
   setSelectedDate(date) {
     let mDate = moment(date);
     this.onDateSelected(mDate);
-    // Update week view only if date is not cleared (0).
-    if (date !== 0) {
-      this.updateWeekStart(mDate);
-    }
   }
 
-  getDateMarking(day) {
-    const { markedDates } = this.props
-    if (markedDates.length === 0) {
-      return false
-    }
-    const date = markedDates.find(item => moment(day).isSame(item.date, "day"))
-    if (date && date.dots.length > 0) {
-      return date
-    } else {
-      return false
-    }
-  }
-
-  getCustomDateStyle(date, props = this.props) {
-    if (Array.isArray(props.customDatesStyles)) {
-      for (let customDateStyle of props.customDatesStyles) {
-        if (customDateStyle.endDate) {
-          // Range
-          if (
-            date.isBetween(
-              customDateStyle.startDate,
-              customDateStyle.endDate,
-              "day",
-              "[]"
-            )
-          ) {
-            return customDateStyle;
-          }
-        } else {
-          // Single date
-          if (date.isSame(customDateStyle.startDate, "day")) {
-            return customDateStyle;
-          }
-        }
-      }
-    } else if (props.customDatesStyles instanceof Function) {
-      return props.customDatesStyles(date);
-    }
-  }
-
-  //Function for reseting animations
-  resetAnimation() {
-    this.animatedValue = [];
-    for (let i = 0; i < this.numDaysInWeek; i++) {
-      this.animatedValue.push(new Animated.Value(0));
-    }
-  }
-
-  //Function to animate showing the CalendarDay elements.
-  //Possible cases for animations are sequence and parallel
-  animate() {
-    if (this.props.calendarAnimation) {
-      let animations = [];
-      for (let i = 0; i < this.numDaysInWeek; i++) {
-        animations.push(
-          Animated.timing(this.animatedValue[i], {
-            toValue: 1,
-            duration: this.props.calendarAnimation.duration,
-            easing: Easing.linear,
-            useNativeDriver: this.props.useNativeDriver
-          })
-        );
-      }
-
+  // Gather animations from each day. Sequence animations must be started
+  // together to work around bug in RN Animated with individual starts.
+  registerAnimation(animation) {
+    this.animations.push(animation);
+    if (this.animations.length >= this.state.days.length) {
       if (this.props.calendarAnimation.type.toLowerCase() === "sequence") {
-        Animated.sequence(animations).start();
-      } else {
-        if (this.props.calendarAnimation.type.toLowerCase() === "parallel") {
-          Animated.parallel(animations).start();
-        } else {
-          throw new Error(
-            "CalendarStrip Error! Type of animation is incorrect!"
-          );
-        }
+        Animated.sequence(this.animations).start();
+      }
+      else {
+        Animated.parallel(this.animations).start();
       }
     }
   }
@@ -541,70 +344,88 @@ class CalendarStrip extends Component {
       height,
       monthFontSize,
       selectorSize
-    });
+    },
+    () => this.setState( {...this.createDays(this.state.startingDate)} ));
   }
 
-  render() {
-    let datesForWeek = this.state.datesForWeek;
-    let datesRender = [];
-    let _CalendarDay = this.props.dayComponent || CalendarDay;
-    for (let i = 0; i < datesForWeek.length; i++) {
-      let enabled = this.state.datesAllowedForWeek[i];
-      let calendarDay = (
-        <_CalendarDay
-          date={datesForWeek[i]}
-          marking={this.getDateMarking(datesForWeek[i])}
-          selected={this.state.datesSelectedForWeek[i]}
-          enabled={enabled}
-          showDayName={this.props.showDayName}
-          showDayNumber={this.props.showDayNumber}
-          onDateSelected={() => enabled && this.onDateSelected(datesForWeek[i])}
-          calendarColor={this.props.calendarColor}
-          dateNameStyle={this.props.dateNameStyle}
-          dateNumberStyle={this.props.dateNumberStyle}
-          weekendDateNameStyle={this.props.weekendDateNameStyle}
-          weekendDateNumberStyle={this.props.weekendDateNumberStyle}
-          highlightDateNameStyle={this.props.highlightDateNameStyle}
-          highlightDateNumberStyle={this.props.highlightDateNumberStyle}
-          disabledDateNameStyle={this.props.disabledDateNameStyle}
-          disabledDateNumberStyle={this.props.disabledDateNumberStyle}
-          markedDatesStyle={this.props.markedDatesStyle}
-          disabledDateOpacity={this.props.disabledDateOpacity}
-          styleWeekend={this.props.styleWeekend}
-          daySelectionAnimation={this.props.daySelectionAnimation}
-          customStyle={this.state.datesCustomStylesForWeek[i]}
-          size={this.state.dayComponentWidth}
-          allowDayTextScaling={this.props.shouldAllowFontScaling}
-          markedDates={this.props.markedDates}
-        />
-      );
-      datesRender.push(
-        this.props.calendarAnimation ? (
-          <Animated.View
-            key={i}
-            style={{ opacity: this.animatedValue[i], flex: 1 }}
-          >
-            {calendarDay}
-          </Animated.View>
-        ) : (
-          <View key={i} style={{ flex: 1 }}>
-            {calendarDay}
-          </View>
-        )
-      );
+  createDays(startingDate, selectedDate = this.state.selectedDate) {
+    let datesForWeek = [];
+    let days = [];
+
+    for (let i = 0; i < this.numDaysInWeek; i++) {
+      let date;
+      if (this.props.useIsoWeekday) {
+        // isoWeekday starts from Monday
+        date = this.setLocale(startingDate.clone().isoWeekday(i + 1));
+      } else {
+        date = this.setLocale(startingDate.clone().add(i, "days"));
+      }
+      datesForWeek.push(date);
+      days.push(this.renderDay(date, selectedDate, i));
     }
 
-    let calendarHeader = this.props.showMonth && (
+    return {
+      days,
+      weekStartDate: datesForWeek[0],
+      weekEndDate: datesForWeek[datesForWeek.length - 1],
+    };
+  }
+
+  renderDay(date, selectedDate, index) {
+    return (
+      <CalendarDay
+        date={date}
+        selectedDate={selectedDate}
+        key={date.format("YYYY-MM-DD")}
+        datesWhitelist={this.props.datesWhitelist}
+        datesBlacklist={this.props.datesBlacklist}
+        showDayName={this.props.showDayName}
+        showDayNumber={this.props.showDayNumber}
+        onDateSelected={this.onDateSelected}
+        dayComponent={this.props.dayComponent}
+        calendarColor={this.props.calendarColor}
+        dateNameStyle={this.props.dateNameStyle}
+        dateNumberStyle={this.props.dateNumberStyle}
+        weekendDateNameStyle={this.props.weekendDateNameStyle}
+        weekendDateNumberStyle={this.props.weekendDateNumberStyle}
+        highlightDateNameStyle={this.props.highlightDateNameStyle}
+        highlightDateNumberStyle={this.props.highlightDateNumberStyle}
+        disabledDateNameStyle={this.props.disabledDateNameStyle}
+        disabledDateNumberStyle={this.props.disabledDateNumberStyle}
+        markedDatesStyle={this.props.markedDatesStyle}
+        disabledDateOpacity={this.props.disabledDateOpacity}
+        styleWeekend={this.props.styleWeekend}
+        calendarAnimation={this.props.calendarAnimation}
+        registerAnimation={this.registerAnimation}
+        daySelectionAnimation={this.props.daySelectionAnimation}
+        useNativeDriver={this.props.useNativeDriver}
+        customDatesStyles={this.props.customDatesStyles}
+        markedDates={this.props.markedDates}
+        size={this.state.dayComponentWidth}
+        allowDayTextScaling={this.props.shouldAllowFontScaling}
+      />
+    );
+  }
+
+  renderHeader() {
+    return ( this.props.showMonth &&
       <CalendarHeader
         calendarHeaderFormat={this.props.calendarHeaderFormat}
         calendarHeaderContainerStyle={this.props.calendarHeaderContainerStyle}
         calendarHeaderStyle={this.props.calendarHeaderStyle}
-        datesForWeek={this.state.datesForWeek}
+        weekStartDate={this.state.weekStartDate}
+        weekEndDate={this.state.weekEndDate}
         fontSize={this.state.monthFontSize}
         allowHeaderTextScaling={this.props.shouldAllowFontScaling}
       />
     );
+  }
 
+  renderWeekView(days) {
+    return ( <View style={styles.calendarDates}>{days}</View> );
+  }
+
+  render() {
     // calendarHeader renders above or below of the dates & left/right selectors if dates are shown.
     // However if dates are hidden, the header shows between the left/right selectors.
     return (
@@ -619,7 +440,9 @@ class CalendarStrip extends Component {
           style={[this.props.innerStyle, { height: this.state.height }]}
           onLayout={this.onLayout.bind(this)}
         >
-          {this.props.showDate && this.props.calendarHeaderPosition === "above" && calendarHeader}
+          {this.props.showDate && this.props.calendarHeaderPosition === "above" &&
+            this.renderHeader()
+          }
 
           <View style={styles.datesStrip}>
             <WeekSelector
@@ -630,17 +453,15 @@ class CalendarStrip extends Component {
               iconStyle={this.props.iconStyle}
               imageSource={this.props.iconLeft}
               onPress={this.getPreviousWeek}
-              weekEndDate={
-                this.state.datesForWeek[this.state.datesForWeek.length - 1]
-              }
-              weekStartDate={this.state.datesForWeek[0]}
+              weekStartDate={this.state.weekStartDate}
+              weekEndDate={this.state.weekEndDate}
               size={this.state.selectorSize}
             />
 
             {this.props.showDate ? (
-              <View style={styles.calendarDates}>{datesRender}</View>
+              this.renderWeekView(this.state.days)
             ) : (
-              calendarHeader
+              this.renderHeader()
             )}
 
             <WeekSelector
@@ -651,21 +472,19 @@ class CalendarStrip extends Component {
               iconStyle={this.props.iconStyle}
               imageSource={this.props.iconRight}
               onPress={this.getNextWeek}
-              weekEndDate={
-                this.state.datesForWeek[this.state.datesForWeek.length - 1]
-              }
-              weekStartDate={this.state.datesForWeek[0]}
+              weekStartDate={this.state.weekStartDate}
+              weekEndDate={this.state.weekEndDate}
               size={this.state.selectorSize}
             />
           </View>
 
-          {this.props.showDate && this.props.calendarHeaderPosition === "below" && calendarHeader}
+          {this.props.showDate && this.props.calendarHeaderPosition === "below" &&
+            this.renderHeader()
+          }
         </View>
       </View>
     );
   }
 }
-
-polyfill(CalendarStrip);
 
 export default CalendarStrip;

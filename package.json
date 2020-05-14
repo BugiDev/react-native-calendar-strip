@@ -35,8 +35,7 @@
   },
   "dependencies": {
     "moment": ">=2.0.0",
-    "prop-types": "^15.6.0",
-    "react-lifecycles-compat": "^2.0.0"
+    "prop-types": "^15.6.0"
   },
   "peerDependencies": {
     "react": "*",
