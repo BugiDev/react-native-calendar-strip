@@ -42,8 +42,6 @@
 </div>
 
 <h2>Table of Contents</h2>
-<details>
-  <summary>Table of Contents</summary>
   <li><a href="#install">Install</a></li>
   <li><a href="#usage">Usage</a></li>
   <li><a href="#props">Props</a></li>
@@ -51,7 +49,6 @@
   <li><a href="#localization">Localization</a></li>
   <li><a href="#contributors">Contribute</a></li>
   <li><a href="#license">License</a></li>
-</details>
 
 ## Install
 
@@ -62,6 +59,44 @@ $ yarn add react-native-calendar-strip
 ```
 
 ## Usage
+
+### Scrollable CalendarStrip — New in 2.x
+
+The `scrollable` prop was introduced in 2.0.0 and features a bi-directional infinite scroller.  It recycles days using RecyclerListView, shifting the dates as the ends are reached.  The Chrome debugger can cause issues with this updating due to a [RN setTimeout bug](https://github.com/facebook/react-native/issues/4470). To prevent date shifts at the ends of the scroller, set the `minDate` and `maxDate` range to a year or less.
+
+The refactor to support `scrollable` introduced internal changes to the `CalendarDay` component.  Users of the `dayComponent` prop may need to adjust their custom day component to accomomdate the props passed to it.
+
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/6295083/82712731-54a98780-9c4e-11ea-9076-eddf0b756239.gif" alt="">
+</div>
+
+<details>
+
+```jsx
+import { View, StyleSheet } from 'react-native';
+import CalendarStrip from 'react-native-calendar-strip';
+
+const Example = () => (
+  <View style={styles.container}>
+    <CalendarStrip
+      scrollable
+      style={{height:200, paddingTop: 20, paddingBottom: 10}}
+      calendarColor={'#3343CE'}
+      calendarHeaderStyle={{color: 'white'}}
+      dateNumberStyle={{color: 'white'}}
+      dateNameStyle={{color: 'white'}}
+      iconContainer={{flex: 0.1}}
+    />
+  </View>
+);
+
+const styles = StyleSheet.create({
+  container: { flex: 1 }
+});
+```
+
+</details>
+
 
 ### Simple "out of the box" Example
 
@@ -151,22 +186,11 @@ AppRegistry.registerComponent('Example', () => Example);
 
 ## Props
 
-### Methods
-
-Methods may be accessed through the instantiated component's [ref](https://reactjs.org/docs/react-component.html).
-
-| Prop                                  | Description                                                                                                                                                                                                                                                                                           |
-| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`getSelectedDate()`**               | Returns the currently selected date. If no date is selected, returns undefined.                                                                                                                                                                                                                       |
-| **`setSelectedDate(date)`**           | Sets the selected date. `date` may be a Moment object, ISO8601 date string, or any format that Moment is able to parse. It is the responsibility of the caller to select a date that makes sense (e.g. within the current week view). Passing in a value of `0` effectively clears the selected date. |
-| **`getNextWeek()`**                   | Advance to the next week.                                                                                                                                                                                                                                                                             |
-| **`getPreviousWeek()`**               | Rewind to the previous week.                                                                                                                                                                                                                                                                          |
-| **`updateWeekView(date, startDate)`** | Show the week that includes the `date` param. If `startDate` is provided, the first day of the week resets to it as long as `useIsoWeekday` is false.                                                                                                                                                 |
-
 ### Initial data and onDateSelected handler
 
 | Prop                 | Description                                                                                                                                                                                  | Type     | Default    |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------- |
+| **`scrollable`**     | Dates are scrollable if true.                                                                                                                                                                | Bool     | **`False`**|
 | **`startingDate`**   | Date to be used for centering the calendar/showing the week based on that date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`.                             | Any      |
 | **`selectedDate`**   | Date to be used as pre selected Date. It is internaly wrapped by `moment` so it accepts both `Date` and `moment Date`.                                                                       | Any      |
 | **`onDateSelected`** | Function to be used as a callback when a date is selected. It returns `moment Date`                                                                                                          | Function |
@@ -216,6 +240,9 @@ Methods may be accessed through the instantiated component's [ref](https://react
 ```
 
 ##### markedDatesFormat Array Example
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/6241354/50537547-f1f3af80-0b71-11e9-806d-2ca3294f8b2e.png "react-native-calendar-strip marked dates example" alt="">
+</div>
 
 ```jsx
    // Market dates format
@@ -232,10 +259,6 @@ Methods may be accessed through the instantiated component's [ref](https://react
     },
   ]
 ```
-
-### markedDates screenshot example
-
-![alt text](https://user-images.githubusercontent.com/6241354/50537547-f1f3af80-0b71-11e9-806d-2ca3294f8b2e.png "react-native-calendar-strip marked dates example")
 
 ### Hiding Components
 
@@ -368,6 +391,18 @@ This prop may be passed an array of style objects or a callback which receives a
 | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------- |
 | **`dayComponent`**       | User-defined component for the Days. All day-related props are passed to the custom component: https://github.com/BugiDev/react-native-calendar-strip/blob/master/src/CalendarStrip.js#L542 | Any  |
 
+### Methods
+
+Methods may be accessed through the instantiated component's [ref](https://reactjs.org/docs/react-component.html).
+
+| Prop                                  | Description                                                                                                                                                                                                                                                                                           |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`getSelectedDate()`**               | Returns the currently selected date. If no date is selected, returns undefined.                                                                                                                                                                                                                       |
+| **`setSelectedDate(date)`**           | Sets the selected date. `date` may be a Moment object, ISO8601 date string, or any format that Moment is able to parse. It is the responsibility of the caller to select a date that makes sense (e.g. within the current week view). Passing in a value of `0` effectively clears the selected date. |
+| **`getNextWeek()`**                   | Advance to the next week.                                                                                                                                                                                                                                                                             |
+| **`getPreviousWeek()`**               | Rewind to the previous week.                                                                                                                                                                                                                                                                          |
+| **`updateWeekView(date, startDate)`** | Show the week that includes the `date` param. If `startDate` is provided, the first day of the week resets to it as long as `useIsoWeekday` is false.                                                                                                                                                 |
+
 
 ## Animations
 
@@ -378,6 +413,8 @@ This prop may be passed an array of style objects or a callback which receives a
 | ![alt text](https://user-images.githubusercontent.com/6295083/81627798-96237280-93c4-11ea-998f-53f7ee07caba.gif "react-native-calendar-strip parallel animation demo") | ![alt text](https://user-images.githubusercontent.com/6295083/81627797-96237280-93c4-11ea-874d-1f23fe6ba487.gif "react-native-calendar-strip parallel animation demo") |
 
 #### Week Strip Animation Options
+
+The `calendarAnimation` prop accepts an object in the following format:
 
 | Props          | Description                                         | Types                    |
 | -------------- | --------------------------------------------------- | ------------------------ |
@@ -392,6 +429,8 @@ This prop may be passed an array of style objects or a callback which receives a
 | ![alt text](https://user-images.githubusercontent.com/6295083/81627793-94f24580-93c4-11ea-9726-89a56b2c4d49.gif "react-native-calendar-strip border animation demo") | ![alt text](https://user-images.githubusercontent.com/6295083/81627791-93c11880-93c4-11ea-8a1b-e5fb5848d2a7.gif "react-native-calendar-strip simple demo") |
 
 #### Day Selection Animation Options
+
+The `daySelectionAnimation` prop accepts an object in the following format:
 
 | Props                      | Description                                                                                                            | Type                     |
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------ |

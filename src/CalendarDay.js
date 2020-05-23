@@ -44,6 +44,7 @@ class CalendarDay extends Component {
     registerAnimation: PropTypes.func.isRequired,
     daySelectionAnimation: PropTypes.object,
     useNativeDriver: PropTypes.bool,
+    scrollable: PropTypes.bool,
   };
 
   // Reference: https://medium.com/@Jpoliachik/react-native-s-layoutanimation-is-awesome-4a4d317afd3e
@@ -76,14 +77,17 @@ class CalendarDay extends Component {
       ...this.calcSizes(props)
     };
 
-    props.registerAnimation(this.createAnimation());
+    if (!props.scrollable) {
+      props.registerAnimation(this.createAnimation());
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
     let newState = {};
     let doStateUpdate = false;
+    let hasDateChanged = prevProps.date !== this.props.date;
 
-    if (this.props.selectedDate !== prevProps.selectedDate) {
+    if ((this.props.selectedDate !== prevProps.selectedDate) || hasDateChanged) {
       if (this.props.daySelectionAnimation.type !== "") {
         let configurableAnimation = {
           duration: this.props.daySelectionAnimation.duration || 300,
@@ -121,18 +125,19 @@ class CalendarDay extends Component {
       doStateUpdate = true;
     }
 
-    if (prevProps.customDatesStyles !== this.props.customDatesStyles) {
+    if ((prevProps.customDatesStyles !== this.props.customDatesStyles) || hasDateChanged) {
       newState = { ...newState, customStyle: this.getCustomDateStyle(this.props.date, this.props.customDatesStyles) };
       doStateUpdate = true;
     }
 
-    if (prevProps.markedDates !== this.props.markedDates) {
+    if ((prevProps.markedDates !== this.props.markedDates) || hasDateChanged) {
       newState = { ...newState, marking: this.getDateMarking(this.props.date, this.props.markedDates) };
       doStateUpdate = true;
     }
 
-    if (prevProps.datesBlacklist !== this.props.datesBlacklist ||
-        prevProps.datesWhitelist !== this.props.datesWhitelist)
+    if ((prevProps.datesBlacklist !== this.props.datesBlacklist) ||
+        (prevProps.datesWhitelist !== this.props.datesWhitelist) ||
+        hasDateChanged)
     {
       newState = { ...newState, enabled: this.isDateAllowed(this.props.date, this.props.datesBlacklist, this.props.datesWhitelist) };
       doStateUpdate = true;
@@ -143,10 +148,9 @@ class CalendarDay extends Component {
     }
   }
 
-  calcSizes(props) {
+  calcSizes = props => {
     return {
       containerSize: Math.round(props.size),
-      containerPadding: Math.round(props.size / 5),
       containerBorderRadius: Math.round(props.size / 2),
       dateNameFontSize: Math.round(props.size / 5),
       dateNumberFontSize: Math.round(props.size / 2.9)
@@ -155,12 +159,15 @@ class CalendarDay extends Component {
 
   //Function to check if provided date is the same as selected one, hence date is selected
   //using isSame moment query with "day" param so that it check years, months and day
-  isDateSelected(date, selectedDate) {
+  isDateSelected = (date, selectedDate) => {
+    if (!date || !selectedDate) {
+      return date === selectedDate;
+    }
     return date.isSame(selectedDate, "day");
   }
 
   // Check whether date is allowed
-  isDateAllowed(date, datesBlacklist, datesWhitelist) {
+  isDateAllowed = (date, datesBlacklist, datesWhitelist) => {
     // datesBlacklist entries override datesWhitelist
     if (Array.isArray(datesBlacklist)) {
       for (let disallowed of datesBlacklist) {
@@ -201,7 +208,7 @@ class CalendarDay extends Component {
     return true;
   }
 
-  getCustomDateStyle(date, customDatesStyles) {
+  getCustomDateStyle = (date, customDatesStyles) => {
     if (Array.isArray(customDatesStyles)) {
       for (let customDateStyle of customDatesStyles) {
         if (customDateStyle.endDate) {
@@ -228,7 +235,7 @@ class CalendarDay extends Component {
     }
   }
 
-  getDateMarking(day, markedDates) {
+  getDateMarking = (day, markedDates) => {
     if (markedDates.length === 0) {
       return {};
     }
@@ -240,13 +247,13 @@ class CalendarDay extends Component {
     }
   }
 
-  createAnimation() {
-    if (this.props.calendarAnimation) {
-      const {
-        calendarAnimation,
-        useNativeDriver,
-      } = this.props
+  createAnimation = () => {
+    const {
+      calendarAnimation,
+      useNativeDriver,
+    } = this.props
 
+    if (calendarAnimation) {
       this.animation = Animated.timing(this.state.animatedValue, {
         toValue: 1,
         duration: calendarAnimation.duration,
@@ -316,13 +323,13 @@ class CalendarDay extends Component {
       showDayNumber,
       allowDayTextScaling,
       dayComponent: DayComponent,
+      scrollable,
     } = this.props;
     const {
       enabled,
       selected,
       containerSize,
       containerBorderRadius,
-      containerPadding,
       customStyle,
       dateNameFontSize,
       dateNumberFontSize,
@@ -386,9 +393,7 @@ class CalendarDay extends Component {
       width: containerSize,
       height: containerSize,
       borderRadius: containerBorderRadius,
-      padding: containerPadding
     };
-
 
     let day;
     if (DayComponent) {
@@ -401,7 +406,6 @@ class CalendarDay extends Component {
           disabled={!enabled}
         >
           <View
-            key={date}
             style={[
               styles.dateContainer,
               responsiveDateContainerStyle,
@@ -435,12 +439,15 @@ class CalendarDay extends Component {
       );
     }
 
-    return calendarAnimation ? (
-      <Animated.View style={{ opacity: this.state.animatedValue, flex: 1 }}>
+    return calendarAnimation && !scrollable ? (
+      <Animated.View style={[
+        styles.dateRootContainer,
+        {opacity: this.state.animatedValue}
+      ]}>
         {day}
       </Animated.View>
     ) : (
-      <View style={{ flex: 1 }}>
+      <View style={styles.dateRootContainer}>
         {day}
       </View>
     );

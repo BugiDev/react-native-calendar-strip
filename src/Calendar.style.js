@@ -12,6 +12,7 @@ export default StyleSheet.create({
   datesStrip: {
     flexDirection: "row",
     flex: 1,
+    alignItems: "center",
     justifyContent: "space-between"
   },
   calendarDates: {
@@ -35,6 +36,9 @@ export default StyleSheet.create({
   },
 
   //CALENDAR DAY
+  dateRootContainer: {
+    flex: 1,
+  },
   dateContainer: {
     justifyContent: "center",
     alignItems: "center",
