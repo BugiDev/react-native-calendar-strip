@@ -396,12 +396,12 @@ This prop may be passed an array of style objects or a callback which receives a
 Methods may be accessed through the instantiated component's [ref](https://reactjs.org/docs/react-component.html).
 
 | Prop                                  | Description                                                                                                                                                                                                                                                                                           |
-| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`getSelectedDate()`**               | Returns the currently selected date. If no date is selected, returns undefined.                                                                                                                                                                                                                       |
+| ------------------------------------- | --------------------------------------------------------------------------------- |
+| **`getSelectedDate()`**               | Returns the currently selected date. If no date is selected, returns undefined.   |
 | **`setSelectedDate(date)`**           | Sets the selected date. `date` may be a Moment object, ISO8601 date string, or any format that Moment is able to parse. It is the responsibility of the caller to select a date that makes sense (e.g. within the current week view). Passing in a value of `0` effectively clears the selected date. |
-| **`getNextWeek()`**                   | Advance to the next week.                                                                                                                                                                                                                                                                             |
-| **`getPreviousWeek()`**               | Rewind to the previous week.                                                                                                                                                                                                                                                                          |
-| **`updateWeekView(date, startDate)`** | Show the week that includes the `date` param. If `startDate` is provided, the first day of the week resets to it as long as `useIsoWeekday` is false.                                                                                                                                                 |
+| **`getNextWeek()`**                   | Advance to the next week.                                                         |
+| **`getPreviousWeek()`**               | Rewind to the previous week.                                                      |
+| **`updateWeekView(date)`**            | Show the week starting on `date`.                                                 |
 
 
 ## Animations

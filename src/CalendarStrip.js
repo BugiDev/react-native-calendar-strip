@@ -264,6 +264,20 @@ class CalendarStrip extends Component {
     return this.setLocale(startingDate);
   }
 
+  // updateWeekView allows external callers to update the visible week.
+  updateWeekView = date => {
+    if (this.props.scrollable) {
+      // ToDo: add Scroller method to scroll to date.
+      return;
+    }
+
+    this.animations = [];
+    let startingDate = moment(date);
+    startingDate = this.props.useIsoWeekday ? startingDate.startOf("isoweek") : startingDate;
+    const days = this.createDays(startingDate);
+    this.setState({startingDate, ...days});
+  }
+
   //Handling press on date/selecting date
   onDateSelected = selectedDate => {
     let newState;
