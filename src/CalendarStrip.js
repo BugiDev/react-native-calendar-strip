@@ -4,7 +4,7 @@
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { View, Animated } from "react-native";
+import { View, Animated, PixelRatio } from "react-native";
 
 import moment from "moment";
 
@@ -324,36 +324,29 @@ class CalendarStrip extends Component {
 
   // Responsive sizing based on container width.
   onLayout = event => {
-    let csWidth = event.nativeEvent.layout.width;
+    const {
+      responsiveSizingOffset,
+      maxDayComponentSize,
+      minDayComponentSize,
+      showMonth,
+      showDate,
+      scrollable,
+    } = this.props;
+    let csWidth = PixelRatio.roundToNearestPixel(event.nativeEvent.layout.width);
     let numElements = this.numDaysInWeek;
-    if (
-      Array.isArray(this.props.leftSelector) &&
-      this.props.leftSelector.length > 0
-    ) {
-      numElements++;
+    let dayComponentWidth = csWidth / numElements + responsiveSizingOffset;
+    dayComponentWidth = Math.min(dayComponentWidth, maxDayComponentSize);
+    dayComponentWidth = Math.max(dayComponentWidth, minDayComponentSize);
+    let marginHorizontal;
+    if (scrollable) {
+      // Scroller requires spacing between days
+      marginHorizontal = dayComponentWidth * 0.05;
+      dayComponentWidth = dayComponentWidth * 0.9;
     }
-    if (
-      Array.isArray(this.props.rightSelector) &&
-      this.props.rightSelector.length > 0
-    ) {
-      numElements++;
-    }
-
-    let dayComponentWidth =
-      csWidth / numElements + this.props.responsiveSizingOffset;
-    dayComponentWidth = Math.min(
-      dayComponentWidth,
-      this.props.maxDayComponentSize
-    );
-    dayComponentWidth = Math.max(
-      dayComponentWidth,
-      this.props.minDayComponentSize
-    );
-    let marginHorizontal = dayComponentWidth * 0.05;
     let monthFontSize = Math.round(dayComponentWidth / 3.2);
     let selectorSize = Math.round(dayComponentWidth / 2.5);
-    let height = this.props.showMonth ? monthFontSize : 0;
-    height += this.props.showDate ? dayComponentWidth : 0; // assume square element sizes
+    let height = showMonth ? monthFontSize : 0;
+    height += showDate ? dayComponentWidth : 0; // assume square element sizes
     selectorSize = Math.min(selectorSize, height);
 
     this.setState({
@@ -491,10 +484,8 @@ class CalendarStrip extends Component {
   }
 
   renderWeekView(days) {
-    let _days = days;
-
     if (this.props.scrollable && this.state.datesList.length) {
-      _days = (
+      return (
         <Scroller
           ref={scroller => this.scroller = scroller}
           data={this.state.datesList}
@@ -509,11 +500,7 @@ class CalendarStrip extends Component {
       );
     }
 
-    return (
-      <View style={styles.calendarDates}>
-        { _days }
-      </View>
-    );
+    return days;
   }
 
   render() {
@@ -527,10 +514,7 @@ class CalendarStrip extends Component {
           this.props.style
         ]}
       >
-        <View
-          style={[this.props.innerStyle, { height: this.state.height }]}
-          onLayout={this.onLayout}
-        >
+        <View style={[this.props.innerStyle, { height: this.state.height }]}>
           {this.props.showDate && this.props.calendarHeaderPosition === "above" &&
             this.renderHeader()
           }
@@ -549,11 +533,13 @@ class CalendarStrip extends Component {
               size={this.state.selectorSize}
             />
 
-            {this.props.showDate ? (
-              this.renderWeekView(this.state.days)
-            ) : (
-              this.renderHeader()
-            )}
+            <View onLayout={this.onLayout} style={styles.calendarDates}>
+              {this.props.showDate ? (
+                this.renderWeekView(this.state.days)
+              ) : (
+                this.renderHeader()
+              )}
+            </View>
 
             <WeekSelector
               controlDate={this.props.maxDate}

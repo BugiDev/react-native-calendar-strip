@@ -31,29 +31,57 @@ export default class CalendarScroller extends Component {
   constructor(props) {
     super(props);
 
+    this.updateLayout = renderDayParams => {
+      const itemHeight = renderDayParams.size;
+      const itemWidth = itemHeight + renderDayParams.marginHorizontal * 2;
+
+      const layoutProvider = new LayoutProvider(
+        index => 0, // only 1 view type
+        (type, dim) => {
+          // Square, plus horizontal margin
+          dim.width = itemWidth;
+          dim.height = itemHeight;
+        }
+      );
+
+      return { layoutProvider, itemHeight, itemWidth };
+    }
+
     this.dataProvider = new DataProvider((r1, r2) => {
       return r1 !== r2;
     });
 
-    const itemHeight = this.props.renderDayParams.size;
-    const itemWidth = itemHeight + this.props.renderDayParams.marginHorizontal * 2;
-
-    this.layoutProvider = new LayoutProvider(
-      index => 0, // only 1 view type
-      (type, dim) => {
-        // Square, plus horizontal margin
-        dim.width = itemWidth;
-        dim.height = itemHeight;
+    this.updateDaysData = data => {
+      return {
+        data,
+        numDays: data.length,
+        dataProvider: this.dataProvider.cloneWithRows(data),
       }
-    );
+    }
 
     this.state = {
-      numDays: this.props.data.length,
-      data: this.props.data,
-      dataProvider: this.dataProvider.cloneWithRows(this.props.data),
-      itemHeight,
-      itemWidth,
+      ...this.updateLayout(props.renderDayParams),
+      ...this.updateDaysData(props.data),
     };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    let newState = {};
+    let updateState = false;
+
+    if (this.props.renderDayParams.size !== prevProps.renderDayParams.size) {
+      updateState = true;
+      newState = this.updateLayout(this.props.renderDayParams);
+    }
+
+    if (this.props.data !== prevProps.data) {
+      updateState = true;
+      newState = {...newState, ...this.updateDaysData(this.props.data)};
+    }
+
+    if (updateState) {
+      this.setState(newState);
+    }
   }
 
   // Scroll left, guarding against start index.
@@ -131,7 +159,6 @@ export default class CalendarScroller extends Component {
     this.setState({
       data,
       dataProvider: this.dataProvider.cloneWithRows(data),
-    }, () => {
     });
   }
 
@@ -193,7 +220,7 @@ export default class CalendarScroller extends Component {
       >
         <RecyclerListView
           ref={rlv => this.rlv = rlv}
-          layoutProvider={this.layoutProvider}
+          layoutProvider={this.state.layoutProvider}
           dataProvider={this.state.dataProvider}
           rowRenderer={this.rowRenderer}
           extendedState={this.props.renderDayParams}
@@ -202,7 +229,6 @@ export default class CalendarScroller extends Component {
           isHorizontal
           scrollViewProps={{
             showsHorizontalScrollIndicator: false,
-            onContentSizeChange: this.onContentSizeChange,
             contentContainerStyle: {paddingRight: this.state.itemWidth / 2},
           }}
         />
