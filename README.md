@@ -552,6 +552,12 @@ const locale = {
 </details>
 </br>
 
+## Device Specific Notes
+
+<ul>
+<li>OnePlus devices use OnePlus Slate font by default which causes text being cut off in the date number in react-native-calendar-strip. To overcome this change the default font of the device or use a specific font throughout your app.</li>
+</ul>
+
 ## Development with Sample Application
 
 To facilitate development, the `example` directory has a sample app.
