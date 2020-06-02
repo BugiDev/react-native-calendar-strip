@@ -36,7 +36,7 @@ class CalendarStrip extends Component {
     datesWhitelist: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
     datesBlacklist: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
 
-    markedDates: PropTypes.array,
+    markedDates: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
 
     showMonth: PropTypes.bool,
     showDayName: PropTypes.bool,

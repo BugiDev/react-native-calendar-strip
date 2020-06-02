@@ -201,7 +201,7 @@ AppRegistry.registerComponent('Example', () => Example);
 | **`maxDate`**        | maximum date that the calendar may navigate to. A week is allowed if maxDate falls within the current week.                                                                                  | Any      |
 | **`datesWhitelist`** | Array of dates that are enabled, or a function callback which receives a date param and returns true if enabled. Array supports ranges specified with an object entry in the array. Check example <a href="#dateswhitelist-array-example">Below</a> | Array or Func |
 | **`datesBlacklist`** | Array of dates that are disabled, or a function callback. Same format as _datesWhitelist_. This overrides dates in _datesWhitelist_.                                                                                          | Array or Func |
-| **`markedDates`**    | Dates that are marked. Format as <a href="#markedDatesFormat-array-example">markedDatesFormat</a>.  | Array   | **[]**
+| **`markedDates`**    | Dates that are marked. Format as <a href="#markedDatesFormat-array-example">markedDatesFormat</a>.  | Array or Func | **[]**
 
 
 ##### datesWhitelist Array Example
@@ -239,25 +239,42 @@ AppRegistry.registerComponent('Example', () => Example);
   );
 ```
 
-##### markedDatesFormat Array Example
+##### markedDatesFormat Example
 <div align="center">
   <img src="https://user-images.githubusercontent.com/6241354/50537547-f1f3af80-0b71-11e9-806d-2ca3294f8b2e.png "react-native-calendar-strip marked dates example" alt="">
 </div>
 
+`markedDates` may be an array of dates with dots, or a callback that returns the same shaped object for a date passed to it.
+
 ```jsx
-   // Market dates format
-  [
+  // Marked dates array format
+  markedDatesArray = [
     {
-        date: '(string, Date or Moment object)',
-        dots: [
-            {
-              key: (unique number or string),
-              color: string,
-              selectedDotColor: string,
-            },
-        ],
+      date: '(string, Date or Moment object)',
+      dots: [
+        {
+          key: (unique number or string),
+          color: string,
+          selectedDotColor: string,
+        },
+      ],
     },
-  ]
+  ];
+
+  // Marked dates callback
+  markedDatesFunc = date => {
+    if (date.isoWeekday() === 4) { // Thursdays
+      return {
+        dots:[{
+          key: date.format('YYYY-MM-DD'),
+          color: 'red',
+          selectedDotColor: 'yellow',
+        }]
+      };
+    }
+    return {};
+  }
+
 ```
 
 ### Hiding Components

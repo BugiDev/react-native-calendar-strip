@@ -18,7 +18,7 @@ class CalendarDay extends Component {
     datesWhitelist: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
     datesBlacklist: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
 
-    markedDates: PropTypes.array,
+    markedDates: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
 
     showDayName: PropTypes.bool,
     showDayNumber: PropTypes.bool,
@@ -236,14 +236,13 @@ class CalendarDay extends Component {
   }
 
   getDateMarking = (day, markedDates) => {
-    if (markedDates.length === 0) {
-      return {};
-    }
-    const date = markedDates.find(item => moment(day).isSame(item.date, "day"))
-    if (date && date.dots.length > 0) {
-      return date;
-    } else {
-      return {}
+    if (Array.isArray(markedDates)) {
+      if (markedDates.length === 0) {
+        return {};
+      }
+      return markedDates.find(md => moment(day).isSame(md.date, "day")) || {};
+    } else if (markedDates instanceof Function) {
+      return markedDates(day) || {};
     }
   }
 
@@ -287,7 +286,7 @@ class CalendarDay extends Component {
             key={dot.key ? dot.key : index}
             style={[
               baseDotStyle,
-              { backgroundColor: marking.selected && dot.selectedDotColor ? dot.selectedDotColor : dot.color },
+              { backgroundColor: this.state.selected && dot.selectedDotColor ? dot.selectedDotColor : dot.color },
               markedDatesStyle
             ]}
           />

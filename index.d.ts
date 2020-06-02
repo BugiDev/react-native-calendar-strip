@@ -46,14 +46,14 @@ declare module "react-native-calendar-strip" {
     highlightDateNumberStyle: TextStyle;
     disabledDateNameStyle: TextStyle;
     disabledDateNumberStyle: TextStyle;
-    markedDatesStyle: TextStyle;
     disabledDateOpacity: number;
     styleWeekend: boolean;
     daySelectionAnimation: TDaySelectionAnimation;
     customStyle: ViewStyle;
     size: number;
     allowDayTextScaling: boolean;
-    markedDates: [];
+    markedDatesStyle: TextStyle;
+    markedDates?: any[];
   }
 
   type TDaySelectionAnimation =
