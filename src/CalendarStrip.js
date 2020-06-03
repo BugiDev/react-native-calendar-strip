@@ -135,6 +135,7 @@ class CalendarStrip extends Component {
     };
 
     this.animations = [];
+    this.layout = {};
   }
 
   //Receiving props and set date states, minimizing state updates.
@@ -323,7 +324,22 @@ class CalendarStrip extends Component {
   }
 
   // Responsive sizing based on container width.
+  // Debounce to prevent rapid succession of onLayout calls from thrashing.
   onLayout = event => {
+    if (event.nativeEvent.layout.width === this.layout.width) {
+      return;
+    }
+    if (this.onLayoutTimer) {
+      clearTimeout(this.onLayoutTimer);
+    }
+    this.layout = event.nativeEvent.layout;
+    this.onLayoutTimer = setTimeout(() => {
+      this.onLayoutDebounce(this.layout);
+      this.onLayoutTimer = null;
+    }, 100);
+  }
+
+  onLayoutDebounce = layout => {
     const {
       responsiveSizingOffset,
       maxDayComponentSize,
@@ -332,7 +348,7 @@ class CalendarStrip extends Component {
       showDate,
       scrollable,
     } = this.props;
-    let csWidth = PixelRatio.roundToNearestPixel(event.nativeEvent.layout.width);
+    let csWidth = PixelRatio.roundToNearestPixel(layout.width);
     let numElements = this.numDaysInWeek;
     let dayComponentWidth = csWidth / numElements + responsiveSizingOffset;
     dayComponentWidth = Math.min(dayComponentWidth, maxDayComponentSize);
