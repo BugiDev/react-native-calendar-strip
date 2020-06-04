@@ -29,6 +29,7 @@ class CalendarStrip extends Component {
     selectedDate: PropTypes.any,
     onDateSelected: PropTypes.func,
     onWeekChanged: PropTypes.func,
+    onHeaderSelected: PropTypes.func,
     updateWeek: PropTypes.bool,
     useIsoWeekday: PropTypes.bool,
     minDate: PropTypes.any,
@@ -494,6 +495,7 @@ class CalendarStrip extends Component {
         calendarHeaderFormat={this.props.calendarHeaderFormat}
         calendarHeaderContainerStyle={this.props.calendarHeaderContainerStyle}
         calendarHeaderStyle={this.props.calendarHeaderStyle}
+        onHeaderSelected={this.props.onHeaderSelected}
         weekStartDate={this.state.weekStartDate}
         weekEndDate={this.state.weekEndDate}
         fontSize={this.state.monthFontSize}

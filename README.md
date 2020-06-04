@@ -188,20 +188,21 @@ AppRegistry.registerComponent('Example', () => Example);
 
 ### Initial data and onDateSelected handler
 
-| Prop                 | Description                                                                                                                                                                                  | Type     | Default    |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------- |
-| **`scrollable`**     | Dates are scrollable if true.                                                                                                                                                                | Bool     | **`False`**|
-| **`startingDate`**   | Date to be used for centering the calendar/showing the week based on that date. It is internally wrapped by `moment` so it accepts both `Date` and `moment Date`.                             | Any      |
-| **`selectedDate`**   | Date to be used as pre selected Date. It is internally wrapped by `moment` so it accepts both `Date` and `moment Date`.                                                                       | Any      |
-| **`onDateSelected`** | Function to be used as a callback when a date is selected. It returns `moment Date`                                                                                                          | Function |
-| **`onWeekChanged`**  | Function to be used as a callback when a week is changed. It returns `moment Date`                                                                                                           | Number   |
-| **`updateWeek`**     | Update the week view if other props change. If `false`, the week view won't change when other props change, but will still respond to left/right selectors.                                  | Bool     | **`True`** |
-| **`useIsoWeekday`**  | start week on ISO day of week (default true). If false, starts week on _startingDate_ parameter.                                                                                             | Bool     | **`True`** |
-| **`minDate`**        | minimum date that the calendar may navigate to. A week is allowed if minDate falls within the current week.                                                                                  | Any      |
-| **`maxDate`**        | maximum date that the calendar may navigate to. A week is allowed if maxDate falls within the current week.                                                                                  | Any      |
+| Prop                 | Description                                                                                                                                                        | Type     | Default    |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ---------- |
+| **`scrollable`**     | Dates are scrollable if true.                                                                                                                                      | Bool     | **`False`**|
+| **`startingDate`**   | Date to be used for centering the calendar/showing the week based on that date. It is internally wrapped by `moment` so it accepts both `Date` and `moment Date`.  | Any      |
+| **`selectedDate`**   | Date to be used as pre selected Date. It is internally wrapped by `moment` so it accepts both `Date` and `moment Date`.                                            | Any      |
+| **`onDateSelected`** | Function to be used as a callback when a date is selected. It returns `moment Date`                                                                                | Function |
+| **`onWeekChanged`**  | Function to be used as a callback when a week is changed. It returns `moment Date`                                                                                 | Function |
+| **`onHeaderSelected`**| Function to be used as a callback when the header is selected. It returns `{weekStartDate, weekEndDate}` as `moment Dates`                                         | Function |
+| **`updateWeek`**     | Update the week view if other props change. If `false`, the week view won't change when other props change, but will still respond to left/right selectors.        | Bool     | **`True`** |
+| **`useIsoWeekday`**  | start week on ISO day of week (default true). If false, starts week on _startingDate_ parameter.                                                                   | Bool     | **`True`** |
+| **`minDate`**        | minimum date that the calendar may navigate to. A week is allowed if minDate falls within the current week.                                                        | Any      |
+| **`maxDate`**        | maximum date that the calendar may navigate to. A week is allowed if maxDate falls within the current week.                                                        | Any      |
 | **`datesWhitelist`** | Array of dates that are enabled, or a function callback which receives a date param and returns true if enabled. Array supports ranges specified with an object entry in the array. Check example <a href="#dateswhitelist-array-example">Below</a> | Array or Func |
-| **`datesBlacklist`** | Array of dates that are disabled, or a function callback. Same format as _datesWhitelist_. This overrides dates in _datesWhitelist_.                                                                                          | Array or Func |
-| **`markedDates`**    | Dates that are marked. Format as <a href="#markedDatesFormat-array-example">markedDatesFormat</a>.  | Array or Func | **[]**
+| **`datesBlacklist`** | Array of dates that are disabled, or a function callback. Same format as _datesWhitelist_. This overrides dates in _datesWhitelist_.                               | Array or Func |
+| **`markedDates`**    | Dates that are marked. Format as <a href="#markedDatesFormat-array-example">markedDatesFormat</a>.                                                                 | Array or Func | **[]**
 
 
 ##### datesWhitelist Array Example

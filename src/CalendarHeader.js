@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 
 import styles from "./Calendar.style.js";
 
@@ -19,6 +19,7 @@ class CalendarHeader extends Component {
     weekEndDate: PropTypes.object,
     allowHeaderTextScaling: PropTypes.bool,
     fontSize: PropTypes.number,
+    onHeaderSelected: PropTypes.func,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -66,20 +67,35 @@ class CalendarHeader extends Component {
   }
 
   render() {
-    const headerText = this.formatCalendarHeader(this.props.calendarHeaderFormat);
+    const {
+      calendarHeaderFormat,
+      onHeaderSelected,
+      calendarHeaderContainerStyle,
+      calendarHeaderStyle,
+      fontSize,
+      allowHeaderTextScaling,
+      weekStartDate,
+      weekEndDate,
+    } = this.props;
+    const headerText = this.formatCalendarHeader(calendarHeaderFormat);
+
     return (
-      <View style={this.props.calendarHeaderContainerStyle}>
+      <TouchableOpacity
+        onPress={onHeaderSelected && onHeaderSelected.bind(this, {weekStartDate, weekEndDate})}
+        disabled={!onHeaderSelected}
+        style={calendarHeaderContainerStyle}
+      >
         <Text
           style={[
             styles.calendarHeader,
-            { fontSize: this.props.fontSize },
-            this.props.calendarHeaderStyle
+            { fontSize: fontSize },
+            calendarHeaderStyle
           ]}
-          allowFontScaling={this.props.allowHeaderTextScaling}
+          allowFontScaling={allowHeaderTextScaling}
         >
           {headerText}
         </Text>
-      </View>
+      </TouchableOpacity>
     );
   }
 }
