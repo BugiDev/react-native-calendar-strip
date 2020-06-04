@@ -88,7 +88,7 @@ class CalendarDay extends Component {
     let hasDateChanged = prevProps.date !== this.props.date;
 
     if ((this.props.selectedDate !== prevProps.selectedDate) || hasDateChanged) {
-      if (this.props.daySelectionAnimation.type !== "") {
+      if (this.props.daySelectionAnimation.type !== "" && !this.props.scrollable) {
         let configurableAnimation = {
           duration: this.props.daySelectionAnimation.duration || 300,
           create: {
