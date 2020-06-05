@@ -21,6 +21,7 @@ export default class CalendarScroller extends Component {
     maxDate: PropTypes.any,
     maxSimultaneousDays: PropTypes.number,
     updateMonthYear: PropTypes.func,
+    onWeekChanged: PropTypes.func,
   }
 
   static defaultProps = {
@@ -168,15 +169,30 @@ export default class CalendarScroller extends Component {
       data,
       numDays,
       numVisibleItems,
+      visibleStartDate: _visStartDate,
+      visibleEndDate: _visEndDate,
     } = this.state;
     const visibleStartIndex = all[0];
     const visibleStartDate = data[visibleStartIndex].date;
-    const visibleEndDate = data[all[all.length - 1]].date;
+    const visibleEndIndex = Math.min(visibleStartIndex + numVisibleItems - 1, data.length - 1);
+    const visibleEndDate = data[visibleEndIndex].date;
 
     const {
       updateMonthYear,
+      onWeekChanged,
     } = this.props;
-    updateMonthYear && updateMonthYear(visibleStartDate, visibleEndDate);
+
+    // Fire month/year update on both week and month changes.  This is
+    // necessary for the header and onWeekChanged updates.
+    if (!_visStartDate || !_visEndDate ||
+        !visibleStartDate.isSame(_visStartDate, "week") ||
+        !visibleEndDate.isSame(_visEndDate, "week") ||
+        !visibleStartDate.isSame(_visStartDate, "month") ||
+        !visibleEndDate.isSame(_visEndDate, "month") )
+    {
+      updateMonthYear && updateMonthYear(visibleStartDate, visibleEndDate);
+      onWeekChanged && onWeekChanged(visibleStartDate, visibleEndDate);
+    }
 
     if (visibleStartIndex === 0) {
       this.shiftDaysBackward(visibleStartDate);
