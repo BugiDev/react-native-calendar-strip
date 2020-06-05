@@ -195,14 +195,14 @@ AppRegistry.registerComponent('Example', () => Example);
 | **`selectedDate`**   | Date to be used as pre selected Date. It is internally wrapped by `moment` so it accepts both `Date` and `moment Date`.                                            | Any      |
 | **`onDateSelected`** | Function to be used as a callback when a date is selected. It returns `moment Date`                                                                                | Function |
 | **`onWeekChanged`**  | Function to be used as a callback when a week is changed. It returns `moment Date`                                                                                 | Function |
-| **`onHeaderSelected`**| Function to be used as a callback when the header is selected. It returns `{weekStartDate, weekEndDate}` as `moment Dates`                                         | Function |
+| **`onHeaderSelected`**| Function to be used as a callback when the header is selected. It returns `{weekStartDate, weekEndDate}` as `moment Dates`                                        | Function |
 | **`updateWeek`**     | Update the week view if other props change. If `false`, the week view won't change when other props change, but will still respond to left/right selectors.        | Bool     | **`True`** |
 | **`useIsoWeekday`**  | start week on ISO day of week (default true). If false, starts week on _startingDate_ parameter.                                                                   | Bool     | **`True`** |
 | **`minDate`**        | minimum date that the calendar may navigate to. A week is allowed if minDate falls within the current week.                                                        | Any      |
 | **`maxDate`**        | maximum date that the calendar may navigate to. A week is allowed if maxDate falls within the current week.                                                        | Any      |
 | **`datesWhitelist`** | Array of dates that are enabled, or a function callback which receives a date param and returns true if enabled. Array supports ranges specified with an object entry in the array. Check example <a href="#dateswhitelist-array-example">Below</a> | Array or Func |
 | **`datesBlacklist`** | Array of dates that are disabled, or a function callback. Same format as _datesWhitelist_. This overrides dates in _datesWhitelist_.                               | Array or Func |
-| **`markedDates`**    | Dates that are marked. Format as <a href="#markedDatesFormat-array-example">markedDatesFormat</a>.                                                                 | Array or Func | **[]**
+| **`markedDates`**    | Dates that are marked with dots or lines. Format as <a href="#markeddates-example">markedDatesFormat</a>.                                                          | Array or Func | **[]**
 
 
 ##### datesWhitelist Array Example
@@ -240,12 +240,12 @@ AppRegistry.registerComponent('Example', () => Example);
   );
 ```
 
-##### markedDatesFormat Example
+##### markedDates Example
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/6241354/50537547-f1f3af80-0b71-11e9-806d-2ca3294f8b2e.png "react-native-calendar-strip marked dates example" alt="">
+  <img src="https://user-images.githubusercontent.com/6295083/83835989-e1752c00-a6b7-11ea-9104-c79a26438c50.png" alt="marked dates example">
 </div>
 
-`markedDates` may be an array of dates with dots, or a callback that returns the same shaped object for a date passed to it.
+`markedDates` may be an array of dates with dots/lines, or a callback that returns the same shaped object for a date passed to it.
 
 ```jsx
   // Marked dates array format
@@ -254,22 +254,42 @@ AppRegistry.registerComponent('Example', () => Example);
       date: '(string, Date or Moment object)',
       dots: [
         {
-          key: (unique number or string),
-          color: string,
-          selectedDotColor: string,
+          color: <string>,
+          selectedColor: <string> (optional),
+        },
+      ],
+    },
+    {
+      date: '(string, Date or Moment object)',
+      lines: [
+        {
+          color: <string>,
+          selectedColor: <string> (optional),
         },
       ],
     },
   ];
 
+```
+
+```jsx
   // Marked dates callback
   markedDatesFunc = date => {
+    // Dot
     if (date.isoWeekday() === 4) { // Thursdays
       return {
         dots:[{
-          key: date.format('YYYY-MM-DD'),
-          color: 'red',
-          selectedDotColor: 'yellow',
+          color: <string>,
+          selectedColor: <string> (optional),
+        }]
+      };
+    }
+    // Line
+    if (date.isoWeekday() === 6) { // Saturdays
+      return {
+        lines:[{
+          color: <string>,
+          selectedColor: <string> (optional),
         }]
       };
     }

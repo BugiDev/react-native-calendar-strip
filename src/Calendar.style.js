@@ -80,4 +80,22 @@ export default StyleSheet.create({
   selectedDot: {
     backgroundColor: 'blue'
   },
+
+  // Calendar Lines
+  line: {
+    height: 4,
+    marginTop: 3,
+    borderRadius: 1,
+    opacity: 0
+  },
+  linesContainer: {
+    justifyContent: 'center'
+  },
+  visibleLine: {
+    opacity: 1,
+    backgroundColor: 'blue'
+  },
+  selectedLine: {
+    backgroundColor: 'blue'
+  },
 });
