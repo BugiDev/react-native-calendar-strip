@@ -29,21 +29,25 @@ export default class App extends Component<{}> {
         dateContainerStyle: { backgroundColor: `#${(`#00000${(Math.random() * (1 << 24) | 0).toString(16)}`).slice(-6)}` },
       });
 
-      let dots = [{
-        key: i,
-        color: 'red',
-        selectedDotColor: 'yellow',
-      }];
-      if (i % 2) {  // add second dot to alternating days
+      let dots = [];
+      let lines = [];
+
+      if (i % 2) {
+        lines.push({
+          color: 'cyan',
+          selectedColor: 'orange',
+        });
+      }
+      else {
         dots.push({
-          key: i + 'b',
-          color: 'blue',
-          selectedDotColor: 'yellow',
+          color: 'red',
+          selectedColor: 'yellow',
         });
       }
       markedDates.push({
         date,
         dots,
+        lines
       });
     }
 

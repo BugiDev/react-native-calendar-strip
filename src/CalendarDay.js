@@ -18,7 +18,7 @@ class CalendarDay extends Component {
     datesWhitelist: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
     datesBlacklist: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
 
-    markedDates: PropTypes.array,
+    markedDates: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
 
     showDayName: PropTypes.bool,
     showDayNumber: PropTypes.bool,
@@ -88,7 +88,7 @@ class CalendarDay extends Component {
     let hasDateChanged = prevProps.date !== this.props.date;
 
     if ((this.props.selectedDate !== prevProps.selectedDate) || hasDateChanged) {
-      if (this.props.daySelectionAnimation.type !== "") {
+      if (this.props.daySelectionAnimation.type !== "" && !this.props.scrollable) {
         let configurableAnimation = {
           duration: this.props.daySelectionAnimation.duration || 300,
           create: {
@@ -236,14 +236,13 @@ class CalendarDay extends Component {
   }
 
   getDateMarking = (day, markedDates) => {
-    if (markedDates.length === 0) {
-      return {};
-    }
-    const date = markedDates.find(item => moment(day).isSame(item.date, "day"))
-    if (date && date.dots.length > 0) {
-      return date;
-    } else {
-      return {}
+    if (Array.isArray(markedDates)) {
+      if (markedDates.length === 0) {
+        return {};
+      }
+      return markedDates.find(md => moment(day).isSame(md.date, "day")) || {};
+    } else if (markedDates instanceof Function) {
+      return markedDates(day) || {};
     }
   }
 
@@ -268,36 +267,83 @@ class CalendarDay extends Component {
     }
   }
 
-  renderDots() {
+  renderMarking() {
     if (!this.props.markedDates || this.props.markedDates.length === 0) {
       return;
     }
     const marking = this.state.marking;
-    const baseDotStyle = [styles.dot, styles.visibleDot];
-    const markedDatesStyle = this.props.markedDatesStyle || {};
-    let validDots = <View style={[styles.dot]} />; // default empty view for no dots case
 
     if (marking.dots && Array.isArray(marking.dots) && marking.dots.length > 0) {
-      // Filter out dots so that we we process only those items which have key and color property
-      validDots = marking.dots
-        .filter(d => (d && d.color))
-        .map((dot, index) => {
-        return (
-          <View
-            key={dot.key ? dot.key : index}
-            style={[
-              baseDotStyle,
-              { backgroundColor: marking.selected && dot.selectedDotColor ? dot.selectedDotColor : dot.color },
-              markedDatesStyle
-            ]}
-          />
-        );
-      });
+      return this.renderDots(marking);
     }
+    if (marking.lines && Array.isArray(marking.lines) && marking.lines.length > 0) {
+      return this.renderLines(marking);
+    }
+
+    return ( // default empty spacer
+      <View style={styles.dotsContainer}>
+        <View style={[styles.dot]} />
+      </View>
+    );
+  }
+
+  renderDots(marking) {
+    const baseDotStyle = [styles.dot, styles.visibleDot];
+    const markedDatesStyle = this.props.markedDatesStyle || {};
+    const formattedDate = this.props.date.format('YYYY-MM-DD');
+    let validDots = <View style={[styles.dot]} />; // default empty view for no dots case
+
+    // Filter dots and process only those which have color property
+    validDots = marking.dots
+      .filter(d => (d && d.color))
+      .map((dot, index) => {
+      const selectedColor = dot.selectedColor || dot.selectedDotColor; // selectedDotColor deprecated
+      const backgroundColor = this.state.selected && selectedColor ? selectedColor : dot.color;
+      return (
+        <View
+          key={dot.key || (formattedDate + index)}
+          style={[
+            baseDotStyle,
+            { backgroundColor },
+            markedDatesStyle
+          ]}
+        />
+      );
+    });
 
     return (
       <View style={styles.dotsContainer}>
         {validDots}
+      </View>
+    );
+  }
+
+  renderLines(marking) {
+    const baseLineStyle = [styles.line, styles.visibleLine];
+    const markedDatesStyle = this.props.markedDatesStyle || {};
+    let validLines = <View style={[styles.line]} />; // default empty view
+
+    // Filter lines and process only those which have color property
+    validLines = marking.lines
+      .filter(d => (d && d.color))
+      .map((line, index) => {
+      const backgroundColor = this.state.selected && line.selectedColor ? line.selectedColor : line.color;
+      const width = this.props.size * 0.6;
+      return (
+        <View
+          key={line.key ? line.key : index}
+          style={[
+            baseLineStyle,
+            { backgroundColor, width },
+            markedDatesStyle
+          ]}
+        />
+      );
+    });
+
+    return (
+      <View style={styles.linesContainer}>
+        {validLines}
       </View>
     );
   }
@@ -431,7 +477,7 @@ class CalendarDay extends Component {
                 >
                   {date.date()}
                 </Text>
-                { this.renderDots() }
+                { this.renderMarking() }
               </View>
             )}
           </View>
