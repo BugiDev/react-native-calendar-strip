@@ -297,19 +297,19 @@ class CalendarDay extends Component {
     validDots = marking.dots
       .filter(d => (d && d.color))
       .map((dot, index) => {
-      const selectedColor = dot.selectedColor || dot.selectedDotColor; // selectedDotColor deprecated
-      const backgroundColor = this.state.selected && selectedColor ? selectedColor : dot.color;
-      return (
-        <View
-          key={dot.key || (formattedDate + index)}
-          style={[
-            baseDotStyle,
-            { backgroundColor },
-            markedDatesStyle
-          ]}
-        />
-      );
-    });
+        const selectedColor = dot.selectedColor || dot.selectedDotColor; // selectedDotColor deprecated
+        const backgroundColor = this.state.selected && selectedColor ? selectedColor : dot.color;
+        return (
+          <View
+            key={dot.key || (formattedDate + index)}
+            style={[
+              baseDotStyle,
+              { backgroundColor },
+              markedDatesStyle
+            ]}
+          />
+        );
+      });
 
     return (
       <View style={styles.dotsContainer}>
@@ -327,19 +327,19 @@ class CalendarDay extends Component {
     validLines = marking.lines
       .filter(d => (d && d.color))
       .map((line, index) => {
-      const backgroundColor = this.state.selected && line.selectedColor ? line.selectedColor : line.color;
-      const width = this.props.size * 0.6;
-      return (
-        <View
-          key={line.key ? line.key : index}
-          style={[
-            baseLineStyle,
-            { backgroundColor, width },
-            markedDatesStyle
-          ]}
-        />
-      );
-    });
+        const backgroundColor = this.state.selected && line.selectedColor ? line.selectedColor : line.color;
+        const width = this.props.size * 0.6;
+        return (
+          <View
+            key={line.key ? line.key : index}
+            style={[
+              baseLineStyle,
+              { backgroundColor, width },
+              markedDatesStyle
+            ]}
+          />
+        );
+      });
 
     return (
       <View style={styles.linesContainer}>
@@ -470,8 +470,8 @@ class CalendarDay extends Component {
               <View>
                 <Text
                   style={[
-                      { fontSize: dateNumberFontSize },
-                      _dateNumberStyle
+                    { fontSize: dateNumberFontSize },
+                    _dateNumberStyle
                   ]}
                   allowFontScaling={allowDayTextScaling}
                 >
