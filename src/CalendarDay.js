@@ -6,7 +6,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 
-import { Text, View, Animated, Easing, LayoutAnimation, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  Animated,
+  Easing,
+  LayoutAnimation,
+  TouchableOpacity
+} from "react-native";
 import styles from "./Calendar.style.js";
 
 class CalendarDay extends Component {
@@ -44,7 +51,7 @@ class CalendarDay extends Component {
     registerAnimation: PropTypes.func.isRequired,
     daySelectionAnimation: PropTypes.object,
     useNativeDriver: PropTypes.bool,
-    scrollable: PropTypes.bool,
+    scrollable: PropTypes.bool
   };
 
   // Reference: https://medium.com/@Jpoliachik/react-native-s-layoutanimation-is-awesome-4a4d317afd3e
@@ -69,7 +76,11 @@ class CalendarDay extends Component {
     super(props);
 
     this.state = {
-      enabled: this.isDateAllowed(props.date, props.datesBlacklist, props.datesWhitelist),
+      enabled: this.isDateAllowed(
+        props.date,
+        props.datesBlacklist,
+        props.datesWhitelist
+      ),
       selected: this.isDateSelected(props.date, props.selectedDate),
       customStyle: this.getCustomDateStyle(props.date, props.customDatesStyles),
       marking: this.getDateMarking(props.date, props.markedDates),
@@ -87,8 +98,11 @@ class CalendarDay extends Component {
     let doStateUpdate = false;
     let hasDateChanged = prevProps.date !== this.props.date;
 
-    if ((this.props.selectedDate !== prevProps.selectedDate) || hasDateChanged) {
-      if (this.props.daySelectionAnimation.type !== "" && !this.props.scrollable) {
+    if (this.props.selectedDate !== prevProps.selectedDate || hasDateChanged) {
+      if (
+        this.props.daySelectionAnimation.type !== "" &&
+        !this.props.scrollable
+      ) {
         let configurableAnimation = {
           duration: this.props.daySelectionAnimation.duration || 300,
           create: {
@@ -116,7 +130,10 @@ class CalendarDay extends Component {
         };
         LayoutAnimation.configureNext(configurableAnimation);
       }
-      newState.selected = this.isDateSelected(this.props.date, this.props.selectedDate);
+      newState.selected = this.isDateSelected(
+        this.props.date,
+        this.props.selectedDate
+      );
       doStateUpdate = true;
     }
 
@@ -125,21 +142,41 @@ class CalendarDay extends Component {
       doStateUpdate = true;
     }
 
-    if ((prevProps.customDatesStyles !== this.props.customDatesStyles) || hasDateChanged) {
-      newState = { ...newState, customStyle: this.getCustomDateStyle(this.props.date, this.props.customDatesStyles) };
+    if (
+      prevProps.customDatesStyles !== this.props.customDatesStyles ||
+      hasDateChanged
+    ) {
+      newState = {
+        ...newState,
+        customStyle: this.getCustomDateStyle(
+          this.props.date,
+          this.props.customDatesStyles
+        )
+      };
       doStateUpdate = true;
     }
 
-    if ((prevProps.markedDates !== this.props.markedDates) || hasDateChanged) {
-      newState = { ...newState, marking: this.getDateMarking(this.props.date, this.props.markedDates) };
+    if (prevProps.markedDates !== this.props.markedDates || hasDateChanged) {
+      newState = {
+        ...newState,
+        marking: this.getDateMarking(this.props.date, this.props.markedDates)
+      };
       doStateUpdate = true;
     }
 
-    if ((prevProps.datesBlacklist !== this.props.datesBlacklist) ||
-        (prevProps.datesWhitelist !== this.props.datesWhitelist) ||
-        hasDateChanged)
-    {
-      newState = { ...newState, enabled: this.isDateAllowed(this.props.date, this.props.datesBlacklist, this.props.datesWhitelist) };
+    if (
+      prevProps.datesBlacklist !== this.props.datesBlacklist ||
+      prevProps.datesWhitelist !== this.props.datesWhitelist ||
+      hasDateChanged
+    ) {
+      newState = {
+        ...newState,
+        enabled: this.isDateAllowed(
+          this.props.date,
+          this.props.datesBlacklist,
+          this.props.datesWhitelist
+        )
+      };
       doStateUpdate = true;
     }
 
@@ -155,7 +192,7 @@ class CalendarDay extends Component {
       dateNameFontSize: Math.round(props.size / 5),
       dateNumberFontSize: Math.round(props.size / 2.9)
     };
-  }
+  };
 
   //Function to check if provided date is the same as selected one, hence date is selected
   //using isSame moment query with "day" param so that it check years, months and day
@@ -164,7 +201,7 @@ class CalendarDay extends Component {
       return date === selectedDate;
     }
     return date.isSame(selectedDate, "day");
-  }
+  };
 
   // Check whether date is allowed
   isDateAllowed = (date, datesBlacklist, datesWhitelist) => {
@@ -206,7 +243,7 @@ class CalendarDay extends Component {
     }
 
     return true;
-  }
+  };
 
   getCustomDateStyle = (date, customDatesStyles) => {
     if (Array.isArray(customDatesStyles)) {
@@ -233,7 +270,7 @@ class CalendarDay extends Component {
     } else if (customDatesStyles instanceof Function) {
       return customDatesStyles(date);
     }
-  }
+  };
 
   getDateMarking = (day, markedDates) => {
     if (Array.isArray(markedDates)) {
@@ -244,20 +281,17 @@ class CalendarDay extends Component {
     } else if (markedDates instanceof Function) {
       return markedDates(day) || {};
     }
-  }
+  };
 
   createAnimation = () => {
-    const {
-      calendarAnimation,
-      useNativeDriver,
-    } = this.props
+    const { calendarAnimation, useNativeDriver } = this.props;
 
     if (calendarAnimation) {
       this.animation = Animated.timing(this.state.animatedValue, {
         toValue: 1,
         duration: calendarAnimation.duration,
         easing: Easing.linear,
-        useNativeDriver,
+        useNativeDriver
       });
 
       // Individual CalendarDay animation starts have unpredictable timing
@@ -265,7 +299,7 @@ class CalendarDay extends Component {
       // Send animation to parent to collect and start together.
       return this.animation;
     }
-  }
+  };
 
   renderMarking() {
     if (!this.props.markedDates || this.props.markedDates.length === 0) {
@@ -273,14 +307,23 @@ class CalendarDay extends Component {
     }
     const marking = this.state.marking;
 
-    if (marking.dots && Array.isArray(marking.dots) && marking.dots.length > 0) {
+    if (
+      marking.dots &&
+      Array.isArray(marking.dots) &&
+      marking.dots.length > 0
+    ) {
       return this.renderDots(marking);
     }
-    if (marking.lines && Array.isArray(marking.lines) && marking.lines.length > 0) {
+    if (
+      marking.lines &&
+      Array.isArray(marking.lines) &&
+      marking.lines.length > 0
+    ) {
       return this.renderLines(marking);
     }
 
-    return ( // default empty spacer
+    return (
+      // default empty spacer
       <View style={styles.dotsContainer}>
         <View style={[styles.dot]} />
       </View>
@@ -290,32 +333,23 @@ class CalendarDay extends Component {
   renderDots(marking) {
     const baseDotStyle = [styles.dot, styles.visibleDot];
     const markedDatesStyle = this.props.markedDatesStyle || {};
-    const formattedDate = this.props.date.format('YYYY-MM-DD');
+    const formattedDate = this.props.date.format("YYYY-MM-DD");
     let validDots = <View style={[styles.dot]} />; // default empty view for no dots case
 
     // Filter dots and process only those which have color property
-    validDots = marking.dots
-      .filter(d => (d && d.color))
-      .map((dot, index) => {
+    validDots = marking.dots.filter(d => d && d.color).map((dot, index) => {
       const selectedColor = dot.selectedColor || dot.selectedDotColor; // selectedDotColor deprecated
-      const backgroundColor = this.state.selected && selectedColor ? selectedColor : dot.color;
+      const backgroundColor =
+        this.state.selected && selectedColor ? selectedColor : dot.color;
       return (
         <View
-          key={dot.key || (formattedDate + index)}
-          style={[
-            baseDotStyle,
-            { backgroundColor },
-            markedDatesStyle
-          ]}
+          key={dot.key || formattedDate + index}
+          style={[baseDotStyle, { backgroundColor }, markedDatesStyle]}
         />
       );
     });
 
-    return (
-      <View style={styles.dotsContainer}>
-        {validDots}
-      </View>
-    );
+    return <View style={styles.dotsContainer}>{validDots}</View>;
   }
 
   renderLines(marking) {
@@ -324,28 +358,21 @@ class CalendarDay extends Component {
     let validLines = <View style={[styles.line]} />; // default empty view
 
     // Filter lines and process only those which have color property
-    validLines = marking.lines
-      .filter(d => (d && d.color))
-      .map((line, index) => {
-      const backgroundColor = this.state.selected && line.selectedColor ? line.selectedColor : line.color;
+    validLines = marking.lines.filter(d => d && d.color).map((line, index) => {
+      const backgroundColor =
+        this.state.selected && line.selectedColor
+          ? line.selectedColor
+          : line.color;
       const width = this.props.size * 0.6;
       return (
         <View
           key={line.key ? line.key : index}
-          style={[
-            baseLineStyle,
-            { backgroundColor, width },
-            markedDatesStyle
-          ]}
+          style={[baseLineStyle, { backgroundColor, width }, markedDatesStyle]}
         />
       );
     });
 
-    return (
-      <View style={styles.linesContainer}>
-        {validLines}
-      </View>
-    );
+    return <View style={styles.linesContainer}>{validLines}</View>;
   }
 
   render() {
@@ -369,7 +396,7 @@ class CalendarDay extends Component {
       showDayNumber,
       allowDayTextScaling,
       dayComponent: DayComponent,
-      scrollable,
+      scrollable
     } = this.props;
     const {
       enabled,
@@ -378,11 +405,17 @@ class CalendarDay extends Component {
       containerBorderRadius,
       customStyle,
       dateNameFontSize,
-      dateNumberFontSize,
+      dateNumberFontSize
     } = this.state;
 
-    let _dateNameStyle = [styles.dateName, enabled ? dateNameStyle : disabledDateNameStyle];
-    let _dateNumberStyle = [styles.dateNumber, enabled ? dateNumberStyle : disabledDateNumberStyle];
+    let _dateNameStyle = [
+      styles.dateName,
+      enabled ? dateNameStyle : disabledDateNameStyle
+    ];
+    let _dateNumberStyle = [
+      styles.dateNumber,
+      enabled ? dateNumberStyle : disabledDateNumberStyle
+    ];
     let _dateViewStyle = enabled
       ? [{ backgroundColor: "transparent" }]
       : [{ opacity: disabledDateOpacity }];
@@ -399,7 +432,9 @@ class CalendarDay extends Component {
       //If it is border, the user has to input color for border animation
       switch (daySelectionAnimation.type) {
         case "background":
-          _dateViewStyle.push({ backgroundColor: daySelectionAnimation.highlightColor });
+          _dateViewStyle.push({
+            backgroundColor: daySelectionAnimation.highlightColor
+          });
           break;
         case "border":
           _dateViewStyle.push({
@@ -414,38 +449,29 @@ class CalendarDay extends Component {
 
       _dateNameStyle = [styles.dateName, dateNameStyle];
       _dateNumberStyle = [styles.dateNumber, dateNumberStyle];
-      if (styleWeekend &&
+      if (
+        styleWeekend &&
         (date.isoWeekday() === 6 || date.isoWeekday() === 7)
       ) {
-        _dateNameStyle = [
-          styles.weekendDateName,
-          weekendDateNameStyle
-        ];
-        _dateNumberStyle = [
-          styles.weekendDateNumber,
-          weekendDateNumberStyle
-        ];
+        _dateNameStyle = [styles.weekendDateName, weekendDateNameStyle];
+        _dateNumberStyle = [styles.weekendDateNumber, weekendDateNumberStyle];
       }
       if (selected) {
         _dateNameStyle = [styles.dateName, highlightDateNameStyle];
-        _dateNumberStyle = [
-          styles.dateNumber,
-          highlightDateNumberStyle
-        ];
+        _dateNumberStyle = [styles.dateNumber, highlightDateNumberStyle];
       }
     }
 
     let responsiveDateContainerStyle = {
       width: containerSize,
       height: containerSize,
-      borderRadius: containerBorderRadius,
+      borderRadius: containerBorderRadius
     };
 
     let day;
     if (DayComponent) {
-      day = (<DayComponent {...this.props} {...this.state}/>);
-    }
-    else {
+      day = <DayComponent {...this.props} {...this.state} />;
+    } else {
       day = (
         <TouchableOpacity
           onPress={onDateSelected.bind(this, date)}
@@ -469,15 +495,12 @@ class CalendarDay extends Component {
             {showDayNumber && (
               <View>
                 <Text
-                  style={[
-                      { fontSize: dateNumberFontSize },
-                      _dateNumberStyle
-                  ]}
+                  style={[{ fontSize: dateNumberFontSize }, _dateNumberStyle]}
                   allowFontScaling={allowDayTextScaling}
                 >
                   {date.date()}
                 </Text>
-                { this.renderMarking() }
+                {this.renderMarking()}
               </View>
             )}
           </View>
@@ -486,16 +509,16 @@ class CalendarDay extends Component {
     }
 
     return calendarAnimation && !scrollable ? (
-      <Animated.View style={[
-        styles.dateRootContainer,
-        {opacity: this.state.animatedValue}
-      ]}>
+      <Animated.View
+        style={[
+          styles.dateRootContainer,
+          { opacity: this.state.animatedValue }
+        ]}
+      >
         {day}
       </Animated.View>
     ) : (
-      <View style={styles.dateRootContainer}>
-        {day}
-      </View>
+      <View style={styles.dateRootContainer}>{day}</View>
     );
   }
 }

@@ -8,7 +8,11 @@
 import React, { Component } from "react";
 import { View } from "react-native";
 import PropTypes from "prop-types";
-import { RecyclerListView, DataProvider, LayoutProvider } from "recyclerlistview";
+import {
+  RecyclerListView,
+  DataProvider,
+  LayoutProvider
+} from "recyclerlistview";
 import moment from "moment";
 
 export default class CalendarScroller extends Component {
@@ -21,12 +25,12 @@ export default class CalendarScroller extends Component {
     maxDate: PropTypes.any,
     maxSimultaneousDays: PropTypes.number,
     updateMonthYear: PropTypes.func,
-    onWeekChanged: PropTypes.func,
-  }
+    onWeekChanged: PropTypes.func
+  };
 
   static defaultProps = {
     data: [],
-    renderDayParams: {},
+    renderDayParams: {}
   };
 
   constructor(props) {
@@ -46,7 +50,7 @@ export default class CalendarScroller extends Component {
       );
 
       return { layoutProvider, itemHeight, itemWidth };
-    }
+    };
 
     this.dataProvider = new DataProvider((r1, r2) => {
       return r1 !== r2;
@@ -56,13 +60,13 @@ export default class CalendarScroller extends Component {
       return {
         data,
         numDays: data.length,
-        dataProvider: this.dataProvider.cloneWithRows(data),
-      }
-    }
+        dataProvider: this.dataProvider.cloneWithRows(data)
+      };
+    };
 
     this.state = {
       ...this.updateLayout(props.renderDayParams),
-      ...this.updateDaysData(props.data),
+      ...this.updateDaysData(props.data)
     };
   }
 
@@ -77,7 +81,7 @@ export default class CalendarScroller extends Component {
 
     if (this.props.data !== prevProps.data) {
       updateState = true;
-      newState = {...newState, ...this.updateDaysData(this.props.data)};
+      newState = { ...newState, ...this.updateDaysData(this.props.data) };
     }
 
     if (updateState) {
@@ -90,42 +94,49 @@ export default class CalendarScroller extends Component {
     if (this.state.visibleStartIndex === 0) {
       return;
     }
-    const newIndex = Math.max(this.state.visibleStartIndex - this.state.numVisibleItems, 0);
+    const newIndex = Math.max(
+      this.state.visibleStartIndex - this.state.numVisibleItems,
+      0
+    );
     this.rlv.scrollToIndex(newIndex, true);
-  }
+  };
 
   // Scroll right, guarding against end index.
   scrollRight = () => {
     const endIndex = this.state.visibleStartIndex + this.state.numVisibleItems;
-    if (endIndex === (this.state.numDays - 1)) {
+    if (endIndex === this.state.numDays - 1) {
       return;
     }
-    const newIndex = Math.min(endIndex, this.state.numDays - 1 - this.state.numVisibleItems);
+    const newIndex = Math.min(
+      endIndex,
+      this.state.numDays - 1 - this.state.numVisibleItems
+    );
     this.rlv.scrollToIndex(newIndex, true);
-  }
+  };
 
   // Shift dates when end of list is reached.
   shiftDaysForward = (visibleStartDate = this.state.visibleStartDate) => {
     const prevVisStart = visibleStartDate.clone();
-    const newStartDate = prevVisStart.clone().subtract(Math.floor(this.state.numDays / 3), "days");
+    const newStartDate = prevVisStart
+      .clone()
+      .subtract(Math.floor(this.state.numDays / 3), "days");
     this.updateDays(prevVisStart, newStartDate);
-  }
+  };
 
   // Shift dates when beginning of list is reached.
-  shiftDaysBackward = (visibleStartDate) => {
+  shiftDaysBackward = visibleStartDate => {
     const prevVisStart = visibleStartDate.clone();
-    const newStartDate = prevVisStart.clone().subtract(Math.floor(this.state.numDays * 2/3), "days");
+    const newStartDate = prevVisStart
+      .clone()
+      .subtract(Math.floor(this.state.numDays * 2 / 3), "days");
     this.updateDays(prevVisStart, newStartDate);
-  }
+  };
 
   updateDays = (prevVisStart, newStartDate) => {
     if (this.shifting) {
       return;
     }
-    const {
-      minDate,
-      maxDate,
-    } = this.props;
+    const { minDate, maxDate } = this.props;
     const data = [];
     let _newStartDate = newStartDate;
     if (minDate && newStartDate.isBefore(minDate, "day")) {
@@ -136,7 +147,7 @@ export default class CalendarScroller extends Component {
       if (maxDate && date.isAfter(maxDate, "day")) {
         break;
       }
-      data.push({date});
+      data.push({ date });
     }
     // Prevent reducing range when the minDate - maxDate range is small.
     if (data.length < this.props.maxSimultaneousDays) {
@@ -159,9 +170,9 @@ export default class CalendarScroller extends Component {
     }
     this.setState({
       data,
-      dataProvider: this.dataProvider.cloneWithRows(data),
+      dataProvider: this.dataProvider.cloneWithRows(data)
     });
-  }
+  };
 
   // Track which dates are visible.
   onVisibleIndicesChanged = (all, now, notNow) => {
@@ -170,28 +181,32 @@ export default class CalendarScroller extends Component {
       numDays,
       numVisibleItems,
       visibleStartDate: _visStartDate,
-      visibleEndDate: _visEndDate,
+      visibleEndDate: _visEndDate
     } = this.state;
     const visibleStartIndex = all[0];
     const visibleStartDate = data[visibleStartIndex].date;
-    const visibleEndIndex = Math.min(visibleStartIndex + numVisibleItems - 1, data.length - 1);
+    const visibleEndIndex = Math.min(
+      visibleStartIndex + numVisibleItems - 1,
+      data.length - 1
+    );
     const visibleEndDate = data[visibleEndIndex].date;
 
-    const {
-      updateMonthYear,
-      onWeekChanged,
-    } = this.props;
+    const { updateMonthYear, onWeekChanged } = this.props;
 
     // Fire month/year update on both week and month changes.  This is
     // necessary for the header and onWeekChanged updates.
-    if (!_visStartDate || !_visEndDate ||
-        !visibleStartDate.isSame(_visStartDate, "week") ||
-        !visibleEndDate.isSame(_visEndDate, "week") ||
-        !visibleStartDate.isSame(_visStartDate, "month") ||
-        !visibleEndDate.isSame(_visEndDate, "month") )
-    {
+    if (
+      !_visStartDate ||
+      !_visEndDate ||
+      !visibleStartDate.isSame(_visStartDate, "week") ||
+      !visibleEndDate.isSame(_visEndDate, "week") ||
+      !visibleStartDate.isSame(_visStartDate, "month") ||
+      !visibleEndDate.isSame(_visEndDate, "month")
+    ) {
       updateMonthYear && updateMonthYear(visibleStartDate, visibleEndDate);
-      onWeekChanged && onWeekChanged(visibleStartDate, visibleEndDate);
+      //return cloned moment dates rather than internal moment objects
+      onWeekChanged &&
+        onWeekChanged(moment(visibleStartDate), moment(visibleEndDate));
     }
 
     if (visibleStartIndex === 0) {
@@ -210,23 +225,29 @@ export default class CalendarScroller extends Component {
     this.setState({
       visibleStartDate,
       visibleEndDate,
-      visibleStartIndex,
+      visibleStartIndex
     });
-  }
+  };
 
   onLayout = event => {
     let width = event.nativeEvent.layout.width;
     this.setState({
-      numVisibleItems: Math.floor(width / this.state.itemWidth),
+      numVisibleItems: Math.floor(width / this.state.itemWidth)
     });
-  }
+  };
 
   rowRenderer = (type, data, i, extState) => {
-    return this.props.renderDay && this.props.renderDay({...data, ...extState});
-  }
+    return (
+      this.props.renderDay && this.props.renderDay({ ...data, ...extState })
+    );
+  };
 
   render() {
-    if (!this.state.data || this.state.numDays === 0 || !this.state.itemHeight) {
+    if (
+      !this.state.data ||
+      this.state.numDays === 0 ||
+      !this.state.itemHeight
+    ) {
       return null;
     }
     return (
@@ -235,7 +256,7 @@ export default class CalendarScroller extends Component {
         onLayout={this.onLayout}
       >
         <RecyclerListView
-          ref={rlv => this.rlv = rlv}
+          ref={rlv => (this.rlv = rlv)}
           layoutProvider={this.state.layoutProvider}
           dataProvider={this.state.dataProvider}
           rowRenderer={this.rowRenderer}
@@ -245,7 +266,7 @@ export default class CalendarScroller extends Component {
           isHorizontal
           scrollViewProps={{
             showsHorizontalScrollIndicator: false,
-            contentContainerStyle: {paddingRight: this.state.itemWidth / 2},
+            contentContainerStyle: { paddingRight: this.state.itemWidth / 2 }
           }}
         />
       </View>

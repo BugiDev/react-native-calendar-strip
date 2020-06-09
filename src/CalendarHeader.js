@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Text, TouchableOpacity } from "react-native";
+import moment from "moment";
 
 import styles from "./Calendar.style.js";
 
@@ -20,7 +21,7 @@ class CalendarHeader extends Component {
     allowHeaderTextScaling: PropTypes.bool,
     fontSize: PropTypes.number,
     headerText: PropTypes.string,
-    onHeaderSelected: PropTypes.func,
+    onHeaderSelected: PropTypes.func
   };
 
   shouldComponentUpdate(nextProps) {
@@ -77,13 +78,20 @@ class CalendarHeader extends Component {
       allowHeaderTextScaling,
       weekStartDate,
       weekEndDate,
-      headerText,
+      headerText
     } = this.props;
-    const _headerText = headerText || this.formatCalendarHeader(calendarHeaderFormat);
-
+    const _headerText =
+      headerText || this.formatCalendarHeader(calendarHeaderFormat);
+    //return cloned moment dates rather than internal moment objects
     return (
       <TouchableOpacity
-        onPress={onHeaderSelected && onHeaderSelected.bind(this, {weekStartDate, weekEndDate})}
+        onPress={
+          onHeaderSelected &&
+          onHeaderSelected.bind(this, {
+            weekStartDate: moment(weekStartDate),
+            weekEndDate: moment(weekEndDate)
+          })
+        }
         disabled={!onHeaderSelected}
         style={calendarHeaderContainerStyle}
       >
