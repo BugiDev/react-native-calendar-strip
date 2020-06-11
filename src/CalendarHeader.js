@@ -75,11 +75,13 @@ class CalendarHeader extends Component {
       calendarHeaderStyle,
       fontSize,
       allowHeaderTextScaling,
-      weekStartDate,
-      weekEndDate,
+      weekStartDate: _weekStartDate,
+      weekEndDate: _weekEndDate,
       headerText,
     } = this.props;
     const _headerText = headerText || this.formatCalendarHeader(calendarHeaderFormat);
+    const weekStartDate = _weekStartDate && _weekStartDate.clone();
+    const weekEndDate = _weekEndDate && _weekEndDate.clone();
 
     return (
       <TouchableOpacity

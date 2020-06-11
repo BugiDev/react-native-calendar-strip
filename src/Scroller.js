@@ -190,8 +190,10 @@ export default class CalendarScroller extends Component {
         !visibleStartDate.isSame(_visStartDate, "month") ||
         !visibleEndDate.isSame(_visEndDate, "month") )
     {
-      updateMonthYear && updateMonthYear(visibleStartDate, visibleEndDate);
-      onWeekChanged && onWeekChanged(visibleStartDate, visibleEndDate);
+      const visStart = visibleStartDate && visibleStartDate.clone();
+      const visEnd = visibleEndDate && visibleEndDate.clone();
+      updateMonthYear && updateMonthYear(visStart, visEnd);
+      onWeekChanged && onWeekChanged(visStart, visEnd);
     }
 
     if (visibleStartIndex === 0) {

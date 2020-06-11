@@ -280,7 +280,8 @@ class CalendarStrip extends Component {
       };
     }
     this.setState(newState);
-    this.props.onDateSelected && this.props.onDateSelected(selectedDate);
+    const _selectedDate = selectedDate && selectedDate.clone();
+    this.props.onDateSelected && this.props.onDateSelected(_selectedDate);
   }
 
   // Get the currently selected date (Moment JS object)
@@ -464,7 +465,9 @@ class CalendarStrip extends Component {
 
     const weekStartDate = datesList[0].date;
     const weekEndDate = datesList[this.state.numVisibleDays - 1].date;
-    onWeekChanged && onWeekChanged(weekStartDate, weekEndDate);
+    const _weekStartDate = weekStartDate && weekStartDate.clone();
+    const _weekEndDate = weekEndDate && weekStartDate.clone();
+    onWeekChanged && onWeekChanged(_weekStartDate, _weekEndDate);
 
     return {
       days,
