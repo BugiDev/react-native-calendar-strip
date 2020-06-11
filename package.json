@@ -26,7 +26,7 @@
   },
   "scripts": {
     "eslint": "eslint src/**/*.js __tests__/**/*.js --fix",
-    "test": "npm run format && jest",
+    "test": "npm run eslint && jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
     "contributors:add": "./node_modules/.bin/all-contributors add",
@@ -49,14 +49,16 @@
     "babel-jest": "^22.0.3",
     "babel-preset-react-native": "^4.0.0",
     "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.3.0",
     "eslint": "^4.13.1",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-react": "^7.5.1",
     "jest": "^22.0.3",
+    "react": "^16.13.1",
     "react-addons-test-utils": "^15.6.2",
     "react-dom": "^16.2.0",
-    "react-native": "^0.51.0",
+    "react-native": "^0.62.0",
     "react-test-renderer": "^16.2.0"
   },
   "keywords": [
@@ -83,6 +85,11 @@
       "src/**/*.js",
       "!src/img.js",
       "!example/*.js"
+    ],
+    "modulePathIgnorePatterns": [
+      "example",
+      "npm-cache",
+      ".npm"
     ],
     "collectCoverage": false,
     "globals": {
