@@ -466,7 +466,7 @@ class CalendarStrip extends Component {
     const weekStartDate = datesList[0].date;
     const weekEndDate = datesList[this.state.numVisibleDays - 1].date;
     const _weekStartDate = weekStartDate && weekStartDate.clone();
-    const _weekEndDate = weekEndDate && weekStartDate.clone();
+    const _weekEndDate = weekEndDate && weekEndDate.clone();
     onWeekChanged && onWeekChanged(_weekStartDate, _weekEndDate);
 
     return {
