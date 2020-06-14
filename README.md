@@ -187,6 +187,7 @@ AppRegistry.registerComponent('Example', () => Example);
 
 | Prop                 | Description                                                                                                                                                        | Type     | Default    |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ---------- |
+| **`numDaysInWeek`**  | Number of days shown in week. Applicable only when scrollable is false.                                                                                            | Number   | **`7`**    |
 | **`scrollable`**     | Dates are scrollable if true.                                                                                                                                      | Bool     | **`False`**|
 | **`startingDate`**   | Date to be used for centering the calendar/showing the week based on that date. It is internally wrapped by `moment` so it accepts both `Date` and `moment Date`.  | Any      |
 | **`selectedDate`**   | Date to be used as pre selected Date. It is internally wrapped by `moment` so it accepts both `Date` and `moment Date`.                                            | Any      |
