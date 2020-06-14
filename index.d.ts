@@ -53,7 +53,7 @@ declare module "react-native-calendar-strip" {
     size: number;
     allowDayTextScaling: boolean;
     markedDatesStyle: TextStyle;
-    markedDates?: any[];
+    markedDates?: any[] | (date: Date) => void;
   }
 
   type TDaySelectionAnimation =
@@ -71,6 +71,8 @@ declare module "react-native-calendar-strip" {
       innerStyle?: StyleProp<ViewStyle>;
       calendarColor?: string;
 
+      numDaysInWeek?: number;
+      scrollable?: boolean;
       startingDate?: Date;
       selectedDate?: Date;
       onDateSelected?: (date: Date) => void;
@@ -80,8 +82,8 @@ declare module "react-native-calendar-strip" {
       useIsoWeekday?: boolean;
       minDate?: Date;
       maxDate?: Date;
-      datesWhitelist?: TDateRange[];
-      datesBlacklist?: TDateRange[];
+      datesWhitelist?: TDateRange[] | (date: Date) => void;
+      datesBlacklist?: TDateRange[] | (date: Date) => void;
 
       showMonth?: boolean;
       showDayName?: boolean;
@@ -112,7 +114,7 @@ declare module "react-native-calendar-strip" {
       };
       daySelectionAnimation?: TDaySelectionAnimation;
 
-      customDatesStyles?: any[];
+      customDatesStyles?: any[] | (date: Date) => void;
 
       dayComponent?: (props: IDayComponentProps) => ReactNode;
 
