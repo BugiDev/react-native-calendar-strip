@@ -465,19 +465,25 @@ class CalendarStrip extends Component {
       }
     }
 
-    const weekStartDate = datesList[0].date;
-    const weekEndDate = datesList[this.state.numVisibleDays - 1].date;
-    const _weekStartDate = weekStartDate && weekStartDate.clone();
-    const _weekEndDate = weekEndDate && weekEndDate.clone();
-    onWeekChanged && onWeekChanged(_weekStartDate, _weekEndDate);
-
-    return {
+    const newState = {
       days,
       datesList,
       initialScrollerIndex,
-      weekStartDate,
-      weekEndDate,
     };
+
+    if (!scrollable) {
+      const weekStartDate = datesList[0].date;
+      const weekEndDate = datesList[this.state.numVisibleDays - 1].date;
+      newState.weekStartDate = weekStartDate;
+      newState.weekEndDate = weekEndDate;
+
+      const _weekStartDate = weekStartDate && weekStartDate.clone();
+      const _weekEndDate = weekEndDate && weekEndDate.clone();
+      onWeekChanged && onWeekChanged(_weekStartDate, _weekEndDate);
+    }
+    // else Scroller sets weekStart/EndDate and fires onWeekChanged.
+
+    return newState;
   }
 
   renderDay(props) {
