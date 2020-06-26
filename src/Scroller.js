@@ -97,11 +97,11 @@ export default class CalendarScroller extends Component {
 
   // Scroll right, guarding against end index.
   scrollRight = () => {
-    const endIndex = this.state.visibleStartIndex + this.state.numVisibleItems;
-    if (endIndex === (this.state.numDays - 1)) {
+    const newIndex = this.state.visibleStartIndex + this.state.numVisibleItems;
+    if (newIndex >= (this.state.numDays - 1)) {
+      this.rlv.scrollToEnd(true); // scroll to the very end, including padding
       return;
     }
-    const newIndex = Math.min(endIndex, this.state.numDays - 1 - this.state.numVisibleItems);
     this.rlv.scrollToIndex(newIndex, true);
   }
 
@@ -193,9 +193,11 @@ export default class CalendarScroller extends Component {
     {
       const visStart = visibleStartDate && visibleStartDate.clone();
       const visEnd = visibleEndDate && visibleEndDate.clone();
-      updateMonthYear && updateMonthYear(visStart, visEnd);
       onWeekChanged && onWeekChanged(visStart, visEnd);
     }
+
+    // Always update weekstart/end for WeekSelectors.
+    updateMonthYear && updateMonthYear(visibleStartDate, visibleEndDate);
 
     if (visibleStartIndex === 0) {
       this.shiftDaysBackward(visibleStartDate);
