@@ -63,6 +63,7 @@ export default class CalendarScroller extends Component {
     this.state = {
       ...this.updateLayout(props.renderDayParams),
       ...this.updateDaysData(props.data),
+      numVisibleItems: 1, // updated in onLayout
     };
   }
 
