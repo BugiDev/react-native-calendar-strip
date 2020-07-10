@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/BugiDev/react-native-calendar-strip/issues"
   },
-  "version": "2.0.6",
+  "version": "2.0.7",
   "main": "index.js",
   "directories": {
     "example": "example"
@@ -31,7 +31,7 @@
     "test:watch": "jest --watch",
     "contributors:add": "./node_modules/.bin/all-contributors add",
     "contributors:generate": "./node_modules/.bin/all-contributors generate",
-    "postinstall": "./node_modules/.bin/node-git-hooks"
+    "postinstall": "node-git-hooks"
   },
   "dependencies": {
     "moment": ">=2.0.0",
