@@ -28,6 +28,7 @@ class CalendarDay extends Component {
 
     dateNameStyle: PropTypes.any,
     dateNumberStyle: PropTypes.any,
+    getDateNameText: PropTypes.func,
     weekendDateNameStyle: PropTypes.any,
     weekendDateNumberStyle: PropTypes.any,
     highlightDateNameStyle: PropTypes.any,
@@ -354,6 +355,7 @@ class CalendarDay extends Component {
       date,
       dateNameStyle,
       dateNumberStyle,
+      getDateNameText,
       disabledDateNameStyle,
       disabledDateNumberStyle,
       disabledDateOpacity,
@@ -463,7 +465,7 @@ class CalendarDay extends Component {
                 style={[{ fontSize: dateNameFontSize }, _dateNameStyle]}
                 allowFontScaling={allowDayTextScaling}
               >
-                {date.format("ddd").toUpperCase()}
+                {getDateNameText ? getDateNameText(date) : date.format("ddd").toUpperCase()}
               </Text>
             )}
             {showDayNumber && (
