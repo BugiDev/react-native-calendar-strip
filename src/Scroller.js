@@ -32,6 +32,8 @@ export default class CalendarScroller extends Component {
   constructor(props) {
     super(props);
 
+    this.timeoutResetPositionId = null;
+
     this.updateLayout = renderDayParams => {
       const itemHeight = renderDayParams.size;
       const itemWidth = itemHeight + renderDayParams.marginHorizontal * 2;
@@ -65,6 +67,13 @@ export default class CalendarScroller extends Component {
       ...this.updateDaysData(props.data),
       numVisibleItems: 1, // updated in onLayout
     };
+  }
+
+  componentWillUnmount() {
+    if (this.timeoutResetPositionId !== null) {
+      clearTimeout(this.timeoutResetPositionId);
+      this.timeoutResetPositionId = null;
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -151,7 +160,8 @@ export default class CalendarScroller extends Component {
         this.rlv.scrollToIndex(i, false);
         // RecyclerListView sometimes returns position to old index after
         // moving to the new one. Set position again after delay.
-        setTimeout(() => {
+        this.timeoutResetPositionId = setTimeout(() => {
+          this.timeoutResetPositionId = null;
           this.rlv.scrollToIndex(i, false);
           this.shifting = false; // debounce
         }, 800);
