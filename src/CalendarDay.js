@@ -136,9 +136,8 @@ class CalendarDay extends Component {
     }
 
     if ((prevProps.datesBlacklist !== this.props.datesBlacklist) ||
-        (prevProps.datesWhitelist !== this.props.datesWhitelist) ||
-        hasDateChanged)
-    {
+      (prevProps.datesWhitelist !== this.props.datesWhitelist) ||
+      hasDateChanged) {
       newState = { ...newState, enabled: this.isDateAllowed(this.props.date, this.props.datesBlacklist, this.props.datesWhitelist) };
       doStateUpdate = true;
     }
@@ -383,9 +382,18 @@ class CalendarDay extends Component {
 
     let _dateNameStyle = [styles.dateName, enabled ? dateNameStyle : disabledDateNameStyle];
     let _dateNumberStyle = [styles.dateNumber, enabled ? dateNumberStyle : disabledDateNumberStyle];
-    let _dateViewStyle = enabled
-      ? [{ backgroundColor: "transparent" }]
-      : [{ opacity: disabledDateOpacity }];
+    let _dateViewStyle = [
+      {
+        borderRadius: 50,
+        paddingVertical: 8,
+        paddingHorizontal: 5,
+        marginBottom: 5,
+        width: 40,
+      },
+      enabled
+        ? { backgroundColor: "transparent" }
+        : { opacity: disabledDateOpacity }
+    ]
 
     if (customStyle) {
       _dateNameStyle.push(customStyle.dateNameStyle);
@@ -399,7 +407,9 @@ class CalendarDay extends Component {
       //If it is border, the user has to input color for border animation
       switch (daySelectionAnimation.type) {
         case "background":
-          _dateViewStyle.push({ backgroundColor: daySelectionAnimation.highlightColor });
+          _dateViewStyle.push({
+            backgroundColor: daySelectionAnimation.highlightColor,
+          });
           break;
         case "border":
           _dateViewStyle.push({
@@ -408,7 +418,11 @@ class CalendarDay extends Component {
           });
           break;
         default:
-          // No animation styling by default
+          _dateViewStyle.push({
+            backgroundColor: daySelectionAnimation.highlightColor,
+            borderColor: daySelectionAnimation.highlightBorderColor,
+            borderWidth: daySelectionAnimation.borderWidth,
+          });
           break;
       }
 
@@ -433,6 +447,11 @@ class CalendarDay extends Component {
           highlightDateNumberStyle
         ];
       }
+    } else {
+      _dateViewStyle.push({
+        borderColor: '#acacac',
+        borderWidth: 1,
+      });
     }
 
     let responsiveDateContainerStyle = {
@@ -443,7 +462,7 @@ class CalendarDay extends Component {
 
     let day;
     if (DayComponent) {
-      day = (<DayComponent {...this.props} {...this.state}/>);
+      day = (<DayComponent {...this.props} {...this.state} />);
     }
     else {
       day = (
@@ -455,9 +474,24 @@ class CalendarDay extends Component {
             style={[
               styles.dateContainer,
               responsiveDateContainerStyle,
-              _dateViewStyle
+              // _dateViewStyle // added by library owner
             ]}
           >
+            {showDayNumber && (
+              <View>
+                <Text
+                  style={[
+                    { fontSize: dateNumberFontSize },
+                    _dateNumberStyle,
+                    _dateViewStyle
+                  ]}
+                  allowFontScaling={allowDayTextScaling}
+                >
+                  {date.date()}
+                </Text>
+                {this.renderMarking()}
+              </View>
+            )}
             {showDayName && (
               <Text
                 style={[{ fontSize: dateNameFontSize }, _dateNameStyle]}
@@ -465,20 +499,6 @@ class CalendarDay extends Component {
               >
                 {date.format("ddd").toUpperCase()}
               </Text>
-            )}
-            {showDayNumber && (
-              <View>
-                <Text
-                  style={[
-                    { fontSize: dateNumberFontSize },
-                    _dateNumberStyle
-                  ]}
-                  allowFontScaling={allowDayTextScaling}
-                >
-                  {date.date()}
-                </Text>
-                { this.renderMarking() }
-              </View>
             )}
           </View>
         </TouchableOpacity>
@@ -488,15 +508,15 @@ class CalendarDay extends Component {
     return calendarAnimation && !scrollable ? (
       <Animated.View style={[
         styles.dateRootContainer,
-        {opacity: this.state.animatedValue}
+        { opacity: this.state.animatedValue }
       ]}>
         {day}
       </Animated.View>
     ) : (
-      <View style={styles.dateRootContainer}>
-        {day}
-      </View>
-    );
+        <View style={styles.dateRootContainer}>
+          {day}
+        </View>
+      );
   }
 }
 
