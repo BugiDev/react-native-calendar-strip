@@ -76,7 +76,6 @@ export default class App extends Component<{}> {
           daySelectionAnimation={{type: 'background', duration: 300, highlightColor: '#9265DC'}}
           style={{height:200, paddingTop: 20, paddingBottom: 10}}
           calendarHeaderStyle={{color: 'white'}}
-          scrollerStyle={{ backgroundColor: '#8f98d9' }}
           calendarColor={'#3343CE'}
           dateNumberStyle={{color: 'white'}}
           dateNameStyle={{color: 'white'}}
@@ -86,6 +85,7 @@ export default class App extends Component<{}> {
           datesBlacklist={this.datesBlacklistFunc}
           onDateSelected={this.onDateSelected}
           useIsoWeekday={false}
+          dayComponentHeight={50}
         />
         <Text style={{fontSize: 24}}>Selected Date: {this.state.formattedDate}</Text>
       </View>
