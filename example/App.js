@@ -76,6 +76,7 @@ export default class App extends Component<{}> {
           daySelectionAnimation={{type: 'background', duration: 300, highlightColor: '#9265DC'}}
           style={{height:200, paddingTop: 20, paddingBottom: 10}}
           calendarHeaderStyle={{color: 'white'}}
+          scrollerStyle={{ backgroundColor: '#8f98d9' }}
           calendarColor={'#3343CE'}
           dateNumberStyle={{color: 'white'}}
           dateNameStyle={{color: 'white'}}

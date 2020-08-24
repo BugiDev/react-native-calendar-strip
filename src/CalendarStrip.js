@@ -62,6 +62,7 @@ class CalendarStrip extends Component {
 
     calendarHeaderContainerStyle: PropTypes.any,
     calendarHeaderStyle: PropTypes.any,
+    scrollerStyle: PropTypes.any,
     calendarHeaderFormat: PropTypes.string,
     calendarHeaderPosition: PropTypes.oneOf(["above", "below"]),
 
@@ -522,6 +523,7 @@ class CalendarStrip extends Component {
           maxDate={this.props.maxDate}
           updateMonthYear={this.updateMonthYear}
           onWeekChanged={this.props.onWeekChanged}
+          scrollerStyle={this.props.scrollerStyle}
         />
       );
     }
