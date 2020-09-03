@@ -478,12 +478,11 @@ class CalendarDay extends Component {
             ]}
           >
             {showDayNumber && (
-              <View>
+              <View style={_dateViewStyle}>
                 <Text
                   style={[
                     { fontSize: dateNumberFontSize },
                     _dateNumberStyle,
-                    _dateViewStyle
                   ]}
                   allowFontScaling={allowDayTextScaling}
                 >
