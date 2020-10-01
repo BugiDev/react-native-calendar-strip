@@ -156,8 +156,8 @@ class CalendarStrip extends Component {
 
     if(!this.compareDates(prevProps.selectedDate, this.props.selectedDate)){
       updateState = true;
-      selectedDate = { selectedDate: this.setLocale(this.props.selectedDate)};
-      let date = this.setLocale(this.props.selectedDate);
+      const date = this.setLocale(this.props.selectedDate);
+      selectedDate = { selectedDate: date};
       days = this.createDays(date.startOf("isoweek"), selectedDate.selectedDate);
     }
 
