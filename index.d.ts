@@ -13,10 +13,10 @@ declare module "react-native-calendar-strip" {
     duration: number;
     borderWidth: number;
     borderHighlightColor: string;
-    animType: any;
-    animUpdateType: any;
-    animProperty: any;
-    animSpringDamping: any;
+    animType?: any;
+    animUpdateType?: any;
+    animProperty?: any;
+    animSpringDamping?: any;
   }
 
   interface IDaySelectionAnimationBackground {
