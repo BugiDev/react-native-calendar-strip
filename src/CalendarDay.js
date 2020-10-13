@@ -313,7 +313,7 @@ class CalendarDay extends Component {
 
     return (
       <View style={styles.dotsContainer}>
-        <Image source={require('./img/heart.png')}></Image>
+        <Image style={{width: 8}} resizeMode="contain" source={require('./img/heart.png')}></Image>
       </View>
     );
   }
