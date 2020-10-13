@@ -23,6 +23,11 @@ class CalendarStrip extends Component {
     style: PropTypes.any,
     innerStyle: PropTypes.any,
     calendarColor: PropTypes.string,
+    customContainerDateStyle: {
+      style: PropTypes.any,
+      disabled: PropTypes.any,
+      highlight: PropTypes.any,
+    },
 
     numDaysInWeek: PropTypes.number,
     scrollable: PropTypes.bool,
@@ -46,6 +51,7 @@ class CalendarStrip extends Component {
     showDayNumber: PropTypes.bool,
     showDate: PropTypes.bool,
 
+    scrollContainerStyle: PropTypes.any,
     dayComponent: PropTypes.any,
     leftSelector: PropTypes.any,
     rightSelector: PropTypes.any,
@@ -390,6 +396,7 @@ class CalendarStrip extends Component {
       showDayName: this.props.showDayName,
       showDayNumber: this.props.showDayNumber,
       dayComponent: this.props.dayComponent,
+      customContainerDateStyle: this.props.customContainerDateStyle,
       calendarColor: this.props.calendarColor,
       dateNameStyle: this.props.dateNameStyle,
       dateNumberStyle: this.props.dateNumberStyle,
@@ -522,6 +529,7 @@ class CalendarStrip extends Component {
           maxDate={this.props.maxDate}
           updateMonthYear={this.updateMonthYear}
           onWeekChanged={this.props.onWeekChanged}
+          scrollContainerStyle={this.props.scrollContainerStyle}
         />
       );
     }

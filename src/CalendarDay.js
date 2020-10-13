@@ -39,6 +39,12 @@ class CalendarDay extends Component {
     customDatesStyles: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
     markedDatesStyle: PropTypes.object,
     allowDayTextScaling: PropTypes.bool,
+    
+    customContainerDateStyle: {
+      style: PropTypes.any,
+      disabled: PropTypes.any,
+      highlight: PropTypes.any,
+    },
 
     calendarAnimation: PropTypes.object,
     registerAnimation: PropTypes.func.isRequired,
@@ -370,6 +376,7 @@ class CalendarDay extends Component {
       allowDayTextScaling,
       dayComponent: DayComponent,
       scrollable,
+      customContainerDateStyle,
     } = this.props;
     const {
       enabled,
@@ -386,6 +393,7 @@ class CalendarDay extends Component {
     let _dateViewStyle = enabled
       ? [{ backgroundColor: "transparent" }]
       : [{ opacity: disabledDateOpacity }];
+      let _dateContainerStyle = [enabled ? customContainerDateStyle && customContainerDateStyle.style : customContainerDateStyle && customContainerDateStyle.disabled];
 
     if (customStyle) {
       _dateNameStyle.push(customStyle.dateNameStyle);
@@ -427,6 +435,9 @@ class CalendarDay extends Component {
         ];
       }
       if (selected) {
+        if (_dateContainerStyle) {
+          _dateContainerStyle = customContainerDateStyle && customContainerDateStyle.highlight;
+        }
         _dateNameStyle = [styles.dateName, highlightDateNameStyle];
         _dateNumberStyle = [
           styles.dateNumber,
@@ -455,7 +466,8 @@ class CalendarDay extends Component {
             style={[
               styles.dateContainer,
               responsiveDateContainerStyle,
-              _dateViewStyle
+              _dateViewStyle,
+              _dateContainerStyle
             ]}
           >
             {showDayName && (

@@ -22,6 +22,7 @@ export default class CalendarScroller extends Component {
     maxSimultaneousDays: PropTypes.number,
     updateMonthYear: PropTypes.func,
     onWeekChanged: PropTypes.func,
+    scrollContainerStyle: PropTypes.any,
   }
 
   static defaultProps = {
@@ -241,12 +242,13 @@ export default class CalendarScroller extends Component {
   }
 
   render() {
+    const { scrollContainerStyle } = this.props;
     if (!this.state.data || this.state.numDays === 0 || !this.state.itemHeight) {
       return null;
     }
     return (
       <View
-        style={{ height: this.state.itemHeight, flex: 1 }}
+        style={[{ height: this.state.itemHeight, flex: 1 }, scrollContainerStyle]}
         onLayout={this.onLayout}
       >
         <RecyclerListView
