@@ -348,6 +348,19 @@ class CalendarDay extends Component {
     );
   }
 
+  //Marked Text Styles
+  getMarkedTextStyles() {
+    if (!this.props.markedDates || this.props.markedDates.length === 0) {
+      return null;
+    }
+    const marking = this.state.marking;
+    if(marking.textStyle){
+      return marking.textStyle;
+    }else{
+      return null;
+    }
+  }
+
   render() {
     // Defaults for disabled state
     const {
@@ -460,7 +473,7 @@ class CalendarDay extends Component {
           >
             {showDayName && (
               <Text
-                style={[{ fontSize: dateNameFontSize }, _dateNameStyle]}
+                style={[{ fontSize: dateNameFontSize }, _dateNameStyle, this.getMarkedTextStyles()]}
                 allowFontScaling={allowDayTextScaling}
               >
                 {date.format("ddd").toUpperCase()}
@@ -471,7 +484,8 @@ class CalendarDay extends Component {
                 <Text
                   style={[
                     { fontSize: dateNumberFontSize },
-                    _dateNumberStyle
+                    _dateNumberStyle,
+                    this.getMarkedTextStyles()
                   ]}
                   allowFontScaling={allowDayTextScaling}
                 >
