@@ -159,6 +159,10 @@ class CalendarStrip extends Component {
       days = this.createDays(startingDate.startingDate);
     }
 
+    if (prevProps.selectedDate !== this.props.selectedDate) {
+      this.setState({ selectedDate: this.props.selectedDate })
+    }
+
     if (updateState) {
       this.setState({...startingDate, ...days });
     }
