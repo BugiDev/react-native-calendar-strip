@@ -129,6 +129,15 @@ declare module "react-native-calendar-strip" {
       disabledDateOpacity?: number;
       styleWeekend?: boolean;
 
+      customContainerDateStyle?: {
+        style: StyleProp<ViewStyle>;
+        disabled: StyleProp<ViewStyle>;
+        highlight: StyleProp<ViewStyle>;
+      }
+      scrollContainerStyle?: StyleProp<ViewStyle>;
+
+      onVisibleIndicesChangedCallback?: () => void;
+
       locale?: object;
       shouldAllowFontScaling?: boolean;
       useNativeDriver?: boolean;
