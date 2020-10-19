@@ -23,6 +23,7 @@ export default class CalendarScroller extends Component {
     updateMonthYear: PropTypes.func,
     onWeekChanged: PropTypes.func,
     scrollContainerStyle: PropTypes.any,
+    onVisibleIndicesChangedCallback: PropTypes.func,
   }
 
   static defaultProps = {
@@ -205,6 +206,10 @@ export default class CalendarScroller extends Component {
       const visStart = visibleStartDate && visibleStartDate.clone();
       const visEnd = visibleEndDate && visibleEndDate.clone();
       onWeekChanged && onWeekChanged(visStart, visEnd);
+    }
+
+    if (this.props.onVisibleIndicesChangedCallback) {
+      this.props.onVisibleIndicesChangedCallback()
     }
 
     // Always update weekstart/end for WeekSelectors.

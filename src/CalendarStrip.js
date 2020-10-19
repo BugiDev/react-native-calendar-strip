@@ -90,7 +90,9 @@ class CalendarStrip extends Component {
 
     locale: PropTypes.object,
     shouldAllowFontScaling: PropTypes.bool,
-    useNativeDriver: PropTypes.bool
+    useNativeDriver: PropTypes.bool,
+
+    onVisibleIndicesChangedCallback: PropTypes.func
   };
 
   static defaultProps = {
@@ -534,6 +536,7 @@ class CalendarStrip extends Component {
           updateMonthYear={this.updateMonthYear}
           onWeekChanged={this.props.onWeekChanged}
           scrollContainerStyle={this.props.scrollContainerStyle}
+          onVisibleIndicesChangedCallback={this.props.onVisibleIndicesChangedCallback}
         />
       );
     }
