@@ -216,7 +216,7 @@ export default class CalendarScroller extends Component {
     updateMonthYear && updateMonthYear(visibleStartDate, visibleEndDate);
 
     if (visibleStartIndex === 0) {
-      this.shiftDaysBackward(visibleStartDate);
+      // this.shiftDaysBackward(visibleStartDate);
     } else {
       const minEndOffset = numDays - numVisibleItems;
       if (minEndOffset > numVisibleItems) {
