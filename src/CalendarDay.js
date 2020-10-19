@@ -93,25 +93,25 @@ class CalendarDay extends Component {
           duration: this.props.daySelectionAnimation.duration || 300,
           create: {
             type:
-              this.props.daySelectionAnimation.animType ||
-              LayoutAnimation.Types.easeInEaseOut,
+                this.props.daySelectionAnimation.animType ||
+                LayoutAnimation.Types.easeInEaseOut,
             property:
-              this.props.daySelectionAnimation.animProperty ||
-              LayoutAnimation.Properties.opacity
+                this.props.daySelectionAnimation.animProperty ||
+                LayoutAnimation.Properties.opacity
           },
           update: {
             type:
-              this.props.daySelectionAnimation.animUpdateType ||
-              LayoutAnimation.Types.easeInEaseOut,
+                this.props.daySelectionAnimation.animUpdateType ||
+                LayoutAnimation.Types.easeInEaseOut,
             springDamping: this.props.daySelectionAnimation.animSpringDamping
           },
           delete: {
             type:
-              this.props.daySelectionAnimation.animType ||
-              LayoutAnimation.Types.easeInEaseOut,
+                this.props.daySelectionAnimation.animType ||
+                LayoutAnimation.Types.easeInEaseOut,
             property:
-              this.props.daySelectionAnimation.animProperty ||
-              LayoutAnimation.Properties.opacity
+                this.props.daySelectionAnimation.animProperty ||
+                LayoutAnimation.Properties.opacity
           }
         };
         LayoutAnimation.configureNext(configurableAnimation);
@@ -214,12 +214,12 @@ class CalendarDay extends Component {
         if (customDateStyle.endDate) {
           // Range
           if (
-            date.isBetween(
-              customDateStyle.startDate,
-              customDateStyle.endDate,
-              "day",
-              "[]"
-            )
+              date.isBetween(
+                  customDateStyle.startDate,
+                  customDateStyle.endDate,
+                  "day",
+                  "[]"
+              )
           ) {
             return customDateStyle;
           }
@@ -281,9 +281,9 @@ class CalendarDay extends Component {
     }
 
     return ( // default empty spacer
-      <View style={styles.dotsContainer}>
-        <View style={[styles.dot]} />
-      </View>
+        <View style={styles.dotsContainer}>
+          <View style={[styles.dot]} />
+        </View>
     );
   }
 
@@ -295,26 +295,26 @@ class CalendarDay extends Component {
 
     // Filter dots and process only those which have color property
     validDots = marking.dots
-      .filter(d => (d && d.color))
-      .map((dot, index) => {
-        const selectedColor = dot.selectedColor || dot.selectedDotColor; // selectedDotColor deprecated
-        const backgroundColor = this.state.selected && selectedColor ? selectedColor : dot.color;
-        return (
-          <View
-            key={dot.key || (formattedDate + index)}
-            style={[
-              baseDotStyle,
-              { backgroundColor },
-              markedDatesStyle
-            ]}
-          />
-        );
-      });
+        .filter(d => (d && d.color))
+        .map((dot, index) => {
+          const selectedColor = dot.selectedColor || dot.selectedDotColor; // selectedDotColor deprecated
+          const backgroundColor = this.state.selected && selectedColor ? selectedColor : dot.color;
+          return (
+              <View
+                  key={dot.key || (formattedDate + index)}
+                  style={[
+                    baseDotStyle,
+                    { backgroundColor },
+                    markedDatesStyle
+                  ]}
+              />
+          );
+        });
 
     return (
-      <View style={styles.dotsContainer}>
-        {validDots}
-      </View>
+        <View style={styles.dotsContainer}>
+          {validDots}
+        </View>
     );
   }
 
@@ -325,26 +325,26 @@ class CalendarDay extends Component {
 
     // Filter lines and process only those which have color property
     validLines = marking.lines
-      .filter(d => (d && d.color))
-      .map((line, index) => {
-        const backgroundColor = this.state.selected && line.selectedColor ? line.selectedColor : line.color;
-        const width = this.props.size * 0.6;
-        return (
-          <View
-            key={line.key ? line.key : index}
-            style={[
-              baseLineStyle,
-              { backgroundColor, width },
-              markedDatesStyle
-            ]}
-          />
-        );
-      });
+        .filter(d => (d && d.color))
+        .map((line, index) => {
+          const backgroundColor = this.state.selected && line.selectedColor ? line.selectedColor : line.color;
+          const width = this.props.size * 0.6;
+          return (
+              <View
+                  key={line.key ? line.key : index}
+                  style={[
+                    baseLineStyle,
+                    { backgroundColor, width },
+                    markedDatesStyle
+                  ]}
+              />
+          );
+        });
 
     return (
-      <View style={styles.linesContainer}>
-        {validLines}
-      </View>
+        <View style={styles.linesContainer}>
+          {validLines}
+        </View>
     );
   }
 
@@ -361,6 +361,8 @@ class CalendarDay extends Component {
       daySelectionAnimation,
       highlightDateNameStyle,
       highlightDateNumberStyle,
+      viewHighlightDateNameStyle,
+      viewHighlightDateNumberStyle,
       styleWeekend,
       weekendDateNameStyle,
       weekendDateNumberStyle,
@@ -381,11 +383,12 @@ class CalendarDay extends Component {
       dateNumberFontSize,
     } = this.state;
 
+    let _dateViewNumberStyle;
     let _dateNameStyle = [styles.dateName, enabled ? dateNameStyle : disabledDateNameStyle];
     let _dateNumberStyle = [styles.dateNumber, enabled ? dateNumberStyle : disabledDateNumberStyle];
     let _dateViewStyle = enabled
-      ? [{ backgroundColor: "transparent" }]
-      : [{ opacity: disabledDateOpacity }];
+        ? [{ backgroundColor: "transparent" }]
+        : [{ opacity: disabledDateOpacity }];
 
     if (customStyle) {
       _dateNameStyle.push(customStyle.dateNameStyle);
@@ -415,7 +418,7 @@ class CalendarDay extends Component {
       _dateNameStyle = [styles.dateName, dateNameStyle];
       _dateNumberStyle = [styles.dateNumber, dateNumberStyle];
       if (styleWeekend &&
-        (date.isoWeekday() === 6 || date.isoWeekday() === 7)
+          (date.isoWeekday() === 6 || date.isoWeekday() === 7)
       ) {
         _dateNameStyle = [
           styles.weekendDateName,
@@ -427,6 +430,8 @@ class CalendarDay extends Component {
         ];
       }
       if (selected) {
+        _dateViewNumberStyle = viewHighlightDateNumberStyle
+        _dateViewStyle.push(viewHighlightDateNameStyle)
         _dateNameStyle = [styles.dateName, highlightDateNameStyle];
         _dateNumberStyle = [
           styles.dateNumber,
@@ -447,55 +452,55 @@ class CalendarDay extends Component {
     }
     else {
       day = (
-        <TouchableOpacity
-          onPress={onDateSelected.bind(this, date)}
-          disabled={!enabled}
-        >
-          <View
-            style={[
-              styles.dateContainer,
-              responsiveDateContainerStyle,
-              _dateViewStyle
-            ]}
+          <TouchableOpacity
+              onPress={onDateSelected.bind(this, date)}
+              disabled={!enabled}
           >
-            {showDayName && (
-              <Text
-                style={[{ fontSize: dateNameFontSize }, _dateNameStyle]}
-                allowFontScaling={allowDayTextScaling}
-              >
-                {date.format("ddd").toUpperCase()}
-              </Text>
-            )}
-            {showDayNumber && (
-              <View>
-                <Text
-                  style={[
-                    { fontSize: dateNumberFontSize },
-                    _dateNumberStyle
-                  ]}
-                  allowFontScaling={allowDayTextScaling}
-                >
-                  {date.date()}
-                </Text>
-                { this.renderMarking() }
-              </View>
-            )}
-          </View>
-        </TouchableOpacity>
+            <View
+                style={[
+                  styles.dateContainer,
+                  responsiveDateContainerStyle,
+                  _dateViewStyle
+                ]}
+            >
+              {showDayName && (
+                  <Text
+                      style={[{ fontSize: dateNameFontSize }, _dateNameStyle]}
+                      allowFontScaling={allowDayTextScaling}
+                  >
+                    {date.format("ddd").toUpperCase()}
+                  </Text>
+              )}
+              {showDayNumber && (
+                  <View style={_dateViewNumberStyle}>
+                    <Text
+                        style={[
+                          { fontSize: dateNumberFontSize },
+                          _dateNumberStyle,
+                        ]}
+                        allowFontScaling={allowDayTextScaling}
+                    >
+                      {date.date()}
+                    </Text>
+                    { this.renderMarking() }
+                  </View>
+              )}
+            </View>
+          </TouchableOpacity>
       );
     }
 
     return calendarAnimation && !scrollable ? (
-      <Animated.View style={[
-        styles.dateRootContainer,
-        {opacity: this.state.animatedValue}
-      ]}>
-        {day}
-      </Animated.View>
+        <Animated.View style={[
+          styles.dateRootContainer,
+          {opacity: this.state.animatedValue}
+        ]}>
+          {day}
+        </Animated.View>
     ) : (
-      <View style={styles.dateRootContainer}>
-        {day}
-      </View>
+        <View style={styles.dateRootContainer}>
+          {day}
+        </View>
     );
   }
 }
