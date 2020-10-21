@@ -4,7 +4,7 @@
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { View, Animated, PixelRatio } from "react-native";
+import { View, Animated, PixelRatio, ActivityIndicator } from "react-native";
 
 import moment from "moment";
 
@@ -523,7 +523,8 @@ class CalendarStrip extends Component {
   }
 
   renderWeekView(days) {
-    if (this.props.scrollable && this.state.datesList.length) {
+    if (this.props.scrollable) {
+      if (this.state.datesList.length) {
       return (
         <Scroller
           ref={scroller => this.scroller = scroller}
@@ -541,6 +542,9 @@ class CalendarStrip extends Component {
           pagingEnabled={this.props.pagingEnabled}
         />
       );
+      } else {
+        return <ActivityIndicator animating color='#000'size='small'  />
+      }
     }
 
     return days;
