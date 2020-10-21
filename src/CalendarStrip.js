@@ -92,7 +92,8 @@ class CalendarStrip extends Component {
     shouldAllowFontScaling: PropTypes.bool,
     useNativeDriver: PropTypes.bool,
 
-    onVisibleIndicesChangedCallback: PropTypes.func
+    onVisibleIndicesChangedCallback: PropTypes.func,
+    pagingEnabled: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -537,6 +538,7 @@ class CalendarStrip extends Component {
           onWeekChanged={this.props.onWeekChanged}
           scrollContainerStyle={this.props.scrollContainerStyle}
           onVisibleIndicesChangedCallback={this.props.onVisibleIndicesChangedCallback}
+          pagingEnabled={this.props.pagingEnabled}
         />
       );
     }

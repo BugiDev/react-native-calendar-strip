@@ -24,6 +24,7 @@ export default class CalendarScroller extends Component {
     onWeekChanged: PropTypes.func,
     scrollContainerStyle: PropTypes.any,
     onVisibleIndicesChangedCallback: PropTypes.func,
+    pagingEnabled: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -208,9 +209,18 @@ export default class CalendarScroller extends Component {
       onWeekChanged && onWeekChanged(visStart, visEnd);
     }
 
-    if (this.props.onVisibleIndicesChangedCallback) {
-      this.props.onVisibleIndicesChangedCallback()
+    if (this.props.pagingEnabled) {
+      if (visibleStartIndex > 0 && visibleStartIndex % numVisibleItems === 0) {
+        if (this.props.onVisibleIndicesChangedCallback) {
+          this.props.onVisibleIndicesChangedCallback()
+        }
+      }
+    } else {
+      if (this.props.onVisibleIndicesChangedCallback) {
+        this.props.onVisibleIndicesChangedCallback()
+      }
     }
+
 
     // Always update weekstart/end for WeekSelectors.
     updateMonthYear && updateMonthYear(visibleStartDate, visibleEndDate);
@@ -258,6 +268,7 @@ export default class CalendarScroller extends Component {
       >
         <RecyclerListView
           ref={rlv => this.rlv = rlv}
+          scrollThrottle={16}
           layoutProvider={this.state.layoutProvider}
           dataProvider={this.state.dataProvider}
           rowRenderer={this.rowRenderer}
@@ -267,7 +278,11 @@ export default class CalendarScroller extends Component {
           isHorizontal
           scrollViewProps={{
             showsHorizontalScrollIndicator: false,
+            pagingEnabled: this.props.pagingEnabled,
             contentContainerStyle: {paddingRight: this.state.itemWidth / 2},
+            snapToAlignment: 'center',
+            decelerationRate: 0,
+            snapToInterval: this.props.pagingEnabled ? this.state.itemWidth * this.state.numVisibleItems : null,
           }}
         />
       </View>

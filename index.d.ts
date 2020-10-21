@@ -138,6 +138,8 @@ declare module "react-native-calendar-strip" {
 
       onVisibleIndicesChangedCallback?: () => void;
 
+      pagingEnabled? : boolean;
+
       locale?: object;
       shouldAllowFontScaling?: boolean;
       useNativeDriver?: boolean;
