@@ -6,10 +6,12 @@
 // an infinite scroller.
 
 import React, { Component } from "react";
-import { View } from "react-native";
+import { View, Dimensions } from "react-native";
 import PropTypes from "prop-types";
 import { RecyclerListView, DataProvider, LayoutProvider } from "recyclerlistview";
 import moment from "moment";
+
+const { width } = Dimensions.get('window')
 
 export default class CalendarScroller extends Component {
   static propTypes = {
@@ -25,6 +27,7 @@ export default class CalendarScroller extends Component {
     scrollContainerStyle: PropTypes.any,
     onVisibleIndicesChangedCallback: PropTypes.func,
     pagingEnabled: PropTypes.bool,
+    customVisiableNumber: PropTypes.number,
   }
 
   static defaultProps = {
@@ -39,7 +42,7 @@ export default class CalendarScroller extends Component {
 
     this.updateLayout = renderDayParams => {
       const itemHeight = renderDayParams.size;
-      const itemWidth = itemHeight + renderDayParams.marginHorizontal * 2;
+      const itemWidth = this.props.customVisiableNumber ? width / this.props.customVisiableNumber : itemHeight + renderDayParams.marginHorizontal * 2
 
       const layoutProvider = new LayoutProvider(
         index => 0, // only 1 view type
@@ -261,6 +264,9 @@ export default class CalendarScroller extends Component {
     if (!this.state.data || this.state.numDays === 0 || !this.state.itemHeight) {
       return null;
     }
+    const step = this.props.customVisiableNumber
+      ? this.state.itemWidth * this.props.customVisiableNumber
+      : this.state.itemWidth * this.state.numVisibleItems
     return (
       <View
         style={[{ height: this.state.itemHeight, flex: 1 }, scrollContainerStyle]}
@@ -282,7 +288,7 @@ export default class CalendarScroller extends Component {
             contentContainerStyle: {paddingRight: this.state.itemWidth / 2},
             snapToAlignment: 'center',
             decelerationRate: 0,
-            snapToInterval: this.props.pagingEnabled ? this.state.itemWidth * this.state.numVisibleItems : null,
+            snapToInterval: this.props.pagingEnabled ? step : null,
           }}
         />
       </View>

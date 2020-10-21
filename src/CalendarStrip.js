@@ -94,6 +94,7 @@ class CalendarStrip extends Component {
 
     onVisibleIndicesChangedCallback: PropTypes.func,
     pagingEnabled: PropTypes.bool,
+    customVisiableNumber: PropTypes.number,
   };
 
   static defaultProps = {
@@ -540,6 +541,7 @@ class CalendarStrip extends Component {
           scrollContainerStyle={this.props.scrollContainerStyle}
           onVisibleIndicesChangedCallback={this.props.onVisibleIndicesChangedCallback}
           pagingEnabled={this.props.pagingEnabled}
+          customVisiableNumber={this.props.customVisiableNumber}
         />
       );
       } else {
