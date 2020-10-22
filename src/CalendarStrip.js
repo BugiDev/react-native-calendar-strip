@@ -542,6 +542,7 @@ class CalendarStrip extends Component {
           onVisibleIndicesChangedCallback={this.props.onVisibleIndicesChangedCallback}
           pagingEnabled={this.props.pagingEnabled}
           customVisiableNumber={this.props.customVisiableNumber}
+          selectedDate={this.props.selectedDate}
         />
       );
       } else {

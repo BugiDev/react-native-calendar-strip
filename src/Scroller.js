@@ -28,6 +28,7 @@ export default class CalendarScroller extends Component {
     onVisibleIndicesChangedCallback: PropTypes.func,
     pagingEnabled: PropTypes.bool,
     customVisiableNumber: PropTypes.number,
+    selectedDate: PropTypes.any,
   }
 
   static defaultProps = {
@@ -75,6 +76,15 @@ export default class CalendarScroller extends Component {
     };
   }
 
+  componentDidMount() {
+    if (this.props.selectedDate) {
+      // after mount component
+      setTimeout(() => {
+        this.scrollToIndex()
+      }, 500)
+    }
+  }
+
   componentWillUnmount() {
     if (this.timeoutResetPositionId !== null) {
       clearTimeout(this.timeoutResetPositionId);
@@ -96,8 +106,27 @@ export default class CalendarScroller extends Component {
       newState = {...newState, ...this.updateDaysData(this.props.data)};
     }
 
+    if (prevProps.selectedDate !== this.props.selectedDate) {
+      this.scrollToIndex()
+    }
+
     if (updateState) {
       this.setState(newState);
+    }
+  }
+
+  scrollToIndex = () => {
+    let data = this.state.data
+    let dateMoment = moment(this.props.selectedDate).format('YYYY-MM-DD')
+    for (let i = 0; i < data.length; i++) {
+      let item = data[i]
+      let itemDate = moment(item.date).format('YYYY-MM-DD')
+      if (item && item.date && itemDate === dateMoment) {
+        let dayInweek = moment(itemDate).weekday()
+        let firstDayInWeek = i - dayInweek
+        this.rlv.scrollToIndex(firstDayInWeek, true);
+        break;
+      }
     }
   }
 
