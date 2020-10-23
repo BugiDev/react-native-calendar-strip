@@ -163,9 +163,9 @@ class CalendarStrip extends Component {
       days = this.createDays(startingDate.startingDate);
     }
 
-    if (prevProps.selectedDate !== this.props.selectedDate) {
-      this.setState({ selectedDate: this.props.selectedDate })
-    }
+    // if (prevProps.selectedDate !== this.props.selectedDate) {
+    //   this.setState({ selectedDate: this.props.selectedDate })
+    // }
 
     if (updateState) {
       this.setState({...startingDate, ...days });
@@ -394,6 +394,11 @@ class CalendarStrip extends Component {
     });
   }
 
+  updateSelectedDate = (date) => {
+    const selectedDate = this.setLocale(date);
+    this.setState({ selectedDate })
+  }
+
   createDayProps = selectedDate => {
     return {
       selectedDate,
@@ -543,6 +548,8 @@ class CalendarStrip extends Component {
           pagingEnabled={this.props.pagingEnabled}
           customVisiableNumber={this.props.customVisiableNumber}
           selectedDate={this.props.selectedDate}
+          selectedDateState={this.state.selectedDate}
+          updateSelectedDate={this.updateSelectedDate.bind(this)}
         />
       );
       } else {

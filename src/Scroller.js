@@ -29,6 +29,8 @@ export default class CalendarScroller extends Component {
     pagingEnabled: PropTypes.bool,
     customVisiableNumber: PropTypes.number,
     selectedDate: PropTypes.any,
+    selectedDateState: PropTypes.any,
+    updateSelectedDate: PropTypes.func,
   }
 
   static defaultProps = {
@@ -78,10 +80,7 @@ export default class CalendarScroller extends Component {
 
   componentDidMount() {
     if (this.props.selectedDate) {
-      // after mount component
-      setTimeout(() => {
-        this.scrollToIndex()
-      }, 500)
+      this.scrollToIndex()
     }
   }
 
@@ -106,7 +105,7 @@ export default class CalendarScroller extends Component {
       newState = {...newState, ...this.updateDaysData(this.props.data)};
     }
 
-    if (prevProps.selectedDate !== this.props.selectedDate) {
+    if (prevProps.selectedDate !== this.props.selectedDate && prevProps.selectedDateState === this.props.selectedDateState) {
       this.scrollToIndex()
     }
 
@@ -116,6 +115,9 @@ export default class CalendarScroller extends Component {
   }
 
   scrollToIndex = () => {
+    if (this.props.updateSelectedDate) {
+      this.props.updateSelectedDate(this.props.selectedDate)
+    }
     let data = this.state.data
     let dateMoment = moment(this.props.selectedDate).format('YYYY-MM-DD')
     for (let i = 0; i < data.length; i++) {
