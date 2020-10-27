@@ -127,8 +127,11 @@ export default class CalendarScroller extends Component {
         let dayInweek = moment(itemDate).weekday()
         let firstDayInWeek = i - dayInweek
         if (this.rlv && this.rlv.scrollToIndex) {
-          this.rlv.scrollToIndex(firstDayInWeek, true);
-        }        break;
+          setTimeout(() => {
+            this.rlv.scrollToIndex(firstDayInWeek, true);
+          }, 300)
+        }
+        break;
       }
     }
   }
