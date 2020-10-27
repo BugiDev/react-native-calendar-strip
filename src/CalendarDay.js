@@ -179,7 +179,14 @@ class CalendarDay extends Component {
       for (let disallowed of datesBlacklist) {
         // Blacklist start/end object
         if (disallowed.start && disallowed.end) {
-          if (date.isBetween(disallowed.start, disallowed.end, "day", "[]")) {
+          let current = moment(date).format('YYYY-MM-DD')
+          let start = moment(disallowed.start).format('YYYY-MM-DD')
+          let end =  moment(disallowed.end).format('YYYY-MM-DD')
+
+          if (date.isBetween(moment(start), moment(end), "day", "[]") ||
+            moment(current).isSame(moment(start), "day") ||
+            moment(current).isSame(moment(end), "day")
+          ) {
             return false;
           }
         } else {
