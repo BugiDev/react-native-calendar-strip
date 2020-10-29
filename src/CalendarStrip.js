@@ -2,7 +2,7 @@
  * Created by bogdanbegovic on 8/20/16.
  */
 
-import React, { Component } from "react";
+import React, { Component, PureComponent } from "react";
 import PropTypes from "prop-types";
 import { View, Animated, PixelRatio, ActivityIndicator } from "react-native";
 
@@ -18,7 +18,9 @@ import styles from "./Calendar.style.js";
  * Class CalendarStrip that is representing the whole calendar strip and contains CalendarDay elements
  *
  */
-class CalendarStrip extends Component {
+const DayComponent = React.memo(CalendarDay)
+
+class CalendarStrip extends PureComponent {
   static propTypes = {
     style: PropTypes.any,
     innerStyle: PropTypes.any,
@@ -508,7 +510,7 @@ class CalendarStrip extends Component {
 
   renderDay(props) {
     return (
-      <CalendarDay {...props} />
+      <DayComponent {...props} />
     );
   }
 

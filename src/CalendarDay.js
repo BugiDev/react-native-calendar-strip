@@ -468,6 +468,7 @@ class CalendarDay extends Component {
         <TouchableOpacity
           onPress={onDateSelected.bind(this, date)}
           disabled={!enabled}
+          activeOpacity={1}
         >
           <View
             style={[
