@@ -11,10 +11,7 @@ class CalendarHeader extends Component {
       PropTypes.object,
       PropTypes.number
     ]),
-    calendarHeaderStyle: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.number
-    ]),
+    calendarHeaderStyle: PropTypes.any,
     weekStartDate: PropTypes.object,
     weekEndDate: PropTypes.object,
     allowHeaderTextScaling: PropTypes.bool,

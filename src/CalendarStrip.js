@@ -2,7 +2,7 @@
  * Created by bogdanbegovic on 8/20/16.
  */
 
-import React, { Component, PureComponent } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { View, Animated, PixelRatio, ActivityIndicator } from "react-native";
 
@@ -20,16 +20,12 @@ import styles from "./Calendar.style.js";
  */
 const DayComponent = React.memo(CalendarDay)
 
-class CalendarStrip extends PureComponent {
+class CalendarStrip extends Component {
   static propTypes = {
     style: PropTypes.any,
     innerStyle: PropTypes.any,
     calendarColor: PropTypes.string,
-    customContainerDateStyle: {
-      style: PropTypes.any,
-      disabled: PropTypes.any,
-      highlight: PropTypes.any,
-    },
+    customContainerDateStyle: PropTypes.any,
 
     numDaysInWeek: PropTypes.number,
     scrollable: PropTypes.bool,

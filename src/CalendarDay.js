@@ -40,11 +40,7 @@ class CalendarDay extends Component {
     markedDatesStyle: PropTypes.object,
     allowDayTextScaling: PropTypes.bool,
     
-    customContainerDateStyle: {
-      style: PropTypes.any,
-      disabled: PropTypes.any,
-      highlight: PropTypes.any,
-    },
+    customContainerDateStyle: PropTypes.any,
 
     calendarAnimation: PropTypes.object,
     registerAnimation: PropTypes.func.isRequired,
