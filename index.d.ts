@@ -127,7 +127,7 @@ declare module "react-native-calendar-strip" {
       highlightDateNumberStyle?: StyleProp<TextStyle>;
       disabledDateNameStyle?: StyleProp<TextStyle>;
       disabledDateNumberStyle?: StyleProp<TextStyle>;
-      markedDatesStyle: StyleProp<TextStyle>;
+      markedDatesStyle?: StyleProp<TextStyle>;
       disabledDateOpacity?: number;
       styleWeekend?: boolean;
 
