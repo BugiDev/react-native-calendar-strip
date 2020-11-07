@@ -1,5 +1,5 @@
 import { Component, ReactNode } from "react";
-import { Duration } from "moment";
+import { Duration, Moment } from "moment";
 import {
   StyleProp,
   ViewStyle,
@@ -75,8 +75,8 @@ declare module "react-native-calendar-strip" {
       scrollable?: boolean;
       startingDate?: Date;
       selectedDate?: Date;
-      onDateSelected?: (date: Date) => void;
-      onWeekChanged?: (start: Date, end: Date) => void;
+      onDateSelected?: (date: Moment) => void;
+      onWeekChanged?: (start: Moment, end: Moment) => void;
       onHeaderSelected?: ({weekStartDate: Date, weekEndDate: Date}) => void;
       updateWeek?: boolean;
       useIsoWeekday?: boolean;
