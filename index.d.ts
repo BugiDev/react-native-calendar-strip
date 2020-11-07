@@ -84,6 +84,7 @@ declare module "react-native-calendar-strip" {
       maxDate?: Date;
       datesWhitelist?: TDateRange[] | (date: Date) => void;
       datesBlacklist?: TDateRange[] | (date: Date) => void;
+      markedDates?: any[] | (date: Date) => void;
 
       showMonth?: boolean;
       showDayName?: boolean;
@@ -126,6 +127,7 @@ declare module "react-native-calendar-strip" {
       highlightDateNumberStyle?: StyleProp<TextStyle>;
       disabledDateNameStyle?: StyleProp<TextStyle>;
       disabledDateNumberStyle?: StyleProp<TextStyle>;
+      markedDatesStyle: StyleProp<TextStyle>;
       disabledDateOpacity?: number;
       styleWeekend?: boolean;
 
