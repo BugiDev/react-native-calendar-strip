@@ -312,9 +312,10 @@ class CalendarDay extends Component {
     //   });
 
     return (
-      <View style={styles.dotsContainer}>
-        <Image style={{width: 8}} resizeMode="contain" source={require('./img/heart.png')}></Image>
-      </View>
+      null
+//       <View style={styles.dotsContainer}>
+//         <Image style={{width: 8}} resizeMode="contain" source={require('./img/heart.png')}></Image>
+//       </View>
     );
   }
 
