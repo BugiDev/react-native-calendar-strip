@@ -46,14 +46,13 @@ declare module "react-native-calendar-strip" {
     highlightDateNumberStyle: TextStyle;
     disabledDateNameStyle: TextStyle;
     disabledDateNumberStyle: TextStyle;
-    disabledDateOpacity: number;
     styleWeekend: boolean;
     daySelectionAnimation: TDaySelectionAnimation;
     customStyle: ViewStyle;
     size: number;
     allowDayTextScaling: boolean;
     markedDatesStyle: TextStyle;
-    markedDates?: any[] | (date: Date) => void;
+    markedDates?: any[] | ((date: Date) => void);
   }
 
   type TDaySelectionAnimation =
@@ -75,16 +74,16 @@ declare module "react-native-calendar-strip" {
       scrollable?: boolean;
       startingDate?: Date;
       selectedDate?: Date;
-      onDateSelected?: (date: Moment) => void;
-      onWeekChanged?: (start: Moment, end: Moment) => void;
-      onHeaderSelected?: ({weekStartDate: Date, weekEndDate: Date}) => void;
+      onDateSelected?: ((date: Moment) => void);
+      onWeekChanged?: ((start: Moment, end: Moment) => void);
+      onHeaderSelected?: (({weekStartDate: Moment, weekEndDate: Moment}) => void);
       updateWeek?: boolean;
       useIsoWeekday?: boolean;
       minDate?: Date;
       maxDate?: Date;
-      datesWhitelist?: TDateRange[] | (date: Date) => void;
-      datesBlacklist?: TDateRange[] | (date: Date) => void;
-      markedDates?: any[] | (date: Date) => void;
+      datesWhitelist?: TDateRange[] | ((date: Date) => void);
+      datesBlacklist?: TDateRange[] | ((date: Date) => void);
+      markedDates?: any[] | ((date: Date) => void);
 
       showMonth?: boolean;
       showDayName?: boolean;
@@ -115,7 +114,7 @@ declare module "react-native-calendar-strip" {
       };
       daySelectionAnimation?: TDaySelectionAnimation;
 
-      customDatesStyles?: any[] | (date: Date) => void;
+      customDatesStyles?: any[] | ((date: Date) => void);
 
       dayComponent?: (props: IDayComponentProps) => ReactNode;
 
