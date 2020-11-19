@@ -184,9 +184,9 @@ export default class CalendarScroller extends Component {
       visibleEndDate: _visEndDate,
     } = this.state;
     const visibleStartIndex = all[0];
-    const visibleStartDate = data[visibleStartIndex].date;
+    const visibleStartDate = data[visibleStartIndex] ? data[visibleStartIndex].date : moment();
     const visibleEndIndex = Math.min(visibleStartIndex + numVisibleItems - 1, data.length - 1);
-    const visibleEndDate = data[visibleEndIndex].date;
+    const visibleEndDate = data[visibleEndIndex] ? data[visibleEndIndex].date : moment();
 
     const {
       updateMonthYear,
