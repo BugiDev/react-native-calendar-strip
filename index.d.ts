@@ -52,7 +52,7 @@ declare module "react-native-calendar-strip" {
     size: number;
     allowDayTextScaling: boolean;
     markedDatesStyle: TextStyle;
-    markedDates?: any[] | ((date: Date) => void);
+    markedDates?: any[] | ((date: Moment) => void);
   }
 
   type TDaySelectionAnimation =
@@ -60,8 +60,8 @@ declare module "react-native-calendar-strip" {
     | IDaySelectionAnimationBackground;
 
   type TDateRange = {
-    start: Date;
-    end: Date;
+    start: Moment;
+    end: Moment;
   };
 
   class ReactNativeCalendarStrip extends Component<
@@ -72,18 +72,18 @@ declare module "react-native-calendar-strip" {
 
       numDaysInWeek?: number;
       scrollable?: boolean;
-      startingDate?: Date;
-      selectedDate?: Date;
+      startingDate?: Moment;
+      selectedDate?: Moment;
       onDateSelected?: ((date: Moment) => void);
       onWeekChanged?: ((start: Moment, end: Moment) => void);
-      onHeaderSelected?: (({weekStartDate: Moment, weekEndDate: Moment}) => void);
+      onHeaderSelected?: ((dates: {weekStartDate: Moment, weekEndDate: Moment}) => void);
       updateWeek?: boolean;
       useIsoWeekday?: boolean;
-      minDate?: Date;
-      maxDate?: Date;
-      datesWhitelist?: TDateRange[] | ((date: Date) => void);
-      datesBlacklist?: TDateRange[] | ((date: Date) => void);
-      markedDates?: any[] | ((date: Date) => void);
+      minDate?: Moment;
+      maxDate?: Moment;
+      datesWhitelist?: TDateRange[] | ((date: Moment) => void);
+      datesBlacklist?: TDateRange[] | ((date: Moment) => void);
+      markedDates?: any[] | ((date: Moment) => void);
 
       showMonth?: boolean;
       showDayName?: boolean;
@@ -114,7 +114,7 @@ declare module "react-native-calendar-strip" {
       };
       daySelectionAnimation?: TDaySelectionAnimation;
 
-      customDatesStyles?: any[] | ((date: Date) => void);
+      customDatesStyles?: any[] | ((date: Moment) => void);
 
       dayComponent?: (props: IDayComponentProps) => ReactNode;
 
@@ -137,10 +137,10 @@ declare module "react-native-calendar-strip" {
     {}
   > {
     getSelectedDate: () => undefined | Date | string;
-    setSelectedDate: (date: Date | string) => void;
+    setSelectedDate: (date: Moment | string) => void;
     getNextWeek: () => void;
     getPreviousWeek: () => void;
-    updateWeekView: (date: Date | string, startDate: Date | string) => void;
+    updateWeekView: (date: Moment | string, startDate: Moment | string) => void;
   }
 
   export = ReactNativeCalendarStrip;
