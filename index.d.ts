@@ -1,4 +1,4 @@
-import { Component, ReactNode } from "react";
+import { Component, ReactNode, ComponentProps } from "react";
 import { Duration } from "moment";
 import {
   StyleProp,
@@ -6,6 +6,7 @@ import {
   TextStyle,
   GestureResponderEvent
 } from "react-native";
+import { RecyclerListView } from 'recyclerlistview';
 
 declare module "react-native-calendar-strip" {
   interface IDaySelectionAnimationBorder {
@@ -73,6 +74,7 @@ declare module "react-native-calendar-strip" {
 
       numDaysInWeek?: number;
       scrollable?: boolean;
+      externalScrollView?: ComponentProps<typeof RecyclerListView>['externalScrollView'];	
       startingDate?: Date;
       selectedDate?: Date;
       onDateSelected?: (date: Date) => void;

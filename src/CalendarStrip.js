@@ -26,6 +26,7 @@ class CalendarStrip extends Component {
 
     numDaysInWeek: PropTypes.number,
     scrollable: PropTypes.bool,
+    externalScrollView: PropTypes.func,
     startingDate: PropTypes.any,
     selectedDate: PropTypes.any,
     onDateSelected: PropTypes.func,
@@ -522,6 +523,7 @@ class CalendarStrip extends Component {
           maxDate={this.props.maxDate}
           updateMonthYear={this.updateMonthYear}
           onWeekChanged={this.props.onWeekChanged}
+          externalScrollView={this.props.externalScrollView}
         />
       );
     }
