@@ -22,6 +22,7 @@ export default class CalendarScroller extends Component {
     maxSimultaneousDays: PropTypes.number,
     updateMonthYear: PropTypes.func,
     onWeekChanged: PropTypes.func,
+    externalScrollView: PropTypes.func
   }
 
   static defaultProps = {
@@ -258,6 +259,7 @@ export default class CalendarScroller extends Component {
           initialRenderIndex={this.props.initialRenderIndex}
           onVisibleIndicesChanged={this.onVisibleIndicesChanged}
           isHorizontal
+          externalScrollView={this.props.externalScrollView}
           scrollViewProps={{
             showsHorizontalScrollIndicator: false,
             contentContainerStyle: {paddingRight: this.state.itemWidth / 2},
