@@ -44,6 +44,8 @@
     "react-native": "*"
   },
   "devDependencies": {
+    "@types/react": "^17.0.0",
+    "@types/react-native": "^0.63.37",
     "all-contributors-cli": "^4.10.1",
     "babel-eslint": "^8.0.3",
     "babel-jest": "^22.0.3",
