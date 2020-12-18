@@ -64,79 +64,78 @@ type TDateRange = {
   end: Moment;
 };
 
-export default class ReactNativeCalendarStrip extends Component<
-  {
-    style: StyleProp<ViewStyle>;
-    innerStyle?: StyleProp<ViewStyle>;
-    calendarColor?: string;
+interface CalendarStripProps {
+  style: StyleProp<ViewStyle>;
+  innerStyle?: StyleProp<ViewStyle>;
+  calendarColor?: string;
 
-    numDaysInWeek?: number;
-    scrollable?: boolean;
-    externalScrollView?: ComponentProps<typeof RecyclerListView>['externalScrollView'];
-    startingDate?: Moment;
-    selectedDate?: Moment;
-    onDateSelected?: ((date: Moment) => void);
-    onWeekChanged?: ((start: Moment, end: Moment) => void);
-    onHeaderSelected?: ((dates: {weekStartDate: Moment, weekEndDate: Moment}) => void);
-    updateWeek?: boolean;
-    useIsoWeekday?: boolean;
-    minDate?: Moment;
-    maxDate?: Moment;
-    datesWhitelist?: TDateRange[] | ((date: Moment) => void);
-    datesBlacklist?: TDateRange[] | ((date: Moment) => void);
-    markedDates?: any[] | ((date: Moment) => void);
+  numDaysInWeek?: number;
+  scrollable?: boolean;
+  externalScrollView?: ComponentProps<typeof RecyclerListView>['externalScrollView'];
+  startingDate?: Moment;
+  selectedDate?: Moment;
+  onDateSelected?: ((date: Moment) => void);
+  onWeekChanged?: ((start: Moment, end: Moment) => void);
+  onHeaderSelected?: ((dates: {weekStartDate: Moment, weekEndDate: Moment}) => void);
+  updateWeek?: boolean;
+  useIsoWeekday?: boolean;
+  minDate?: Moment;
+  maxDate?: Moment;
+  datesWhitelist?: TDateRange[] | ((date: Moment) => void);
+  datesBlacklist?: TDateRange[] | ((date: Moment) => void);
+  markedDates?: any[] | ((date: Moment) => void);
 
-    showMonth?: boolean;
-    showDayName?: boolean;
-    showDayNumber?: boolean;
-    showDate?: boolean;
+  showMonth?: boolean;
+  showDayName?: boolean;
+  showDayNumber?: boolean;
+  showDate?: boolean;
 
-    leftSelector?: any;
-    rightSelector?: any;
-    iconLeft?: any;
-    iconRight?: any;
-    iconStyle?: any;
-    iconLeftStyle?: any;
-    iconRightStyle?: any;
-    iconContainer?: any;
+  leftSelector?: any;
+  rightSelector?: any;
+  iconLeft?: any;
+  iconRight?: any;
+  iconStyle?: any;
+  iconLeftStyle?: any;
+  iconRightStyle?: any;
+  iconContainer?: any;
 
-    maxDayComponentSize?: number;
-    minDayComponentSize?: number;
-    responsiveSizingOffset?: number;
+  maxDayComponentSize?: number;
+  minDayComponentSize?: number;
+  responsiveSizingOffset?: number;
 
-    calendarHeaderContainerStyle?: StyleProp<ViewStyle>;
-    calendarHeaderStyle?: StyleProp<TextStyle>;
-    calendarHeaderFormat?: string;
-    calendarHeaderPosition?: "below" | "above";
+  calendarHeaderContainerStyle?: StyleProp<ViewStyle>;
+  calendarHeaderStyle?: StyleProp<TextStyle>;
+  calendarHeaderFormat?: string;
+  calendarHeaderPosition?: "below" | "above";
 
-    calendarAnimation?: {
-      duration: number;
-      type: "sequence" | "parallel";
-    };
-    daySelectionAnimation?: TDaySelectionAnimation;
+  calendarAnimation?: {
+    duration: number;
+    type: "sequence" | "parallel";
+  };
+  daySelectionAnimation?: TDaySelectionAnimation;
 
-    customDatesStyles?: any[] | ((date: Moment) => void);
+  customDatesStyles?: any[] | ((date: Moment) => void);
 
-    dayComponent?: (props: IDayComponentProps) => ReactNode;
+  dayComponent?: (props: IDayComponentProps) => ReactNode;
 
-    dateNameStyle?: StyleProp<TextStyle>;
-    dateNumberStyle?: StyleProp<TextStyle>;
-    weekendDateNameStyle?: StyleProp<TextStyle>;
-    weekendDateNumberStyle?: StyleProp<TextStyle>;
-    highlightDateNameStyle?: StyleProp<TextStyle>;
-    highlightDateNumberStyle?: StyleProp<TextStyle>;
-    disabledDateNameStyle?: StyleProp<TextStyle>;
-    disabledDateNumberStyle?: StyleProp<TextStyle>;
-    markedDatesStyle?: StyleProp<TextStyle>;
-    disabledDateOpacity?: number;
-    styleWeekend?: boolean;
+  dateNameStyle?: StyleProp<TextStyle>;
+  dateNumberStyle?: StyleProp<TextStyle>;
+  weekendDateNameStyle?: StyleProp<TextStyle>;
+  weekendDateNumberStyle?: StyleProp<TextStyle>;
+  highlightDateNameStyle?: StyleProp<TextStyle>;
+  highlightDateNumberStyle?: StyleProp<TextStyle>;
+  disabledDateNameStyle?: StyleProp<TextStyle>;
+  disabledDateNumberStyle?: StyleProp<TextStyle>;
+  markedDatesStyle?: StyleProp<TextStyle>;
+  disabledDateOpacity?: number;
+  styleWeekend?: boolean;
 
-    locale?: object;
-    shouldAllowFontScaling?: boolean;
-    useNativeDriver?: boolean;
-  },
-  {}
-> {
+  locale?: object;
+  shouldAllowFontScaling?: boolean;
+  useNativeDriver?: boolean;
+}
+
+export default class ReactNativeCalendarStrip extends Component<CalendarStripProps> {
   getSelectedDate: () => undefined | Date | string;
   setSelectedDate: (date: Moment | string) => void;
   getNextWeek: () => void;
