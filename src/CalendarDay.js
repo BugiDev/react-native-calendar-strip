@@ -55,6 +55,7 @@ class CalendarDay extends Component {
       borderWidth: 1,
       borderHighlightColor: "black",
       highlightColor: "yellow",
+      color: '#fff',
       animType: LayoutAnimation.Types.easeInEaseOut,
       animUpdateType: LayoutAnimation.Types.easeInEaseOut,
       animProperty: LayoutAnimation.Properties.opacity,
@@ -399,7 +400,7 @@ class CalendarDay extends Component {
       //If it is border, the user has to input color for border animation
       switch (daySelectionAnimation.type) {
         case "background":
-          _dateViewStyle.push({ backgroundColor: daySelectionAnimation.highlightColor });
+          _dateViewStyle.push({ backgroundColor: daySelectionAnimation.highlightColor, color: daySelectionAnimation.color });
           break;
         case "border":
           _dateViewStyle.push({
