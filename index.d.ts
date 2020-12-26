@@ -23,10 +23,10 @@ interface IDaySelectionAnimationBackground {
   type: "background";
   duration: number;
   highlightColor: string;
-  animType: any;
-  animUpdateType: any;
-  animProperty: any;
-  animSpringDamping: any;
+  animType?: any;
+  animUpdateType?: any;
+  animProperty?: any;
+  animSpringDamping?: any;
 }
 
 interface IDayComponentProps {
