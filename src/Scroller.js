@@ -115,6 +115,28 @@ export default class CalendarScroller extends Component {
     this.rlv.scrollToIndex(newIndex, true);
   }
 
+  // Scroll to given date, and check against min and max date if available.
+  scrollToDate = (date) => {
+    const targetDate = moment(date);
+    const {
+      minDate,
+      maxDate,
+    } = this.props;
+
+    if (minDate && targetDate.isBefore(minDate, "day")) {
+      return;
+    }
+    if (maxDate && targetDate.isAfter(maxDate, "day")) {
+      return;
+    }
+
+    for (let i = 0; i < this.state.data.length; i++) {
+      if (this.state.data[i].date.isSame(targetDate, "day")) {
+        this.rlv.scrollToIndex(i, true);
+      }
+    }
+  }
+
   // Shift dates when end of list is reached.
   shiftDaysForward = (visibleStartDate = this.state.visibleStartDate) => {
     const prevVisStart = visibleStartDate.clone();

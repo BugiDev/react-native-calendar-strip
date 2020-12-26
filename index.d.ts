@@ -140,5 +140,5 @@ export default class ReactNativeCalendarStrip extends Component<CalendarStripPro
   setSelectedDate: (date: Moment | string) => void;
   getNextWeek: () => void;
   getPreviousWeek: () => void;
-  updateWeekView: (date: Moment | string, startDate: Moment | string) => void;
+  updateWeekView: (date: Moment | string) => void;
 }
