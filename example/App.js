@@ -73,7 +73,7 @@ export default class App extends Component<{}> {
         <CalendarStrip
           scrollable
           calendarAnimation={{type: 'sequence', duration: 30}}
-          daySelectionAnimation={{type: 'background', duration: 300, highlightColor: '#9265DC', color: '#fff'}}
+          daySelectionAnimation={{type: 'background', duration: 300, highlightColor: "#9265DC", color: "#fff" }}
           style={{height:200, paddingTop: 20, paddingBottom: 10}}
           calendarHeaderStyle={{color: 'white'}}
           calendarColor={'#3343CE'}

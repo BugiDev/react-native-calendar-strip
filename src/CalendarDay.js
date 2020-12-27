@@ -55,7 +55,7 @@ class CalendarDay extends Component {
       borderWidth: 1,
       borderHighlightColor: "black",
       highlightColor: "yellow",
-      color: '#fff',
+      color: "#fff",
       animType: LayoutAnimation.Types.easeInEaseOut,
       animUpdateType: LayoutAnimation.Types.easeInEaseOut,
       animProperty: LayoutAnimation.Properties.opacity,

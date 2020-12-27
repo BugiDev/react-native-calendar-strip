@@ -28,7 +28,7 @@ interface IDaySelectionAnimationBackground {
   animUpdateType: any;
   animProperty: any;
   animSpringDamping: any;
-  color: 'string';
+  color: "string";
 }
 
 interface IDayComponentProps {
