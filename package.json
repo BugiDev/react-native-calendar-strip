@@ -26,7 +26,7 @@
   },
   "scripts": {
     "eslint": "eslint src/**/*.js __tests__/**/*.js --fix",
-    "test": "npm run eslint && jest --clearCache",
+    "test": "npm run eslint && jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
     "contributors:add": "./node_modules/.bin/all-contributors add",
