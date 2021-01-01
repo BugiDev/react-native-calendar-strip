@@ -194,8 +194,11 @@ class CalendarStrip extends Component {
   //Function that checks if the locale is passed to the component and sets it to the passed date
   setLocale = date => {
     let _date = date && moment(date);
-    if (this.props.locale && _date) {
-      _date = _date.locale(this.props.locale.name);
+    if (_date) {
+      _date.set({ hour: 12}); // keep date the same regardless of timezone shifts
+      if (this.props.locale) {
+        _date = _date.locale(this.props.locale.name);
+      }
     }
     return _date;
   }
