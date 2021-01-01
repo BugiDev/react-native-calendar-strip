@@ -41,6 +41,7 @@ class CalendarStrip extends Component {
     headerText: PropTypes.string,
 
     markedDates: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
+    scrollToOnSetSelectedDate: PropTypes.bool,
 
     showMonth: PropTypes.bool,
     showDayName: PropTypes.bool,
@@ -108,7 +109,8 @@ class CalendarStrip extends Component {
     minDayComponentSize: 10,
     shouldAllowFontScaling: true,
     markedDates: [],
-    useNativeDriver: true
+    useNativeDriver: true,
+    scrollToOnSetSelectedDate: true,
   };
 
   constructor(props) {
@@ -298,6 +300,12 @@ class CalendarStrip extends Component {
   setSelectedDate = date => {
     let mDate = moment(date);
     this.onDateSelected(mDate);
+    if (this.props.scrollToOnSetSelectedDate) {
+      // Scroll to selected date, centered in the week
+      const scrolledDate = moment(mDate);
+      scrolledDate.subtract(Math.floor(this.props.numDaysInWeek / 2), "days");
+      this.scroller.scrollToDate(scrolledDate);
+    }
   }
 
   // Gather animations from each day. Sequence animations must be started

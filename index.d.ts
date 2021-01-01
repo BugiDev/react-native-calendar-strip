@@ -84,6 +84,7 @@ interface CalendarStripProps {
   datesWhitelist?: TDateRange[] | ((date: Moment) => void);
   datesBlacklist?: TDateRange[] | ((date: Moment) => void);
   markedDates?: any[] | ((date: Moment) => void);
+  scrollToOnSetSelectedDate?: boolean;
 
   showMonth?: boolean;
   showDayName?: boolean;

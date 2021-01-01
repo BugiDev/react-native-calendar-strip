@@ -61,7 +61,7 @@ $ yarn add react-native-calendar-strip
 
 The `scrollable` prop was introduced in 2.0.0 and features a bi-directional infinite scroller.  It recycles days using RecyclerListView, shifting the dates as the ends are reached.  The Chrome debugger can cause issues with this updating due to a [RN setTimeout bug](https://github.com/facebook/react-native/issues/4470). To prevent date shifts at the ends of the scroller, set the `minDate` and `maxDate` range to a year or less.
 
-The refactor to support `scrollable` introduced internal changes to the `CalendarDay` component.  Users of the `dayComponent` prop may need to adjust their custom day component to accomomdate the props passed to it.
+The refactor to support `scrollable` introduced internal changes to the `CalendarDay` component.  Users of the `dayComponent` prop may need to adjust their custom day component to accommodate the props passed to it.
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/6295083/82712731-54a98780-9c4e-11ea-9076-eddf0b756239.gif" alt="">
@@ -192,7 +192,7 @@ AppRegistry.registerComponent('Example', () => Example);
 | **`startingDate`**   | Date to be used for centering the calendar/showing the week based on that date. It is internally wrapped by `moment` so it accepts both `Date` and `moment Date`.  | Any      |
 | **`selectedDate`**   | Date to be used as pre selected Date. It is internally wrapped by `moment` so it accepts both `Date` and `moment Date`.                                            | Any      |
 | **`onDateSelected`** | Function to be used as a callback when a date is selected. Receives param `date` Moment date.                                                                      | Function |
-| **`onWeekChanged`**  | Function to be used as a callback when a week is changed. Receives params `(start, end)` Moment dates.                                                     | Function |
+| **`onWeekChanged`**  | Function to be used as a callback when a week is changed. Receives params `(start, end)` Moment dates.                                                             | Function |
 | **`onHeaderSelected`**| Function to be used as a callback when the header is selected. Receives param object `{weekStartDate, weekEndDate}` Moment dates.                                 | Function |
 | **`headerText`**     | Text to use in the header. Use with `onWeekChanged` to receive the visible start & end dates.                                                                      | String  |
 | **`updateWeek`**     | Update the week view if other props change. If `false`, the week view won't change when other props change, but will still respond to left/right selectors.        | Bool     | **`True`** |
@@ -202,6 +202,7 @@ AppRegistry.registerComponent('Example', () => Example);
 | **`datesWhitelist`** | Array of dates that are enabled, or a function callback which receives a date param and returns true if enabled. Array supports ranges specified with an object entry in the array. Check example <a href="#dateswhitelist-array-example">Below</a> | Array or Func |
 | **`datesBlacklist`** | Array of dates that are disabled, or a function callback. Same format as _datesWhitelist_. This overrides dates in _datesWhitelist_.                               | Array or Func |
 | **`markedDates`**    | Dates that are marked with dots or lines. Format as <a href="#markeddates-example">markedDatesFormat</a>.                                                          | Array or Func | **[]**
+| **`scrollToOnSetSelectedDate`** | Controls whether to reposition the scroller to the date passed to `setSelectedDate`.                                                                         | Bool     | **`True`** |
 
 
 ##### datesWhitelist Array Example
@@ -435,7 +436,7 @@ Methods may be accessed through the instantiated component's [ref](https://react
 | Prop                                  | Description                                                                                                                                                                                                                                                                                           |
 | ------------------------------------- | --------------------------------------------------------------------------------- |
 | **`getSelectedDate()`**               | Returns the currently selected date. If no date is selected, returns undefined.   |
-| **`setSelectedDate(date)`**           | Sets the selected date. `date` may be a Moment object, ISO8601 date string, or any format that Moment is able to parse. It is the responsibility of the caller to select a date that makes sense (e.g. within the current week view). Passing in a value of `0` effectively clears the selected date. |
+| **`setSelectedDate(date)`**           | Sets the selected date. `date` may be a Moment object, ISO8601 date string, or any format that Moment is able to parse. It is the responsibility of the caller to select a date that makes sense (e.g. within the current week view). Passing in a value of `0` effectively clears the selected date. `scrollToOnSetSelectedDate` controls whether the scroller repositions to the selected date. |
 | **`getNextWeek()`**                   | Advance to the next week.                                                         |
 | **`getPreviousWeek()`**               | Rewind to the previous week.                                                      |
 | **`updateWeekView(date)`**            | Show the week starting on `date`.                                                 |
