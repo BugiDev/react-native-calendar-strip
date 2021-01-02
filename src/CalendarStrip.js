@@ -147,17 +147,21 @@ class CalendarStrip extends Component {
   //Receiving props and set date states, minimizing state updates.
   componentDidUpdate(prevProps, prevState) {
     let startingDate = {};
+    let selectedDate = {};
     let days = {};
     let updateState = false;
 
-    if (!this.compareDates(prevProps.startingDate, this.props.startingDate)) {
+    if (!this.compareDates(prevProps.startingDate, this.props.startingDate) ||
+        !this.compareDates(prevProps.selectedDate, this.props.selectedDate))
+    {
       updateState = true;
       startingDate = { startingDate: this.setLocale(this.props.startingDate)};
-      days = this.createDays(startingDate.startingDate);
+      selectedDate = { selectedDate: this.setLocale(this.props.selectedDate)};
+      days = this.createDays(startingDate.startingDate, selectedDate.selectedDate);
     }
 
     if (updateState) {
-      this.setState({...startingDate, ...days });
+      this.setState({...startingDate, ...selectedDate, ...days });
     }
   }
 
