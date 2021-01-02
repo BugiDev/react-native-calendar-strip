@@ -31,27 +31,28 @@ interface IDaySelectionAnimationBackground {
 
 interface IDayComponentProps {
   date: Duration;
-  marking: any;
-  selected: boolean;
+  marking?: any;
+  selected?: boolean;
   enabled: boolean;
-  showDayName: boolean;
-  showDayNumber: boolean;
-  onDateSelected: (event: GestureResponderEvent) => void;
-  calendarColor: string;
-  dateNameStyle: string;
-  dateNumberStyle: string;
-  weekendDateNameStyle: TextStyle;
-  weekendDateNumberStyle: TextStyle;
-  highlightDateNameStyle: TextStyle;
-  highlightDateNumberStyle: TextStyle;
-  disabledDateNameStyle: TextStyle;
-  disabledDateNumberStyle: TextStyle;
-  styleWeekend: boolean;
-  daySelectionAnimation: TDaySelectionAnimation;
-  customStyle: ViewStyle;
+  showDayName?: boolean;
+  showDayNumber?: boolean;
+  onDateSelected?: (event: GestureResponderEvent) => void;
+  calendarColor?: string;
+  dateNameStyle?: string;
+  dateNumberStyle?: string;
+  dayContainerStyle?: StyleProp<ViewStyle>;
+  weekendDateNameStyle?: TextStyle;
+  weekendDateNumberStyle?: TextStyle;
+  highlightDateNameStyle?: TextStyle;
+  highlightDateNumberStyle?: TextStyle;
+  disabledDateNameStyle?: TextStyle;
+  disabledDateNumberStyle?: TextStyle;
+  styleWeekend?: boolean;
+  daySelectionAnimation?: TDaySelectionAnimation;
+  customStyle?: ViewStyle;
   size: number;
-  allowDayTextScaling: boolean;
-  markedDatesStyle: TextStyle;
+  allowDayTextScaling?: boolean;
+  markedDatesStyle?: TextStyle;
   markedDates?: any[] | ((date: Moment) => void);
 }
 
