@@ -25,6 +25,8 @@ export default class App extends Component<{}> {
         startDate: date, // Single date since no endDate provided
         dateNameStyle: {color: 'blue'},
         dateNumberStyle: {color: 'purple'},
+        highlightDateNameStyle: {color: 'pink'},
+        highlightDateNumberStyle: {color: 'yellow'},
         // Random color...
         dateContainerStyle: { backgroundColor: `#${(`#00000${(Math.random() * (1 << 24) | 0).toString(16)}`).slice(-6)}` },
       });

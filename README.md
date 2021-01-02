@@ -346,6 +346,8 @@ This prop may be passed an array of style objects or a callback which receives a
 | **`endDate`**            | specify a range. If no endDate is supplied, startDate is treated as a single date. | Any  | **`True`** (unused w/ callback) |
 | **`dateNameStyle`**      | Text style for the name of the day.                                                | Any  | **`True`**  |
 | **`dateNumberStyle`**    | Text style for the number of the day.                                              | Any  | **`True`**  |
+| **`highlightDateNameStyle`**   | Text style for the selected name of the day. This overrides the global prop.   | Any  | **`True`**  |
+| **`highlightDateNumberStyle`** | Text style for the selected number of the day. This overrides the global prop. | Any  | **`True`**  |
 | **`dateContainerStyle`** | Style for the date Container.                                                      | Any  | **`True`**  |
 
 ##### Array Usage Example:
