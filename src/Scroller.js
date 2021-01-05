@@ -269,6 +269,7 @@ export default class CalendarScroller extends Component {
     if (!this.state.data || this.state.numDays === 0 || !this.state.itemHeight) {
       return null;
     }
+
     return (
       <View
         style={{ height: this.state.itemHeight, flex: 1 }}
@@ -276,7 +277,6 @@ export default class CalendarScroller extends Component {
       >
         <RecyclerListView
           ref={rlv => this.rlv = rlv}
-          pagingEnabled={this.props.pagingEnabled}
           layoutProvider={this.state.layoutProvider}
           dataProvider={this.state.dataProvider}
           rowRenderer={this.rowRenderer}
@@ -288,6 +288,10 @@ export default class CalendarScroller extends Component {
           scrollViewProps={{
             showsHorizontalScrollIndicator: false,
             contentContainerStyle: {paddingRight: this.state.itemWidth / 2},
+            ...(this.props.pagingEnabled ? {
+              decelerationRate: 0,
+              snapToInterval: this.state.itemWidth * this.state.numVisibleItems
+            } : {})
           }}
         />
       </View>
