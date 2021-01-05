@@ -2,7 +2,7 @@
  * Created by bogdanbegovic on 8/20/16.
  */
 
-import React, { Component, RefObject } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { View, Animated, PixelRatio } from "react-native";
 
@@ -87,9 +87,7 @@ class CalendarStrip extends Component {
 
     locale: PropTypes.object,
     shouldAllowFontScaling: PropTypes.bool,
-    useNativeDriver: PropTypes.bool,
-
-    ref: RefObject
+    useNativeDriver: PropTypes.bool
   };
 
   static defaultProps = {
@@ -102,7 +100,6 @@ class CalendarStrip extends Component {
     iconRight: require("./img/right-arrow-black.png"),
     calendarHeaderFormat: "MMMM YYYY",
     calendarHeaderPosition: "above",
-    headerText: moment().format("MMMM YYYY"),
     datesWhitelist: undefined,
     datesBlacklist: undefined,
     disabledDateOpacity: 0.3,
@@ -115,7 +112,6 @@ class CalendarStrip extends Component {
     markedDates: [],
     useNativeDriver: true,
     scrollToOnSetSelectedDate: true,
-    ref: undefined,
   };
 
   constructor(props) {
