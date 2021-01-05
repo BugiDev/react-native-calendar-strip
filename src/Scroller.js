@@ -22,7 +22,8 @@ export default class CalendarScroller extends Component {
     maxSimultaneousDays: PropTypes.number,
     updateMonthYear: PropTypes.func,
     onWeekChanged: PropTypes.func,
-    externalScrollView: PropTypes.func
+    externalScrollView: PropTypes.func,
+    pagingEnabled: PropTypes.bool
   }
 
   static defaultProps = {
@@ -275,6 +276,7 @@ export default class CalendarScroller extends Component {
       >
         <RecyclerListView
           ref={rlv => this.rlv = rlv}
+          pagingEnabled={this.props.pagingEnabled}
           layoutProvider={this.state.layoutProvider}
           dataProvider={this.state.dataProvider}
           rowRenderer={this.rowRenderer}
