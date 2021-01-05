@@ -1,4 +1,4 @@
-import { Component, ReactNode, ComponentProps } from "react";
+import { Component, ReactNode, ComponentProps, RefObject } from "react";
 import { Duration, Moment } from "moment";
 import {
   StyleProp,
@@ -135,6 +135,10 @@ interface CalendarStripProps {
   locale?: object;
   shouldAllowFontScaling?: boolean;
   useNativeDriver?: boolean;
+
+  headerText?: string;
+
+  ref?: RefObject;
 }
 
 export default class ReactNativeCalendarStrip extends Component<CalendarStripProps> {
