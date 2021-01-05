@@ -102,6 +102,7 @@ class CalendarStrip extends Component {
     iconRight: require("./img/right-arrow-black.png"),
     calendarHeaderFormat: "MMMM YYYY",
     calendarHeaderPosition: "above",
+    headerText: moment().format("MMMM YYYY"),
     datesWhitelist: undefined,
     datesBlacklist: undefined,
     disabledDateOpacity: 0.3,
