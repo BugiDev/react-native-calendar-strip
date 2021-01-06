@@ -270,6 +270,15 @@ export default class CalendarScroller extends Component {
       return null;
     }
 
+    const scrollViewProps = {
+      showsHorizontalScrollIndicator: false,
+      contentContainerStyle: {paddingRight: this.state.itemWidth / 2},
+      ...(this.props.pagingEnabled ? {
+        decelerationRate: 0,
+        snapToInterval: this.state.itemWidth * this.state.numVisibleItems
+      } : {})
+    }
+
     return (
       <View
         style={{ height: this.state.itemHeight, flex: 1 }}
@@ -285,14 +294,7 @@ export default class CalendarScroller extends Component {
           onVisibleIndicesChanged={this.onVisibleIndicesChanged}
           isHorizontal
           externalScrollView={this.props.externalScrollView}
-          scrollViewProps={{
-            showsHorizontalScrollIndicator: false,
-            contentContainerStyle: {paddingRight: this.state.itemWidth / 2},
-            ...(this.props.pagingEnabled ? {
-              decelerationRate: 0,
-              snapToInterval: this.state.itemWidth * this.state.numVisibleItems
-            } : {})
-          }}
+          scrollViewProps={scrollViewProps}
         />
       </View>
     );
