@@ -22,7 +22,8 @@ export default class CalendarScroller extends Component {
     maxSimultaneousDays: PropTypes.number,
     updateMonthYear: PropTypes.func,
     onWeekChanged: PropTypes.func,
-    externalScrollView: PropTypes.func
+    externalScrollView: PropTypes.func,
+    pagingEnabled: PropTypes.bool
   }
 
   static defaultProps = {
@@ -268,6 +269,12 @@ export default class CalendarScroller extends Component {
     if (!this.state.data || this.state.numDays === 0 || !this.state.itemHeight) {
       return null;
     }
+
+    const pagingProps = this.props.pagingEnabled ? {
+      decelerationRate: 0,
+      snapToInterval: this.state.itemWidth * this.state.numVisibleItems
+    } : {};
+
     return (
       <View
         style={{ height: this.state.itemHeight, flex: 1 }}
@@ -285,7 +292,8 @@ export default class CalendarScroller extends Component {
           externalScrollView={this.props.externalScrollView}
           scrollViewProps={{
             showsHorizontalScrollIndicator: false,
-            contentContainerStyle: {paddingRight: this.state.itemWidth / 2},
+            contentContainerStyle: { paddingRight: this.state.itemWidth / 2 },
+            ...pagingProps
           }}
         />
       </View>

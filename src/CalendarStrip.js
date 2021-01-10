@@ -26,6 +26,7 @@ class CalendarStrip extends Component {
 
     numDaysInWeek: PropTypes.number,
     scrollable: PropTypes.bool,
+    scrollerPaging: PropTypes.bool,
     externalScrollView: PropTypes.func,
     startingDate: PropTypes.any,
     selectedDate: PropTypes.any,
@@ -532,6 +533,7 @@ class CalendarStrip extends Component {
         <Scroller
           ref={scroller => this.scroller = scroller}
           data={this.state.datesList}
+          pagingEnabled={this.props.scrollerPaging}
           renderDay={this.renderDay}
           renderDayParams={{...this.createDayProps(this.state.selectedDate)}}
           maxSimultaneousDays={this.numDaysScroll}
