@@ -160,10 +160,13 @@ class CalendarStrip extends Component {
         prevProps.markedDates  !== this.props.markedDates  ||
         prevProps.customDatesStyles !== this.props.customDatesStyles )
     {
-      updateState = true;
-      startingDate = { startingDate: this.setLocale(this.props.startingDate)};
+      // Protect against undefined startingDate prop
+      let _startingDate = this.props.startingDate || this.state.startingDate;
+      
+      startingDate = { startingDate: this.setLocale(_startingDate)};
       selectedDate = { selectedDate: this.setLocale(this.props.selectedDate)};
       days = this.createDays(startingDate.startingDate, selectedDate.selectedDate);
+      updateState = true;
     }
 
     if (updateState) {
