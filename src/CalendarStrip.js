@@ -156,7 +156,9 @@ class CalendarStrip extends Component {
     if (!this.compareDates(prevProps.startingDate, this.props.startingDate) ||
         !this.compareDates(prevProps.selectedDate, this.props.selectedDate) ||
         prevProps.datesBlacklist !== this.props.datesBlacklist ||
-        prevProps.datesWhitelist !== this.props.datesWhitelist)
+        prevProps.datesWhitelist !== this.props.datesWhitelist ||
+        prevProps.markedDates  !== this.props.markedDates  ||
+        prevProps.customDatesStyles !== this.props.customDatesStyles )
     {
       updateState = true;
       startingDate = { startingDate: this.setLocale(this.props.startingDate)};
