@@ -363,6 +363,7 @@ class CalendarDay extends Component {
       daySelectionAnimation,
       highlightDateNameStyle,
       highlightDateNumberStyle,
+      selectedDateContainerStyle,
       styleWeekend,
       weekendDateNameStyle,
       weekendDateNumberStyle,
@@ -433,6 +434,7 @@ class CalendarDay extends Component {
         ];
       }
       if (selected) {
+        _dateViewStyle = [selectedDateContainerStyle];
         _dateNameStyle = [
           styles.dateName,
           highlightDateNameStyle,
