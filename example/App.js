@@ -83,7 +83,7 @@ export default class App extends Component<{}> {
           dateNameStyle={{color: 'white'}}
           iconContainer={{flex: 0.1}}
           customDatesStyles={this.state.customDatesStyles}
-          selectedDateContainerStyle={{backgroundColor: 'black'}}
+          highlightDateContainerStyle={{backgroundColor: 'black'}}
           markedDates={this.state.markedDates}
           datesBlacklist={this.datesBlacklistFunc}
           onDateSelected={this.onDateSelected}
