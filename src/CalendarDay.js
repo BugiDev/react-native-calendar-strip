@@ -363,7 +363,7 @@ class CalendarDay extends Component {
       daySelectionAnimation,
       highlightDateNameStyle,
       highlightDateNumberStyle,
-      selectedDateContainerStyle,
+      highlightDateContainerStyle,
       styleWeekend,
       weekendDateNameStyle,
       weekendDateNumberStyle,
@@ -399,7 +399,7 @@ class CalendarDay extends Component {
       _customHighlightDateNameStyle = customStyle.highlightDateNameStyle;
       _customHighlightDateNumberStyle = customStyle.highlightDateNumberStyle;
     }
-    if (enabled && selected) {
+    if (enabled) {
       // Enabled state
       //The user can disable animation, so that is why I use selection type
       //If it is background, the user have to input colors for animation
@@ -434,7 +434,7 @@ class CalendarDay extends Component {
         ];
       }
       if (selected) {
-        _dateViewStyle = [selectedDateContainerStyle];
+        _dateViewStyle.push(highlightDateContainerStyle);
         _dateNameStyle = [
           styles.dateName,
           highlightDateNameStyle,
