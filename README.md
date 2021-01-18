@@ -326,7 +326,7 @@ AppRegistry.registerComponent('Example', () => Example);
 | **`styleWeekend`**             | Whether to style weekend dates separately.                                                                                                 | Bool           | **`True`** |
 | **`highlightDateNameStyle`**   | Style for the selected name of the day in dates strip.                                                                                     | Any            |
 | **`highlightDateNumberStyle`** | Style for the selected number of the day in dates strip.                                                                                   | Any            |
-| **`highlightdDateContainerStyle`** | Style for the selected date container.            | Object         |
+| **`highlightDateContainerStyle`** | Style for the selected date container.            | Object         |
 | **`disabledDateNameStyle`**    | Style for disabled name of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                         | Any            |
 | **`disabledDateNumberStyle`**  | Style for disabled number of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                       | Any            |
 | **`markedDatesStyle`**         | Style for the marked dates marker.                                                                                                         | Object         |
