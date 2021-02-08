@@ -321,6 +321,7 @@ AppRegistry.registerComponent('Example', () => Example);
 | **`dateNameStyle`**            | Style for the name of the day on work days in dates strip                                                                                  | Any            |
 | **`dateNumberStyle`**          | Style for the number of the day on work days in dates strip.                                                                               | Any            |
 | **`dayContainerStyle`**        | Style for all day containers. RNCS scales the width & height responsively, so take that into account if overriding them.                   | Any            |
+| **`dateNumberContainerStyle`** | Style for the date number container. Some styles might not work when using `dateNumberStyle`, specifically on iOS so this is a workaround. | Any            |
 | **`weekendDateNameStyle`**     | Style for the name of the day on weekend days in dates strip.                                                                              | Any            |
 | **`weekendDateNumberStyle`**   | Style for the number of the day on weekend days in dates strip.                                                                            | Any            |
 | **`styleWeekend`**             | Whether to style weekend dates separately.                                                                                                 | Bool           | **`True`** |

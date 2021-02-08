@@ -29,6 +29,7 @@ class CalendarDay extends Component {
     dateNameStyle: PropTypes.any,
     dateNumberStyle: PropTypes.any,
     dayContainerStyle: PropTypes.any,
+    dateNumberContainerStyle: PropTypes.any,
     weekendDateNameStyle: PropTypes.any,
     weekendDateNumberStyle: PropTypes.any,
     highlightDateContainerStyle: PropTypes.any,
@@ -357,6 +358,7 @@ class CalendarDay extends Component {
       dateNameStyle,
       dateNumberStyle,
       dayContainerStyle,
+      dateNumberContainerStyle,
       disabledDateNameStyle,
       disabledDateNumberStyle,
       disabledDateOpacity,
@@ -482,7 +484,7 @@ class CalendarDay extends Component {
               </Text>
             )}
             {showDayNumber && (
-              <View>
+              <View style={dateNumberContainerStyle}>
                 <Text
                   style={[
                     { fontSize: dateNumberFontSize },
