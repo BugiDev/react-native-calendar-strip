@@ -24,10 +24,9 @@ class CalendarDay extends Component {
     showDayNumber: PropTypes.bool,
 
     calendarColor: PropTypes.string,
-    size: PropTypes.shape({
-      width: PropTypes.number,
-      height: PropTypes.number
-    }),
+
+    width: PropTypes.number,
+    height: PropTypes.number,
 
     dateNameStyle: PropTypes.any,
     dateNumberStyle: PropTypes.any,
@@ -126,7 +125,7 @@ class CalendarDay extends Component {
       doStateUpdate = true;
     }
 
-    if (prevProps.size.width !== this.props.size.width || prevProps.size.height !== this.props.size.height) {
+    if (prevProps.width !== this.props.width || prevProps.height !== this.props.height) {
       newState = { ...newState, ...this.calcSizes(this.props) };
       doStateUpdate = true;
     }
@@ -156,13 +155,11 @@ class CalendarDay extends Component {
 
   calcSizes = props => {
     return {
-      containerSize: {
-        width: Math.round(props.size.width),
-        height: Math.round(props.size.height)
-      },
-      containerBorderRadius: Math.round(props.size.width / 2),
-      dateNameFontSize: Math.round(props.size.width / 5),
-      dateNumberFontSize: Math.round(props.size.width / 2.9)
+      containerWidth: Math.round(props.width),
+      containerHeight: Math.round(props.height),
+      containerBorderRadius: Math.round(props.width / 2),
+      dateNameFontSize: Math.round(props.width / 5),
+      dateNumberFontSize: Math.round(props.width / 2.9)
     };
   }
 
@@ -337,7 +334,7 @@ class CalendarDay extends Component {
       .filter(d => (d && d.color))
       .map((line, index) => {
         const backgroundColor = this.state.selected && line.selectedColor ? line.selectedColor : line.color;
-        const width = this.props.size.width * 0.6;
+        const width = this.props.width * 0.6;
         return (
           <View
             key={line.key ? line.key : index}
@@ -386,7 +383,8 @@ class CalendarDay extends Component {
     const {
       enabled,
       selected,
-      containerSize,
+      containerHeight,
+      containerWidth,
       containerBorderRadius,
       customStyle,
       dateNameFontSize,
@@ -459,8 +457,8 @@ class CalendarDay extends Component {
     }
 
     let responsiveDateContainerStyle = {
-      width: containerSize.width,
-      height: containerSize.height,
+      width: containerWidth,
+      height: containerHeight,
       borderRadius: containerBorderRadius,
     };
 

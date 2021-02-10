@@ -441,10 +441,8 @@ class CalendarStrip extends Component {
       useNativeDriver: this.props.useNativeDriver,
       customDatesStyles: this.props.customDatesStyles,
       markedDates: this.props.markedDates,
-      size: {
-        height: this.state.dayComponentHeight,
-        width: this.state.dayComponentWidth
-      },
+      height: this.state.dayComponentHeight,
+      width: this.state.dayComponentWidth,
       marginHorizontal: this.state.marginHorizontal,
       allowDayTextScaling: this.props.shouldAllowFontScaling,
     }
