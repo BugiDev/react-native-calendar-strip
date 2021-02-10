@@ -31,10 +31,13 @@ class CalendarDay extends Component {
 
     dateNameStyle: PropTypes.any,
     dateNumberStyle: PropTypes.any,
+    dayContainerStyle: PropTypes.any,
     weekendDateNameStyle: PropTypes.any,
     weekendDateNumberStyle: PropTypes.any,
+    highlightDateContainerStyle: PropTypes.any,
     highlightDateNameStyle: PropTypes.any,
     highlightDateNumberStyle: PropTypes.any,
+    highlightDateNumberContainerStyle: PropTypes.any,
     disabledDateNameStyle: PropTypes.any,
     disabledDateNumberStyle: PropTypes.any,
     disabledDateOpacity: PropTypes.number,
@@ -360,6 +363,7 @@ class CalendarDay extends Component {
       date,
       dateNameStyle,
       dateNumberStyle,
+      dayContainerStyle,
       disabledDateNameStyle,
       disabledDateNumberStyle,
       disabledDateOpacity,
@@ -367,6 +371,8 @@ class CalendarDay extends Component {
       daySelectionAnimation,
       highlightDateNameStyle,
       highlightDateNumberStyle,
+      highlightDateNumberContainerStyle,
+      highlightDateContainerStyle,
       styleWeekend,
       weekendDateNameStyle,
       weekendDateNumberStyle,
@@ -392,11 +398,16 @@ class CalendarDay extends Component {
     let _dateViewStyle = enabled
       ? [{ backgroundColor: "transparent" }]
       : [{ opacity: disabledDateOpacity }];
+    let _customHighlightDateNameStyle;
+    let _customHighlightDateNumberStyle;
+    let _dateNumberContainerStyle = [];
 
     if (customStyle) {
       _dateNameStyle.push(customStyle.dateNameStyle);
       _dateNumberStyle.push(customStyle.dateNumberStyle);
       _dateViewStyle.push(customStyle.dateContainerStyle);
+      _customHighlightDateNameStyle = customStyle.highlightDateNameStyle;
+      _customHighlightDateNumberStyle = customStyle.highlightDateNumberStyle;
     }
     if (enabled && selected) {
       // Enabled state
@@ -432,13 +443,19 @@ class CalendarDay extends Component {
           weekendDateNumberStyle
         ];
       }
-      if (selected) {
-        _dateNameStyle = [styles.dateName, highlightDateNameStyle];
-        _dateNumberStyle = [
-          styles.dateNumber,
-          highlightDateNumberStyle
-        ];
-      }
+
+      _dateViewStyle.push(highlightDateContainerStyle);
+      _dateNameStyle = [
+        styles.dateName,
+        highlightDateNameStyle,
+        _customHighlightDateNameStyle
+      ];
+      _dateNumberStyle = [
+        styles.dateNumber,
+        highlightDateNumberStyle,
+        _customHighlightDateNumberStyle
+      ];
+      _dateNumberContainerStyle.push(highlightDateNumberContainerStyle);
     }
 
     let responsiveDateContainerStyle = {
@@ -461,7 +478,8 @@ class CalendarDay extends Component {
             style={[
               styles.dateContainer,
               responsiveDateContainerStyle,
-              _dateViewStyle
+              _dateViewStyle,
+              dayContainerStyle
             ]}
           >
             {showDayName && (
@@ -473,7 +491,7 @@ class CalendarDay extends Component {
               </Text>
             )}
             {showDayNumber && (
-              <View>
+              <View style={_dateNumberContainerStyle}>
                 <Text
                   style={[
                     { fontSize: dateNumberFontSize },
