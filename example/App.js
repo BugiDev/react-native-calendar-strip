@@ -25,6 +25,8 @@ export default class App extends Component<{}> {
         startDate: date, // Single date since no endDate provided
         dateNameStyle: {color: 'blue'},
         dateNumberStyle: {color: 'purple'},
+        highlightDateNameStyle: {color: 'pink'},
+        highlightDateNumberStyle: {color: 'yellow'},
         // Random color...
         dateContainerStyle: { backgroundColor: `#${(`#00000${(Math.random() * (1 << 24) | 0).toString(16)}`).slice(-6)}` },
       });
@@ -81,6 +83,7 @@ export default class App extends Component<{}> {
           dateNameStyle={{color: 'white'}}
           iconContainer={{flex: 0.1}}
           customDatesStyles={this.state.customDatesStyles}
+          highlightDateContainerStyle={{backgroundColor: 'black'}}
           markedDates={this.state.markedDates}
           datesBlacklist={this.datesBlacklistFunc}
           onDateSelected={this.onDateSelected}

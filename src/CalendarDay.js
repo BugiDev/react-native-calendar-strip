@@ -153,7 +153,10 @@ class CalendarDay extends Component {
 
   calcSizes = props => {
     return {
-      containerSize: Math.round(props.size.width),
+      containerSize: {
+        width: Math.round(props.size.width),
+        height: Math.round(props.size.height)
+      },
       containerBorderRadius: Math.round(props.size.width / 2),
       dateNameFontSize: Math.round(props.size.width / 5),
       dateNumberFontSize: Math.round(props.size.width / 2.9)
@@ -439,8 +442,8 @@ class CalendarDay extends Component {
     }
 
     let responsiveDateContainerStyle = {
-      width: containerSize,
-      height: containerSize,
+      width: containerSize.width,
+      height: containerSize.hei,
       borderRadius: containerBorderRadius,
     };
 
