@@ -123,7 +123,7 @@ class CalendarDay extends Component {
       doStateUpdate = true;
     }
 
-    if (prevProps.size.width !== this.props.size.width) {
+    if (prevProps.size.width !== this.props.size.width && prevProps.size.height !== this.props.size.height) {
       newState = { ...newState, ...this.calcSizes(this.props) };
       doStateUpdate = true;
     }
