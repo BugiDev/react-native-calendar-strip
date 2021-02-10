@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from "react";
-import PropTypes, { number } from "prop-types";
+import PropTypes from "prop-types";
 import moment from "moment";
 
 import { Text, View, Animated, Easing, LayoutAnimation, TouchableOpacity } from "react-native";
@@ -25,8 +25,8 @@ class CalendarDay extends Component {
 
     calendarColor: PropTypes.string,
     size: PropTypes.shape({
-      width: number,
-      height: number
+      width: PropTypes.number,
+      height: PropTypes.number
     }),
 
     dateNameStyle: PropTypes.any,
@@ -126,7 +126,7 @@ class CalendarDay extends Component {
       doStateUpdate = true;
     }
 
-    if (prevProps.size.width !== this.props.size.width && prevProps.size.height !== this.props.size.height) {
+    if (prevProps.size.width !== this.props.size.width || prevProps.size.height !== this.props.size.height) {
       newState = { ...newState, ...this.calcSizes(this.props) };
       doStateUpdate = true;
     }
