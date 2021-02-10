@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import PropTypes, { number } from "prop-types";
 import moment from "moment";
 
 import { Text, View, Animated, Easing, LayoutAnimation, TouchableOpacity } from "react-native";
@@ -24,7 +24,10 @@ class CalendarDay extends Component {
     showDayNumber: PropTypes.bool,
 
     calendarColor: PropTypes.string,
-    size: PropTypes.number,
+    size: PropTypes.shape({
+      width: number,
+      height: number
+    }),
 
     dateNameStyle: PropTypes.any,
     dateNumberStyle: PropTypes.any,
@@ -120,7 +123,7 @@ class CalendarDay extends Component {
       doStateUpdate = true;
     }
 
-    if (prevProps.size !== this.props.size) {
+    if (prevProps.size.width !== this.props.size.width) {
       newState = { ...newState, ...this.calcSizes(this.props) };
       doStateUpdate = true;
     }
@@ -150,10 +153,10 @@ class CalendarDay extends Component {
 
   calcSizes = props => {
     return {
-      containerSize: Math.round(props.size),
-      containerBorderRadius: Math.round(props.size / 2),
-      dateNameFontSize: Math.round(props.size / 5),
-      dateNumberFontSize: Math.round(props.size / 2.9)
+      containerSize: Math.round(props.size.width),
+      containerBorderRadius: Math.round(props.size.width / 2),
+      dateNameFontSize: Math.round(props.size.width / 5),
+      dateNumberFontSize: Math.round(props.size.width / 2.9)
     };
   }
 
@@ -328,7 +331,7 @@ class CalendarDay extends Component {
       .filter(d => (d && d.color))
       .map((line, index) => {
         const backgroundColor = this.state.selected && line.selectedColor ? line.selectedColor : line.color;
-        const width = this.props.size * 0.6;
+        const width = this.props.size.width * 0.6;
         return (
           <View
             key={line.key ? line.key : index}
