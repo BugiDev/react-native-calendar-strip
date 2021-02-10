@@ -443,7 +443,7 @@ class CalendarDay extends Component {
 
     let responsiveDateContainerStyle = {
       width: containerSize.width,
-      height: containerSize.hei,
+      height: containerSize.height,
       borderRadius: containerBorderRadius,
     };
 
