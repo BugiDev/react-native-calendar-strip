@@ -106,7 +106,8 @@ interface CalendarStripProps {
   maxDayComponentSize?: number;
   minDayComponentSize?: number;
   responsiveSizingOffset?: number;
-
+  dayComponentHeight?: number;
+                                      
   calendarHeaderContainerStyle?: StyleProp<ViewStyle>;
   calendarHeaderStyle?: StyleProp<TextStyle>;
   calendarHeaderFormat?: string;
