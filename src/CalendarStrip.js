@@ -61,6 +61,7 @@ class CalendarStrip extends Component {
 
     maxDayComponentSize: PropTypes.number,
     minDayComponentSize: PropTypes.number,
+    dayComponentHeight: PropTypes.number,
     responsiveSizingOffset: PropTypes.number,
 
     calendarHeaderContainerStyle: PropTypes.any,
@@ -365,6 +366,7 @@ class CalendarStrip extends Component {
       showMonth,
       showDate,
       scrollable,
+      dayComponentHeight,
     } = this.props;
     let csWidth = PixelRatio.roundToNearestPixel(layout.width);
     let dayComponentWidth = csWidth / numDaysInWeek + responsiveSizingOffset;
@@ -381,11 +383,12 @@ class CalendarStrip extends Component {
     let monthFontSize = Math.round(dayComponentWidth / 3.2);
     let selectorSize = Math.round(dayComponentWidth / 2.5);
     let height = showMonth ? monthFontSize : 0;
-    height += showDate ? dayComponentWidth : 0; // assume square element sizes
+    height += showDate ? dayComponentHeight || dayComponentWidth : 0;
     selectorSize = Math.min(selectorSize, height);
 
     this.setState({
       dayComponentWidth,
+      dayComponentHeight: dayComponentHeight || dayComponentWidth,
       height,
       monthFontSize,
       selectorSize,
@@ -438,7 +441,8 @@ class CalendarStrip extends Component {
       useNativeDriver: this.props.useNativeDriver,
       customDatesStyles: this.props.customDatesStyles,
       markedDates: this.props.markedDates,
-      size: this.state.dayComponentWidth,
+      height: this.state.dayComponentHeight,
+      width: this.state.dayComponentWidth,
       marginHorizontal: this.state.marginHorizontal,
       allowDayTextScaling: this.props.shouldAllowFontScaling,
     }

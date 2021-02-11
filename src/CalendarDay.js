@@ -24,7 +24,9 @@ class CalendarDay extends Component {
     showDayNumber: PropTypes.bool,
 
     calendarColor: PropTypes.string,
-    size: PropTypes.number,
+
+    width: PropTypes.number,
+    height: PropTypes.number,
 
     dateNameStyle: PropTypes.any,
     dateNumberStyle: PropTypes.any,
@@ -123,7 +125,7 @@ class CalendarDay extends Component {
       doStateUpdate = true;
     }
 
-    if (prevProps.size !== this.props.size) {
+    if (prevProps.width !== this.props.width || prevProps.height !== this.props.height) {
       newState = { ...newState, ...this.calcSizes(this.props) };
       doStateUpdate = true;
     }
@@ -153,10 +155,11 @@ class CalendarDay extends Component {
 
   calcSizes = props => {
     return {
-      containerSize: Math.round(props.size),
-      containerBorderRadius: Math.round(props.size / 2),
-      dateNameFontSize: Math.round(props.size / 5),
-      dateNumberFontSize: Math.round(props.size / 2.9)
+      containerWidth: Math.round(props.width),
+      containerHeight: Math.round(props.height),
+      containerBorderRadius: Math.round(props.width / 2),
+      dateNameFontSize: Math.round(props.width / 5),
+      dateNumberFontSize: Math.round(props.width / 2.9)
     };
   }
 
@@ -331,7 +334,7 @@ class CalendarDay extends Component {
       .filter(d => (d && d.color))
       .map((line, index) => {
         const backgroundColor = this.state.selected && line.selectedColor ? line.selectedColor : line.color;
-        const width = this.props.size * 0.6;
+        const width = this.props.width * 0.6;
         return (
           <View
             key={line.key ? line.key : index}
@@ -380,7 +383,8 @@ class CalendarDay extends Component {
     const {
       enabled,
       selected,
-      containerSize,
+      containerHeight,
+      containerWidth,
       containerBorderRadius,
       customStyle,
       dateNameFontSize,
@@ -453,8 +457,8 @@ class CalendarDay extends Component {
     }
 
     let responsiveDateContainerStyle = {
-      width: containerSize,
-      height: containerSize,
+      width: containerWidth,
+      height: containerHeight,
       borderRadius: containerBorderRadius,
     };
 
