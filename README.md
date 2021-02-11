@@ -44,7 +44,9 @@
   <li><a href="#props">Props</a></li>
   <li><a href="#animations">Animations</a></li>
   <li><a href="#localization">Localization</a></li>
-  <li><a href="#contributors">Contribute</a></li>
+  <li><a href="#device-specific-notes">Device Specific Notes</a></li>
+  <li><a href="#development-with-sample-application">Local Development</a></li>
+  <li><a href="#contributing">Contributing</a></li>
   <li><a href="#license">License</a></li>
 
 ## Install
@@ -326,7 +328,7 @@ AppRegistry.registerComponent('Example', () => Example);
 | **`styleWeekend`**             | Whether to style weekend dates separately.                                                                                                 | Bool           | **`True`** |
 | **`highlightDateNameStyle`**   | Style for the selected name of the day in dates strip.                                                                                     | Any            |
 | **`highlightDateNumberStyle`** | Style for the selected number of the day in dates strip.                                                                                   | Any            |
-| **`highlightDateNumberContainerStyle`** | Style for the selected date number container. Similar to `highlightDateNumberStyle`, but this fixes the issue that some styles may have on iOS when using `highlightDateNumberStyle`.        | Any            | 
+| **`highlightDateNumberContainerStyle`** | Style for the selected date number container. Similar to `highlightDateNumberStyle`, but this fixes the issue that some styles may have on iOS when using `highlightDateNumberStyle`.        | Any            |
 | **`highlightDateContainerStyle`** | Style for the selected date container.            | Object         |
 | **`disabledDateNameStyle`**    | Style for disabled name of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                         | Any            |
 | **`disabledDateNumberStyle`**  | Style for disabled number of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                       | Any            |
