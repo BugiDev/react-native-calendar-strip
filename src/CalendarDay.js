@@ -50,6 +50,7 @@ class CalendarDay extends Component {
     daySelectionAnimation: PropTypes.object,
     useNativeDriver: PropTypes.bool,
     scrollable: PropTypes.bool,
+    upperCaseDays: PropTypes.bool,
   };
 
   // Reference: https://medium.com/@Jpoliachik/react-native-s-layoutanimation-is-awesome-4a4d317afd3e
@@ -67,7 +68,8 @@ class CalendarDay extends Component {
     },
     styleWeekend: true,
     showDayName: true,
-    showDayNumber: true
+    showDayNumber: true,
+    upperCaseDays: true,
   };
 
   constructor(props) {
@@ -379,6 +381,7 @@ class CalendarDay extends Component {
       allowDayTextScaling,
       dayComponent: DayComponent,
       scrollable,
+      upperCaseDays,
     } = this.props;
     const {
       enabled,
@@ -485,7 +488,7 @@ class CalendarDay extends Component {
                 style={[{ fontSize: dateNameFontSize }, _dateNameStyle]}
                 allowFontScaling={allowDayTextScaling}
               >
-                {date.format("ddd").toUpperCase()}
+                {upperCaseDays ? date.format("ddd").toUpperCase() : date.format("ddd")}
               </Text>
             )}
             {showDayNumber && (
