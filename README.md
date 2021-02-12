@@ -336,7 +336,7 @@ AppRegistry.registerComponent('Example', () => Example);
 | **`disabledDateOpacity`**      | Opacity of disabled dates strip.                                                                                                           | Number         | **`0.3`**  |
 | **`customDatesStyles`**        | Custom per-date styling, overriding the styles above. Check Table <a href="#customdatesstyles"> Below </a>     .                           | Array or Func  | [] |
 | **`shouldAllowFontScaling`**   | Override the underlying Text element scaling to respect font settings                                                                      | Bool           | **`True`**|
-| **`upperCaseDays`**   | Toggle text formatting of days between uppercase and title case | Bool | **`True`**|
+| **`upperCaseDays`**   | Format text of the days to upper case or title case | Bool | **`True`**|
 
 #### customDatesStyles
 
