@@ -55,6 +55,7 @@ interface IDayComponentProps {
   allowDayTextScaling?: boolean;
   markedDatesStyle?: TextStyle;
   markedDates?: any[] | ((date: Moment) => void);
+  upperCaseDays?: boolean;
 }
 
 type TDaySelectionAnimation =
@@ -135,6 +136,7 @@ interface CalendarStripProps {
   markedDatesStyle?: StyleProp<TextStyle>;
   disabledDateOpacity?: number;
   styleWeekend?: boolean;
+  upperCaseDays?: boolean;
 
   locale?: object;
   shouldAllowFontScaling?: boolean;
