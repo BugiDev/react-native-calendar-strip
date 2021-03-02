@@ -256,7 +256,7 @@ export default class CalendarScroller extends Component {
   onLayout = event => {
     let width = event.nativeEvent.layout.width;
     this.setState({
-      numVisibleItems: Math.floor(width / this.state.itemWidth),
+      numVisibleItems: Math.round(width / this.state.itemWidth),
     });
   }
 
