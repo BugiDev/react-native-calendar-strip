@@ -32,6 +32,8 @@ class CalendarStrip extends Component {
     selectedDate: PropTypes.any,
     onDateSelected: PropTypes.func,
     onWeekChanged: PropTypes.func,
+    onWeekScrollStart: PropTypes.func,
+    onWeekScrollEnd: PropTypes.func,
     onHeaderSelected: PropTypes.func,
     updateWeek: PropTypes.bool,
     useIsoWeekday: PropTypes.bool,
@@ -560,6 +562,8 @@ class CalendarStrip extends Component {
           maxDate={this.props.maxDate}
           updateMonthYear={this.updateMonthYear}
           onWeekChanged={this.props.onWeekChanged}
+          onWeekScrollStart={this.props.onWeekScrollStart}
+          onWeekScrollEnd={this.props.onWeekScrollEnd}
           externalScrollView={this.props.externalScrollView}
         />
       );
