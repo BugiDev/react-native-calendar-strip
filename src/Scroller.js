@@ -288,6 +288,8 @@ export default class CalendarScroller extends Component {
       data,
       visibleStartDate,
       visibleEndDate,
+      visibleStartIndex,
+      visibleEndIndex,
     } = this.state;
     const prevStartDate = visibleStartDate ? visibleStartDate
       : (data[visibleStartIndex] ? data[visibleStartIndex].date : moment());
