@@ -22,6 +22,8 @@ export default class CalendarScroller extends Component {
     maxSimultaneousDays: PropTypes.number,
     updateMonthYear: PropTypes.func,
     onWeekChanged: PropTypes.func,
+    onWeekScrollStart: PropTypes.func,
+    onWeekScrollEnd: PropTypes.func,
     externalScrollView: PropTypes.func,
     pagingEnabled: PropTypes.bool
   }
@@ -253,6 +255,51 @@ export default class CalendarScroller extends Component {
     });
   }
 
+  onScrollStart = (event) => {
+    const {onWeekScrollStart} = this.props;
+    const {prevStartDate, prevEndDate} = this.state;
+
+    if (onWeekScrollStart && prevStartDate && prevEndDate) {
+      onWeekScrollStart(prevStartDate.clone(), prevEndDate.clone());
+    }
+  }
+
+  onScrollEnd = () => {
+    const {onWeekScrollEnd} = this.props;
+    const {visibleStartDate, visibleEndDate, prevEndDate} = this.state;
+
+    if (onWeekScrollEnd && visibleStartDate && visibleEndDate) {
+      if (!visibleEndDate.isSame(prevEndDate, "day")) {
+        onWeekScrollEnd(visibleStartDate.clone(), visibleEndDate.clone());
+      }
+    }
+  }
+
+  onScrollBeginDrag = () => {
+    const {
+      onWeekScrollStart,
+      onWeekScrollEnd,
+    } = this.props;
+    // Prev dates required only if scroll callbacks are defined
+    if (!onWeekScrollStart && !onWeekScrollEnd) {
+      return;
+    }
+    const {
+      data,
+      visibleStartDate,
+      visibleEndDate,
+    } = this.state;
+    const prevStartDate = visibleStartDate ? visibleStartDate
+      : (data[visibleStartIndex] ? data[visibleStartIndex].date : moment());
+    const prevEndDate = visibleEndDate ? visibleEndDate
+      : (data[visibleEndIndex] ? data[visibleEndIndex].date : moment());
+
+    this.setState({
+      prevStartDate,
+      prevEndDate,
+    });
+  }
+
   onLayout = event => {
     let width = event.nativeEvent.layout.width;
     this.setState({
@@ -292,6 +339,9 @@ export default class CalendarScroller extends Component {
           scrollViewProps={{
             showsHorizontalScrollIndicator: false,
             contentContainerStyle: { paddingRight: this.state.itemWidth / 2 },
+            onMomentumScrollBegin: this.onScrollStart,
+            onMomentumScrollEnd: this.onScrollEnd,
+            onScrollBeginDrag: this.onScrollBeginDrag,
             ...pagingProps
           }}
         />
