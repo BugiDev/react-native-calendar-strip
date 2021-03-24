@@ -146,7 +146,7 @@ interface CalendarStripProps {
 
   headerText?: string;
 
-  ref?: RefObject;
+  ref?: RefObject<any>;
 }
 
 export default class ReactNativeCalendarStrip extends Component<CalendarStripProps> {
