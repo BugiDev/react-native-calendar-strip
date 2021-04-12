@@ -83,9 +83,18 @@ export default class CalendarScroller extends Component {
     let newState = {};
     let updateState = false;
 
-    if (this.props.renderDayParams.width !== prevProps.renderDayParams.width || this.props.renderDayParams.height !== prevProps.renderDayParams.height) {
+    const {
+      width,
+      height,
+      selectedDate
+    } = this.props.renderDayParams;
+    if (width !== prevProps.renderDayParams.width || height !== prevProps.renderDayParams.height) {
       updateState = true;
       newState = this.updateLayout(this.props.renderDayParams);
+    }
+
+    if (selectedDate !== prevProps.renderDayParams.selectedDate) {
+      this.scrollToDate(selectedDate);
     }
 
     if (this.props.data !== prevProps.data) {
@@ -119,7 +128,7 @@ export default class CalendarScroller extends Component {
 
   // Scroll to given date, and check against min and max date if available.
   scrollToDate = (date) => {
-    let targetDate = moment(date);
+    let targetDate = moment(date).subtract(Math.round(this.state.numVisibleItems / 2) - 1, "days");
     const {
       minDate,
       maxDate,
