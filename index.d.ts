@@ -128,11 +128,13 @@ interface CalendarStripProps {
 
   dateNameStyle?: StyleProp<TextStyle>;
   dateNumberStyle?: StyleProp<TextStyle>;
+  dayContainerStyle?: StyleProp<ViewStyle>;
   weekendDateNameStyle?: StyleProp<TextStyle>;
   weekendDateNumberStyle?: StyleProp<TextStyle>;
   highlightDateContainerStyle?: StyleProp<ViewStyle>;
   highlightDateNameStyle?: StyleProp<TextStyle>;
   highlightDateNumberStyle?: StyleProp<TextStyle>;
+  highlightDateNumberContainerStyle?: StyleProp<ViewStyle>;
   disabledDateNameStyle?: StyleProp<TextStyle>;
   disabledDateNumberStyle?: StyleProp<TextStyle>;
   markedDatesStyle?: StyleProp<TextStyle>;

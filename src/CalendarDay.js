@@ -502,9 +502,10 @@ class CalendarDay extends Component {
                 >
                   {date.date()}
                 </Text>
-                { this.renderMarking() }
+              
               </View>
             )}
+              { this.renderMarking() }
           </View>
         </TouchableOpacity>
       );
