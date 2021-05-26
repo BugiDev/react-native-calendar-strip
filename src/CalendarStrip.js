@@ -479,7 +479,7 @@ class CalendarStrip extends Component {
 
     for (let i = 0; i < numDays; i++) {
       let date;
-      if (useIsoWeekday && !scrollable) {
+      if (useIsoWeekday) {
         // isoWeekday starts from Monday
         date = this.setLocale(_startingDate.clone().isoWeekday(i + 1));
       } else {
