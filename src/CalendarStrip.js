@@ -306,7 +306,7 @@ class CalendarStrip extends Component {
         ...this.createDays(this.state.startingDate, selectedDate),
       };
     }
-    this.setState(newState);
+    this.setState(() => newState);
     const _selectedDate = selectedDate && selectedDate.clone();
     this.props.onDateSelected && this.props.onDateSelected(_selectedDate);
   }
