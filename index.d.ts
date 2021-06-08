@@ -76,8 +76,8 @@ interface CalendarStripProps {
   scrollable?: boolean;
   scrollerPaging?: boolean;
   externalScrollView?: ComponentProps<typeof RecyclerListView>['externalScrollView'];
-  startingDate?: Moment;
-  selectedDate?: Moment;
+  startingDate?: Moment | Date;
+  selectedDate?: Moment | Date;
   onDateSelected?: ((date: Moment) => void);
   onWeekChanged?: ((start: Moment, end: Moment) => void);
   onWeekScrollStart?: ((start: Moment, end: Moment) => void);
@@ -85,8 +85,8 @@ interface CalendarStripProps {
   onHeaderSelected?: ((dates: {weekStartDate: Moment, weekEndDate: Moment}) => void);
   updateWeek?: boolean;
   useIsoWeekday?: boolean;
-  minDate?: Moment;
-  maxDate?: Moment;
+  minDate?: Moment | Date;
+  maxDate?: Moment | Date;
   datesWhitelist?: TDateRange[] | ((date: Moment) => void);
   datesBlacklist?: TDateRange[] | ((date: Moment) => void);
   markedDates?: any[] | ((date: Moment) => void);
