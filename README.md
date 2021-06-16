@@ -44,7 +44,9 @@
   <li><a href="#props">Props</a></li>
   <li><a href="#animations">Animations</a></li>
   <li><a href="#localization">Localization</a></li>
-  <li><a href="#contributors">Contribute</a></li>
+  <li><a href="#device-specific-notes">Device Specific Notes</a></li>
+  <li><a href="#development-with-sample-application">Local Development</a></li>
+  <li><a href="#contributing">Contributing</a></li>
   <li><a href="#license">License</a></li>
 
 ## Install
@@ -61,7 +63,7 @@ $ yarn add react-native-calendar-strip
 
 The `scrollable` prop was introduced in 2.0.0 and features a bi-directional infinite scroller.  It recycles days using RecyclerListView, shifting the dates as the ends are reached.  The Chrome debugger can cause issues with this updating due to a [RN setTimeout bug](https://github.com/facebook/react-native/issues/4470). To prevent date shifts at the ends of the scroller, set the `minDate` and `maxDate` range to a year or less.
 
-The refactor to support `scrollable` introduced internal changes to the `CalendarDay` component.  Users of the `dayComponent` prop may need to adjust their custom day component to accomomdate the props passed to it.
+The refactor to support `scrollable` introduced internal changes to the `CalendarDay` component.  Users of the `dayComponent` prop may need to adjust their custom day component to accommodate the props passed to it.
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/6295083/82712731-54a98780-9c4e-11ea-9076-eddf0b756239.gif" alt="">
@@ -189,10 +191,13 @@ AppRegistry.registerComponent('Example', () => Example);
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ---------- |
 | **`numDaysInWeek`**  | Number of days shown in week. Applicable only when scrollable is false.                                                                                            | Number   | **`7`**    |
 | **`scrollable`**     | Dates are scrollable if true.                                                                                                                                      | Bool     | **`False`**|
+| **`scrollerPaging`** | Dates are scrollable as a page (7 days) if true (Only works with `scrollable` set to true).                                                                        | Bool     | **`False`**|
 | **`startingDate`**   | Date to be used for centering the calendar/showing the week based on that date. It is internally wrapped by `moment` so it accepts both `Date` and `moment Date`.  | Any      |
 | **`selectedDate`**   | Date to be used as pre selected Date. It is internally wrapped by `moment` so it accepts both `Date` and `moment Date`.                                            | Any      |
 | **`onDateSelected`** | Function to be used as a callback when a date is selected. Receives param `date` Moment date.                                                                      | Function |
-| **`onWeekChanged`**  | Function to be used as a callback when a week is changed. Receives params `(start, end)` Moment dates.                                                     | Function |
+| **`onWeekChanged`**  | Function to be used as a callback when a week is changed. Receives params `(start, end)` Moment dates.                                                             | Function |
+| **`onWeekScrollStart`**| Function to be used as a callback in `scrollable` mode when dates page starts gliding. Receives params `(start, end)` Moment dates.                              | Function |
+| **`onWeekScrollEnd`**| Function to be used as a callback in `scrollable` mode when dates page stops gliding. Receives params `(start, end)` Moment dates.                                 | Function |
 | **`onHeaderSelected`**| Function to be used as a callback when the header is selected. Receives param object `{weekStartDate, weekEndDate}` Moment dates.                                 | Function |
 | **`headerText`**     | Text to use in the header. Use with `onWeekChanged` to receive the visible start & end dates.                                                                      | String  |
 | **`updateWeek`**     | Update the week view if other props change. If `false`, the week view won't change when other props change, but will still respond to left/right selectors.        | Bool     | **`True`** |
@@ -202,6 +207,7 @@ AppRegistry.registerComponent('Example', () => Example);
 | **`datesWhitelist`** | Array of dates that are enabled, or a function callback which receives a date param and returns true if enabled. Array supports ranges specified with an object entry in the array. Check example <a href="#dateswhitelist-array-example">Below</a> | Array or Func |
 | **`datesBlacklist`** | Array of dates that are disabled, or a function callback. Same format as _datesWhitelist_. This overrides dates in _datesWhitelist_.                               | Array or Func |
 | **`markedDates`**    | Dates that are marked with dots or lines. Format as <a href="#markeddates-example">markedDatesFormat</a>.                                                          | Array or Func | **[]**
+| **`scrollToOnSetSelectedDate`** | Controls whether to reposition the scroller to the date passed to `setSelectedDate`.                                                                         | Bool     | **`True`** |
 
 
 ##### datesWhitelist Array Example
@@ -309,26 +315,30 @@ AppRegistry.registerComponent('Example', () => Example);
 ### Styling
 
 | Prop                           | Description                                                                                                                                                                                                                                                                              | Type   | Default    |
-| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ---------- |
-| **`style`**                    | Style for the top level CalendarStrip component.                                                                                                                                                                                                                                         | Any    |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | -------------- | ---------- |
+| **`style`**                    | Style for the top level CalendarStrip component.                                                                                                 | Any            |
 | **`innerStyle`**               | Style for the responsively sized inner view. This is necessary to account for padding/margin from the top level view. The inner view has style `flex:1` by default. If this component is nested within another dynamically sized container, remove the flex style by passing in `[]`. | Any    |
-| **`calendarHeaderStyle`**      | Style for the header text of the calendar                                                                                                                                   
-| **`calendarHeaderContainerStyle`** | Style for the header text wrapper of the calendar                                                                                                                                                                                                                                        | Any            |
-| **`calendarHeaderPosition`**       | Position of the header text (above or below)                                                                                                                                                                                                                                             | `above, below` | **`above`** |                                                                                                             | Any    |
-| **`calendarHeaderFormat`**     | Format for the header text of the calendar. For options, refer to [Moment documentation](http://momentjs.com/docs/#/displaying/format/)                                                                                                                                                | String |
-| **`dateNameStyle`**            | Style for the name of the day on work days in dates strip                                                                                                                                                                                                                                | Any    |
-| **`dateNumberStyle`**          | Style for the number of the day on work days in dates strip.                                                                                                                                                                                                                             | Any    |
-| **`weekendDateNameStyle`**     | Style for the name of the day on weekend days in dates strip.                                                                                                                                                                                                                            | Any    |
-| **`weekendDateNumberStyle`**   | Style for the number of the day on weekend days in dates strip.                                                                                                                                                                                                                          | Any    |
-| **`styleWeekend`**             | Whether to style weekend dates separately.                                                                                                                                                                                                                                               | Bool   | **`True`** |
-| **`highlightDateNameStyle`**   | Style for the selected name of the day in dates strip.                                                                                                                                                                                                                                   | Any    |
-| **`highlightDateNumberStyle`** | Style for the selected number of the day in dates strip.                                                                                                                                                                                                                                 | Any    |
-| **`disabledDateNameStyle`**    | Style for disabled name of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                                                                                                                                                                       | Any    |
-| **`disabledDateNumberStyle`**  | Style for disabled number of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                                                                                                                                                                     | Any    |
-| **`markedDatesStyle`**         | Style for the marked dates marker.                                                                                                                                                                                                                                                       | Object |
-| **`disabledDateOpacity`**      | Opacity of disabled dates strip.                                                                                                                                                                                                                                                         | Number | **`0.3`**  |
-| **`customDatesStyles`**        | Custom per-date styling, overriding the styles above. Check Table <a href="#customdatesstyles"> Below </a>     .                                                                                                                                                                           | Array or Func  | [] |
-| **`shouldAllowFontScaling`**   | Override the underlying Text element scaling to respect font settings                                                                                                                                                                            | Bool   | **`True`**|
+| **`calendarHeaderStyle`**      | Style for the header text of the calendar                                                                                                  | Any            |
+| **`calendarHeaderContainerStyle`** | Style for the header text wrapper of the calendar                                                                                      | Any            |
+| **`calendarHeaderPosition`**   | Position of the header text (above or below)                                                                                               | `above, below` | **`above`** |
+| **`calendarHeaderFormat`**     | Format for the header text of the calendar. For options, refer to [Moment documentation](http://momentjs.com/docs/#/displaying/format/)    | String         |
+| **`dateNameStyle`**            | Style for the name of the day on work days in dates strip                                                                                  | Any            |
+| **`dateNumberStyle`**          | Style for the number of the day on work days in dates strip.                                                                               | Any            |
+| **`dayContainerStyle`**        | Style for all day containers. RNCS scales the width & height responsively, so take that into account if overriding them.                   | Any            |
+| **`weekendDateNameStyle`**     | Style for the name of the day on weekend days in dates strip.                                                                              | Any            |
+| **`weekendDateNumberStyle`**   | Style for the number of the day on weekend days in dates strip.                                                                            | Any            |
+| **`styleWeekend`**             | Whether to style weekend dates separately.                                                                                                 | Bool           | **`True`** |
+| **`highlightDateNameStyle`**   | Style for the selected name of the day in dates strip.                                                                                     | Any            |
+| **`highlightDateNumberStyle`** | Style for the selected number of the day in dates strip.                                                                                   | Any            |
+| **`highlightDateNumberContainerStyle`** | Style for the selected date number container. Similar to `highlightDateNumberStyle`, but this fixes the issue that some styles may have on iOS when using `highlightDateNumberStyle`.        | Any            |
+| **`highlightDateContainerStyle`** | Style for the selected date container.            | Object         |
+| **`disabledDateNameStyle`**    | Style for disabled name of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                         | Any            |
+| **`disabledDateNumberStyle`**  | Style for disabled number of the day in dates strip (controlled by datesWhitelist & datesBlacklist).                                       | Any            |
+| **`markedDatesStyle`**         | Style for the marked dates marker.                                                                                                         | Object         |
+| **`disabledDateOpacity`**      | Opacity of disabled dates strip.                                                                                                           | Number         | **`0.3`**  |
+| **`customDatesStyles`**        | Custom per-date styling, overriding the styles above. Check Table <a href="#customdatesstyles"> Below </a>     .                           | Array or Func  | [] |
+| **`shouldAllowFontScaling`**   | Override the underlying Text element scaling to respect font settings                                                                      | Bool           | **`True`**|
+| **`upperCaseDays`**   | Format text of the days to upper case or title case | Bool | **`True`**|
 
 #### customDatesStyles
 
@@ -344,6 +354,8 @@ This prop may be passed an array of style objects or a callback which receives a
 | **`endDate`**            | specify a range. If no endDate is supplied, startDate is treated as a single date. | Any  | **`True`** (unused w/ callback) |
 | **`dateNameStyle`**      | Text style for the name of the day.                                                | Any  | **`True`**  |
 | **`dateNumberStyle`**    | Text style for the number of the day.                                              | Any  | **`True`**  |
+| **`highlightDateNameStyle`**   | Text style for the selected name of the day. This overrides the global prop.   | Any  | **`True`**  |
+| **`highlightDateNumberStyle`** | Text style for the selected number of the day. This overrides the global prop. | Any  | **`True`**  |
 | **`dateContainerStyle`** | Style for the date Container.                                                      | Any  | **`True`**  |
 
 ##### Array Usage Example:
@@ -408,6 +420,7 @@ This prop may be passed an array of style objects or a callback which receives a
 | **`maxDayComponentSize`**    | Maximum size that CalendarDay will responsively size up to.                                                                                          | Number | **`80`** |
 | **`minDayComponentSize`**    | Minimum size that CalendarDay will responsively size down to.                                                                                        | Number | **`10`** |
 | **`responsiveSizingOffset`** | Adjust the responsive sizing. May be positive (increase size) or negative (decrease size). This value is added to the calculated day component width | Number | **`0`**  |
+| **`dayComponentHeight`**     | Fixed height for the CalendarDay component or custom `dayComponent`.                                                                                 | Number |          |
 
 #### Icon Sizing
 
@@ -435,7 +448,7 @@ Methods may be accessed through the instantiated component's [ref](https://react
 | Prop                                  | Description                                                                                                                                                                                                                                                                                           |
 | ------------------------------------- | --------------------------------------------------------------------------------- |
 | **`getSelectedDate()`**               | Returns the currently selected date. If no date is selected, returns undefined.   |
-| **`setSelectedDate(date)`**           | Sets the selected date. `date` may be a Moment object, ISO8601 date string, or any format that Moment is able to parse. It is the responsibility of the caller to select a date that makes sense (e.g. within the current week view). Passing in a value of `0` effectively clears the selected date. |
+| **`setSelectedDate(date)`**           | Sets the selected date. `date` may be a Moment object, ISO8601 date string, or any format that Moment is able to parse. It is the responsibility of the caller to select a date that makes sense (e.g. within the current week view). Passing in a value of `0` effectively clears the selected date. `scrollToOnSetSelectedDate` controls whether the scroller repositions to the selected date. |
 | **`getNextWeek()`**                   | Advance to the next week.                                                         |
 | **`getPreviousWeek()`**               | Rewind to the previous week.                                                      |
 | **`updateWeekView(date)`**            | Show the week starting on `date`.                                                 |

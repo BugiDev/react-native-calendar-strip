@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text } from "react-native";
+import { View, Text, Button } from 'react-native';
 import CalendarStrip from './CalendarStrip/CalendarStrip';
 import moment from 'moment';
 
@@ -25,6 +25,8 @@ export default class App extends Component<{}> {
         startDate: date, // Single date since no endDate provided
         dateNameStyle: {color: 'blue'},
         dateNumberStyle: {color: 'purple'},
+        highlightDateNameStyle: {color: 'pink'},
+        highlightDateNumberStyle: {color: 'yellow'},
         // Random color...
         dateContainerStyle: { backgroundColor: `#${(`#00000${(Math.random() * (1 << 24) | 0).toString(16)}`).slice(-6)}` },
       });
@@ -52,7 +54,7 @@ export default class App extends Component<{}> {
     }
 
     this.state = {
-      selectedDate: '',
+      selectedDate: undefined,
       customDatesStyles,
       markedDates,
       startDate,
@@ -63,8 +65,21 @@ export default class App extends Component<{}> {
     return date.isoWeekday() === 6; // disable Saturdays
   }
 
-  onDateSelected = date => {
-    this.setState({ formattedDate: date.format('YYYY-MM-DD')});
+  onDateSelected = selectedDate => {
+    this.setState({ selectedDate });
+    this.setState({ formattedDate: selectedDate.format('YYYY-MM-DD')});
+  }
+
+  setSelectedDateNextWeek = date => {
+    const selectedDate = moment(this.state.selectedDate).add(1, 'week');
+    const formattedDate = selectedDate.format('YYYY-MM-DD');
+    this.setState({ selectedDate, formattedDate });
+  }
+
+  setSelectedDatePrevWeek = date => {
+    const selectedDate = moment(this.state.selectedDate).subtract(1, 'week');
+    const formattedDate = selectedDate.format('YYYY-MM-DD');
+    this.setState({ selectedDate, formattedDate });
   }
 
   render() {
@@ -81,12 +96,30 @@ export default class App extends Component<{}> {
           dateNameStyle={{color: 'white'}}
           iconContainer={{flex: 0.1}}
           customDatesStyles={this.state.customDatesStyles}
+          highlightDateNameStyle={{color: 'white'}}
+          highlightDateNumberStyle={{color: 'yellow'}}
+          highlightDateContainerStyle={{backgroundColor: 'black'}}
           markedDates={this.state.markedDates}
           datesBlacklist={this.datesBlacklistFunc}
+          selectedDate={this.state.selectedDate}
           onDateSelected={this.onDateSelected}
           useIsoWeekday={false}
         />
+
         <Text style={{fontSize: 24}}>Selected Date: {this.state.formattedDate}</Text>
+
+        <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', padding: 40}}>
+          <Button
+            onPress={this.setSelectedDatePrevWeek}
+            title="Select previous week"
+            color="#841584"
+          />
+          <Button
+            onPress={this.setSelectedDateNextWeek}
+            title="Select next week"
+            color="#841584"
+          />
+        </View>
       </View>
     );
   }

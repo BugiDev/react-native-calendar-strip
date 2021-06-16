@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/BugiDev/react-native-calendar-strip/issues"
   },
-  "version": "2.0.9",
+  "version": "2.2.3",
   "main": "index.js",
   "directories": {
     "example": "example"
@@ -44,9 +44,11 @@
     "react-native": "*"
   },
   "devDependencies": {
+    "@types/react": "^17.0.0",
+    "@types/react-native": "^0.63.37",
     "all-contributors-cli": "^4.10.1",
     "babel-eslint": "^8.0.3",
-    "babel-jest": "^22.0.3",
+    "babel-jest": "^26.6.3",
     "babel-preset-react-native": "^4.0.0",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.15.2",
@@ -54,7 +56,7 @@
     "eslint": "^4.13.1",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-react": "^7.5.1",
-    "jest": "^22.0.3",
+    "jest": "^26.6.3",
     "react": "^16.13.1",
     "react-addons-test-utils": "^15.6.2",
     "react-dom": "^16.2.0",
@@ -79,6 +81,9 @@
   ],
   "jest": {
     "preset": "react-native",
+    "transform": {
+      "^.+\\.(js)$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
+    },
     "verbose": true,
     "coverageDirectory": "./coverage/",
     "collectCoverageFrom": [

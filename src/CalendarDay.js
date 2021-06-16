@@ -24,14 +24,19 @@ class CalendarDay extends Component {
     showDayNumber: PropTypes.bool,
 
     calendarColor: PropTypes.string,
-    size: PropTypes.number,
+
+    width: PropTypes.number,
+    height: PropTypes.number,
 
     dateNameStyle: PropTypes.any,
     dateNumberStyle: PropTypes.any,
+    dayContainerStyle: PropTypes.any,
     weekendDateNameStyle: PropTypes.any,
     weekendDateNumberStyle: PropTypes.any,
+    highlightDateContainerStyle: PropTypes.any,
     highlightDateNameStyle: PropTypes.any,
     highlightDateNumberStyle: PropTypes.any,
+    highlightDateNumberContainerStyle: PropTypes.any,
     disabledDateNameStyle: PropTypes.any,
     disabledDateNumberStyle: PropTypes.any,
     disabledDateOpacity: PropTypes.number,
@@ -39,7 +44,7 @@ class CalendarDay extends Component {
     customDatesStyles: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
     markedDatesStyle: PropTypes.object,
     allowDayTextScaling: PropTypes.bool,
-    
+
     customContainerDateStyle: PropTypes.any,
 
     calendarAnimation: PropTypes.object,
@@ -47,6 +52,7 @@ class CalendarDay extends Component {
     daySelectionAnimation: PropTypes.object,
     useNativeDriver: PropTypes.bool,
     scrollable: PropTypes.bool,
+    upperCaseDays: PropTypes.bool,
   };
 
   // Reference: https://medium.com/@Jpoliachik/react-native-s-layoutanimation-is-awesome-4a4d317afd3e
@@ -64,7 +70,8 @@ class CalendarDay extends Component {
     },
     styleWeekend: true,
     showDayName: true,
-    showDayNumber: true
+    showDayNumber: true,
+    upperCaseDays: true,
   };
 
   constructor(props) {
@@ -122,7 +129,7 @@ class CalendarDay extends Component {
       doStateUpdate = true;
     }
 
-    if (prevProps.size !== this.props.size) {
+    if (prevProps.width !== this.props.width || prevProps.height !== this.props.height) {
       newState = { ...newState, ...this.calcSizes(this.props) };
       doStateUpdate = true;
     }
@@ -152,10 +159,11 @@ class CalendarDay extends Component {
 
   calcSizes = props => {
     return {
-      containerSize: Math.round(props.size),
-      containerBorderRadius: Math.round(props.size / 2),
-      dateNameFontSize: Math.round(props.size / 5),
-      dateNumberFontSize: Math.round(props.size / 2.9)
+      containerWidth: Math.round(props.width),
+      containerHeight: Math.round(props.height),
+      containerBorderRadius: Math.round(props.width / 2),
+      dateNameFontSize: Math.round(props.width / 5),
+      dateNumberFontSize: Math.round(props.width / 2.9)
     };
   }
 
@@ -337,7 +345,7 @@ class CalendarDay extends Component {
       .filter(d => (d && d.color))
       .map((line, index) => {
         const backgroundColor = this.state.selected && line.selectedColor ? line.selectedColor : line.color;
-        const width = this.props.size * 0.6;
+        const width = this.props.width * 0.6;
         return (
           <View
             key={line.key ? line.key : index}
@@ -363,6 +371,7 @@ class CalendarDay extends Component {
       date,
       dateNameStyle,
       dateNumberStyle,
+      dayContainerStyle,
       disabledDateNameStyle,
       disabledDateNumberStyle,
       disabledDateOpacity,
@@ -370,6 +379,8 @@ class CalendarDay extends Component {
       daySelectionAnimation,
       highlightDateNameStyle,
       highlightDateNumberStyle,
+      highlightDateNumberContainerStyle,
+      highlightDateContainerStyle,
       styleWeekend,
       weekendDateNameStyle,
       weekendDateNumberStyle,
@@ -379,12 +390,14 @@ class CalendarDay extends Component {
       allowDayTextScaling,
       dayComponent: DayComponent,
       scrollable,
+      upperCaseDays,
       customContainerDateStyle,
     } = this.props;
     const {
       enabled,
       selected,
-      containerSize,
+      containerHeight,
+      containerWidth,
       containerBorderRadius,
       customStyle,
       dateNameFontSize,
@@ -396,12 +409,17 @@ class CalendarDay extends Component {
     let _dateViewStyle = enabled
       ? [{ backgroundColor: "transparent" }]
       : [{ opacity: disabledDateOpacity }];
-      let _dateContainerStyle = [enabled ? customContainerDateStyle && customContainerDateStyle.style : customContainerDateStyle && customContainerDateStyle.disabled];
+    let _customHighlightDateNameStyle;
+    let _customHighlightDateNumberStyle;
+    let _dateNumberContainerStyle = [];
+    let _dateContainerStyle = [enabled ? customContainerDateStyle && customContainerDateStyle.style : customContainerDateStyle && customContainerDateStyle.disabled];
 
     if (customStyle) {
       _dateNameStyle.push(customStyle.dateNameStyle);
       _dateNumberStyle.push(customStyle.dateNumberStyle);
       _dateViewStyle.push(customStyle.dateContainerStyle);
+      _customHighlightDateNameStyle = customStyle.highlightDateNameStyle;
+      _customHighlightDateNumberStyle = customStyle.highlightDateNumberStyle;
     }
     if (enabled && selected) {
       // Enabled state
@@ -437,21 +455,33 @@ class CalendarDay extends Component {
           weekendDateNumberStyle
         ];
       }
-      if (selected) {
-        if (_dateContainerStyle) {
-          _dateContainerStyle = customContainerDateStyle && customContainerDateStyle.highlight;
-        }
-        _dateNameStyle = [styles.dateName, highlightDateNameStyle];
-        _dateNumberStyle = [
-          styles.dateNumber,
-          highlightDateNumberStyle
-        ];
+
+      _dateViewStyle.push(highlightDateContainerStyle);
+      _dateNameStyle = [
+        styles.dateName,
+        highlightDateNameStyle,
+        _customHighlightDateNameStyle
+      ];
+      _dateNumberStyle = [
+        styles.dateNumber,
+        highlightDateNumberStyle,
+        _customHighlightDateNumberStyle
+      ];
+      _dateNumberContainerStyle.push(highlightDateNumberContainerStyle);
+
+      if (_dateContainerStyle) {
+        _dateContainerStyle = customContainerDateStyle && customContainerDateStyle.highlight;
       }
+      _dateNameStyle = [styles.dateName, highlightDateNameStyle];
+      _dateNumberStyle = [
+        styles.dateNumber,
+        highlightDateNumberStyle
+      ];
     }
 
     let responsiveDateContainerStyle = {
-      width: containerSize,
-      height: containerSize,
+      width: containerWidth,
+      height: containerHeight,
       borderRadius: containerBorderRadius,
     };
 
@@ -471,6 +501,7 @@ class CalendarDay extends Component {
               styles.dateContainer,
               responsiveDateContainerStyle,
               _dateViewStyle,
+              dayContainerStyle,
               _dateContainerStyle
             ]}
           >
@@ -479,11 +510,11 @@ class CalendarDay extends Component {
                 style={[{ fontSize: dateNameFontSize }, _dateNameStyle]}
                 allowFontScaling={allowDayTextScaling}
               >
-                {date.format("ddd").toUpperCase()}
+                {upperCaseDays ? date.format("ddd").toUpperCase() : date.format("ddd")}
               </Text>
             )}
             {showDayNumber && (
-              <View>
+              <View style={_dateNumberContainerStyle}>
                 <Text
                   style={[
                     { fontSize: dateNumberFontSize },
