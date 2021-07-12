@@ -169,7 +169,7 @@ class CalendarStrip extends Component {
     {
       // Protect against undefined startingDate prop
       let _startingDate = this.props.startingDate || this.state.startingDate;
-      
+
       startingDate = { startingDate: this.setLocale(_startingDate)};
       selectedDate = { selectedDate: this.setLocale(this.props.selectedDate)};
       days = this.createDays(startingDate.startingDate, selectedDate.selectedDate);
@@ -312,7 +312,7 @@ class CalendarStrip extends Component {
   }
 
   // Get the currently selected date (Moment JS object)
-  getSelectedDate = date => {
+  getSelectedDate = () => {
     if (!this.state.selectedDate || this.state.selectedDate.valueOf() === 0) {
       return; // undefined (no date has been selected yet)
     }
