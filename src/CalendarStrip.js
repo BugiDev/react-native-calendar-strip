@@ -155,6 +155,10 @@ class CalendarStrip extends Component {
 
   //Receiving props and set date states, minimizing state updates.
   componentDidUpdate(prevProps, prevState) {
+    if (!this.state.dayComponentWidth) {
+      return
+    }
+    
     let startingDate = {};
     let selectedDate = {};
     let days = {};
