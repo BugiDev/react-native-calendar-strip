@@ -146,7 +146,8 @@ class CalendarStrip extends Component {
       dayComponentWidth: 0,
       height: 0,
       monthFontSize: 0,
-      selectorSize: 0
+      selectorSize: 0,
+      numVisibleDays: props.numDaysInWeek,
     };
 
     this.animations = [];
@@ -155,10 +156,6 @@ class CalendarStrip extends Component {
 
   //Receiving props and set date states, minimizing state updates.
   componentDidUpdate(prevProps, prevState) {
-    if (!this.state.dayComponentWidth) {
-      return
-    }
-    
     let startingDate = {};
     let selectedDate = {};
     let days = {};
