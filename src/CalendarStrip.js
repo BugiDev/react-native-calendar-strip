@@ -146,7 +146,8 @@ class CalendarStrip extends Component {
       dayComponentWidth: 0,
       height: 0,
       monthFontSize: 0,
-      selectorSize: 0
+      selectorSize: 0,
+      numVisibleDays: props.numDaysInWeek,
     };
 
     this.animations = [];
