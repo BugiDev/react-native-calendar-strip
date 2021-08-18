@@ -465,6 +465,10 @@ class CalendarDay extends Component {
       borderRadius: containerBorderRadius,
     };
 
+    let containerStyle = selected
+      ? { ...dayContainerStyle, ...highlightDateContainerStyle }
+      : dayContainerStyle;
+
     let day;
     if (DayComponent) {
       day = (<DayComponent {...this.props} {...this.state}/>);
@@ -480,7 +484,7 @@ class CalendarDay extends Component {
               styles.dateContainer,
               responsiveDateContainerStyle,
               _dateViewStyle,
-              dayContainerStyle
+              containerStyle
             ]}
           >
             {showDayName && (
