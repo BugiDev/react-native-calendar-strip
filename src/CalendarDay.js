@@ -70,6 +70,8 @@ class CalendarDay extends Component {
     showDayName: true,
     showDayNumber: true,
     upperCaseDays: true,
+    width: 0, // Default width and height to avoid calcSizes() *sometimes* doing Math.round(undefined) to cause NaN
+    height: 0
   };
 
   constructor(props) {
