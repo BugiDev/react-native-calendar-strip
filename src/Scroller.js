@@ -113,7 +113,7 @@ export default class CalendarScroller extends Component {
       return;
     }
     const newIndex = Math.max(this.state.visibleStartIndex - this.state.numVisibleItems, 0);
-    this.rlv.scrollToIndex(newIndex, true);
+    this.rlv?.scrollToIndex(newIndex, true);
   }
 
   // Scroll right, guarding against end index.
