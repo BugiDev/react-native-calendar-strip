@@ -143,7 +143,7 @@ export default class CalendarScroller extends Component {
 
     for (let i = 0; i < this.state.data.length; i++) {
       if (this.state.data[i].date.isSame(targetDate, "day")) {
-        this.rlv.scrollToIndex(i, true);
+        this.rlv?.scrollToIndex(i, true);
         break;
       }
     }
