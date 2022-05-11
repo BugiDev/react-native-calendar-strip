@@ -566,6 +566,7 @@ class CalendarStrip extends Component {
           onWeekScrollStart={this.props.onWeekScrollStart}
           onWeekScrollEnd={this.props.onWeekScrollEnd}
           externalScrollView={this.props.externalScrollView}
+          scrollToOnSetSelectedDate={this.props.scrollToOnSetSelectedDate}
         />
       );
     }

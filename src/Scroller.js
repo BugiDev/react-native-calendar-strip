@@ -25,12 +25,14 @@ export default class CalendarScroller extends Component {
     onWeekScrollStart: PropTypes.func,
     onWeekScrollEnd: PropTypes.func,
     externalScrollView: PropTypes.func,
-    pagingEnabled: PropTypes.bool
+    pagingEnabled: PropTypes.bool,
+    scrollToOnSetSelectedDate: PropTypes.bool
   }
 
   static defaultProps = {
     data: [],
     renderDayParams: {},
+    scrollToOnSetSelectedDate: true
   };
 
   constructor(props) {
@@ -128,6 +130,8 @@ export default class CalendarScroller extends Component {
 
   // Scroll to given date, and check against min and max date if available.
   scrollToDate = (date) => {
+    if (!this.props.scrollToOnSetSelectedDate) return;
+    
     let targetDate = moment(date).subtract(Math.round(this.state.numVisibleItems / 2) - 1, "days");
     const {
       minDate,
