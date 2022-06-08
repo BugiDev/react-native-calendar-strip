@@ -63,7 +63,7 @@ export default StyleSheet.create({
   dot: {
     width: 6,
     height: 6,
-    marginTop: 1,
+    marginTop: 0,
     borderRadius: 5,
     opacity: 0
   },
@@ -71,7 +71,8 @@ export default StyleSheet.create({
   // CALENDAR DOTS
   dotsContainer: {
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    height: 10
   },
   visibleDot: {
     opacity: 1,

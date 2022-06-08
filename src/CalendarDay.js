@@ -6,7 +6,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 
-import { Text, View, Animated, Easing, LayoutAnimation, TouchableOpacity } from "react-native";
+import { Text, View, Animated, Easing, LayoutAnimation, TouchableOpacity, Image } from "react-native";
 import styles from "./Calendar.style.js";
 
 class CalendarDay extends Component {
@@ -298,33 +298,34 @@ class CalendarDay extends Component {
   }
 
   renderDots(marking) {
-    const baseDotStyle = [styles.dot, styles.visibleDot];
-    const markedDatesStyle = this.props.markedDatesStyle || {};
-    const formattedDate = this.props.date.format('YYYY-MM-DD');
-    let validDots = <View style={[styles.dot]} />; // default empty view for no dots case
+    // const baseDotStyle = [styles.dot, styles.visibleDot];
+    // const markedDatesStyle = this.props.markedDatesStyle || {};
+    // const formattedDate = this.props.date.format('YYYY-MM-DD');
+    // let validDots = <View style={[styles.dot]} />; // default empty view for no dots case
 
     // Filter dots and process only those which have color property
-    validDots = marking.dots
-      .filter(d => (d && d.color))
-      .map((dot, index) => {
-        const selectedColor = dot.selectedColor || dot.selectedDotColor; // selectedDotColor deprecated
-        const backgroundColor = this.state.selected && selectedColor ? selectedColor : dot.color;
-        return (
-          <View
-            key={dot.key || (formattedDate + index)}
-            style={[
-              baseDotStyle,
-              { backgroundColor },
-              markedDatesStyle
-            ]}
-          />
-        );
-      });
+    // validDots = marking.dots
+    //   .filter(d => (d && d.color))
+    //   .map((dot, index) => {
+    //     const selectedColor = dot.selectedColor || dot.selectedDotColor; // selectedDotColor deprecated
+    //     const backgroundColor = this.state.selected && selectedColor ? selectedColor : dot.color;
+    //     return (
+    //       <View
+    //         key={dot.key || (formattedDate + index)}
+    //         style={[
+    //           baseDotStyle,
+    //           { backgroundColor },
+    //           markedDatesStyle
+    //         ]}
+    //       />
+    //     );
+    //   });
 
     return (
-      <View style={styles.dotsContainer}>
-        {validDots}
-      </View>
+      null
+//       <View style={styles.dotsContainer}>
+//         <Image style={{width: 8}} resizeMode="contain" source={require('./img/heart.png')}></Image>
+//       </View>
     );
   }
 
@@ -356,6 +357,19 @@ class CalendarDay extends Component {
         {validLines}
       </View>
     );
+  }
+
+  //Marked Text Styles
+  getMarkedTextStyles() {
+    if (!this.props.markedDates || this.props.markedDates.length === 0) {
+      return null;
+    }
+    const marking = this.state.marking;
+    if(marking.textStyle){
+      return marking.textStyle;
+    }else{
+      return null;
+    }
   }
 
   render() {
@@ -491,7 +505,7 @@ class CalendarDay extends Component {
           >
             {showDayName && (
               <Text
-                style={[{ fontSize: dateNameFontSize }, _dateNameStyle]}
+                style={[{ fontSize: dateNameFontSize }, _dateNameStyle, this.getMarkedTextStyles()]}
                 allowFontScaling={allowDayTextScaling}
               >
                 {upperCaseDays ? date.format("ddd").toUpperCase() : date.format("ddd")}
@@ -502,7 +516,8 @@ class CalendarDay extends Component {
                 <Text
                   style={[
                     { fontSize: dateNumberFontSize },
-                    _dateNumberStyle
+                    _dateNumberStyle,
+                    this.getMarkedTextStyles()
                   ]}
                   allowFontScaling={allowDayTextScaling}
                 >
