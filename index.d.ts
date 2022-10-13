@@ -150,6 +150,8 @@ interface CalendarStripProps {
   headerText?: string;
 
   ref?: RefObject<any>;
+
+  datesStripStyle?: StyleProp<ViewStyle>;
 }
 
 export default class ReactNativeCalendarStrip extends Component<CalendarStripProps> {
