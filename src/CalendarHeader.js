@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Text, TouchableOpacity } from "react-native";
+import { Pressable, Text, TouchableOpacity } from "react-native";
 
 import styles from "./Calendar.style.js";
 
@@ -21,6 +21,8 @@ class CalendarHeader extends Component {
     fontSize: PropTypes.number,
     headerText: PropTypes.string,
     onHeaderSelected: PropTypes.func,
+    onDateSelected: PropTypes.func,
+    selectedDate: PropTypes.object
   };
 
   shouldComponentUpdate(nextProps) {
@@ -67,6 +69,12 @@ class CalendarHeader extends Component {
     )}`;
   }
 
+  // Function that goes to today's date
+  gotoToday() {
+    const { onDateSelected } = this.props;
+    onDateSelected && onDateSelected(new Date());
+  }
+
   render() {
     const {
       calendarHeaderFormat,
@@ -87,7 +95,7 @@ class CalendarHeader extends Component {
       <TouchableOpacity
         onPress={onHeaderSelected && onHeaderSelected.bind(this, {weekStartDate, weekEndDate})}
         disabled={!onHeaderSelected}
-        style={calendarHeaderContainerStyle}
+        style={[calendarHeaderContainerStyle, {flexDirection: "row", justifyContent: 'space-between'}]}
       >
         <Text
           style={[
@@ -99,6 +107,15 @@ class CalendarHeader extends Component {
         >
           {_headerText}
         </Text>
+        {
+          this.props.selectedDate && !this.props.selectedDate.isSame(new Date(), "day") && (
+            <TouchableOpacity onPress={() => {
+              this.gotoToday()
+            }}>
+              <Text style={{color: '#0A0615', fontSize: 16, fontWeight: '500'}}>Today</Text>
+            </TouchableOpacity>
+          )
+        }
       </TouchableOpacity>
     );
   }
