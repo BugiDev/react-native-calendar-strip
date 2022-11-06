@@ -12,22 +12,26 @@ class WeekSelector extends Component {
     iconComponent: PropTypes.any,
     iconContainerStyle: PropTypes.oneOfType([
       PropTypes.object,
-      PropTypes.number
+      PropTypes.number,
     ]),
     iconInstanceStyle: PropTypes.oneOfType([
       PropTypes.object,
-      PropTypes.number
+      PropTypes.number,
     ]),
     iconStyle: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.number,
-      PropTypes.array
+      PropTypes.array,
     ]),
-    imageSource: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.number]),
+    imageSource: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+      PropTypes.number,
+    ]),
     size: PropTypes.number,
     onPress: PropTypes.func,
     weekStartDate: PropTypes.object,
-    weekEndDate: PropTypes.object
+    weekEndDate: PropTypes.object,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -67,7 +71,7 @@ class WeekSelector extends Component {
       onPress,
       weekEndDate,
       weekStartDate,
-      size
+      size,
     } = this.props;
 
     const enabled = this.isEnabled(controlDate, weekStartDate, weekEndDate);
@@ -76,7 +80,7 @@ class WeekSelector extends Component {
     let component;
     if (React.isValidElement(iconComponent)) {
       component = React.cloneElement(iconComponent, {
-        style: [iconComponent.props.style, { opacity: opacity.opacity }]
+        style: [iconComponent.props.style, { opacity: opacity.opacity }],
       });
     } else if (Array.isArray(iconComponent)) {
       component = iconComponent;
@@ -89,7 +93,7 @@ class WeekSelector extends Component {
             imageSize,
             iconStyle,
             iconInstanceStyle,
-            opacity
+            opacity,
           ]}
           source={imageSource}
         />
@@ -98,7 +102,11 @@ class WeekSelector extends Component {
 
     return (
       <TouchableOpacity
-        style={[styles.iconContainer, iconContainerStyle]}
+        style={[
+          styles.iconContainer,
+          iconContainerStyle,
+          { opacity: opacity.opacity },
+        ]}
         onPress={onPress}
         disabled={!enabled}
       >

@@ -9,11 +9,11 @@ class CalendarHeader extends Component {
     calendarHeaderFormat: PropTypes.string.isRequired,
     calendarHeaderContainerStyle: PropTypes.oneOfType([
       PropTypes.object,
-      PropTypes.number
+      PropTypes.number,
     ]),
     calendarHeaderStyle: PropTypes.oneOfType([
       PropTypes.object,
-      PropTypes.number
+      PropTypes.number,
     ]),
     weekStartDate: PropTypes.object,
     weekEndDate: PropTypes.object,
@@ -79,21 +79,25 @@ class CalendarHeader extends Component {
       weekEndDate: _weekEndDate,
       headerText,
     } = this.props;
-    const _headerText = headerText || this.formatCalendarHeader(calendarHeaderFormat);
+    const _headerText =
+      headerText || this.formatCalendarHeader(calendarHeaderFormat);
     const weekStartDate = _weekStartDate && _weekStartDate.clone();
     const weekEndDate = _weekEndDate && _weekEndDate.clone();
 
     return (
       <TouchableOpacity
-        onPress={onHeaderSelected && onHeaderSelected.bind(this, {weekStartDate, weekEndDate})}
+        onPress={
+          onHeaderSelected &&
+          onHeaderSelected.bind(this, { weekStartDate, weekEndDate })
+        }
         disabled={!onHeaderSelected}
         style={calendarHeaderContainerStyle}
       >
         <Text
           style={[
             styles.calendarHeader,
-            { fontSize: fontSize },
-            calendarHeaderStyle
+            // { fontSize: fontSize },
+            calendarHeaderStyle,
           ]}
           allowFontScaling={allowHeaderTextScaling}
         >
