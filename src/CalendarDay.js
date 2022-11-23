@@ -59,6 +59,7 @@ class CalendarDay extends Component {
     useNativeDriver: PropTypes.bool,
     scrollable: PropTypes.bool,
     upperCaseDays: PropTypes.bool,
+    isWeeKView: PropTypes.bool,
   };
 
   // Reference: https://medium.com/@Jpoliachik/react-native-s-layoutanimation-is-awesome-4a4d317afd3e
@@ -525,7 +526,7 @@ class CalendarDay extends Component {
       day = (
         <TouchableOpacity
           onPress={onDateSelected.bind(this, date)}
-          disabled={!enabled}
+          disabled={!enabled && !!this.props?.isWeeKView}
         >
           <LinearGradient
             style={[
@@ -536,7 +537,11 @@ class CalendarDay extends Component {
             ]}
             start={{ x: 0, y: 0 }}
             end={{ x: 0.6, y: 0.6 }}
-            colors={selected ? ["#ECEDCD", "#568E96"] : ["#E7EBFB", "#E7EBFB"]}
+            colors={
+              selected && !this.props?.isWeeKView
+                ? ["#ECEDCD", "#568E96"]
+                : ["#E7EBFB", "#E7EBFB"]
+            }
           >
             {showDayName && (
               <Text

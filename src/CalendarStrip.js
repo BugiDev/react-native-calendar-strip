@@ -98,6 +98,7 @@ class CalendarStrip extends Component {
 
     // more
     datesStripStyle: PropTypes.any,
+    isWeeKView: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -123,6 +124,7 @@ class CalendarStrip extends Component {
     useNativeDriver: true,
     scrollToOnSetSelectedDate: true,
     upperCaseDays: true,
+    isWeeKView: false,
   };
 
   constructor(props) {
@@ -465,6 +467,7 @@ class CalendarStrip extends Component {
       marginHorizontal: this.state.marginHorizontal,
       allowDayTextScaling: this.props.shouldAllowFontScaling,
       upperCaseDays: this.props.upperCaseDays,
+      isWeeKView: this.props.isWeeKView,
     };
   };
 
@@ -542,7 +545,7 @@ class CalendarStrip extends Component {
   };
 
   renderDay(props) {
-    return <CalendarDay {...props} />;
+    return <CalendarDay {...props} isWeeKView={this.props.isWeeKView} />;
   }
 
   renderHeader() {
