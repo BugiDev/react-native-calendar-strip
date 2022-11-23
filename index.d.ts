@@ -152,6 +152,7 @@ interface CalendarStripProps {
   ref?: RefObject<any>;
 
   datesStripStyle?: StyleProp<ViewStyle>;
+  isWeeKView?: boolean
 }
 
 export default class ReactNativeCalendarStrip extends Component<CalendarStripProps> {
