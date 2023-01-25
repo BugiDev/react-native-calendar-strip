@@ -312,6 +312,7 @@ class CalendarStrip extends Component {
 
   //Handling press on date/selecting date
   onDateSelected = (selectedDate) => {
+    if (!!this.props.isWeeKView) return;
     let newState;
     if (this.props.scrollable) {
       newState = { selectedDate };
