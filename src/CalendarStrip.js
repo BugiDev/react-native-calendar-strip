@@ -99,6 +99,7 @@ class CalendarStrip extends Component {
     // more
     datesStripStyle: PropTypes.any,
     isWeeKView: PropTypes.bool,
+    dow: PropTypes.number,
   };
 
   static defaultProps = {
@@ -125,6 +126,7 @@ class CalendarStrip extends Component {
     scrollToOnSetSelectedDate: true,
     upperCaseDays: true,
     isWeeKView: false,
+    dow: 1,
   };
 
   constructor(props) {
@@ -500,7 +502,9 @@ class CalendarStrip extends Component {
       let date;
       if (useIsoWeekday) {
         // isoWeekday starts from Monday
-        date = this.setLocale(_startingDate.clone().isoWeekday(i + 1));
+        date = this.setLocale(
+          _startingDate.clone().isoWeekday(i + (this.props.dow || 0))
+        );
       } else {
         date = this.setLocale(_startingDate.clone().add(i, "days"));
       }
