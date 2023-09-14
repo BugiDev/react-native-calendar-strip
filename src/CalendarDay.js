@@ -60,6 +60,8 @@ class CalendarDay extends Component {
     scrollable: PropTypes.bool,
     upperCaseDays: PropTypes.bool,
     isWeeKView: PropTypes.bool,
+    highlightDateColors: PropTypes.any,
+    dateColors: PropTypes.any,
   };
 
   // Reference: https://medium.com/@Jpoliachik/react-native-s-layoutanimation-is-awesome-4a4d317afd3e
@@ -539,8 +541,8 @@ class CalendarDay extends Component {
             end={{ x: 0.6, y: 0.6 }}
             colors={
               selected && !this.props?.isWeeKView
-                ? ["#ECEDCD", "#568E96"]
-                : ["#E7EBFB", "#E7EBFB"]
+              ? (this.props.highlightDateColors || ["transparent", "transparent"])
+              : (this.props.dateColors || ["transparent", "transparent"])
             }
           >
             {showDayName && (

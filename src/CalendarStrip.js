@@ -99,7 +99,10 @@ class CalendarStrip extends Component {
     // more
     datesStripStyle: PropTypes.any,
     isWeeKView: PropTypes.bool,
+    showWeekSelector: PropTypes.bool,
     dow: PropTypes.number,
+    highlightDateColors: PropTypes.any,
+    dateColors: PropTypes.any,
   };
 
   static defaultProps = {
@@ -127,6 +130,9 @@ class CalendarStrip extends Component {
     upperCaseDays: true,
     isWeeKView: false,
     dow: 1,
+    showWeekSelector: true,
+    highlightDateColors: ["#ECEDCD", "#568E96"],
+    dateColors: ["#E7EBFB", "#E7EBFB"],
   };
 
   constructor(props) {
@@ -471,6 +477,8 @@ class CalendarStrip extends Component {
       allowDayTextScaling: this.props.shouldAllowFontScaling,
       upperCaseDays: this.props.upperCaseDays,
       isWeeKView: this.props.isWeeKView,
+      highlightDateColors: this.props.highlightDateColors,
+      dateColors: this.props.dateColors,
     };
   };
 
@@ -611,7 +619,7 @@ class CalendarStrip extends Component {
           {this.props.showDate &&
             this.props.calendarHeaderPosition === "above" && (
               <View style={styles.headerContainer}>
-                <WeekSelector
+                {this.props.showWeekSelector && <WeekSelector
                   controlDate={this.props.minDate}
                   iconComponent={this.props.leftSelector}
                   iconContainerStyle={this.props.iconContainer}
@@ -622,9 +630,9 @@ class CalendarStrip extends Component {
                   weekStartDate={this.state.weekStartDate}
                   weekEndDate={this.state.weekEndDate}
                   size={this.state.selectorSize}
-                />
+                />}
                 {this.renderHeader()}
-                <WeekSelector
+                {this.props.showWeekSelector && <WeekSelector
                   controlDate={this.props.maxDate}
                   iconComponent={this.props.rightSelector}
                   iconContainerStyle={this.props.iconContainer}
@@ -635,7 +643,7 @@ class CalendarStrip extends Component {
                   weekStartDate={this.state.weekStartDate}
                   weekEndDate={this.state.weekEndDate}
                   size={this.state.selectorSize}
-                />
+                />}
               </View>
             )}
 

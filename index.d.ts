@@ -153,7 +153,10 @@ interface CalendarStripProps {
 
   datesStripStyle?: StyleProp<ViewStyle>;
   isWeeKView?: boolean;
+  showWeekSelector?: boolean;
   dow?: number;
+  highlightDateColors?: string[];
+  dateColors?: string[];
 }
 
 export default class ReactNativeCalendarStrip extends Component<CalendarStripProps> {
