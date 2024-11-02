@@ -519,7 +519,12 @@ class CalendarStrip extends Component {
 
       const _weekStartDate = weekStartDate && weekStartDate.clone();
       const _weekEndDate = weekEndDate && weekEndDate.clone();
-      onWeekChanged && onWeekChanged(_weekStartDate, _weekEndDate);
+      if (
+        !weekStartDate.isSame(this.state.weekStartDate, "day") ||
+        !weekEndDate.isSame(this.state.weekEndDate, "day")
+      ) {
+        onWeekChanged && onWeekChanged(_weekStartDate, _weekEndDate);
+      }
     }
     // else Scroller sets weekStart/EndDate and fires onWeekChanged.
 
