@@ -38,7 +38,7 @@
     "moment": ">=2.0.0",
     "node-git-hooks": "^1.0.1",
     "prop-types": "^15.6.0",
-    "recyclerlistview": "^3.0.0"
+    "recyclerlistview": ">3.0.0"
   },
   "peerDependencies": {
     "react": "*",

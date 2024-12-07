@@ -113,7 +113,7 @@ export default class CalendarScroller extends Component {
       return;
     }
     const newIndex = Math.max(this.state.visibleStartIndex - this.state.numVisibleItems, 0);
-    this.rlv.scrollToIndex(newIndex, true);
+    this.rlv?.scrollToIndex(newIndex, true);
   }
 
   // Scroll right, guarding against end index.
@@ -123,7 +123,7 @@ export default class CalendarScroller extends Component {
       this.rlv.scrollToEnd(true); // scroll to the very end, including padding
       return;
     }
-    this.rlv.scrollToIndex(newIndex, true);
+    this.rlv?.scrollToIndex(newIndex, true);
   }
 
   // Scroll to given date, and check against min and max date if available.
@@ -192,12 +192,12 @@ export default class CalendarScroller extends Component {
     for (let i = 0; i < data.length; i++) {
       if (data[i].date.isSame(prevVisStart, "day")) {
         this.shifting = true;
-        this.rlv.scrollToIndex(i, false);
+        this.rlv?.scrollToIndex(i, false);
         // RecyclerListView sometimes returns position to old index after
         // moving to the new one. Set position again after delay.
         this.timeoutResetPositionId = setTimeout(() => {
           this.timeoutResetPositionId = null;
-          this.rlv.scrollToIndex(i, false);
+          this.rlv?.scrollToIndex(i, false);
           this.shifting = false; // debounce
         }, 800);
         break;
